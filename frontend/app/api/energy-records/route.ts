@@ -9,6 +9,7 @@ import {
   isEnergyRecordPeriodConflict,
   resolveBusiness,
   validateEnergyRecord,
+  withDerivedEnergyRecordFields,
   withPersistedEnergyEfficiencyScore,
 } from "@/lib/energy-records";
 
@@ -201,7 +202,13 @@ export async function POST(request: Request) {
       .values({
         id: crypto.randomUUID(),
         businessId: business.id,
-        ...withPersistedEnergyEfficiencyScore(validation.data),
+        ...withPersistedEnergyEfficiencyScore(
+          withDerivedEnergyRecordFields(
+            validation.data,
+            validation.data.averageMonthlyEnergyCost ??
+              validation.data.totalEnergyCost
+          )
+        ),
       })
       .returning();
 

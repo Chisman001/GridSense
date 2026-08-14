@@ -9,6 +9,7 @@ import {
   isEnergyRecordPeriodConflict,
   resolveBusiness,
   validateEnergyRecord,
+  withDerivedEnergyRecordFields,
   withPersistedEnergyEfficiencyScore,
 } from "@/lib/energy-records";
 
@@ -130,7 +131,11 @@ export async function PATCH(request: Request, context: RouteContext) {
       .update(energyRecords)
       .set(
         withPersistedEnergyEfficiencyScore(
-          validation.data,
+          withDerivedEnergyRecordFields(
+            validation.data,
+            validation.data.averageMonthlyEnergyCost ??
+              validation.data.totalEnergyCost
+          ),
           ownedRecord.energyEfficiencyScore
         )
       )

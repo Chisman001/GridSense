@@ -1,4 +1,4 @@
-export const writableFields = [
+export const rawWritableFields = [
   "year",
   "month",
   "quarter",
@@ -21,6 +21,11 @@ export const writableFields = [
   "renewableEnergyPercentage",
   "maintenanceCost",
   "monthlyRevenue",
+  "weatherAvgTemp",
+  "estimatedCarbonIntensity",
+] as const;
+
+export const derivedWritableFields = [
   "energyCostPerEmployee",
   "costPerKwh",
   "averageMonthlyEnergyCost",
@@ -28,10 +33,15 @@ export const writableFields = [
   "generatorDependency",
   "revenueEnergyRatio",
   "outageSeverity",
-  "weatherAvgTemp",
-  "estimatedCarbonIntensity",
 ] as const;
 
+export const writableFields = [
+  ...rawWritableFields,
+  ...derivedWritableFields,
+] as const;
+
+export type RawWritableField = (typeof rawWritableFields)[number];
+export type DerivedWritableField = (typeof derivedWritableFields)[number];
 export type WritableField = (typeof writableFields)[number];
 
 export const csvHeaders: Record<WritableField, string> = {
@@ -68,6 +78,10 @@ export const csvHeaders: Record<WritableField, string> = {
   estimatedCarbonIntensity: "estimated_carbon_intensity",
 };
 
-export const requiredCsvHeaders = writableFields.map(
+export const requiredCsvHeaders = rawWritableFields.map(
+  (field) => csvHeaders[field]
+);
+
+export const optionalCsvHeaders = derivedWritableFields.map(
   (field) => csvHeaders[field]
 );

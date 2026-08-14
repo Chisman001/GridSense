@@ -10,10 +10,12 @@ import {
   EnergyRecordPayload,
   errorResponse,
   isEnergyRecordPeriodConflict,
+  optionalCsvHeaders,
   parseCsv,
   requiredCsvHeaders,
   resolveBusiness,
   validateEnergyRecord,
+  withDerivedEnergyRecordFields,
   withPersistedEnergyEfficiencyScore,
 } from "@/lib/energy-records";
 
@@ -117,21 +119,19 @@ export async function POST(request: Request) {
       }
     }
 
+    const allowedHeaders = new Set([
+      ...requiredCsvHeaders,
+      ...optionalCsvHeaders,
+    ]);
+
     for (const header of headers) {
-      if (!requiredCsvHeaders.includes(header)) {
+      if (!allowedHeaders.has(header)) {
         errors.push({
           row: headerRow.row,
           reason: "Unexpected CSV header",
           field: header,
         });
       }
-    }
-
-    if (headers.length !== requiredCsvHeaders.length && errors.length === 0) {
-      errors.push({
-        row: headerRow.row,
-        reason: "CSV must contain every required header exactly once",
-      });
     }
 
     if (errors.length > 0) {
@@ -223,14 +223,42 @@ export async function POST(request: Request) {
       );
     }
 
+    const chronological = [...validRecords].sort(
+      (left, right) =>
+        left.data.year * 12 +
+        left.data.month -
+        (right.data.year * 12 + right.data.month)
+    );
+    const derivedByRow = new Map<number, EnergyRecordPayload>();
+    let runningTotal = 0;
+
+    chronological.forEach((record, index) => {
+      runningTotal += record.data.totalEnergyCost;
+      derivedByRow.set(
+        record.row,
+        withDerivedEnergyRecordFields(
+          record.data,
+          runningTotal / (index + 1)
+        )
+      );
+    });
+
     const insertedRecords = await db
       .insert(energyRecords)
       .values(
-        validRecords.map((record) => ({
-          id: crypto.randomUUID(),
-          businessId: business.id,
-          ...withPersistedEnergyEfficiencyScore(record.data),
-        }))
+        validRecords.map((record) => {
+          const derived = derivedByRow.get(record.row);
+
+          if (!derived) {
+            throw new Error("Derived energy record payload is missing");
+          }
+
+          return {
+            id: crypto.randomUUID(),
+            businessId: business.id,
+            ...withPersistedEnergyEfficiencyScore(derived),
+          };
+        })
       )
       .returning();
 

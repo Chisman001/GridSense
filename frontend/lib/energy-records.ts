@@ -5,15 +5,22 @@ import { db } from "@/lib/db";
 import { businesses, energyRecords } from "@/lib/db/schema";
 import {
   csvHeaders,
+  derivedWritableFields,
+  optionalCsvHeaders,
+  rawWritableFields,
   requiredCsvHeaders,
   writableFields,
   type WritableField,
 } from "@/lib/energy-record-fields";
+import { daysInCalendarMonth } from "@/lib/ges-v1";
 import { LEGACY_ENERGY_EFFICIENCY_SCORE } from "@/lib/ml-compat";
 
 export { LEGACY_ENERGY_EFFICIENCY_SCORE };
 export {
   csvHeaders,
+  derivedWritableFields,
+  optionalCsvHeaders,
+  rawWritableFields,
   requiredCsvHeaders,
   writableFields,
   type WritableField,
@@ -77,6 +84,64 @@ const signedFields = new Set<WritableField>([
   "energyEfficiencyScore",
 ]);
 
+const derivedFieldSet = new Set<WritableField>(derivedWritableFields);
+
+function roundTo(value: number, digits: number): number {
+  const factor = 10 ** digits;
+  return Math.round(value * factor) / factor;
+}
+
+function safeDivide(numerator: number, denominator: number): number {
+  if (denominator === 0) {
+    return 0;
+  }
+
+  return numerator / denominator;
+}
+
+/**
+ * Fill ratio columns from raw inputs. GES ignores these stored values
+ * and recomputes from the same raw fields.
+ */
+export function withDerivedEnergyRecordFields(
+  data: EnergyRecordPayload,
+  averageMonthlyEnergyCost: number
+): EnergyRecordPayload {
+  const employees = data.employees;
+
+  return {
+    ...data,
+    energyCostPerEmployee: roundTo(
+      safeDivide(data.totalEnergyCost, employees),
+      4
+    ),
+    costPerKwh: roundTo(
+      safeDivide(data.totalEnergyCost, data.energyConsumptionKwh),
+      4
+    ),
+    averageMonthlyEnergyCost: roundTo(averageMonthlyEnergyCost, 2),
+    generatorDependency: roundTo(
+      safeDivide(
+        data.generatorHours,
+        data.generatorHours + data.gridHours
+      ),
+      6
+    ),
+    revenueEnergyRatio: roundTo(
+      safeDivide(data.monthlyRevenue, data.totalEnergyCost),
+      6
+    ),
+    outageSeverity: roundTo(
+      safeDivide(
+        data.outageHours,
+        data.operatingHours *
+          (daysInCalendarMonth(data.year, data.month) ?? 0)
+      ),
+      6
+    ),
+  };
+}
+
 export function isRecord(
   value: unknown
 ): value is Record<string, unknown> {
@@ -100,7 +165,7 @@ export function validateEnergyRecord(
   for (const field of writableFields) {
     const fieldValue = value[field];
 
-    if (field === "energyEfficiencyScore" && fieldValue === undefined) {
+    if (derivedFieldSet.has(field) && fieldValue === undefined) {
       continue;
     }
 
@@ -187,11 +252,14 @@ export function validateEnergyRecord(
 
   const data = Object.fromEntries(
     writableFields
-      .filter(
-        (field) =>
-          field !== "energyEfficiencyScore" ||
-          typeof value.energyEfficiencyScore === "number"
-      )
+      .filter((field) => {
+        if (!derivedFieldSet.has(field)) {
+          return true;
+        }
+
+        const fieldValue = value[field];
+        return typeof fieldValue === "number" && Number.isFinite(fieldValue);
+      })
       .map((field) => [
         field,
         field === "energySource"
@@ -339,7 +407,7 @@ export function csvRowToPayload(
   );
 
   return Object.fromEntries(
-    writableFields.map((field) => {
+    rawWritableFields.map((field) => {
       const rawValue = byHeader.get(csvHeaders[field]) ?? "";
       return [
         field,

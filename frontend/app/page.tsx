@@ -483,12 +483,15 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section id="about" className="relative bg-slate-950 text-white">
+        <section
+          id="about"
+          className="relative bg-slate-950 text-white lg:flex lg:min-h-[calc(100vh-4rem)] lg:items-center"
+        >
           <div
             aria-hidden="true"
             className="absolute inset-0 bg-[linear-gradient(rgba(148,163,184,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.05)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:linear-gradient(to_bottom,black_60%,transparent)]"
           />
-          <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-20">
+          <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-18 lg:px-8 lg:py-12">
             <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
               <div className="max-w-xl">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-emerald-400">

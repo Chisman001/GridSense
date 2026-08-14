@@ -859,11 +859,11 @@ export default function EnergyRecordsPage() {
               CSV format
             </summary>
             <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-              The sample file includes every column the importer currently
-              requires, including calculated fields. Use Download sample CSV
-              rather than building a file from scratch. If a year and month
-              already exist, delete those records first or change the period in
-              the file.
+              Upload raw monthly energy data. GridSense calculates ratio
+              columns and the GridSense Energy Score from those inputs. Use
+              Download sample CSV rather than building a file from scratch. If
+              a year and month already exist, delete those records first or
+              change the period in the file.
             </p>
           </details>
         </section>

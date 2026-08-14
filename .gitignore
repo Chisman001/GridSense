@@ -71,3 +71,10 @@ ml/datasets/raw/household_power_consumption.txt
 ml/datasets/merged/time_series_energy_records.csv
 ml/datasets/standardized/household_power_consumption.csv
 ml/datasets/cleaned/household_power_consumption.csv
+
+# Local-only docs (not published)
+docs/demo/
+docs/PRD.md
+docs/Pitch.md
+docs/Brand-Identity.md
+docs/Visual-Identity.md
