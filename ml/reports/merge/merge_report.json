@@ -1,0 +1,229 @@
+{
+  "generated_at": "2026-08-07T21:27:41.559209",
+  "outputs": [
+    {
+      "output": "time_series_energy_records",
+      "output_path": "C:\\Proj\\GridSense\\ml\\datasets\\merged\\time_series_energy_records.csv",
+      "rows": 1069241,
+      "columns": 19,
+      "all_null_columns": [],
+      "status": "PASS"
+    },
+    {
+      "output": "cross_sectional_energy_records",
+      "output_path": "C:\\Proj\\GridSense\\ml\\datasets\\merged\\cross_sectional_energy_records.csv",
+      "rows": 5100,
+      "columns": 15,
+      "all_null_columns": [],
+      "status": "PASS"
+    },
+    {
+      "output": "cbecs_building_survey",
+      "output_path": "C:\\Proj\\GridSense\\ml\\datasets\\merged\\cbecs_building_survey.csv",
+      "rows": 6436,
+      "columns": 28,
+      "all_null_columns": [],
+      "status": "PASS"
+    }
+  ],
+  "datasets": [
+    {
+      "dataset": "energy_complete",
+      "input_path": "C:\\Proj\\GridSense\\ml\\datasets\\standardized\\energydata_complete.csv",
+      "source_grain": "time_series_reading",
+      "status": "PASS",
+      "warnings": [],
+      "rows_before": 19735,
+      "columns_before": 29,
+      "rows_contributed": 19735,
+      "columns_mapped": [
+        "timestamp",
+        "appliance_energy_wh",
+        "lighting_energy_wh",
+        "temperature",
+        "humidity",
+        "wind_speed"
+      ],
+      "missing_common_fields": [
+        "energy_consumption",
+        "global_active_power_kw",
+        "global_reactive_power_kvarh",
+        "voltage",
+        "global_intensity",
+        "sub_metering_1_wh",
+        "sub_metering_2_wh",
+        "sub_metering_3_wh",
+        "avg_past_consumption",
+        "anomaly_label"
+      ],
+      "timestamp_invalid": 0,
+      "duplicate_timestamps": 0,
+      "output": "time_series_energy_records"
+    },
+    {
+      "dataset": "smart_meter",
+      "input_path": "C:\\Proj\\GridSense\\ml\\datasets\\standardized\\smart_meter_data.csv",
+      "source_grain": "time_series_reading",
+      "status": "PASS",
+      "warnings": [],
+      "rows_before": 5000,
+      "columns_before": 7,
+      "rows_contributed": 5000,
+      "columns_mapped": [
+        "timestamp",
+        "energy_consumption",
+        "temperature",
+        "humidity",
+        "wind_speed",
+        "avg_past_consumption",
+        "anomaly_label"
+      ],
+      "missing_common_fields": [
+        "appliance_energy_wh",
+        "lighting_energy_wh",
+        "global_active_power_kw",
+        "global_reactive_power_kvarh",
+        "voltage",
+        "global_intensity",
+        "sub_metering_1_wh",
+        "sub_metering_2_wh",
+        "sub_metering_3_wh"
+      ],
+      "timestamp_invalid": 0,
+      "duplicate_timestamps": 0,
+      "output": "time_series_energy_records"
+    },
+    {
+      "dataset": "household",
+      "input_path": "C:\\Proj\\GridSense\\ml\\datasets\\standardized\\household_power_consumption.csv",
+      "source_grain": "time_series_reading",
+      "status": "PASS",
+      "warnings": [],
+      "rows_before": 1044506,
+      "columns_before": 11,
+      "rows_contributed": 1044506,
+      "columns_mapped": [
+        "timestamp",
+        "global_active_power_kw",
+        "global_reactive_power_kvarh",
+        "voltage",
+        "global_intensity",
+        "sub_metering_1_wh",
+        "sub_metering_2_wh",
+        "sub_metering_3_wh"
+      ],
+      "missing_common_fields": [
+        "energy_consumption",
+        "appliance_energy_wh",
+        "lighting_energy_wh",
+        "temperature",
+        "humidity",
+        "wind_speed",
+        "avg_past_consumption",
+        "anomaly_label"
+      ],
+      "timestamp_invalid": 0,
+      "duplicate_timestamps": 0,
+      "output": "time_series_energy_records"
+    },
+    {
+      "dataset": "test_energy",
+      "input_path": "C:\\Proj\\GridSense\\ml\\datasets\\standardized\\test_energy_data.csv",
+      "source_grain": "cross_sectional_observation",
+      "status": "PASS",
+      "warnings": [],
+      "rows_before": 100,
+      "columns_before": 7,
+      "rows_contributed": 100,
+      "columns_mapped": [
+        "building_type",
+        "floor_area_sqft",
+        "occupants",
+        "appliance_count",
+        "outdoor_temperature",
+        "day_type",
+        "reported_energy_consumption"
+      ],
+      "missing_common_fields": [
+        "customer_id",
+        "customer_type",
+        "region",
+        "floor_area_m2",
+        "energy_cost_brl"
+      ],
+      "timestamp_invalid": 0,
+      "duplicate_timestamps": 0,
+      "output": "cross_sectional_energy_records"
+    },
+    {
+      "dataset": "energy_consumption",
+      "input_path": "C:\\Proj\\GridSense\\ml\\datasets\\standardized\\energy_consumption.csv",
+      "source_grain": "customer_observation",
+      "status": "PASS",
+      "warnings": [],
+      "rows_before": 5000,
+      "columns_before": 6,
+      "rows_contributed": 5000,
+      "columns_mapped": [
+        "customer_id",
+        "customer_type",
+        "region",
+        "floor_area_m2",
+        "occupants",
+        "energy_cost_brl"
+      ],
+      "missing_common_fields": [
+        "building_type",
+        "floor_area_sqft",
+        "appliance_count",
+        "outdoor_temperature",
+        "day_type",
+        "reported_energy_consumption"
+      ],
+      "timestamp_invalid": 0,
+      "duplicate_timestamps": 0,
+      "output": "cross_sectional_energy_records"
+    },
+    {
+      "dataset": "cbecs",
+      "input_path": "C:\\Proj\\GridSense\\ml\\datasets\\standardized\\cbecs2018_final_public.csv",
+      "source_grain": "building_survey",
+      "status": "PASS",
+      "warnings": [],
+      "rows_before": 6436,
+      "columns_before": 1249,
+      "rows_contributed": 6436,
+      "columns_mapped": [
+        "cbecs_public_building_id",
+        "cbecs_region_code",
+        "cbecs_building_activity_code",
+        "floor_area_sqft",
+        "cbecs_floor_count_code",
+        "cbecs_construction_period_code",
+        "cbecs_occupancy_code",
+        "cbecs_weekly_operating_hours",
+        "cbecs_worker_count",
+        "cbecs_energy_used_code",
+        "cbecs_electricity_used_code",
+        "cbecs_natural_gas_used_code",
+        "cbecs_fuel_oil_used_code",
+        "cbecs_propane_used_code",
+        "cbecs_district_steam_used_code",
+        "cbecs_district_hot_water_used_code",
+        "heating_degree_days",
+        "cooling_degree_days",
+        "electricity_btu",
+        "electricity_consumption_cbecs",
+        "electricity_expenditure",
+        "natural_gas_btu",
+        "natural_gas_consumption_cbecs",
+        "natural_gas_expenditure",
+        "survey_final_weight"
+      ],
+      "missing_common_fields": [],
+      "timestamp_invalid": 0,
+      "duplicate_timestamps": 0,
+      "output": "cbecs_building_survey"
+    }
+  ]
+}

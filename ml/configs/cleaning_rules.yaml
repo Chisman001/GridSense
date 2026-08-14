@@ -1,0 +1,352 @@
+datasets:
+  test_energy:
+    file: test_energy_data.csv
+    enabled: true
+    numeric_columns:
+      - square_footage
+      - number_of_occupants
+      - appliances_used
+      - energy_consumption
+      - average_temperature
+    datetime_columns: []
+    id_columns: []
+    categorical_columns:
+      building_type:
+        - Residential
+        - Commercial
+        - Industrial
+    ranges:
+      square_footage:
+        min: 0
+      number_of_occupants:
+        min: 0
+      appliances_used:
+        min: 0
+      energy_consumption:
+        min: 0
+      average_temperature:
+        min: -20
+        max: 60
+    categories:
+      building_type:
+        - Residential
+        - Commercial
+        - Industrial
+    duplicate_checks:
+      unique_ids: []
+      timestamps: {}
+    required_columns:
+      - building_type
+      - square_footage
+      - number_of_occupants
+      - appliances_used
+      - average_temperature
+      - energy_consumption
+    remove_duplicates: true
+    remove_empty_rows: true
+    trim_strings: true
+    replace_missing_values: true
+    ratio_checks:
+      - numerator: number_of_occupants
+        denominator: square_footage
+        maximum_ratio: 1
+        description: occupancy densities
+
+  energy_consumption:
+    file: energy_consumption.csv
+    enabled: true
+    numeric_columns:
+      - building_size_m2
+      - occupants
+      - energy_cost_brl
+    datetime_columns: []
+    id_columns:
+      - customer_id
+    categorical_columns:
+      customer_type:
+        - residential
+        - commercial
+        - industrial
+      regions:
+        - Northeast
+        - Midwest
+        - Southeast
+        - North
+        - South
+    ranges:
+      building_size_m2:
+        min: 0
+      occupants:
+        min: 0
+      energy_cost_brl:
+        min: 0
+    categories:
+      customer_type:
+        - residential
+        - commercial
+        - industrial
+      regions:
+        - Northeast
+        - Midwest
+        - Southeast
+        - North
+        - South
+    duplicate_checks:
+      unique_ids:
+        - customer_id
+      timestamps: {}
+    required_columns:
+      - customer_id
+      - customer_type
+      - regions
+      - building_size_m2
+      - occupants
+      - energy_cost_brl
+    remove_duplicates: true
+    remove_empty_rows: true
+    trim_strings: true
+    replace_missing_values: true
+    ratio_checks:
+      - numerator: occupants
+        denominator: building_size_m2
+        maximum_ratio: 1
+        description: occupancy densities
+
+  energy_complete:
+    file: energydata_complete.csv
+    enabled: true
+    numeric_columns:
+      - appliances
+      - lights
+      - t1
+      - rh_1
+      - t2
+      - rh_2
+      - t3
+      - rh_3
+      - t4
+      - rh_4
+      - t5
+      - rh_5
+      - t6
+      - rh_6
+      - t7
+      - rh_7
+      - t8
+      - rh_8
+      - t9
+      - rh_9
+      - t_out
+      - press_mm_hg
+      - rh_out
+      - windspeed
+      - visibility
+      - tdewpoint
+      - rv1
+      - rv2
+    datetime_columns:
+      - date
+    id_columns: []
+    categorical_columns: {}
+    ranges:
+      appliances:
+        min: 0
+      lights:
+        min: 0
+      t1:
+        min: -50
+        max: 50
+      t2:
+        min: -50
+        max: 50
+      t3:
+        min: -50
+        max: 50
+      t4:
+        min: -50
+        max: 50
+      t5:
+        min: -50
+        max: 50
+      t6:
+        min: -50
+        max: 50
+      t7:
+        min: -50
+        max: 50
+      t8:
+        min: -50
+        max: 50
+      t9:
+        min: -50
+        max: 50
+      t_out:
+        min: -50
+        max: 50
+      press_mm_hg:
+        min: 600
+        max: 1100
+      rh_out:
+        min: 0
+        max: 100
+      windspeed:
+        min: 0
+    categories: {}
+    duplicate_checks:
+      unique_ids: []
+      timestamps:
+        timestamp_column: date
+    required_columns:
+      - date
+      - appliances
+      - lights
+      - t1
+      - rh_1
+      - t2
+      - rh_2
+      - t3
+      - rh_3
+      - t4
+      - rh_4
+      - t5
+      - rh_5
+      - t6
+      - rh_6
+      - t7
+      - rh_7
+      - t8
+      - rh_8
+      - t9
+      - rh_9
+      - t_out
+      - press_mm_hg
+      - rh_out
+      - windspeed
+    remove_duplicates: true
+    remove_empty_rows: true
+    trim_strings: true
+    replace_missing_values: true
+
+  smart_meter:
+    file: smart_meter_data.csv
+    enabled: true
+    numeric_columns:
+      - electricity_consumed
+      - temperature
+      - humidity
+      - wind_speed
+      - avg_past_consumption
+    datetime_columns:
+      - timestamp
+    id_columns: []
+    categorical_columns:
+      anomaly_label:
+        - Normal
+        - Warning
+        - Fault
+    ranges:
+      electricity_consumed:
+        min: 0
+      temperature:
+        min: -40
+        max: 100
+      humidity:
+        min: 0
+        max: 100
+      wind_speed:
+        min: 0
+      avg_past_consumption:
+        min: 0
+    categories:
+      anomaly_label:
+        - Normal
+        - Warning
+        - Fault
+    duplicate_checks:
+      unique_ids:
+        - meter_id
+      timestamps:
+        timestamp_column: timestamp
+        id_column: meter_id
+    required_columns:
+      - timestamp
+      - electricity_consumed
+      - temperature
+      - humidity
+      - wind_speed
+      - avg_past_consumption
+      - anomaly_label
+    remove_duplicates: true
+    remove_empty_rows: true
+    trim_strings: true
+    replace_missing_values: true
+
+  household:
+    file: household_power_consumption.csv
+    enabled: true
+    numeric_columns:
+      - global_active_power
+      - global_reactive_power
+      - voltage
+      - global_intensity
+      - sub_metering_1
+      - sub_metering_2
+      - sub_metering_3
+    datetime_columns:
+      - date_time
+    id_columns: []
+    categorical_columns: {}
+    ranges:
+      global_active_power:
+        min: 0
+      global_reactive_power:
+        min: 0
+      voltage:
+        min: 0
+      global_intensity:
+        min: 0
+      sub_metering_1:
+        min: 0
+      sub_metering_2:
+        min: 0
+      sub_metering_3:
+        min: 0
+    categories: {}
+    duplicate_checks:
+      unique_ids: []
+      timestamps:
+        timestamp_column: date_time
+    required_columns:
+      - date_time
+      - global_active_power
+      - global_reactive_power
+      - voltage
+      - global_intensity
+      - sub_metering_1
+      - sub_metering_2
+      - sub_metering_3
+    remove_duplicates: true
+    remove_empty_rows: true
+    trim_strings: true
+    replace_missing_values: true
+
+  cbecs:
+    file: cbecs2018_final_public.csv
+    enabled: true
+    numeric_columns:
+      - BUILDING_TYPE
+      - COMMERCIAL_BUILDING
+      - TOTAL_FLOOR_AREA
+    datetime_columns: []
+    id_columns: []
+    categorical_columns: {}
+    ranges: {}
+    categories: {}
+    duplicate_checks:
+      unique_ids: []
+      timestamps: {}
+    required_columns: []
+    remove_duplicates: true
+    remove_empty_rows: true
+    trim_strings: true
+    replace_missing_values: true

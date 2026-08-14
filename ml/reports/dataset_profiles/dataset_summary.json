@@ -1,0 +1,58 @@
+[
+    {
+        "Dataset": "test_energy",
+        "Rows": 100,
+        "Columns": 7,
+        "Missing Cells": 0,
+        "Duplicate Rows": 0,
+        "Memory (MB)": 0.01
+    },
+    {
+        "Dataset": "energy_consumption",
+        "Rows": 5000,
+        "Columns": 6,
+        "Missing Cells": 0,
+        "Duplicate Rows": 0,
+        "Memory (MB)": 0.38
+    },
+    {
+        "Dataset": "energy_complete",
+        "Rows": 19735,
+        "Columns": 29,
+        "Missing Cells": 0,
+        "Duplicate Rows": 0,
+        "Memory (MB)": 4.72
+    },
+    {
+        "Dataset": "smart_meter",
+        "Rows": 5000,
+        "Columns": 7,
+        "Missing Cells": 0,
+        "Duplicate Rows": 0,
+        "Memory (MB)": 0.39
+    },
+    {
+        "Dataset": "household_csv",
+        "Rows": 1048575,
+        "Columns": 9,
+        "Missing Cells": 4069,
+        "Duplicate Rows": 0,
+        "Memory (MB)": 107.71
+    },
+    {
+        "Dataset": "household_text",
+        "Rows": 2075259,
+        "Columns": 9,
+        "Missing Cells": 25979,
+        "Duplicate Rows": 0,
+        "Memory (MB)": 239.06
+    },
+    {
+        "Dataset": "cbecs",
+        "Rows": 6436,
+        "Columns": 1249,
+        "Missing Cells": 1965847,
+        "Duplicate Rows": 0,
+        "Memory (MB)": 61.33
+    }
+]

@@ -1,0 +1,82 @@
+{
+  "generated_at": "2026-08-14T14:20:14.673448",
+  "dataset_path": "C:\\Proj\\GridSense\\ml\\datasets\\final\\energy_records.csv",
+  "target": "next_month_energy_cost",
+  "split_strategy": {
+    "type": "chronological",
+    "train_end_period": 18,
+    "val_end_period": 21
+  },
+  "split_source": "split_metadata.json",
+  "row_counts": {
+    "validation": 450,
+    "test": 300,
+    "null_target": 150
+  },
+  "validation_metrics": {
+    "linear_regression": {
+      "mae": 757439.8077404031,
+      "rmse": 1154912.6314058064,
+      "r2": 0.942049360968918,
+      "mean_error": -63079.75406016626,
+      "median_abs_error": 447419.6779119083,
+      "max_abs_error": 6372146.399818633,
+      "status": "evaluated"
+    },
+    "random_forest": {
+      "mae": 737343.3321066665,
+      "rmse": 1204756.143900107,
+      "r2": 0.9369393756533061,
+      "mean_error": -64468.68161955572,
+      "median_abs_error": 375556.6954500027,
+      "max_abs_error": 7059400.961600013,
+      "status": "evaluated"
+    },
+    "xgboost": {
+      "mae": 746093.0961881945,
+      "rmse": 1256430.7030047127,
+      "r2": 0.9314137516182419,
+      "mean_error": -15895.432403472249,
+      "median_abs_error": 386467.0425,
+      "max_abs_error": 7279864.140000001,
+      "status": "evaluated"
+    },
+    "lightgbm": {
+      "mae": 728287.8675029739,
+      "rmse": 1202921.1647808529,
+      "r2": 0.9371313262087484,
+      "mean_error": -4594.870396986211,
+      "median_abs_error": 363591.89996353013,
+      "max_abs_error": 6838520.87294684,
+      "status": "evaluated"
+    }
+  },
+  "selected_model": "lightgbm",
+  "selection_rule": "validation_mae (lower_is_better); tie-breaker: rmse; mae_tol=1e-6",
+  "test_metrics": {
+    "mae": 655001.2660955844,
+    "rmse": 1043583.7020863274,
+    "r2": 0.953235543057385,
+    "mean_error": 74336.59849596587,
+    "median_abs_error": 328589.72506701306,
+    "max_abs_error": 4530006.423555855
+  },
+  "artifact_paths": {
+    "linear_regression": "C:\\Proj\\GridSense\\ml\\models\\linear_regression.joblib",
+    "random_forest": "C:\\Proj\\GridSense\\ml\\models\\random_forest.joblib",
+    "xgboost": "C:\\Proj\\GridSense\\ml\\models\\xgboost.joblib",
+    "lightgbm": "C:\\Proj\\GridSense\\ml\\models\\lightgbm.joblib"
+  },
+  "leakage_controls": [
+    "do_not_fit_models",
+    "use_persisted_pipelines_only",
+    "use_exact_split_membership",
+    "exclude_null_targets"
+  ],
+  "reproducibility": {
+    "python_version": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "sklearn_version": "1.9.0",
+    "joblib_version": "1.5.3",
+    "random_seed": 42
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "export_timestamp": "2026-08-14T14:20:11.506668",
+  "input_file": "C:\\Proj\\GridSense\\ml\\datasets\\processed\\engineered_energy_records.csv",
+  "output_file": "C:\\Proj\\GridSense\\ml\\datasets\\final\\energy_records.csv",
+  "rows": 3600,
+  "columns": 36,
+  "unique_businesses": 150,
+  "target": "next_month_energy_cost",
+  "target_non_null": 3450,
+  "target_null": 150,
+  "input_column_count": 36,
+  "output_column_count": 36,
+  "duplicate_record_id_count": 0,
+  "duplicate_business_month_count": 0,
+  "export_integrity_result": "PASS",
+  "validation": "PASS"
+}

@@ -1,0 +1,163 @@
+# Stage 05: controlled, grain-specific analytical outputs.
+# Values are copied only; this stage performs no unit conversion or imputation.
+
+outputs:
+  time_series_energy_records:
+    filename: time_series_energy_records.csv
+    columns:
+      - dataset_source
+      - source_grain
+      - source_row_id
+      - timestamp
+      - energy_consumption
+      - appliance_energy_wh
+      - lighting_energy_wh
+      - global_active_power_kw
+      - global_reactive_power_kvarh
+      - voltage
+      - global_intensity
+      - sub_metering_1_wh
+      - sub_metering_2_wh
+      - sub_metering_3_wh
+      - temperature
+      - humidity
+      - wind_speed
+      - avg_past_consumption
+      - anomaly_label
+    datasets:
+      energy_complete:
+        source_file: energydata_complete.csv
+        source_grain: time_series_reading
+        mapping:
+          timestamp: timestamp
+          appliance_energy_wh: appliance_energy_wh
+          lighting_energy_wh: lighting_energy_wh
+          t_out: temperature
+          rh_out: humidity
+          windspeed: wind_speed
+      smart_meter:
+        source_file: smart_meter_data.csv
+        source_grain: time_series_reading
+        mapping:
+          timestamp: timestamp
+          energy_consumption: energy_consumption
+          temperature: temperature
+          humidity: humidity
+          wind_speed: wind_speed
+          avg_past_consumption: avg_past_consumption
+          anomaly_label: anomaly_label
+      household:
+        source_file: household_power_consumption.csv
+        source_grain: time_series_reading
+        mapping:
+          timestamp: timestamp
+          global_active_power_kw: global_active_power_kw
+          global_reactive_power_kvarh: global_reactive_power_kvarh
+          voltage: voltage
+          global_intensity: global_intensity
+          sub_metering_1_wh: sub_metering_1_wh
+          sub_metering_2_wh: sub_metering_2_wh
+          sub_metering_3_wh: sub_metering_3_wh
+
+  cross_sectional_energy_records:
+    filename: cross_sectional_energy_records.csv
+    columns:
+      - dataset_source
+      - source_grain
+      - source_row_id
+      - customer_id
+      - building_type
+      - customer_type
+      - region
+      - floor_area_sqft
+      - floor_area_m2
+      - occupants
+      - appliance_count
+      - outdoor_temperature
+      - day_type
+      - reported_energy_consumption
+      - energy_cost_brl
+    datasets:
+      test_energy:
+        source_file: test_energy_data.csv
+        source_grain: cross_sectional_observation
+        mapping:
+          building_type: building_type
+          floor_area_sqft: floor_area_sqft
+          occupants: occupants
+          appliance_count: appliance_count
+          outdoor_temperature: outdoor_temperature
+          day_type: day_type
+          energy_consumption: reported_energy_consumption
+      energy_consumption:
+        source_file: energy_consumption.csv
+        source_grain: customer_observation
+        mapping:
+          customer_id: customer_id
+          customer_type: customer_type
+          region: region
+          floor_area_m2: floor_area_m2
+          occupants: occupants
+          energy_cost_brl: energy_cost_brl
+
+  cbecs_building_survey:
+    filename: cbecs_building_survey.csv
+    columns:
+      - dataset_source
+      - source_grain
+      - source_row_id
+      - cbecs_public_building_id
+      - cbecs_region_code
+      - cbecs_building_activity_code
+      - floor_area_sqft
+      - cbecs_floor_count_code
+      - cbecs_construction_period_code
+      - cbecs_occupancy_code
+      - cbecs_weekly_operating_hours
+      - cbecs_worker_count
+      - cbecs_energy_used_code
+      - cbecs_electricity_used_code
+      - cbecs_natural_gas_used_code
+      - cbecs_fuel_oil_used_code
+      - cbecs_propane_used_code
+      - cbecs_district_steam_used_code
+      - cbecs_district_hot_water_used_code
+      - heating_degree_days
+      - cooling_degree_days
+      - electricity_btu
+      - electricity_consumption_cbecs
+      - electricity_expenditure
+      - natural_gas_btu
+      - natural_gas_consumption_cbecs
+      - natural_gas_expenditure
+      - survey_final_weight
+    datasets:
+      cbecs:
+        source_file: cbecs2018_final_public.csv
+        source_grain: building_survey
+        mapping:
+          pubid: cbecs_public_building_id
+          region: cbecs_region_code
+          pba: cbecs_building_activity_code
+          sqft: floor_area_sqft
+          nfloor: cbecs_floor_count_code
+          yrconc: cbecs_construction_period_code
+          nocc: cbecs_occupancy_code
+          wkhrs: cbecs_weekly_operating_hours
+          nwker: cbecs_worker_count
+          egyused: cbecs_energy_used_code
+          elused: cbecs_electricity_used_code
+          ngused: cbecs_natural_gas_used_code
+          fkused: cbecs_fuel_oil_used_code
+          prused: cbecs_propane_used_code
+          stused: cbecs_district_steam_used_code
+          hwused: cbecs_district_hot_water_used_code
+          hdd65: heating_degree_days
+          cdd65: cooling_degree_days
+          elbtu: electricity_btu
+          elcns: electricity_consumption_cbecs
+          elexp: electricity_expenditure
+          ngbtu: natural_gas_btu
+          ngcns: natural_gas_consumption_cbecs
+          ngexp: natural_gas_expenditure
+          finalwt: survey_final_weight

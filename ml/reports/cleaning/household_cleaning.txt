@@ -1,0 +1,28 @@
+
+
+    GridSense AI
+
+    Cleaning Report
+
+    Dataset: household
+
+    Generated: 2026-08-07 18:05:35.515781
+
+    ----------------------------------------
+
+    Rows Before: 1048575
+
+    Rows After: 1044506
+
+    Duplicates Removed: 0
+
+    Empty Rows Removed: 0
+
+    Status: WARNING
+
+    Execution Time (s): 45.959
+
+
+Warnings
+----------------------------------------
+- 4069 rows removed for global_active_power outside defined range

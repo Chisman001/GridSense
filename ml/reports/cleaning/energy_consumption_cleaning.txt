@@ -1,0 +1,28 @@
+
+
+    GridSense AI
+
+    Cleaning Report
+
+    Dataset: energy_consumption
+
+    Generated: 2026-08-07 18:04:45.456625
+
+    ----------------------------------------
+
+    Rows Before: 5000
+
+    Rows After: 5000
+
+    Duplicates Removed: 0
+
+    Empty Rows Removed: 0
+
+    Status: PASS
+
+    Execution Time (s): 0.147
+
+
+Warnings
+----------------------------------------
+None

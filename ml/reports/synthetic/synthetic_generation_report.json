@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-08-07",
+  "businesses": 150,
+  "energy_records": 3600,
+  "recommendations": 30,
+  "records_per_business": 24,
+  "business_type_distribution": {
+    "Bakery": 21,
+    "Cold Room": 26,
+    "Factory": 30,
+    "Hospital": 29,
+    "Hotel": 24,
+    "School": 20
+  },
+  "validation": {
+    "business_ids_unique": true,
+    "record_ids_unique": true,
+    "recommendation_ids_unique": true,
+    "employees_positive": true,
+    "solar_capacity_nonnegative": true,
+    "referential_integrity": true,
+    "records_per_business": true,
+    "occupancy_in_range": true,
+    "generator_within_operating_hours": true,
+    "nonnegative_energy_fields": true,
+    "total_cost_consistent": true,
+    "no_missing_values": true
+  }
+}

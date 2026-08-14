@@ -1,0 +1,621 @@
+{
+  "generated_at": "2026-08-13T15:28:30.981942+00:00",
+  "status": "non_production_validation_only",
+  "production_changes": "none",
+  "dataset": "C:\\Proj\\GridSense\\ml\\datasets\\final\\energy_records.csv",
+  "row_count": 3600,
+  "expected_row_count": 3600,
+  "approved_methodology": {
+    "components": {
+      "cost_burden": 0.5,
+      "generator_dependency": 0.25,
+      "operational_reliability": 0.25
+    },
+    "excluded": [
+      "fuel_intensity",
+      "sustainability",
+      "solar_capacity_kw",
+      "renewable_energy_percentage",
+      "occupancy_rate",
+      "energy_efficiency_score"
+    ],
+    "operating_hours_unit": "hours_per_day",
+    "d_min": 0.006077,
+    "d_max": 0.241246,
+    "s_min": 0.048013,
+    "s_max": 0.296079,
+    "rating_bands": {
+      "Excellent": "90-100",
+      "Good": "75-89",
+      "Needs Improvement": "50-74",
+      "Critical": "0-49"
+    }
+  },
+  "component_statistics": {
+    "cost_burden": {
+      "count": 3600,
+      "min": 0.007871024896620362,
+      "p10": 0.09846951009832536,
+      "p25": 0.17212026793650023,
+      "p50": 0.27254837232066254,
+      "p75": 0.429794644908344,
+      "p90": 0.6528040699685028,
+      "p95": 0.8478213831683635,
+      "max": 1.7633658531773788,
+      "mean": 0.33838899790051014,
+      "std": 0.2513925126285916
+    },
+    "cost_score": {
+      "count": 3600,
+      "min": 0.0,
+      "p10": 34.71959300314972,
+      "p25": 57.020535509165605,
+      "p50": 72.74516276793375,
+      "p75": 82.78797320634997,
+      "p90": 90.15304899016746,
+      "p95": 93.47075944568869,
+      "max": 99.21289751033797,
+      "mean": 66.85594765871416,
+      "std": 22.676035981325604
+    },
+    "generator_dependency": {
+      "count": 3600,
+      "min": 0.006076771425258032,
+      "p10": 0.030694121657184638,
+      "p25": 0.0506779626130844,
+      "p50": 0.07737146408744355,
+      "p75": 0.11169781221256427,
+      "p90": 0.13999791202984704,
+      "p95": 0.15650860322115118,
+      "max": 0.24124611850243619,
+      "mean": 0.08266320962007367,
+      "std": 0.04187066203714899
+    },
+    "gen_score": {
+      "count": 3600,
+      "min": 0.0,
+      "p10": 43.05333099607217,
+      "p25": 55.087272466794396,
+      "p50": 69.68373208737395,
+      "p75": 81.03450598799824,
+      "p90": 89.532157020192,
+      "p95": 92.87400594629689,
+      "max": 100.0,
+      "mean": 67.43354368532871,
+      "std": 17.804498805656085
+    },
+    "outage_fraction": {
+      "count": 3600,
+      "min": 0.04801295220473191,
+      "p10": 0.0753166847384115,
+      "p25": 0.09267599388159595,
+      "p50": 0.12064988384125569,
+      "p75": 0.1487879821745874,
+      "p90": 0.17721717884705648,
+      "p95": 0.19878123597101066,
+      "max": 0.29607897664071187,
+      "mean": 0.12418342422730522,
+      "std": 0.04054118703146055
+    },
+    "op_score": {
+      "count": 3600,
+      "min": 9.416561767804288e-06,
+      "p10": 47.91540201113555,
+      "p25": 59.375737838080425,
+      "p50": 70.71872653194887,
+      "p75": 81.99551978844504,
+      "p90": 88.99337888367954,
+      "p95": 91.5448022321285,
+      "max": 100.0,
+      "mean": 69.29429093846731,
+      "std": 16.342903504111508
+    },
+    "ges": {
+      "count": 3600,
+      "min": 16.716086284665572,
+      "p10": 47.815752817646676,
+      "p25": 59.27963302827106,
+      "p50": 69.57022398204705,
+      "p75": 78.22492756012305,
+      "p90": 84.20464713904508,
+      "p95": 87.71117714212461,
+      "max": 95.9747775317039,
+      "mean": 67.60993248530609,
+      "std": 14.288054059852904
+    }
+  },
+  "rating_distribution": {
+    "available_scores": 3600,
+    "unavailable_scores": 0,
+    "counts": {
+      "Excellent": 106,
+      "Good": 1124,
+      "Needs Improvement": 1932,
+      "Critical": 438
+    },
+    "percents": {
+      "Excellent": 2.944444444444444,
+      "Good": 31.222222222222225,
+      "Needs Improvement": 53.666666666666664,
+      "Critical": 12.166666666666668
+    }
+  },
+  "boundary_behavior": [
+    {
+      "name": "cost_revenue_zero",
+      "cost_burden": 0.0,
+      "generator_dependency": 0.1,
+      "outage_fraction": 0.10752688172043011,
+      "cost_score": 100.0,
+      "gen_score": 60.06148769608238,
+      "op_score": 76.00885178926974,
+      "ges": 84.01758487133803,
+      "ges_available": true
+    },
+    {
+      "name": "cost_revenue_half",
+      "cost_burden": 0.5,
+      "generator_dependency": 0.1,
+      "outage_fraction": 0.10752688172043011,
+      "cost_score": 50.0,
+      "gen_score": 60.06148769608238,
+      "op_score": 76.00885178926974,
+      "ges": 59.01758487133803,
+      "ges_available": true
+    },
+    {
+      "name": "cost_revenue_at_one",
+      "cost_burden": 1.0,
+      "generator_dependency": 0.1,
+      "outage_fraction": 0.10752688172043011,
+      "cost_score": 0.0,
+      "gen_score": 60.06148769608238,
+      "op_score": 76.00885178926974,
+      "ges": 34.01758487133803,
+      "ges_available": true
+    },
+    {
+      "name": "cost_revenue_above_one",
+      "cost_burden": 1.5,
+      "generator_dependency": 0.1,
+      "outage_fraction": 0.10752688172043011,
+      "cost_score": 0.0,
+      "gen_score": 60.06148769608238,
+      "op_score": 76.00885178926974,
+      "ges": 34.01758487133803,
+      "ges_available": true
+    },
+    {
+      "name": "d_below_dmin",
+      "cost_burden": 0.3,
+      "generator_dependency": 2.5e-06,
+      "outage_fraction": 0.10752688172043011,
+      "cost_score": 70.0,
+      "gen_score": 100.0,
+      "op_score": 76.00885178926974,
+      "ges": 79.00221294731743,
+      "ges_available": true
+    },
+    {
+      "name": "d_above_dmax",
+      "cost_burden": 0.3,
+      "generator_dependency": 0.5,
+      "outage_fraction": 0.10752688172043011,
+      "cost_score": 70.0,
+      "gen_score": 0.0,
+      "op_score": 76.00885178926974,
+      "ges": 54.00221294731743,
+      "ges_available": true
+    },
+    {
+      "name": "s_below_smin",
+      "cost_burden": 0.3,
+      "generator_dependency": 0.1,
+      "outage_fraction": 0.002688172043010753,
+      "cost_score": 70.0,
+      "gen_score": 60.06148769608238,
+      "op_score": 100.0,
+      "ges": 75.0153719240206,
+      "ges_available": true
+    },
+    {
+      "name": "s_above_smax",
+      "cost_burden": 0.3,
+      "generator_dependency": 0.1,
+      "outage_fraction": 0.8064516129032258,
+      "cost_score": 70.0,
+      "gen_score": 60.06148769608238,
+      "op_score": 0.0,
+      "ges": 50.0153719240206,
+      "ges_available": true
+    },
+    {
+      "name": "invalid_zero_revenue",
+      "cost_burden": null,
+      "generator_dependency": 0.1,
+      "outage_fraction": 0.10752688172043011,
+      "cost_score": null,
+      "gen_score": 60.06148769608238,
+      "op_score": 76.00885178926974,
+      "ges": null,
+      "ges_available": false
+    },
+    {
+      "name": "invalid_zero_powered_hours",
+      "cost_burden": 0.3,
+      "generator_dependency": null,
+      "outage_fraction": 0.10752688172043011,
+      "cost_score": 70.0,
+      "gen_score": null,
+      "op_score": 76.00885178926974,
+      "ges": null,
+      "ges_available": false
+    },
+    {
+      "name": "invalid_zero_operating_hours",
+      "cost_burden": 0.3,
+      "generator_dependency": 0.1,
+      "outage_fraction": null,
+      "cost_score": 70.0,
+      "gen_score": 60.06148769608238,
+      "op_score": null,
+      "ges": null,
+      "ges_available": false
+    },
+    {
+      "name": "invalid_month",
+      "cost_burden": 0.3,
+      "generator_dependency": 0.1,
+      "outage_fraction": null,
+      "cost_score": 70.0,
+      "gen_score": 60.06148769608238,
+      "op_score": null,
+      "ges": null,
+      "ges_available": false
+    }
+  ],
+  "representative_records": [
+    {
+      "record_id": "REC-000049",
+      "present": true,
+      "business_name": "Bakery SME 003",
+      "business_type": "Bakery",
+      "energy_source": "Solar",
+      "year": 2024.0,
+      "month": 1.0,
+      "total_energy_cost": 503928.23,
+      "monthly_revenue": 5873751.66,
+      "generator_hours": 7.0,
+      "grid_hours": 390.66,
+      "outage_hours": 70.0,
+      "operating_hours_per_day": 14.86,
+      "cost_burden": 0.08579324751363424,
+      "generator_dependency": 0.017602977417894683,
+      "outage_fraction": 0.15195588937611254,
+      "cost_score": 91.42067524863657,
+      "gen_score": 95.09885341269695,
+      "op_score": 58.09869575995398,
+      "ges": 84.00972491748101,
+      "ges_rating": "Good"
+    },
+    {
+      "record_id": "REC-000001",
+      "present": true,
+      "business_name": "Factory SME 001",
+      "business_type": "Factory",
+      "energy_source": "Generator",
+      "year": 2024.0,
+      "month": 1.0,
+      "total_energy_cost": 18452387.41,
+      "monthly_revenue": 61846742.13,
+      "generator_hours": 43.21,
+      "grid_hours": 358.71,
+      "outage_hours": 48.01,
+      "operating_hours_per_day": 13.12,
+      "cost_burden": 0.29835665993875043,
+      "generator_dependency": 0.10750895700636943,
+      "outage_fraction": 0.1180418961447679,
+      "cost_score": 70.16433400612496,
+      "gen_score": 56.86848308817512,
+      "op_score": 71.77005468513705,
+      "ges": 67.24180144639053,
+      "ges_rating": "Needs Improvement"
+    },
+    {
+      "record_id": "REC-000005",
+      "present": true,
+      "business_name": "Factory SME 001",
+      "business_type": "Factory",
+      "energy_source": "Generator",
+      "year": 2024.0,
+      "month": 5.0,
+      "total_energy_cost": 16201526.55,
+      "monthly_revenue": 61846742.13,
+      "generator_hours": 82.91,
+      "grid_hours": 314.6,
+      "outage_hours": 92.12,
+      "operating_hours_per_day": 13.12,
+      "cost_burden": 0.26196248972896385,
+      "generator_dependency": 0.20857336922341577,
+      "outage_fraction": 0.22649488591660114,
+      "cost_score": 73.80375102710362,
+      "gen_score": 13.893255818829958,
+      "op_score": 28.050645426378,
+      "ges": 47.3878508248538,
+      "ges_rating": "Critical"
+    },
+    {
+      "record_id": "REC-000025",
+      "present": true,
+      "business_name": "Cold Room SME 002",
+      "business_type": "Cold Room",
+      "energy_source": "Grid",
+      "year": 2024.0,
+      "month": 1.0,
+      "total_energy_cost": 3024649.81,
+      "monthly_revenue": 2805163.65,
+      "generator_hours": 33.7,
+      "grid_hours": 639.47,
+      "outage_hours": 56.17,
+      "operating_hours_per_day": 22.44,
+      "cost_burden": 1.0782436204746915,
+      "generator_dependency": 0.050061648617734,
+      "outage_fraction": 0.0807457880512909,
+      "cost_score": 0.0,
+      "gen_score": 81.29657879323635,
+      "op_score": 86.8048067646147,
+      "ges": 42.02534638946276,
+      "ges_rating": "Critical"
+    },
+    {
+      "record_id": "REC-001241",
+      "present": true,
+      "business_name": "Hospital SME 052",
+      "business_type": "Hospital",
+      "energy_source": "Generator",
+      "year": 2025.0,
+      "month": 5.0,
+      "total_energy_cost": 16611557.16,
+      "monthly_revenue": 9420369.08,
+      "generator_hours": 111.67,
+      "grid_hours": 632.33,
+      "outage_hours": 111.67,
+      "operating_hours_per_day": 24.0,
+      "cost_burden": 1.7633658531773788,
+      "generator_dependency": 0.15009408602150537,
+      "outage_fraction": 0.15009408602150537,
+      "cost_score": 0.0,
+      "gen_score": 38.76017416347164,
+      "op_score": 58.84922318193328,
+      "ges": 24.40234933635123,
+      "ges_rating": "Critical"
+    },
+    {
+      "record_id": "REC-003386",
+      "present": true,
+      "business_name": "Factory SME 142",
+      "business_type": "Factory",
+      "energy_source": "Hybrid",
+      "year": 2024.0,
+      "month": 2.0,
+      "total_energy_cost": 17087662.87,
+      "monthly_revenue": 79217463.28,
+      "generator_hours": 74.53,
+      "grid_hours": 253.13,
+      "outage_hours": 106.47,
+      "operating_hours_per_day": 12.4,
+      "cost_burden": 0.21570575681781665,
+      "generator_dependency": 0.22746139290728196,
+      "outage_fraction": 0.29607897664071187,
+      "cost_score": 78.42942431821834,
+      "gen_score": 5.861574906861887,
+      "op_score": 9.416561767804288e-06,
+      "ges": 40.68010823996508,
+      "ges_rating": "Critical"
+    }
+  ],
+  "correlations": {
+    "n_complete_rows": 3600,
+    "pearson": {
+      "cost_burden": {
+        "cost_burden": 1.0,
+        "generator_dependency": 0.15187909456522475,
+        "outage_fraction": -0.013783540164124091,
+        "fuel_intensity": -0.09187260199045807
+      },
+      "generator_dependency": {
+        "cost_burden": 0.15187909456522475,
+        "generator_dependency": 1.0,
+        "outage_fraction": 0.7028066156428174,
+        "fuel_intensity": 0.3796651198012858
+      },
+      "outage_fraction": {
+        "cost_burden": -0.013783540164124091,
+        "generator_dependency": 0.7028066156428174,
+        "outage_fraction": 1.0,
+        "fuel_intensity": 0.12395640103169014
+      },
+      "fuel_intensity": {
+        "cost_burden": -0.09187260199045807,
+        "generator_dependency": 0.3796651198012858,
+        "outage_fraction": 0.12395640103169014,
+        "fuel_intensity": 1.0
+      }
+    },
+    "spearman": {
+      "cost_burden": {
+        "cost_burden": 1.0,
+        "generator_dependency": 0.20984281168211635,
+        "outage_fraction": 0.014269782368496959,
+        "fuel_intensity": -0.09798129408291878
+      },
+      "generator_dependency": {
+        "cost_burden": 0.20984281168211635,
+        "generator_dependency": 1.0,
+        "outage_fraction": 0.6600415872692249,
+        "fuel_intensity": 0.5031224155908408
+      },
+      "outage_fraction": {
+        "cost_burden": 0.014269782368496959,
+        "generator_dependency": 0.6600415872692249,
+        "outage_fraction": 1.0,
+        "fuel_intensity": 0.16182941353331115
+      },
+      "fuel_intensity": {
+        "cost_burden": -0.09798129408291878,
+        "generator_dependency": 0.5031224155908408,
+        "outage_fraction": 0.16182941353331115,
+        "fuel_intensity": 1.0
+      }
+    },
+    "note": "Correlation does not establish causation. Stage 06 generates generator hours from outage hours and fuel from generator hours."
+  },
+  "business_type_distribution": {
+    "available": true,
+    "by_type": {
+      "Bakery": {
+        "count": 504,
+        "ges": {
+          "count": 504,
+          "min": 39.46056356690422,
+          "p10": 54.173088738974506,
+          "p25": 63.87449274953331,
+          "p50": 73.31912384425291,
+          "p75": 81.99870961352603,
+          "p90": 89.0225927502066,
+          "p95": 91.5166283064598,
+          "max": 95.0404425726066,
+          "mean": 72.53776640938918,
+          "std": 12.693327869185957
+        },
+        "rating_counts": {
+          "Needs Improvement": 241,
+          "Good": 189,
+          "Excellent": 45,
+          "Critical": 29
+        }
+      },
+      "Cold Room": {
+        "count": 624,
+        "ges": {
+          "count": 624,
+          "min": 21.29806591321823,
+          "p10": 40.136728107847084,
+          "p25": 55.84318168058211,
+          "p50": 66.92191191179138,
+          "p75": 74.296028586478,
+          "p90": 80.33621335996843,
+          "p95": 83.46329514444967,
+          "max": 91.42751752935546,
+          "mean": 63.57091558132828,
+          "std": 14.78698264714156
+        },
+        "rating_counts": {
+          "Needs Improvement": 371,
+          "Good": 144,
+          "Critical": 107,
+          "Excellent": 2
+        }
+      },
+      "Factory": {
+        "count": 720,
+        "ges": {
+          "count": 720,
+          "min": 16.716086284665572,
+          "p10": 43.87488377980867,
+          "p25": 53.3119789793345,
+          "p50": 62.6856474902191,
+          "p75": 71.1160914026365,
+          "p90": 77.87019125812412,
+          "p95": 80.60696286202584,
+          "max": 89.42423497720199,
+          "mean": 61.50685016600619,
+          "std": 13.219040692698826
+        },
+        "rating_counts": {
+          "Needs Improvement": 467,
+          "Critical": 139,
+          "Good": 114
+        }
+      },
+      "Hospital": {
+        "count": 696,
+        "ges": {
+          "count": 696,
+          "min": 21.577274749690396,
+          "p10": 43.22623588555243,
+          "p25": 55.519217950260085,
+          "p50": 64.7168214280701,
+          "p75": 71.95557534881146,
+          "p90": 78.37203743499326,
+          "p95": 81.00017830350953,
+          "max": 88.73437586718671,
+          "mean": 62.55503584869607,
+          "std": 13.59559703554723
+        },
+        "rating_counts": {
+          "Needs Improvement": 458,
+          "Good": 121,
+          "Critical": 117
+        }
+      },
+      "Hotel": {
+        "count": 576,
+        "ges": {
+          "count": 576,
+          "min": 33.341508029414065,
+          "p10": 57.85062499325627,
+          "p25": 72.63923937512814,
+          "p50": 78.8464875435467,
+          "p75": 83.59486164791088,
+          "p90": 87.78654951530662,
+          "p95": 90.37416868026264,
+          "max": 95.9747775317039,
+          "mean": 76.22280054262602,
+          "std": 12.025535097157634
+        },
+        "rating_counts": {
+          "Good": 356,
+          "Needs Improvement": 151,
+          "Critical": 39,
+          "Excellent": 30
+        }
+      },
+      "School": {
+        "count": 480,
+        "ges": {
+          "count": 480,
+          "min": 39.369443765908876,
+          "p10": 59.59228962442179,
+          "p25": 67.46741404164466,
+          "p50": 74.29213178140361,
+          "p75": 80.81912909790928,
+          "p90": 87.39780208554241,
+          "p95": 90.41179094441225,
+          "max": 94.42995182811279,
+          "mean": 73.8352107734404,
+          "std": 10.404773534761445
+        },
+        "rating_counts": {
+          "Needs Improvement": 244,
+          "Good": 200,
+          "Excellent": 29,
+          "Critical": 7
+        }
+      }
+    }
+  },
+  "observations": [
+    "GES was recomputed from raw fields; stored generator_dependency and outage_severity were not used as scoring inputs.",
+    "energy_efficiency_score is absent from the ML dataset and was not used.",
+    "All 3,600 records produced a valid GES.",
+    "115 records have cost burden >= 1.0 and therefore CostScore = 0.",
+    "Calibration clips: D below Dmin=1, D above Dmax=1, S below Smin=1, S above Smax=0.",
+    "Approved rating bands on this dataset: Excellent 2.94%, Good 31.22%, Needs Improvement 53.67%, Critical 12.17%."
+  ],
+  "warnings": [
+    "Some synthetic months have energy cost greater than monthly revenue. Those rows receive CostScore 0 and are pulled toward Critical.",
+    "Frozen D/S min-max constants are taken from this synthetic snapshot. Live app records with operating_hours stored as monthly hours would mis-compute S.",
+    "The application currently lets users type generatorDependency, outageSeverity, revenueEnergyRatio, and energyEfficiencyScore. Production GES must ignore those columns."
+  ]
+}

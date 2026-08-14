@@ -1,0 +1,151 @@
+business_id,business_name,business_type,industry,state,city,employees,operating_hours,floor_area_sqm,energy_source,solar_capacity_kw,monthly_revenue,created_at
+BIZ-0001,Factory SME 001,Factory,Manufacturing,Lagos,Lagos,41,13.12,4707.75,Generator,0.0,61846742.13,2024-01-01
+BIZ-0002,Cold Room SME 002,Cold Room,Cold Storage,Lagos,Lagos,22,22.44,449.1,Grid,0.0,2805163.65,2024-01-01
+BIZ-0003,Bakery SME 003,Bakery,Food Production,Oyo,Ibadan,21,14.86,188.18,Solar,5.19,5873751.66,2024-01-01
+BIZ-0004,Factory SME 004,Factory,Manufacturing,Kano,Kano,122,18.11,2389.36,Generator,0.0,36594911.04,2024-01-01
+BIZ-0005,Hospital SME 005,Hospital,Healthcare,Rivers,Port Harcourt,199,24.0,1234.85,Grid,0.0,37513451.9,2024-01-01
+BIZ-0006,Hotel SME 006,Hotel,Hospitality,Oyo,Ibadan,36,23.17,1544.11,Hybrid,57.03,13568577.54,2024-01-01
+BIZ-0007,Hotel SME 007,Hotel,Hospitality,Abuja,Abuja,67,19.4,734.08,Grid,0.0,7169604.05,2024-01-01
+BIZ-0008,Factory SME 008,Factory,Manufacturing,Rivers,Port Harcourt,76,14.14,2850.9,Generator,0.0,55362476.97,2024-01-01
+BIZ-0009,Cold Room SME 009,Cold Room,Cold Storage,Abuja,Abuja,21,22.76,688.72,Generator,0.0,9859997.24,2024-01-01
+BIZ-0010,Cold Room SME 010,Cold Room,Cold Storage,Abuja,Abuja,14,22.46,777.42,Hybrid,11.93,6127710.05,2024-01-01
+BIZ-0011,Hospital SME 011,Hospital,Healthcare,Lagos,Lagos,99,24.0,2791.53,Hybrid,47.64,23975400.3,2024-01-01
+BIZ-0012,Factory SME 012,Factory,Manufacturing,Kano,Kano,71,16.49,2324.4,Generator,0.0,50921019.32,2024-01-01
+BIZ-0013,Cold Room SME 013,Cold Room,Cold Storage,Kano,Kano,15,23.02,291.07,Hybrid,15.45,3041838.32,2024-01-01
+BIZ-0014,Hotel SME 014,Hotel,Hospitality,Abuja,Abuja,58,21.58,539.97,Hybrid,42.01,11938326.43,2024-01-01
+BIZ-0015,School SME 015,School,Education,Oyo,Ibadan,47,8.05,2439.26,Hybrid,60.45,11021379.61,2024-01-01
+BIZ-0016,Cold Room SME 016,Cold Room,Cold Storage,Rivers,Port Harcourt,14,22.91,207.01,Hybrid,67.23,12572308.81,2024-01-01
+BIZ-0017,Hospital SME 017,Hospital,Healthcare,Oyo,Ibadan,90,24.0,1818.44,Generator,0.0,24245212.22,2024-01-01
+BIZ-0018,Bakery SME 018,Bakery,Food Production,Abuja,Abuja,19,14.67,405.0,Solar,20.91,1203317.0,2024-01-01
+BIZ-0019,Hospital SME 019,Hospital,Healthcare,Kano,Kano,49,24.0,868.48,Solar,124.88,15662473.93,2024-01-01
+BIZ-0020,Bakery SME 020,Bakery,Food Production,Oyo,Ibadan,10,10.42,134.26,Generator,0.0,5641839.69,2024-01-01
+BIZ-0021,Bakery SME 021,Bakery,Food Production,Kano,Kano,25,13.64,166.05,Solar,33.93,6587698.26,2024-01-01
+BIZ-0022,Factory SME 022,Factory,Manufacturing,Abuja,Abuja,217,17.2,2558.58,Hybrid,123.57,46230308.87,2024-01-01
+BIZ-0023,Hotel SME 023,Hotel,Hospitality,Abuja,Abuja,32,21.32,396.04,Grid,0.0,3107862.58,2024-01-01
+BIZ-0024,Factory SME 024,Factory,Manufacturing,Lagos,Lagos,93,14.64,1337.0,Grid,0.0,29493408.48,2024-01-01
+BIZ-0025,School SME 025,School,Education,Abuja,Abuja,84,10.28,677.85,Hybrid,43.09,12307742.8,2024-01-01
+BIZ-0026,School SME 026,School,Education,Abuja,Abuja,27,9.69,603.55,Generator,0.0,11613448.12,2024-01-01
+BIZ-0027,Factory SME 027,Factory,Manufacturing,Lagos,Lagos,50,18.89,3013.11,Generator,0.0,23314623.59,2024-01-01
+BIZ-0028,School SME 028,School,Education,Abuja,Abuja,69,11.5,785.32,Generator,0.0,12600278.06,2024-01-01
+BIZ-0029,Cold Room SME 029,Cold Room,Cold Storage,Lagos,Lagos,5,22.03,628.67,Hybrid,15.6,11166003.3,2024-01-01
+BIZ-0030,Bakery SME 030,Bakery,Food Production,Abuja,Abuja,21,12.41,294.26,Grid,0.0,3398044.09,2024-01-01
+BIZ-0031,School SME 031,School,Education,Rivers,Port Harcourt,73,10.92,999.02,Hybrid,64.84,10773391.4,2024-01-01
+BIZ-0032,School SME 032,School,Education,Abuja,Abuja,39,10.32,1023.09,Hybrid,47.95,11849694.5,2024-01-01
+BIZ-0033,Hotel SME 033,Hotel,Hospitality,Lagos,Lagos,55,21.19,1015.18,Hybrid,16.44,10617427.45,2024-01-01
+BIZ-0034,Bakery SME 034,Bakery,Food Production,Lagos,Lagos,27,12.42,127.18,Hybrid,33.25,4504117.38,2024-01-01
+BIZ-0035,Cold Room SME 035,Cold Room,Cold Storage,Oyo,Ibadan,5,23.17,603.12,Hybrid,41.37,13249121.96,2024-01-01
+BIZ-0036,Bakery SME 036,Bakery,Food Production,Rivers,Port Harcourt,15,13.87,206.25,Grid,0.0,6588306.32,2024-01-01
+BIZ-0037,Hotel SME 037,Hotel,Hospitality,Lagos,Lagos,47,18.6,1231.74,Hybrid,53.94,10588270.41,2024-01-01
+BIZ-0038,Bakery SME 038,Bakery,Food Production,Rivers,Port Harcourt,10,10.95,451.71,Generator,0.0,5280531.57,2024-01-01
+BIZ-0039,Cold Room SME 039,Cold Room,Cold Storage,Oyo,Ibadan,4,23.86,640.93,Hybrid,16.22,12598460.1,2024-01-01
+BIZ-0040,Hospital SME 040,Hospital,Healthcare,Lagos,Lagos,72,24.0,2381.8,Generator,0.0,18972169.21,2024-01-01
+BIZ-0041,Factory SME 041,Factory,Manufacturing,Rivers,Port Harcourt,164,18.77,3442.66,Hybrid,45.77,39650304.08,2024-01-01
+BIZ-0042,Hospital SME 042,Hospital,Healthcare,Lagos,Lagos,45,24.0,1400.54,Generator,0.0,22138736.38,2024-01-01
+BIZ-0043,Factory SME 043,Factory,Manufacturing,Kano,Kano,178,19.06,1048.35,Grid,0.0,48191320.24,2024-01-01
+BIZ-0044,Hospital SME 044,Hospital,Healthcare,Oyo,Ibadan,186,24.0,955.43,Generator,0.0,33475913.76,2024-01-01
+BIZ-0045,Hotel SME 045,Hotel,Hospitality,Rivers,Port Harcourt,31,20.12,1323.1,Hybrid,55.67,16120690.85,2024-01-01
+BIZ-0046,Cold Room SME 046,Cold Room,Cold Storage,Abuja,Abuja,11,23.62,794.39,Hybrid,62.88,2785043.16,2024-01-01
+BIZ-0047,Factory SME 047,Factory,Manufacturing,Rivers,Port Harcourt,235,18.91,5654.08,Hybrid,207.42,28676399.67,2024-01-01
+BIZ-0048,Factory SME 048,Factory,Manufacturing,Lagos,Lagos,132,13.78,5360.83,Hybrid,208.73,42221226.43,2024-01-01
+BIZ-0049,Hospital SME 049,Hospital,Healthcare,Abuja,Abuja,102,24.0,656.79,Generator,0.0,38940451.33,2024-01-01
+BIZ-0050,Hospital SME 050,Hospital,Healthcare,Rivers,Port Harcourt,209,24.0,1822.57,Hybrid,63.05,8883217.12,2024-01-01
+BIZ-0051,Hospital SME 051,Hospital,Healthcare,Abuja,Abuja,193,24.0,2910.08,Generator,0.0,31313441.94,2024-01-01
+BIZ-0052,Hospital SME 052,Hospital,Healthcare,Kano,Kano,200,24.0,2962.17,Generator,0.0,9420369.08,2024-01-01
+BIZ-0053,School SME 053,School,Education,Lagos,Lagos,81,10.88,2343.71,Solar,61.94,10882856.31,2024-01-01
+BIZ-0054,Hospital SME 054,Hospital,Healthcare,Kano,Kano,62,24.0,2877.3,Hybrid,106.24,11988010.1,2024-01-01
+BIZ-0055,Hospital SME 055,Hospital,Healthcare,Oyo,Ibadan,124,24.0,2200.54,Generator,0.0,14138882.98,2024-01-01
+BIZ-0056,Factory SME 056,Factory,Manufacturing,Kano,Kano,208,16.55,4740.67,Generator,0.0,68360761.85,2024-01-01
+BIZ-0057,Hospital SME 057,Hospital,Healthcare,Rivers,Port Harcourt,98,24.0,1631.73,Hybrid,80.45,22149113.58,2024-01-01
+BIZ-0058,Bakery SME 058,Bakery,Food Production,Oyo,Ibadan,23,14.42,417.49,Hybrid,24.77,2845961.15,2024-01-01
+BIZ-0059,Factory SME 059,Factory,Manufacturing,Oyo,Ibadan,120,13.88,1466.94,Hybrid,94.84,66459402.62,2024-01-01
+BIZ-0060,Bakery SME 060,Bakery,Food Production,Lagos,Lagos,9,15.1,197.94,Generator,0.0,3603757.86,2024-01-01
+BIZ-0061,Factory SME 061,Factory,Manufacturing,Oyo,Ibadan,84,15.2,4591.73,Generator,0.0,58133568.92,2024-01-01
+BIZ-0062,Hotel SME 062,Hotel,Hospitality,Kano,Kano,32,21.11,563.83,Hybrid,15.92,6737974.19,2024-01-01
+BIZ-0063,Hotel SME 063,Hotel,Hospitality,Kano,Kano,26,23.93,1502.12,Hybrid,58.45,17250594.13,2024-01-01
+BIZ-0064,School SME 064,School,Education,Oyo,Ibadan,79,9.78,1296.16,Hybrid,21.14,13268686.37,2024-01-01
+BIZ-0065,School SME 065,School,Education,Rivers,Port Harcourt,46,11.11,2163.71,Grid,0.0,5490573.3,2024-01-01
+BIZ-0066,School SME 066,School,Education,Lagos,Lagos,51,11.57,892.44,Grid,0.0,4385383.23,2024-01-01
+BIZ-0067,School SME 067,School,Education,Abuja,Abuja,42,10.17,534.88,Generator,0.0,5085429.87,2024-01-01
+BIZ-0068,School SME 068,School,Education,Kano,Kano,89,11.52,2386.73,Grid,0.0,8462246.66,2024-01-01
+BIZ-0069,Hospital SME 069,Hospital,Healthcare,Rivers,Port Harcourt,144,24.0,2648.28,Hybrid,117.18,25476233.91,2024-01-01
+BIZ-0070,Cold Room SME 070,Cold Room,Cold Storage,Abuja,Abuja,19,22.06,291.15,Hybrid,30.17,10310131.68,2024-01-01
+BIZ-0071,School SME 071,School,Education,Abuja,Abuja,74,10.14,2331.04,Hybrid,73.49,9898659.7,2024-01-01
+BIZ-0072,Factory SME 072,Factory,Manufacturing,Lagos,Lagos,56,15.69,4213.75,Grid,0.0,36537270.49,2024-01-01
+BIZ-0073,Bakery SME 073,Bakery,Food Production,Kano,Kano,18,11.67,235.0,Hybrid,33.54,3645076.0,2024-01-01
+BIZ-0074,Hotel SME 074,Hotel,Hospitality,Kano,Kano,19,23.71,1423.54,Grid,0.0,4029275.56,2024-01-01
+BIZ-0075,Factory SME 075,Factory,Manufacturing,Lagos,Lagos,228,18.71,1155.15,Generator,0.0,26698145.93,2024-01-01
+BIZ-0076,School SME 076,School,Education,Lagos,Lagos,87,9.02,2390.29,Generator,0.0,10073658.66,2024-01-01
+BIZ-0077,Factory SME 077,Factory,Manufacturing,Lagos,Lagos,234,12.86,5096.51,Hybrid,30.78,31837007.11,2024-01-01
+BIZ-0078,Factory SME 078,Factory,Manufacturing,Kano,Kano,136,16.74,5707.35,Generator,0.0,26999456.64,2024-01-01
+BIZ-0079,Factory SME 079,Factory,Manufacturing,Rivers,Port Harcourt,210,19.87,4002.06,Grid,0.0,34304263.57,2024-01-01
+BIZ-0080,School SME 080,School,Education,Rivers,Port Harcourt,23,11.4,1462.52,Grid,0.0,3819235.88,2024-01-01
+BIZ-0081,Hospital SME 081,Hospital,Healthcare,Kano,Kano,84,24.0,1645.17,Hybrid,55.11,33862375.0,2024-01-01
+BIZ-0082,Cold Room SME 082,Cold Room,Cold Storage,Kano,Kano,18,22.54,459.75,Hybrid,61.1,12053406.72,2024-01-01
+BIZ-0083,Hotel SME 083,Hotel,Hospitality,Rivers,Port Harcourt,74,21.42,976.2,Hybrid,64.12,8045949.3,2024-01-01
+BIZ-0084,School SME 084,School,Education,Rivers,Port Harcourt,38,9.03,1423.85,Generator,0.0,9951937.6,2024-01-01
+BIZ-0085,Hospital SME 085,Hospital,Healthcare,Oyo,Ibadan,47,24.0,1839.91,Generator,0.0,25765638.77,2024-01-01
+BIZ-0086,Bakery SME 086,Bakery,Food Production,Kano,Kano,28,10.1,384.74,Generator,0.0,3545526.55,2024-01-01
+BIZ-0087,Bakery SME 087,Bakery,Food Production,Rivers,Port Harcourt,29,13.19,332.62,Generator,0.0,5526425.53,2024-01-01
+BIZ-0088,Hospital SME 088,Hospital,Healthcare,Rivers,Port Harcourt,161,24.0,1250.2,Generator,0.0,11825751.72,2024-01-01
+BIZ-0089,Cold Room SME 089,Cold Room,Cold Storage,Abuja,Abuja,10,23.45,288.78,Hybrid,68.6,8533323.99,2024-01-01
+BIZ-0090,Hospital SME 090,Hospital,Healthcare,Lagos,Lagos,94,24.0,1310.99,Solar,112.04,12050654.72,2024-01-01
+BIZ-0091,Hotel SME 091,Hotel,Hospitality,Lagos,Lagos,53,21.83,738.2,Hybrid,70.72,4538814.7,2024-01-01
+BIZ-0092,Hotel SME 092,Hotel,Hospitality,Oyo,Ibadan,36,19.11,1004.1,Solar,16.01,17115953.95,2024-01-01
+BIZ-0093,School SME 093,School,Education,Lagos,Lagos,23,10.52,1241.49,Grid,0.0,4364969.81,2024-01-01
+BIZ-0094,Cold Room SME 094,Cold Room,Cold Storage,Rivers,Port Harcourt,6,23.53,895.26,Generator,0.0,11593519.54,2024-01-01
+BIZ-0095,Bakery SME 095,Bakery,Food Production,Oyo,Ibadan,20,15.16,280.21,Generator,0.0,2971205.42,2024-01-01
+BIZ-0096,Cold Room SME 096,Cold Room,Cold Storage,Lagos,Lagos,7,22.42,859.12,Generator,0.0,4306156.57,2024-01-01
+BIZ-0097,Bakery SME 097,Bakery,Food Production,Oyo,Ibadan,10,14.14,162.61,Generator,0.0,1389311.16,2024-01-01
+BIZ-0098,Hospital SME 098,Hospital,Healthcare,Rivers,Port Harcourt,161,24.0,770.83,Generator,0.0,26873266.85,2024-01-01
+BIZ-0099,Bakery SME 099,Bakery,Food Production,Kano,Kano,11,15.45,317.82,Hybrid,29.8,1614177.05,2024-01-01
+BIZ-0100,Bakery SME 100,Bakery,Food Production,Rivers,Port Harcourt,27,11.73,399.58,Solar,8.73,5194332.35,2024-01-01
+BIZ-0101,Factory SME 101,Factory,Manufacturing,Kano,Kano,104,12.64,3502.36,Hybrid,33.97,40242006.49,2024-01-01
+BIZ-0102,Hospital SME 102,Hospital,Healthcare,Oyo,Ibadan,109,24.0,662.08,Generator,0.0,26787933.81,2024-01-01
+BIZ-0103,Hotel SME 103,Hotel,Hospitality,Rivers,Port Harcourt,54,20.82,360.35,Hybrid,62.82,16741091.82,2024-01-01
+BIZ-0104,Bakery SME 104,Bakery,Food Production,Oyo,Ibadan,21,10.55,353.91,Generator,0.0,3133188.68,2024-01-01
+BIZ-0105,Factory SME 105,Factory,Manufacturing,Lagos,Lagos,76,14.31,2649.02,Hybrid,237.67,66949622.43,2024-01-01
+BIZ-0106,Cold Room SME 106,Cold Room,Cold Storage,Lagos,Lagos,18,22.23,188.69,Generator,0.0,12446471.72,2024-01-01
+BIZ-0107,Hotel SME 107,Hotel,Hospitality,Oyo,Ibadan,47,20.17,919.87,Grid,0.0,12381131.13,2024-01-01
+BIZ-0108,Hotel SME 108,Hotel,Hospitality,Abuja,Abuja,35,20.63,1123.83,Hybrid,66.46,4821391.25,2024-01-01
+BIZ-0109,Factory SME 109,Factory,Manufacturing,Oyo,Ibadan,239,16.41,2196.49,Generator,0.0,16524644.09,2024-01-01
+BIZ-0110,Hotel SME 110,Hotel,Hospitality,Kano,Kano,78,20.99,476.2,Hybrid,67.9,10633080.23,2024-01-01
+BIZ-0111,Hospital SME 111,Hospital,Healthcare,Kano,Kano,168,24.0,2952.59,Generator,0.0,37499780.8,2024-01-01
+BIZ-0112,Cold Room SME 112,Cold Room,Cold Storage,Abuja,Abuja,6,22.83,335.47,Hybrid,66.05,8338983.27,2024-01-01
+BIZ-0113,Hotel SME 113,Hotel,Hospitality,Rivers,Port Harcourt,64,23.99,747.83,Hybrid,50.19,5228931.28,2024-01-01
+BIZ-0114,Cold Room SME 114,Cold Room,Cold Storage,Kano,Kano,15,22.75,379.3,Hybrid,65.97,12500419.36,2024-01-01
+BIZ-0115,Factory SME 115,Factory,Manufacturing,Abuja,Abuja,181,15.29,2914.85,Hybrid,96.59,43108337.52,2024-01-01
+BIZ-0116,School SME 116,School,Education,Kano,Kano,99,8.61,2064.03,Hybrid,77.54,4078078.37,2024-01-01
+BIZ-0117,Cold Room SME 117,Cold Room,Cold Storage,Rivers,Port Harcourt,7,23.05,801.87,Hybrid,37.42,10808104.02,2024-01-01
+BIZ-0118,School SME 118,School,Education,Abuja,Abuja,24,9.35,1385.93,Hybrid,58.49,10622958.16,2024-01-01
+BIZ-0119,Hospital SME 119,Hospital,Healthcare,Oyo,Ibadan,142,24.0,2889.94,Hybrid,83.43,25312512.41,2024-01-01
+BIZ-0120,Cold Room SME 120,Cold Room,Cold Storage,Lagos,Lagos,11,23.99,612.31,Hybrid,54.81,7490671.93,2024-01-01
+BIZ-0121,Hotel SME 121,Hotel,Hospitality,Lagos,Lagos,46,18.17,549.55,Generator,0.0,3841788.42,2024-01-01
+BIZ-0122,Hospital SME 122,Hospital,Healthcare,Rivers,Port Harcourt,155,24.0,949.37,Hybrid,123.03,13439476.77,2024-01-01
+BIZ-0123,Hotel SME 123,Hotel,Hospitality,Oyo,Ibadan,73,20.99,873.82,Hybrid,57.49,6482826.66,2024-01-01
+BIZ-0124,Factory SME 124,Factory,Manufacturing,Rivers,Port Harcourt,152,18.44,2276.63,Grid,0.0,57432762.0,2024-01-01
+BIZ-0125,Bakery SME 125,Bakery,Food Production,Lagos,Lagos,22,11.79,478.09,Hybrid,33.86,5203818.37,2024-01-01
+BIZ-0126,School SME 126,School,Education,Rivers,Port Harcourt,40,8.43,2498.68,Hybrid,36.7,6986989.47,2024-01-01
+BIZ-0127,Hospital SME 127,Hospital,Healthcare,Rivers,Port Harcourt,50,24.0,2947.07,Hybrid,93.57,29945583.77,2024-01-01
+BIZ-0128,Factory SME 128,Factory,Manufacturing,Lagos,Lagos,190,19.22,4725.86,Hybrid,199.54,26108287.37,2024-01-01
+BIZ-0129,Hospital SME 129,Hospital,Healthcare,Abuja,Abuja,207,24.0,1056.32,Generator,0.0,29787363.01,2024-01-01
+BIZ-0130,Bakery SME 130,Bakery,Food Production,Lagos,Lagos,28,12.64,358.54,Generator,0.0,5447686.65,2024-01-01
+BIZ-0131,Hotel SME 131,Hotel,Hospitality,Rivers,Port Harcourt,38,18.79,1421.22,Grid,0.0,17572343.72,2024-01-01
+BIZ-0132,Cold Room SME 132,Cold Room,Cold Storage,Oyo,Ibadan,12,23.65,767.77,Generator,0.0,11774617.68,2024-01-01
+BIZ-0133,Factory SME 133,Factory,Manufacturing,Rivers,Port Harcourt,240,13.13,1575.85,Hybrid,242.46,70209841.78,2024-01-01
+BIZ-0134,Factory SME 134,Factory,Manufacturing,Kano,Kano,240,15.16,3786.56,Grid,0.0,18651211.57,2024-01-01
+BIZ-0135,Hospital SME 135,Hospital,Healthcare,Rivers,Port Harcourt,194,24.0,1514.46,Hybrid,107.73,23087259.78,2024-01-01
+BIZ-0136,Cold Room SME 136,Cold Room,Cold Storage,Oyo,Ibadan,14,22.13,833.9,Generator,0.0,12957957.84,2024-01-01
+BIZ-0137,Hospital SME 137,Hospital,Healthcare,Kano,Kano,74,24.0,935.46,Hybrid,84.04,11110143.96,2024-01-01
+BIZ-0138,Cold Room SME 138,Cold Room,Cold Storage,Abuja,Abuja,16,23.49,473.84,Hybrid,66.76,7319957.66,2024-01-01
+BIZ-0139,Factory SME 139,Factory,Manufacturing,Abuja,Abuja,141,16.93,4274.61,Hybrid,236.29,29581809.81,2024-01-01
+BIZ-0140,Factory SME 140,Factory,Manufacturing,Rivers,Port Harcourt,90,18.84,3216.92,Hybrid,47.35,57997618.58,2024-01-01
+BIZ-0141,Cold Room SME 141,Cold Room,Cold Storage,Rivers,Port Harcourt,5,22.24,430.55,Generator,0.0,7729249.74,2024-01-01
+BIZ-0142,Factory SME 142,Factory,Manufacturing,Abuja,Abuja,199,12.4,4197.46,Hybrid,100.04,79217463.28,2024-01-01
+BIZ-0143,Cold Room SME 143,Cold Room,Cold Storage,Abuja,Abuja,6,23.17,767.26,Hybrid,58.78,5179484.81,2024-01-01
+BIZ-0144,Bakery SME 144,Bakery,Food Production,Oyo,Ibadan,8,15.93,210.91,Hybrid,21.21,5831380.18,2024-01-01
+BIZ-0145,Hotel SME 145,Hotel,Hospitality,Lagos,Lagos,26,19.43,322.29,Hybrid,37.25,5613693.02,2024-01-01
+BIZ-0146,Hotel SME 146,Hotel,Hospitality,Abuja,Abuja,65,18.38,931.44,Grid,0.0,8430584.61,2024-01-01
+BIZ-0147,Cold Room SME 147,Cold Room,Cold Storage,Lagos,Lagos,18,22.09,512.99,Hybrid,56.99,12470280.44,2024-01-01
+BIZ-0148,Cold Room SME 148,Cold Room,Cold Storage,Rivers,Port Harcourt,18,24.0,621.81,Grid,0.0,7402146.62,2024-01-01
+BIZ-0149,Hotel SME 149,Hotel,Hospitality,Kano,Kano,63,18.48,1664.55,Grid,0.0,3985233.5,2024-01-01
+BIZ-0150,Hospital SME 150,Hospital,Healthcare,Oyo,Ibadan,207,24.0,2004.88,Hybrid,97.66,17436727.87,2024-01-01

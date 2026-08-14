@@ -1,0 +1,28 @@
+
+
+    GridSense AI
+
+    Cleaning Report
+
+    Dataset: smart_meter
+
+    Generated: 2026-08-07 18:04:49.077103
+
+    ----------------------------------------
+
+    Rows Before: 5000
+
+    Rows After: 5000
+
+    Duplicates Removed: 0
+
+    Empty Rows Removed: 0
+
+    Status: WARNING
+
+    Execution Time (s): 0.218
+
+
+Warnings
+----------------------------------------
+- anomaly_label: 250 invalid values (['Abnormal'])

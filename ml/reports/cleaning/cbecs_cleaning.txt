@@ -1,0 +1,28 @@
+
+
+    GridSense AI
+
+    Cleaning Report
+
+    Dataset: cbecs
+
+    Generated: 2026-08-07 18:05:59.216237
+
+    ----------------------------------------
+
+    Rows Before: 6436
+
+    Rows After: 6436
+
+    Duplicates Removed: 0
+
+    Empty Rows Removed: 0
+
+    Status: PASS
+
+    Execution Time (s): 4.502
+
+
+Warnings
+----------------------------------------
+None

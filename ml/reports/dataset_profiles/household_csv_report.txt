@@ -1,0 +1,53 @@
+Dataset: household_csv
+============================================================
+File: household_power_consumption.csv
+
+Rows: 1,048,575
+Columns: 9
+Memory: 107.71 MB
+Duplicate Rows: 0
+
+COLUMN NAMES
+------------------------------------------------------------
+Date
+Time
+Global_active_power
+Global_reactive_power
+Voltage
+Global_intensity
+Sub_metering_1
+Sub_metering_2
+Sub_metering_3
+
+DATA TYPES
+------------------------------------------------------------
+Date                         str
+Time                         str
+Global_active_power          str
+Global_reactive_power        str
+Voltage                      str
+Global_intensity             str
+Sub_metering_1               str
+Sub_metering_2               str
+Sub_metering_3           float64
+
+MISSING VALUES
+------------------------------------------------------------
+Date                        0
+Time                        0
+Global_active_power         0
+Global_reactive_power       0
+Voltage                     0
+Global_intensity            0
+Sub_metering_1              0
+Sub_metering_2              0
+Sub_metering_3           4069
+
+FIRST FIVE ROWS
+------------------------------------------------------------
+         Date      Time Global_active_power Global_reactive_power Voltage Global_intensity Sub_metering_1 Sub_metering_2  Sub_metering_3
+0  16/12/2006  17:24:00               4.216                 0.418  234.84             18.4              0              1            17.0
+1  16/12/2006  17:25:00                5.36                 0.436  233.63               23              0              1            16.0
+2  16/12/2006  17:26:00               5.374                 0.498  233.29               23              0              2            17.0
+3  16/12/2006  17:27:00               5.388                 0.502  233.74               23              0              1            17.0
+4  16/12/2006  17:28:00               3.666                 0.528  235.68             15.8              0              1            17.0

@@ -1,0 +1,117 @@
+# ============================================================
+# GridSense AI
+# Column Standardization Configuration
+# ============================================================
+
+# ------------------------------------------------------------
+# TEST ENERGY
+# ------------------------------------------------------------
+
+test_energy:
+
+  rename:
+    building_type: building_type
+    square_footage: floor_area_sqft
+    number_of_occupants: occupants
+    appliances_used_number: appliance_count
+    appliances_used: appliance_count
+    average_temperature: outdoor_temperature
+    day_of_week: day_type
+    energy_consumption: energy_consumption
+
+  categories:
+    day_type:
+      weekday: weekday
+      weekend: weekend
+
+
+# ------------------------------------------------------------
+# ENERGY CONSUMPTION
+# ------------------------------------------------------------
+
+energy_consumption:
+
+  rename:
+    customerid: customer_id
+    customer_id: customer_id
+    customer_type: customer_type
+    regions: region
+    region: region
+    building_size: floor_area
+    building_size_m2: floor_area_m2
+    occupant: occupants
+    occupants: occupants
+    energy_cost: energy_cost
+    energy_cost_brl: energy_cost_brl
+
+
+# ------------------------------------------------------------
+# ENERGY COMPLETE
+# UCI Appliances Energy Prediction dataset
+# ------------------------------------------------------------
+
+energy_complete:
+
+  rename:
+    date: timestamp
+    appliances: appliance_energy_wh
+    lights: lighting_energy_wh
+
+
+# ------------------------------------------------------------
+# SMART METER
+# ------------------------------------------------------------
+
+smart_meter:
+
+  rename:
+    timestamp: timestamp
+    datetime: timestamp
+    meter_id: meter_id
+    customer_id: customer_id
+    energy_consumption: energy_consumption
+    energy_usage: energy_consumption
+    consumption: energy_consumption
+    electricity_consumed: energy_consumption
+
+
+# ------------------------------------------------------------
+# HOUSEHOLD POWER
+# ------------------------------------------------------------
+
+household:
+
+  rename:
+    date: date
+    time: time
+
+    global_active_power: global_active_power_kw
+    global_reactive_power: global_reactive_power_kvarh
+    voltage: voltage
+    global_intensity: global_intensity
+    sub_metering_1: sub_metering_1_wh
+    sub_metering_2: sub_metering_2_wh
+    sub_metering_3: sub_metering_3_wh
+
+  datetime:
+    combine:
+      date_column: date
+      time_column: time
+      output_column: timestamp
+      dayfirst: true
+
+
+# ------------------------------------------------------------
+# CBECS
+# ------------------------------------------------------------
+
+cbecs:
+
+  rename: {}
+
+  # CBECS contains many survey-specific columns.
+  # We will only rename verified fields here.
+  #
+  # Do NOT guess CBECS column meanings.
+  # Additional mappings will be added after inspecting
+  # the cleaned CBECS schema.

@@ -1,0 +1,47 @@
+Dataset: smart_meter
+============================================================
+File: smart_meter_data.csv
+
+Rows: 5,000
+Columns: 7
+Memory: 0.39 MB
+Duplicate Rows: 0
+
+COLUMN NAMES
+------------------------------------------------------------
+Timestamp
+Electricity_Consumed
+Temperature
+Humidity
+Wind_Speed
+Avg_Past_Consumption
+Anomaly_Label
+
+DATA TYPES
+------------------------------------------------------------
+Timestamp                   str
+Electricity_Consumed    float64
+Temperature             float64
+Humidity                float64
+Wind_Speed              float64
+Avg_Past_Consumption    float64
+Anomaly_Label               str
+
+MISSING VALUES
+------------------------------------------------------------
+Timestamp               0
+Electricity_Consumed    0
+Temperature             0
+Humidity                0
+Wind_Speed              0
+Avg_Past_Consumption    0
+Anomaly_Label           0
+
+FIRST FIVE ROWS
+------------------------------------------------------------
+             Timestamp  Electricity_Consumed  Temperature  Humidity  Wind_Speed  Avg_Past_Consumption Anomaly_Label
+0  2024-01-01 00:00:00              0.457786     0.469524  0.396368    0.445441              0.692057        Normal
+1  2024-01-01 00:30:00              0.351956     0.465545  0.451184    0.458729              0.539874        Normal
+2  2024-01-01 01:00:00              0.482948     0.285415  0.408289    0.470360              0.614724        Normal
+3  2024-01-01 01:30:00              0.628838     0.482095  0.512308    0.576241              0.757044        Normal
+4  2024-01-01 02:00:00              0.335974     0.624741  0.672021    0.373004              0.673981        Normal

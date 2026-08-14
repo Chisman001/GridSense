@@ -1,0 +1,28 @@
+
+
+    GridSense AI
+
+    Cleaning Report
+
+    Dataset: test_energy
+
+    Generated: 2026-08-07 18:04:45.219836
+
+    ----------------------------------------
+
+    Rows Before: 100
+
+    Rows After: 100
+
+    Duplicates Removed: 0
+
+    Empty Rows Removed: 0
+
+    Status: PASS
+
+    Execution Time (s): 0.173
+
+
+Warnings
+----------------------------------------
+None

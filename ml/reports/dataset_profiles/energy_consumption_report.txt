@@ -1,0 +1,44 @@
+Dataset: energy_consumption
+============================================================
+File: energy_consumption.csv
+
+Rows: 5,000
+Columns: 6
+Memory: 0.38 MB
+Duplicate Rows: 0
+
+COLUMN NAMES
+------------------------------------------------------------
+customer_id
+customer_type
+regions
+building_size_m2
+occupants
+energy_cost_brl
+
+DATA TYPES
+------------------------------------------------------------
+customer_id             str
+customer_type           str
+regions                 str
+building_size_m2      int64
+occupants             int64
+energy_cost_brl     float64
+
+MISSING VALUES
+------------------------------------------------------------
+customer_id         0
+customer_type       0
+regions             0
+building_size_m2    0
+occupants           0
+energy_cost_brl     0
+
+FIRST FIVE ROWS
+------------------------------------------------------------
+     customer_id customer_type    regions  building_size_m2  occupants  energy_cost_brl
+0  CUSTOMER_0001   residential  Northeast                24          2            64.51
+1  CUSTOMER_0002    commercial    Midwest                24          1            55.26
+2  CUSTOMER_0003    commercial  Southeast                24          1            74.54
+3  CUSTOMER_0004   residential  Northeast                45          4           147.06
+4  CUSTOMER_0005   residential  Southeast                45          4           143.06

@@ -1,0 +1,31 @@
+recommendation_id,title,description,estimated_savings,implementation_cost,difficulty,priority,applicable_business_types,category
+REC-TPL-001,Reduce generator runtime,Audit generator scheduling for Hotel operations and shift suitable load to grid or solar.,75000,150000,Medium,High,Hotel,Cost Optimization
+REC-TPL-002,Preventive maintenance plan,Schedule preventive maintenance for Hotel energy equipment to reduce fuel waste and downtime.,45000,100000,Easy,High,Hotel,Maintenance
+REC-TPL-003,Solar feasibility assessment,Assess daytime loads at this Hotel for an appropriately sized solar installation.,120000,500000,Hard,Medium,Hotel,Renewable Energy
+REC-TPL-004,Load scheduling review,Move flexible Hotel loads away from high-demand operating periods where practical.,35000,50000,Easy,Medium,Hotel,Energy Efficiency
+REC-TPL-005,Meter and energy audit,Track major loads at the Hotel to identify abnormal consumption before costs escalate.,30000,75000,Easy,Medium,Hotel,Monitoring
+REC-TPL-006,Reduce generator runtime,Audit generator scheduling for Bakery operations and shift suitable load to grid or solar.,75000,150000,Medium,High,Bakery,Cost Optimization
+REC-TPL-007,Preventive maintenance plan,Schedule preventive maintenance for Bakery energy equipment to reduce fuel waste and downtime.,45000,100000,Easy,High,Bakery,Maintenance
+REC-TPL-008,Solar feasibility assessment,Assess daytime loads at this Bakery for an appropriately sized solar installation.,120000,500000,Hard,Medium,Bakery,Renewable Energy
+REC-TPL-009,Load scheduling review,Move flexible Bakery loads away from high-demand operating periods where practical.,35000,50000,Easy,Medium,Bakery,Energy Efficiency
+REC-TPL-010,Meter and energy audit,Track major loads at the Bakery to identify abnormal consumption before costs escalate.,30000,75000,Easy,Medium,Bakery,Monitoring
+REC-TPL-011,Reduce generator runtime,Audit generator scheduling for Hospital operations and shift suitable load to grid or solar.,75000,150000,Medium,High,Hospital,Cost Optimization
+REC-TPL-012,Preventive maintenance plan,Schedule preventive maintenance for Hospital energy equipment to reduce fuel waste and downtime.,45000,100000,Easy,High,Hospital,Maintenance
+REC-TPL-013,Solar feasibility assessment,Assess daytime loads at this Hospital for an appropriately sized solar installation.,120000,500000,Hard,Medium,Hospital,Renewable Energy
+REC-TPL-014,Load scheduling review,Move flexible Hospital loads away from high-demand operating periods where practical.,35000,50000,Easy,Medium,Hospital,Energy Efficiency
+REC-TPL-015,Meter and energy audit,Track major loads at the Hospital to identify abnormal consumption before costs escalate.,30000,75000,Easy,Medium,Hospital,Monitoring
+REC-TPL-016,Reduce generator runtime,Audit generator scheduling for School operations and shift suitable load to grid or solar.,75000,150000,Medium,High,School,Cost Optimization
+REC-TPL-017,Preventive maintenance plan,Schedule preventive maintenance for School energy equipment to reduce fuel waste and downtime.,45000,100000,Easy,High,School,Maintenance
+REC-TPL-018,Solar feasibility assessment,Assess daytime loads at this School for an appropriately sized solar installation.,120000,500000,Hard,Medium,School,Renewable Energy
+REC-TPL-019,Load scheduling review,Move flexible School loads away from high-demand operating periods where practical.,35000,50000,Easy,Medium,School,Energy Efficiency
+REC-TPL-020,Meter and energy audit,Track major loads at the School to identify abnormal consumption before costs escalate.,30000,75000,Easy,Medium,School,Monitoring
+REC-TPL-021,Reduce generator runtime,Audit generator scheduling for Cold Room operations and shift suitable load to grid or solar.,75000,150000,Medium,High,Cold Room,Cost Optimization
+REC-TPL-022,Preventive maintenance plan,Schedule preventive maintenance for Cold Room energy equipment to reduce fuel waste and downtime.,45000,100000,Easy,High,Cold Room,Maintenance
+REC-TPL-023,Solar feasibility assessment,Assess daytime loads at this Cold Room for an appropriately sized solar installation.,120000,500000,Hard,Medium,Cold Room,Renewable Energy
+REC-TPL-024,Load scheduling review,Move flexible Cold Room loads away from high-demand operating periods where practical.,35000,50000,Easy,Medium,Cold Room,Energy Efficiency
+REC-TPL-025,Meter and energy audit,Track major loads at the Cold Room to identify abnormal consumption before costs escalate.,30000,75000,Easy,Medium,Cold Room,Monitoring
+REC-TPL-026,Reduce generator runtime,Audit generator scheduling for Factory operations and shift suitable load to grid or solar.,75000,150000,Medium,High,Factory,Cost Optimization
+REC-TPL-027,Preventive maintenance plan,Schedule preventive maintenance for Factory energy equipment to reduce fuel waste and downtime.,45000,100000,Easy,High,Factory,Maintenance
+REC-TPL-028,Solar feasibility assessment,Assess daytime loads at this Factory for an appropriately sized solar installation.,120000,500000,Hard,Medium,Factory,Renewable Energy
+REC-TPL-029,Load scheduling review,Move flexible Factory loads away from high-demand operating periods where practical.,35000,50000,Easy,Medium,Factory,Energy Efficiency
+REC-TPL-030,Meter and energy audit,Track major loads at the Factory to identify abnormal consumption before costs escalate.,30000,75000,Easy,Medium,Factory,Monitoring

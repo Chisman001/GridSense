@@ -1,0 +1,157 @@
+# Stage 06 assumptions are deliberate synthetic rules, not public measurements.
+generation:
+  random_seed: 42
+  business_count: 150
+  start_year: 2024
+  start_month: 1
+  months_per_business: 24
+  created_at: "2024-01-01"
+  school_holiday_months: [8, 12]
+
+locations:
+  - {state: Lagos, city: Lagos}
+  - {state: Abuja, city: Abuja}
+  - {state: Rivers, city: Port Harcourt}
+  - {state: Kano, city: Kano}
+  - {state: Oyo, city: Ibadan}
+
+# Currency amounts are Nigerian naira; ranges create relationships, not official tariffs.
+economics:
+  electricity_tariff_naira_per_kwh: 95
+  diesel_price_naira_per_liter: 1300
+  petrol_price_naira_per_liter: 750
+  solar_kwh_per_kw_month: 120
+
+weather:
+  base_temperature_c: 28
+  seasonal_amplitude_c: 2.5
+  noise_c: 1.2
+
+business_rules:
+  Hotel:
+    industry: Hospitality
+    employees: [18, 80]
+    operating_hours: [18, 24]
+    floor_area_sqm: [300, 1800]
+    monthly_revenue: [3000000, 18000000]
+    solar_capacity_kw: [12, 90]
+    occupancy_rate: [62, 95]
+    kwh_per_sqm_month: [20, 30]
+    outage_hours_month: [35, 90]
+    generator_liters_per_hour: [8, 15]
+    generator_outage_coverage: {Grid: 0.35, Generator: 0.75, Solar: 0.15, Hybrid: 0.45}
+    energy_source_weights: {Grid: 25, Generator: 15, Solar: 10, Hybrid: 50}
+    diesel_fraction: 0.8
+    maintenance_base_naira: 30000
+    maintenance_naira_per_generator_hour: 950
+    maintenance_naira_per_kwh: 1.2
+    seasonal_sensitivity: 0.18
+    holiday_occupancy_multiplier: 1.0
+    holiday_energy_multiplier: 1.0
+  Bakery:
+    industry: Food Production
+    employees: [8, 35]
+    operating_hours: [10, 16]
+    floor_area_sqm: [100, 500]
+    monthly_revenue: [1200000, 7000000]
+    solar_capacity_kw: [5, 35]
+    occupancy_rate: [55, 88]
+    kwh_per_sqm_month: [28, 42]
+    outage_hours_month: [25, 70]
+    generator_liters_per_hour: [5, 10]
+    generator_outage_coverage: {Grid: 0.3, Generator: 0.7, Solar: 0.1, Hybrid: 0.4}
+    energy_source_weights: {Grid: 30, Generator: 20, Solar: 10, Hybrid: 40}
+    diesel_fraction: 0.65
+    maintenance_base_naira: 20000
+    maintenance_naira_per_generator_hour: 700
+    maintenance_naira_per_kwh: 1.5
+    seasonal_sensitivity: 0.1
+    holiday_occupancy_multiplier: 1.0
+    holiday_energy_multiplier: 1.0
+  Hospital:
+    industry: Healthcare
+    employees: [45, 220]
+    operating_hours: [24, 24]
+    floor_area_sqm: [600, 3000]
+    monthly_revenue: [8000000, 40000000]
+    solar_capacity_kw: [20, 150]
+    occupancy_rate: [72, 98]
+    kwh_per_sqm_month: [32, 48]
+    outage_hours_month: [50, 120]
+    generator_liters_per_hour: [14, 28]
+    generator_outage_coverage: {Grid: 0.7, Generator: 1.0, Solar: 0.35, Hybrid: 0.8}
+    energy_source_weights: {Grid: 10, Generator: 25, Solar: 5, Hybrid: 60}
+    diesel_fraction: 0.95
+    maintenance_base_naira: 80000
+    maintenance_naira_per_generator_hour: 1800
+    maintenance_naira_per_kwh: 2.0
+    seasonal_sensitivity: 0.22
+    holiday_occupancy_multiplier: 1.0
+    holiday_energy_multiplier: 1.0
+  School:
+    industry: Education
+    employees: [15, 100]
+    operating_hours: [8, 12]
+    floor_area_sqm: [400, 2500]
+    monthly_revenue: [2500000, 15000000]
+    solar_capacity_kw: [10, 80]
+    occupancy_rate: [60, 92]
+    kwh_per_sqm_month: [10, 18]
+    outage_hours_month: [20, 65]
+    generator_liters_per_hour: [5, 11]
+    generator_outage_coverage: {Grid: 0.25, Generator: 0.65, Solar: 0.1, Hybrid: 0.35}
+    energy_source_weights: {Grid: 35, Generator: 15, Solar: 15, Hybrid: 35}
+    diesel_fraction: 0.7
+    maintenance_base_naira: 18000
+    maintenance_naira_per_generator_hour: 550
+    maintenance_naira_per_kwh: 0.8
+    seasonal_sensitivity: 0.08
+    holiday_occupancy_multiplier: 0.45
+    holiday_energy_multiplier: 0.65
+  Cold Room:
+    industry: Cold Storage
+    employees: [4, 22]
+    operating_hours: [22, 24]
+    floor_area_sqm: [120, 900]
+    monthly_revenue: [2500000, 14000000]
+    solar_capacity_kw: [10, 70]
+    occupancy_rate: [20, 45]
+    kwh_per_sqm_month: [45, 65]
+    outage_hours_month: [45, 110]
+    generator_liters_per_hour: [10, 20]
+    generator_outage_coverage: {Grid: 0.6, Generator: 0.95, Solar: 0.3, Hybrid: 0.75}
+    energy_source_weights: {Grid: 10, Generator: 25, Solar: 5, Hybrid: 60}
+    diesel_fraction: 0.9
+    maintenance_base_naira: 60000
+    maintenance_naira_per_generator_hour: 1400
+    maintenance_naira_per_kwh: 2.2
+    seasonal_sensitivity: 0.03
+    holiday_occupancy_multiplier: 1.0
+    holiday_energy_multiplier: 1.0
+  Factory:
+    industry: Manufacturing
+    employees: [35, 250]
+    operating_hours: [12, 20]
+    floor_area_sqm: [1000, 6000]
+    monthly_revenue: [10000000, 80000000]
+    solar_capacity_kw: [25, 250]
+    occupancy_rate: [55, 90]
+    kwh_per_sqm_month: [25, 45]
+    outage_hours_month: [40, 110]
+    generator_liters_per_hour: [18, 38]
+    generator_outage_coverage: {Grid: 0.55, Generator: 0.9, Solar: 0.2, Hybrid: 0.7}
+    energy_source_weights: {Grid: 15, Generator: 25, Solar: 5, Hybrid: 55}
+    diesel_fraction: 0.95
+    maintenance_base_naira: 100000
+    maintenance_naira_per_generator_hour: 2200
+    maintenance_naira_per_kwh: 2.5
+    seasonal_sensitivity: 0.12
+    holiday_occupancy_multiplier: 1.0
+    holiday_energy_multiplier: 1.0
+
+recommendation_templates:
+  - {title: "Reduce generator runtime", description: "Audit generator scheduling for {business_type} operations and shift suitable load to grid or solar.", estimated_savings: 75000, implementation_cost: 150000, difficulty: Medium, priority: High, category: Cost Optimization}
+  - {title: "Preventive maintenance plan", description: "Schedule preventive maintenance for {business_type} energy equipment to reduce fuel waste and downtime.", estimated_savings: 45000, implementation_cost: 100000, difficulty: Easy, priority: High, category: Maintenance}
+  - {title: "Solar feasibility assessment", description: "Assess daytime loads at this {business_type} for an appropriately sized solar installation.", estimated_savings: 120000, implementation_cost: 500000, difficulty: Hard, priority: Medium, category: Renewable Energy}
+  - {title: "Load scheduling review", description: "Move flexible {business_type} loads away from high-demand operating periods where practical.", estimated_savings: 35000, implementation_cost: 50000, difficulty: Easy, priority: Medium, category: Energy Efficiency}
+  - {title: "Meter and energy audit", description: "Track major loads at the {business_type} to identify abnormal consumption before costs escalate.", estimated_savings: 30000, implementation_cost: 75000, difficulty: Easy, priority: Medium, category: Monitoring}

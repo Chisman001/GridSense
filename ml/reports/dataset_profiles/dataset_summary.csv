@@ -1,0 +1,8 @@
+Dataset,Rows,Columns,Missing Cells,Duplicate Rows,Memory (MB)
+household_text,2075259,9,25979,0,239.06
+household_csv,1048575,9,4069,0,107.71
+energy_complete,19735,29,0,0,4.72
+cbecs,6436,1249,1965847,0,61.33
+energy_consumption,5000,6,0,0,0.38
+smart_meter,5000,7,0,0,0.39
+test_energy,100,7,0,0,0.01

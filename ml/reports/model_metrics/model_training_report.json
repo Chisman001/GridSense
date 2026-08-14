@@ -1,0 +1,117 @@
+{
+  "generated_at": "2026-08-09T17:24:59.502401",
+  "dataset_path": "C:\\Proj\\GridSense\\ml\\datasets\\final\\energy_records.csv",
+  "target": "next_month_energy_cost",
+  "features": [
+    "month",
+    "year",
+    "electricity_bill",
+    "diesel_cost",
+    "petrol_cost",
+    "generator_hours",
+    "grid_hours",
+    "outage_hours",
+    "energy_consumption_kwh",
+    "fuel_consumption_liters",
+    "maintenance_cost",
+    "weather_avg_temp",
+    "occupancy_rate",
+    "total_energy_cost",
+    "business_type",
+    "industry",
+    "state",
+    "employees",
+    "operating_hours",
+    "floor_area_sqm",
+    "energy_source",
+    "solar_capacity_kw",
+    "monthly_revenue",
+    "quarter",
+    "cost_per_kwh",
+    "energy_cost_per_employee",
+    "generator_dependency",
+    "revenue_energy_ratio",
+    "outage_severity",
+    "estimated_carbon_intensity"
+  ],
+  "excluded": [
+    "record_id",
+    "city",
+    "business_id",
+    "created_at",
+    "business_name",
+    "next_month_energy_cost"
+  ],
+  "numeric": [
+    "month",
+    "year",
+    "electricity_bill",
+    "diesel_cost",
+    "petrol_cost",
+    "generator_hours",
+    "grid_hours",
+    "outage_hours",
+    "energy_consumption_kwh",
+    "fuel_consumption_liters",
+    "maintenance_cost",
+    "weather_avg_temp",
+    "occupancy_rate",
+    "total_energy_cost",
+    "employees",
+    "operating_hours",
+    "floor_area_sqm",
+    "solar_capacity_kw",
+    "monthly_revenue",
+    "quarter",
+    "cost_per_kwh",
+    "energy_cost_per_employee",
+    "generator_dependency",
+    "revenue_energy_ratio",
+    "outage_severity",
+    "estimated_carbon_intensity"
+  ],
+  "categorical": [
+    "business_type",
+    "industry",
+    "state",
+    "energy_source"
+  ],
+  "split_strategy": {
+    "train_end_period": 18,
+    "val_end_period": 21
+  },
+  "train_rows": 2700,
+  "val_rows": 450,
+  "test_rows": 300,
+  "null_target_rows": 150,
+  "models": {
+    "linear_regression": {
+      "status": "trained",
+      "duration_seconds": 0.17262554168701172
+    },
+    "random_forest": {
+      "status": "trained",
+      "duration_seconds": 3.888974189758301
+    },
+    "xgboost": {
+      "status": "trained",
+      "duration_seconds": 1.814918041229248
+    },
+    "lightgbm": {
+      "status": "trained",
+      "duration_seconds": 5.591661214828491
+    }
+  },
+  "artifacts": {
+    "linear_regression": "C:\\Proj\\GridSense\\ml\\models\\linear_regression.joblib",
+    "random_forest": "C:\\Proj\\GridSense\\ml\\models\\random_forest.joblib",
+    "xgboost": "C:\\Proj\\GridSense\\ml\\models\\xgboost.joblib",
+    "lightgbm": "C:\\Proj\\GridSense\\ml\\models\\lightgbm.joblib"
+  },
+  "reproducibility": {
+    "python_version": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "sklearn_version": "1.9.0",
+    "joblib_version": "1.5.3",
+    "random_seed": 42
+  }
+}

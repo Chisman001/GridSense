@@ -1,0 +1,55 @@
+{
+  "generated_at": "2026-08-07T22:49:21.217109",
+  "input_files": [
+    "C:\\Proj\\GridSense\\ml\\datasets\\synthetic\\businesses.csv",
+    "C:\\Proj\\GridSense\\ml\\datasets\\synthetic\\energy_records.csv"
+  ],
+  "output_file": "C:\\Proj\\GridSense\\ml\\datasets\\processed\\engineered_energy_records.csv",
+  "grain": "one row per business-month",
+  "features": [
+    "quarter",
+    "cost_per_kwh",
+    "energy_cost_per_employee",
+    "generator_dependency",
+    "revenue_energy_ratio",
+    "outage_severity",
+    "estimated_carbon_intensity",
+    "next_month_energy_cost"
+  ],
+  "feature_definitions": {
+    "outage_severity": "outage_hours / (operating_hours * calendar days in month)"
+  },
+  "target_policy": "Final chronological row per business is retained with next_month_energy_cost = null.",
+  "leakage_precaution": "Target is calculated with a chronological within-business lead only.",
+  "input_row_counts": {
+    "businesses": 150,
+    "energy_records": 3600
+  },
+  "rows": 3600,
+  "columns": 36,
+  "unique_businesses": 150,
+  "records_per_business": 24,
+  "distinct_business_months": 3600,
+  "duplicate_record_id_count": 0,
+  "duplicate_business_month_count": 0,
+  "row_multiplication_detected": false,
+  "undefined_ratio_counts": {
+    "cost_per_kwh": 0,
+    "energy_cost_per_employee": 0,
+    "generator_dependency": 0,
+    "revenue_energy_ratio": 0,
+    "outage_severity": 0,
+    "estimated_carbon_intensity": 0
+  },
+  "infinite_value_count": 0,
+  "ratio_validity": {
+    "generator_dependency_in_range": true,
+    "outage_severity_in_range": true
+  },
+  "outage_severity_min": 0.04801295220473191,
+  "outage_severity_max": 0.29607897664071187,
+  "target_non_null": 3450,
+  "target_null": 150,
+  "deterministic_output": "Rows are sorted by business_id, year, and month; no random operation is used.",
+  "validation": "PASS"
+}

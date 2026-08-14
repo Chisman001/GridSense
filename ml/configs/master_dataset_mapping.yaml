@@ -1,0 +1,356 @@
+# ============================================================
+# GridSense AI
+# Master Dataset Mapping Configuration
+# ============================================================
+#
+# Purpose:
+#   Defines how standardized source datasets map into the
+#   canonical GridSense master dataset.
+#
+# Important:
+#   - Only map columns that actually exist in the source dataset.
+#   - Do not invent measurements.
+#   - Source-specific columns that are not useful to the
+#     master dataset are intentionally excluded.
+#   - source_dataset is added automatically by Stage 05.
+#
+# ============================================================
+
+
+# ============================================================
+# CANONICAL MASTER SCHEMA
+# ============================================================
+
+master_columns:
+
+  # -------------------------
+  # Provenance
+  # -------------------------
+  - source_dataset
+
+  # -------------------------
+  # Time
+  # -------------------------
+  - timestamp
+
+  - day_type
+
+  # -------------------------
+  # Building / Customer
+  # -------------------------
+  - building_type
+  - customer_type
+  - region
+  - floor_area_m2
+  - floor_area_sqft
+  - occupants
+  - appliance_count
+
+  # -------------------------
+  # Energy
+  # -------------------------
+  - energy_consumption
+  - electricity_consumed
+  - appliance_energy_wh
+  - lighting_energy_wh
+  - energy_cost
+
+  # -------------------------
+  # Environmental
+  # -------------------------
+  - temperature
+  - humidity
+  - wind_speed
+  - outdoor_temperature
+  - outdoor_humidity
+  - pressure_mm_hg
+  - visibility
+  - dew_point
+
+  # -------------------------
+  # Electrical measurements
+  # -------------------------
+  - global_active_power_kw
+  - global_reactive_power_kvarh
+  - voltage
+  - global_intensity
+  - sub_metering_1_wh
+  - sub_metering_2_wh
+  - sub_metering_3_wh
+
+  # -------------------------
+  # ML / analytical variables
+  # -------------------------
+  - avg_past_consumption
+  - anomaly_label
+
+  # -------------------------
+  # Building energy information
+  # -------------------------
+  - building_energy_use
+  - electricity_consumption
+  - natural_gas_consumption
+  - fuel_oil_consumption
+  - propane_consumption
+  - district_steam_consumption
+  - district_hot_water_consumption
+
+  # -------------------------
+  # CBECS building characteristics
+  # -------------------------
+  - number_of_floors
+  - year_constructed
+  - weekly_operating_hours
+  - number_of_workers
+
+  # -------------------------
+  # Degree days
+  # -------------------------
+  - heating_degree_days
+  - cooling_degree_days
+
+  # -------------------------
+  # CBECS electricity metrics
+  # -------------------------
+  - electricity_btu
+  - electricity_consumption_cbecs
+  - electricity_expenditure
+
+  # -------------------------
+  # CBECS natural gas metrics
+  # -------------------------
+  - natural_gas_btu
+  - natural_gas_consumption_cbecs
+  - natural_gas_expenditure
+
+  # -------------------------
+  # Survey weight
+  # -------------------------
+  - final_weight
+
+
+# ============================================================
+# DATASET MAPPINGS
+# ============================================================
+
+
+# ============================================================
+# 1. TEST ENERGY
+# ============================================================
+
+test_energy:
+
+  source_file: test_energy_data.csv
+
+  columns:
+
+    building_type: building_type
+
+    floor_area_sqft: floor_area_sqft
+
+    occupants: occupants
+
+    appliance_count: appliance_count
+
+    outdoor_temperature: outdoor_temperature
+
+    day_type: day_type
+
+    energy_consumption: energy_consumption
+
+
+# ============================================================
+# 2. ENERGY CONSUMPTION
+# ============================================================
+
+energy_consumption:
+
+  source_file: energy_consumption.csv
+
+  columns:
+
+    customer_id: customer_id
+
+    customer_type: customer_type
+
+    region: region
+
+    floor_area_m2: floor_area_m2
+
+    occupants: occupants
+
+    energy_cost: energy_cost
+
+
+# ============================================================
+# 3. ENERGY COMPLETE
+# ============================================================
+
+energy_complete:
+
+  source_file: energydata_complete.csv
+
+  columns:
+
+    date: timestamp
+
+    appliances: appliance_energy_wh
+
+    lights: lighting_energy_wh
+
+    t1: indoor_temperature_1
+
+    rh_1: indoor_humidity_1
+
+    t2: indoor_temperature_2
+
+    rh_2: indoor_humidity_2
+
+    t3: indoor_temperature_3
+
+    rh_3: indoor_humidity_3
+
+    t4: indoor_temperature_4
+
+    rh_4: indoor_humidity_4
+
+    t5: indoor_temperature_5
+
+    rh_5: indoor_humidity_5
+
+    t6: indoor_temperature_6
+
+    rh_6: indoor_humidity_6
+
+    t7: indoor_temperature_7
+
+    rh_7: indoor_humidity_7
+
+    t8: indoor_temperature_8
+
+    rh_8: indoor_humidity_8
+
+    t9: indoor_temperature_9
+
+    rh_9: indoor_humidity_9
+
+    t_out: outdoor_temperature
+
+    press_mm_hg: pressure_mm_hg
+
+    rh_out: outdoor_humidity
+
+    windspeed: wind_speed
+
+    visibility: visibility
+
+    tdewpoint: dew_point
+
+
+# ============================================================
+# 4. SMART METER
+# ============================================================
+
+smart_meter:
+
+  source_file: smart_meter_data.csv
+
+  columns:
+
+    timestamp: timestamp
+
+    electricity_consumed: electricity_consumed
+
+    temperature: temperature
+
+    humidity: humidity
+
+    wind_speed: wind_speed
+
+    avg_past_consumption: avg_past_consumption
+
+    anomaly_label: anomaly_label
+
+
+# ============================================================
+# 5. HOUSEHOLD POWER CONSUMPTION
+# ============================================================
+
+household:
+
+  source_file: household_power_consumption.csv
+
+  columns:
+
+    timestamp: timestamp
+
+    global_active_power_kw: global_active_power_kw
+
+    global_reactive_power_kvarh: global_reactive_power_kvarh
+
+    voltage: voltage
+
+    global_intensity: global_intensity
+
+    sub_metering_1_wh: sub_metering_1_wh
+
+    sub_metering_2_wh: sub_metering_2_wh
+
+    sub_metering_3_wh: sub_metering_3_wh
+
+
+# ============================================================
+# 6. CBECS
+# ============================================================
+
+cbecs:
+
+  source_file: cbecs2018_final_public.csv
+
+  columns:
+
+    region: region
+
+    sqft: floor_area_sqft
+
+    nfloor: number_of_floors
+
+    yrconc: year_constructed
+
+    nocc: occupants
+
+    wkhrs: weekly_operating_hours
+
+    nwker: number_of_workers
+
+    egyused: building_energy_use
+
+    elused: electricity_consumption
+
+    ngused: natural_gas_consumption
+
+    fkused: fuel_oil_consumption
+
+    prused: propane_consumption
+
+    stused: district_steam_consumption
+
+    hwused: district_hot_water_consumption
+
+    hdd65: heating_degree_days
+
+    cdd65: cooling_degree_days
+
+    elbtu: electricity_btu
+
+    elcns: electricity_consumption_cbecs
+
+    elexp: electricity_expenditure
+
+    ngbtu: natural_gas_btu
+
+    ngcns: natural_gas_consumption_cbecs
+
+    ngexp: natural_gas_expenditure
+
+    finalwt: final_weight

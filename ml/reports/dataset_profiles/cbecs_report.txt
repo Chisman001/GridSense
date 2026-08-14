@@ -1,0 +1,3773 @@
+Dataset: cbecs
+============================================================
+File: cbecs2018_final_public.csv
+
+Rows: 6,436
+Columns: 1249
+Memory: 61.33 MB
+Duplicate Rows: 0
+
+COLUMN NAMES
+------------------------------------------------------------
+PUBID
+REGION
+CENDIV
+PBA
+PUBCLIM
+SQFT
+SQFTC
+WLCNS
+RFCNS
+RFCOOL
+RFTILT
+BLDSHP
+GLSSPC
+NFLOOR
+BASEMNT
+FLCEILHT
+ATTIC
+ELEVTR
+NELVTR
+ESCLTR
+NESLTR
+YRCONC
+RENOV
+RENCOS
+RENADD
+RENRDC
+RENINT
+RENRFF
+RENWIN
+RENHVC
+RENLGT
+RENPLB
+RENELC
+RENINS
+RENSAF
+RENSTR
+RENOTH
+DRYCL
+VACANT
+PBAPLUS
+RWSEAT
+PBSEAT
+EDSEAT
+FDSEAT
+DRVTHRU
+HCBED
+NRSBED
+LODGRM
+COURT
+FACIL
+FEDFAC
+FACACT
+MANIND
+PLANT
+FACDST
+FACDHW
+FACDCW
+FACELC
+BLDPLT
+GOVOWN
+GOVTYP
+OWNTYPE
+NOCC
+NOCCAT
+OWNOCC
+OWNOPR
+OWNPPR
+NWNPPR
+NWNOPR
+WHOPPR
+MONUSE
+OCCUPYP
+LODOCCP
+OPEN24
+OPNMF
+OPNWE
+WKHRS
+WKHRSC
+NWKER
+NWKERC
+HT1
+HT2
+COOL
+WATR
+COOK
+MANU
+EGYUSED
+ELUSED
+NGUSED
+FKUSED
+PRUSED
+STUSED
+HWUSED
+CWUSED
+WOUSED
+COUSED
+SOUSED
+OTUSED
+FKTYPE
+SOPANEL
+SOTHERM
+HEATP
+HTLS50
+ELHT1
+NGHT1
+FKHT1
+PRHT1
+STHT1
+HWHT1
+WOHT1
+COHT1
+SOHT1
+OTHT1
+ELHT2
+NGHT2
+FKHT2
+PRHT2
+STHT2
+HWHT2
+WOHT2
+COHT2
+SOHT2
+OTHT2
+PKGHT
+FURNAC
+SLFCON
+BOILER
+HTPMPH
+STHW
+REHEAT
+FIREPLC
+OTHTEQ
+PKGHT_EL
+BOILER_EL
+HTPMPH_EL
+FURNAC_EL
+SLFCON_EL
+FIREPLC_EL
+REHEAT_EL
+OTHTEQ_EL
+PKGHT_NG
+BOILER_NG
+HTPMPH_NG
+FURNAC_NG
+SLFCON_NG
+FIREPLC_NG
+OTHTEQ_NG
+BOILER_FK
+FURNAC_FK
+SLFCON_FK
+OTHTEQ_FK
+PKGHT_PR
+BOILER_PR
+HTPMPH_PR
+FURNAC_PR
+SLFCON_PR
+FIREPLC_PR
+OTHTEQ_PR
+DIST_ST
+AIRHAND_ST
+FANCOIL_ST
+REHEAT_ST
+RADIATR_ST
+RADFLR_ST
+WTLOOP_ST
+OTDIST_ST
+DIST_HW
+AIRHAND_HW
+FANCOIL_HW
+REHEAT_HW
+RADIATR_HW
+RADFLR_HW
+WTLOOP_HW
+OTDIST_HW
+FURNAC_WO
+SLFCON_WO
+FIREPLC_WO
+OTHTEQ_WO
+BOILER_CO
+FURNAC_CO
+OTHTEQ_CO
+SOTHERM_SO
+PKGHT_OT
+BOILER_OT
+FURNAC_OT
+SLFCON_OT
+OTHTEQ_OT
+BLRAIR_HT1
+BLRFNCL_HT1
+BLRDUCT_HT1
+BLRRAD_HT1
+BLRRDFL_HT1
+BLRWTLP_HT1
+BLROTD_HT1
+BLRAIR_EL2
+BLRFNCL_EL2
+BLRDUCT_EL2
+BLRRAD_EL2
+BLRRDFL_EL2
+BLRWTLP_EL2
+BLROTD_EL2
+BLRAIR_NG2
+BLRFNCL_NG2
+BLRDUCT_NG2
+BLRRAD_NG2
+BLRRDFL_NG2
+BLRWTLP_NG2
+BLROTD_NG2
+BLRAIR_FK2
+BLRFNCL_FK2
+BLRDUCT_FK2
+BLRRAD_FK2
+BLRRDFL_FK2
+BLRWTLP_FK2
+BLROTD_FK2
+BLRAIR_PR2
+BLRFNCL_PR2
+BLRDUCT_PR2
+BLRRAD_PR2
+BLRRDFL_PR2
+BLRWTLP_PR2
+BLROTD_PR2
+BLRAIR_CO2
+BLRFNCL_CO2
+BLRDUCT_CO2
+BLRRAD_CO2
+BLRRDFL_CO2
+BLRWTLP_CO2
+BLROTD_CO2
+BLRAIR_OT2
+BLRFNCL_OT2
+BLRDUCT_OT2
+BLRRAD_OT2
+BLRRDFL_OT2
+BLRWTLP_OT2
+BLROTD_OT2
+BLRAIR
+BLRDUCT
+BLRFNCL
+BLROTD
+BLRRAD
+BLRRDFL
+BLRWTLP
+PKGHPH
+HPHPTHP
+HPHAIR
+HPHGRD
+HPHDUAL
+HPHWTR
+HPHVRF
+SPHTPTHP
+FURNP_EL
+PKGHP_EL
+BOILP_EL
+HTPHP_EL
+SLFCNP_EL
+FIREPLP_EL
+REHEATP_EL
+OTHTP_EL
+FURNP_NG
+PKGHP_NG
+BOILP_NG
+HTPHP_NG
+SLFCNP_NG
+FIREPLP_NG
+OTHTP_NG
+FURNP_FK
+BOILP_FK
+SLFCNP_FK
+OTHTP_FK
+FURNP_PR
+PKGHP_PR
+BOILP_PR
+HTPHP_PR
+SLFCNP_PR
+FIREPLP_PR
+OTHTP_PR
+STHWP_ST
+STHWP_HW
+FURNP_WO
+SLFCNP_WO
+FIREPLP_WO
+OTHTP_WO
+FURNP_CO
+BOILP_CO
+OTHTP_CO
+SOTHERMP_SO
+FURNP_OT
+PKGHP_OT
+BOILP_OT
+SLFCNP_OT
+OTHTP_OT
+MAINHT
+NWMNHT
+COOLP
+ELCOOL
+NGCOOL
+FKCOOL
+PRCOOL
+STCOOL
+CWCOOL
+OTCOOL
+RCAC
+PKGCL
+CHILLR
+HTPMPC
+ACWNWL
+EVAPCL
+OTCLEQ
+CHWT
+RCAC_EL
+PKGCL_EL
+CHILLR_EL
+HTPMPC_EL
+ACWNWL_EL
+EVAPCL_EL
+OTCLEQ_EL
+HPCPTHP
+HPCAIR
+HPCGRD
+HPCDUAL
+HPCWTR
+ACVRF
+RMACPTHP
+CHILLR_NG
+OTCLEQ_NG
+CHILLR_FK
+OTCLEQ_FK
+CHILLR_PR
+OTCLEQ_PR
+CHILLR_ST
+OTCLEQ_ST
+OTCLEQ_OT
+DIST_CW
+CWAIR
+CWFNCL
+CWBEAM
+CWWTLP
+CWOTD
+CHLAIR
+CHLFNCL
+CHLBEAM
+CHLWTLP
+CHLOTD
+CHLAIRCL
+CHLWTRCL
+CHLABSRP
+RCACP_EL
+PKGCP_EL
+CHILP_EL
+HTPCP_EL
+ACWNWP_EL
+EVAPP_EL
+OTCLP_EL
+CHILP_NG
+OTCLP_NG
+CHILP_FK
+OTCLP_FK
+CHILP_PR
+OTCLP_PR
+CHILP_ST
+OTCLP_ST
+CHWTP_CW
+OTCLP_OT
+MAINCL
+NWMNCL
+EMCS
+EMCSHT
+EMCSCL
+EMCSLT
+SMRTTHRM
+HWRDHT
+HWRDCL
+VAV
+DOAS
+DCV
+ECN
+MAINT
+ELWATR
+NGWATR
+FKWATR
+PRWATR
+STWATR
+HWWATR
+WOWATR
+COWATR
+SOWATR
+OTWATR
+WTHTEQ
+BOOSTWT
+ELCOOK
+NGCOOK
+FKCOOK
+PRCOOK
+STCOOK
+HWCOOK
+WOCOOK
+COCOOK
+OTCOOK
+ELMANU
+NGMANU
+FKMANU
+PRMANU
+STMANU
+HWMANU
+WOMANU
+COMANU
+OTMANU
+CAPGEN
+PVC
+ENGINE
+FUELCL
+LRGTRB
+MCROTB
+OTGENTECH
+COGEN
+NGGENR
+FKGENR
+PRGENR
+WOGENR
+COGENR
+SOGENR
+OTGENR
+GENUSE
+GENGT1MW
+NGOTH
+FKOTH
+PROTH
+STOTH
+HWOTH
+CWOTH
+WOOTH
+COOTH
+SOOTH
+OTOTH
+PRAMTC
+PRUNIT
+WOAMT
+WOSRC
+WOEXP
+WOEXPC
+ENRGYPLN
+SNACK
+FASTFD
+CAF
+FDPREP
+KITCHN
+BREAKRM
+OTFDRM
+SNACKSF
+FASTFDSF
+CAFSF
+FDPREPSF
+HWTRM
+LAUNDR
+CONFSP
+CONFSPP
+MEDEQP
+XRAYN
+CTSCAN
+MRI
+LINACC
+OUTHOSPPCT
+OUTSURG
+LABEQP
+MCHEQP
+POOL
+HTPOOL
+POOLSRC
+STRLZR
+RFGEQP
+RFGRES
+RFGCOMP
+RFGWI
+RFGOP
+RFGCL
+RFGVEN
+RFGICE
+RFGSTO
+RFGRSN
+RFGCOMPN
+RFGWIN
+RFGOPN
+RFGCLN
+RFGVNN
+RFGICN
+RFGSTP
+WHRECOV
+WHHT2
+WHWT
+WHOT
+PCTERM
+LAPTOP
+TABLET
+SERVER
+PCTERMN
+PCTRMC
+LAPTPN
+LAPTPC
+MLTMON
+MLTMNC
+TABCHRG
+TABLETN
+SRVUNIT
+SERVERN
+SERVERC
+SRVRCLST
+DATACNTR
+DCNTRSFC
+TRNGRM
+STDNRM
+LGOFFDEV
+SMOFFDEV
+WBOARDS
+TVVIDEO
+RGSTR
+LGOFFDEVN
+SMOFFDEVN
+WBOARDSN
+TVVIDEON
+RGSTRN
+ATMN
+LTZHRP
+LZHRPC
+LTOHRP
+LOHRPC
+LTNR24
+LTNHRP
+LNHRPC
+LIT
+FLUOR
+CFLR
+BULB
+HALO
+HID
+LED
+OTLT
+FLUORP
+CFLRP
+BULBP
+HALOP
+HIDP
+LEDP
+OTLTP
+SCHED
+OCSN
+DIM
+DAYHARV
+TRIM
+PLGCTRL
+DRLGHT
+LTEXPC
+PKLT
+PKLTINOUT
+PKLTN
+WINTYP
+TINT
+REFL
+AWN
+SKYLT
+DAYLTP
+HDD65
+CDD65
+MFUSED
+MFBTU
+MFEXP
+ELBTU
+ELCNS
+ELEXP
+NGBTU
+NGCNS
+NGEXP
+FKBTU
+FKCNS
+FKEXP
+DHUSED
+DHHT1
+DHHT2
+DHCOOL
+DHWATR
+DHCOOK
+DHMANU
+DHOTH
+DHBTU
+DHEXP
+MFHTBTU
+MFCLBTU
+MFVNBTU
+MFWTBTU
+MFLTBTU
+MFCKBTU
+MFRFBTU
+MFOFBTU
+MFPCBTU
+MFOTBTU
+ELHTBTU
+ELCLBTU
+ELVNBTU
+ELWTBTU
+ELLTBTU
+ELCKBTU
+ELRFBTU
+ELOFBTU
+ELPCBTU
+ELOTBTU
+NGHTBTU
+NGCLBTU
+NGWTBTU
+NGCKBTU
+NGOTBTU
+FKHTBTU
+FKCLBTU
+FKWTBTU
+FKCKBTU
+FKOTBTU
+DHHTBTU
+DHCLBTU
+DHWTBTU
+DHCKBTU
+DHOTBTU
+FINALWT
+FINALWT1
+FINALWT2
+FINALWT3
+FINALWT4
+FINALWT5
+FINALWT6
+FINALWT7
+FINALWT8
+FINALWT9
+FINALWT10
+FINALWT11
+FINALWT12
+FINALWT13
+FINALWT14
+FINALWT15
+FINALWT16
+FINALWT17
+FINALWT18
+FINALWT19
+FINALWT20
+FINALWT21
+FINALWT22
+FINALWT23
+FINALWT24
+FINALWT25
+FINALWT26
+FINALWT27
+FINALWT28
+FINALWT29
+FINALWT30
+FINALWT31
+FINALWT32
+FINALWT33
+FINALWT34
+FINALWT35
+FINALWT36
+FINALWT37
+FINALWT38
+FINALWT39
+FINALWT40
+FINALWT41
+FINALWT42
+FINALWT43
+FINALWT44
+FINALWT45
+FINALWT46
+FINALWT47
+FINALWT48
+FINALWT49
+FINALWT50
+FINALWT51
+FINALWT52
+FINALWT53
+FINALWT54
+FINALWT55
+FINALWT56
+FINALWT57
+FINALWT58
+FINALWT59
+FINALWT60
+FINALWT61
+FINALWT62
+FINALWT63
+FINALWT64
+FINALWT65
+FINALWT66
+FINALWT67
+FINALWT68
+FINALWT69
+FINALWT70
+FINALWT71
+FINALWT72
+FINALWT73
+FINALWT74
+FINALWT75
+FINALWT76
+FINALWT77
+FINALWT78
+FINALWT79
+FINALWT80
+FINALWT81
+FINALWT82
+FINALWT83
+FINALWT84
+FINALWT85
+FINALWT86
+FINALWT87
+FINALWT88
+FINALWT89
+FINALWT90
+FINALWT91
+FINALWT92
+FINALWT93
+FINALWT94
+FINALWT95
+FINALWT96
+FINALWT97
+FINALWT98
+FINALWT99
+FINALWT100
+FINALWT101
+FINALWT102
+FINALWT103
+FINALWT104
+FINALWT105
+FINALWT106
+FINALWT107
+FINALWT108
+FINALWT109
+FINALWT110
+FINALWT111
+FINALWT112
+FINALWT113
+FINALWT114
+FINALWT115
+FINALWT116
+FINALWT117
+FINALWT118
+FINALWT119
+FINALWT120
+FINALWT121
+FINALWT122
+FINALWT123
+FINALWT124
+FINALWT125
+FINALWT126
+FINALWT127
+FINALWT128
+FINALWT129
+FINALWT130
+FINALWT131
+FINALWT132
+FINALWT133
+FINALWT134
+FINALWT135
+FINALWT136
+FINALWT137
+FINALWT138
+FINALWT139
+FINALWT140
+FINALWT141
+FINALWT142
+FINALWT143
+FINALWT144
+FINALWT145
+FINALWT146
+FINALWT147
+FINALWT148
+FINALWT149
+FINALWT150
+FINALWT151
+ZSQFT
+ZSQFTC
+ZWLCNS
+ZRFCNS
+ZRFCOOL
+ZRFTILT
+ZBLDSHP
+ZGLSSPC
+ZNFLOOR
+ZBASEMNT
+ZFLCEILHT
+ZATTIC
+ZELEVTR
+ZNELVTR
+ZESCLTR
+ZNESLTR
+ZYRCONC
+ZRENOV
+ZRENCOS
+ZRENADD
+ZRENRDC
+ZRENINT
+ZRENRFF
+ZRENWIN
+ZRENHVC
+ZRENLGT
+ZRENPLB
+ZRENELC
+ZRENINS
+ZRENSAF
+ZRENSTR
+ZRENOTH
+ZDRYCL
+ZRWSEAT
+ZPBSEAT
+ZEDSEAT
+ZFDSEAT
+ZHCBED
+ZNRSBED
+ZLODGRM
+ZFACIL
+ZFEDFAC
+ZFACACT
+ZPLANT
+ZFACDST
+ZFACDHW
+ZFACDCW
+ZFACELC
+ZBLDPLT
+ZGOVOWN
+ZGOVTYP
+ZOWNTYPE
+ZNOCC
+ZNOCCAT
+ZOWNOCC
+ZOWNOPR
+ZOWNPPR
+ZNWNPPR
+ZNWNOPR
+ZWHOPPR
+ZMONUSE
+ZOCCUPYP
+ZLODOCCP
+ZOPEN24
+ZOPNMF
+ZOPNWE
+ZWKHRS
+ZWKHRSC
+ZNWKER
+ZNWKERC
+ZHT1
+ZHT2
+ZCOOL
+ZWATR
+ZCOOK
+ZMANU
+ZELUSED
+ZNGUSED
+ZFKUSED
+ZPRUSED
+ZSTUSED
+ZHWUSED
+ZCWUSED
+ZWOUSED
+ZCOUSED
+ZSOUSED
+ZOTUSED
+ZFKTYPE
+ZSOPANEL
+ZHEATP
+ZHTLS50
+ZELHT1
+ZNGHT1
+ZFKHT1
+ZPRHT1
+ZSTHT1
+ZHWHT1
+ZWOHT1
+ZCOHT1
+ZSOHT1
+ZOTHT1
+ZELHT2
+ZNGHT2
+ZFKHT2
+ZPRHT2
+ZSTHT2
+ZHWHT2
+ZWOHT2
+ZCOHT2
+ZSOHT2
+ZOTHT2
+ZPKGHT_EL
+ZBOILER_EL
+ZHTPMPH_EL
+ZFURNAC_EL
+ZSLFCON_EL
+ZFIREPLC_EL
+ZREHEAT_EL
+ZOTHTEQ_EL
+ZPKGHT_NG
+ZBOILER_NG
+ZHTPMPH_NG
+ZFURNAC_NG
+ZSLFCON_NG
+ZFIREPLC_NG
+ZOTHTEQ_NG
+ZBOILER_FK
+ZFURNAC_FK
+ZSLFCON_FK
+ZOTHTEQ_FK
+ZPKGHT_PR
+ZBOILER_PR
+ZHTPMPH_PR
+ZFURNAC_PR
+ZSLFCON_PR
+ZFIREPLC_PR
+ZOTHTEQ_PR
+ZDIST_ST
+ZAIRHAND_ST
+ZFANCOIL_ST
+ZREHEAT_ST
+ZRADIATR_ST
+ZRADFLR_ST
+ZWTLOOP_ST
+ZOTDIST_ST
+ZDIST_HW
+ZAIRHAND_HW
+ZFANCOIL_HW
+ZREHEAT_HW
+ZRADIATR_HW
+ZRADFLR_HW
+ZWTLOOP_HW
+ZOTDIST_HW
+ZFURNAC_WO
+ZSLFCON_WO
+ZFIREPLC_WO
+ZOTHTEQ_WO
+ZBOILER_CO
+ZFURNAC_CO
+ZOTHTEQ_CO
+ZSOTHERM_SO
+ZPKGHT_OT
+ZBOILER_OT
+ZFURNAC_OT
+ZSLFCON_OT
+ZOTHTEQ_OT
+ZBLRAIR
+ZBLRDUCT
+ZBLRFNCL
+ZBLROTD
+ZBLRRAD
+ZBLRRDFL
+ZBLRWTLP
+ZHPHPTHP
+ZHPHAIR
+ZHPHGRD
+ZHPHDUAL
+ZHPHWTR
+ZHPHVRF
+ZFURNP_EL
+ZPKGHP_EL
+ZBOILP_EL
+ZHTPHP_EL
+ZSLFCNP_EL
+ZFIREPLP_EL
+ZREHEATP_EL
+ZOTHTP_EL
+ZFURNP_NG
+ZPKGHP_NG
+ZBOILP_NG
+ZHTPHP_NG
+ZSLFCNP_NG
+ZFIREPLP_NG
+ZOTHTP_NG
+ZFURNP_FK
+ZBOILP_FK
+ZSLFCNP_FK
+ZOTHTP_FK
+ZFURNP_PR
+ZPKGHP_PR
+ZBOILP_PR
+ZHTPHP_PR
+ZSLFCNP_PR
+ZFIREPLP_PR
+ZOTHTP_PR
+ZSTHWP_ST
+ZSTHWP_HW
+ZFURNP_WO
+ZSLFCNP_WO
+ZFIREPLP_WO
+ZOTHTP_WO
+ZFURNP_CO
+ZBOILP_CO
+ZOTHTP_CO
+ZSOTHERMP_SO
+ZFURNP_OT
+ZPKGHP_OT
+ZBOILP_OT
+ZSLFCNP_OT
+ZOTHTP_OT
+ZMAINHT
+ZNWMNHT
+ZCOOLP
+ZELCOOL
+ZNGCOOL
+ZFKCOOL
+ZPRCOOL
+ZSTCOOL
+ZCWCOOL
+ZOTCOOL
+ZRCAC_EL
+ZPKGCL_EL
+ZCHILLR_EL
+ZHTPMPC_EL
+ZACWNWL_EL
+ZEVAPCL_EL
+ZOTCLEQ_EL
+ZHPCPTHP
+ZHPCAIR
+ZHPCGRD
+ZHPCDUAL
+ZHPCWTR
+ZCHILLR_NG
+ZOTCLEQ_NG
+ZCHILLR_FK
+ZOTCLEQ_FK
+ZCHILLR_PR
+ZOTCLEQ_PR
+ZCHILLR_ST
+ZOTCLEQ_ST
+ZOTCLEQ_OT
+ZDIST_CW
+ZCWAIR
+ZCWFNCL
+ZCWBEAM
+ZCWWTLP
+ZCWOTD
+ZCHLAIR
+ZCHLFNCL
+ZCHLBEAM
+ZCHLWTLP
+ZCHLOTD
+ZCHLAIRCL
+ZCHLWTRCL
+ZCHLABSRP
+ZRCACP_EL
+ZPKGCP_EL
+ZCHILP_EL
+ZHTPCP_EL
+ZACWNWP_EL
+ZEVAPP_EL
+ZOTCLP_EL
+ZCHILP_NG
+ZOTCLP_NG
+ZCHILP_FK
+ZOTCLP_FK
+ZCHILP_PR
+ZOTCLP_PR
+ZCHILP_ST
+ZOTCLP_ST
+ZCHWTP_CW
+ZOTCLP_OT
+ZMAINCL
+ZNWMNCL
+ZEMCS
+ZEMCSHT
+ZEMCSCL
+ZEMCSLT
+ZSMRTTHRM
+ZHWRDHT
+ZHWRDCL
+ZVAV
+ZDOAS
+ZDCV
+ZECN
+ZMAINT
+ZELWATR
+ZNGWATR
+ZFKWATR
+ZPRWATR
+ZSTWATR
+ZHWWATR
+ZWOWATR
+ZCOWATR
+ZSOWATR
+ZOTWATR
+ZWTHTEQ
+ZBOOSTWT
+ZELCOOK
+ZNGCOOK
+ZFKCOOK
+ZPRCOOK
+ZSTCOOK
+ZHWCOOK
+ZWOCOOK
+ZCOCOOK
+ZOTCOOK
+ZELMANU
+ZNGMANU
+ZFKMANU
+ZPRMANU
+ZSTMANU
+ZHWMANU
+ZWOMANU
+ZCOMANU
+ZOTMANU
+ZCAPGEN
+ZPVC
+ZENGINE
+ZFUELCL
+ZLRGTRB
+ZMCROTB
+ZOTGENTECH
+ZCOGEN
+ZNGGENR
+ZFKGENR
+ZPRGENR
+ZWOGENR
+ZCOGENR
+ZSOGENR
+ZOTGENR
+ZGENUSE
+ZPRAMTC
+ZPRUNIT
+ZWOAMT
+ZWOSRC
+ZWOEXP
+ZWOEXPC
+ZENRGYPLN
+ZSNACK
+ZFASTFD
+ZCAF
+ZFDPREP
+ZKITCHN
+ZBREAKRM
+ZOTFDRM
+ZSNACKSF
+ZFASTFDSF
+ZCAFSF
+ZFDPREPSF
+ZHWTRM
+ZLAUNDR
+ZCONFSP
+ZCONFSPP
+ZMEDEQP
+ZXRAYN
+ZOUTSURG
+ZLABEQP
+ZMCHEQP
+ZPOOL
+ZHTPOOL
+ZPOOLSRC
+ZSTRLZR
+ZRFGEQP
+ZRFGRES
+ZRFGCOMP
+ZRFGWI
+ZRFGOP
+ZRFGCL
+ZRFGVEN
+ZRFGICE
+ZRFGSTO
+ZRFGRSN
+ZRFGCOMPN
+ZRFGWIN
+ZRFGOPN
+ZRFGCLN
+ZRFGVNN
+ZRFGICN
+ZRFGSTP
+ZWHRECOV
+ZWHHT2
+ZWHWT
+ZWHOT
+ZPCTERM
+ZLAPTOP
+ZTABLET
+ZSERVER
+ZPCTERMN
+ZPCTRMC
+ZLAPTPN
+ZLAPTPC
+ZMLTMON
+ZMLTMNC
+ZTABCHRG
+ZTABLETN
+ZSRVUNIT
+ZSERVERN
+ZSERVERC
+ZSRVRCLST
+ZDATACNTR
+ZTRNGRM
+ZSTDNRM
+ZLGOFFDEV
+ZSMOFFDEV
+ZWBOARDS
+ZTVVIDEO
+ZRGSTR
+ZLGOFFDEVN
+ZSMOFFDEVN
+ZWBOARDSN
+ZTVVIDEON
+ZRGSTRN
+ZATMN
+ZLTZHRP
+ZLZHRPC
+ZLTOHRP
+ZLOHRPC
+ZLTNR24
+ZLTNHRP
+ZLNHRPC
+ZFLUOR
+ZCFLR
+ZBULB
+ZHALO
+ZHID
+ZLED
+ZOTLT
+ZFLUORP
+ZCFLRP
+ZBULBP
+ZHALOP
+ZHIDP
+ZLEDP
+ZOTLTP
+ZSCHED
+ZOCSN
+ZDIM
+ZDAYHARV
+ZTRIM
+ZPLGCTRL
+ZDRLGHT
+ZLTEXPC
+ZPKLT
+ZPKLTINOUT
+ZPKLTN
+ZWINTYP
+ZTINT
+ZREFL
+ZAWN
+ZSKYLT
+ZDAYLTP
+ZCTSCAN
+ZDCNTRSFC
+ZLINACC
+ZMRI
+ZOUTHOSPPCT
+ZMFBTU
+ZMFEXP
+ZELCNS
+ZELEXP
+ZNGCNS
+ZNGEXP
+ZFKCNS
+ZFKEXP
+ZDHBTU
+ZDHEXP
+
+DATA TYPES
+------------------------------------------------------------
+PUBID             int64
+REGION            int64
+CENDIV            int64
+PBA               int64
+PUBCLIM           int64
+SQFT              int64
+SQFTC             int64
+WLCNS             int64
+RFCNS             int64
+RFCOOL            int64
+RFTILT            int64
+BLDSHP            int64
+GLSSPC            int64
+NFLOOR            int64
+BASEMNT         float64
+FLCEILHT          int64
+ATTIC             int64
+ELEVTR          float64
+NELVTR          float64
+ESCLTR          float64
+NESLTR          float64
+YRCONC            int64
+RENOV           float64
+RENCOS          float64
+RENADD          float64
+RENRDC          float64
+RENINT          float64
+RENRFF          float64
+RENWIN          float64
+RENHVC          float64
+RENLGT          float64
+RENPLB          float64
+RENELC          float64
+RENINS          float64
+RENSAF          float64
+RENSTR          float64
+RENOTH          float64
+DRYCL           float64
+VACANT          float64
+PBAPLUS           int64
+RWSEAT          float64
+PBSEAT          float64
+EDSEAT          float64
+FDSEAT          float64
+DRVTHRU         float64
+HCBED           float64
+NRSBED          float64
+LODGRM          float64
+COURT           float64
+FACIL             int64
+FEDFAC          float64
+FACACT          float64
+MANIND          float64
+PLANT           float64
+FACDST          float64
+FACDHW          float64
+FACDCW          float64
+FACELC          float64
+BLDPLT          float64
+GOVOWN            int64
+GOVTYP          float64
+OWNTYPE           int64
+NOCC              int64
+NOCCAT            int64
+OWNOCC          float64
+OWNOPR            int64
+OWNPPR          float64
+NWNPPR          float64
+NWNOPR          float64
+WHOPPR          float64
+MONUSE            int64
+OCCUPYP         float64
+LODOCCP         float64
+OPEN24            int64
+OPNMF             int64
+OPNWE             int64
+WKHRS             int64
+WKHRSC            int64
+NWKER             int64
+NWKERC            int64
+HT1               int64
+HT2               int64
+COOL              int64
+WATR              int64
+COOK              int64
+MANU              int64
+EGYUSED           int64
+ELUSED            int64
+NGUSED            int64
+FKUSED            int64
+PRUSED            int64
+STUSED            int64
+HWUSED            int64
+CWUSED            int64
+WOUSED            int64
+COUSED            int64
+SOUSED            int64
+OTUSED            int64
+FKTYPE          float64
+SOPANEL         float64
+SOTHERM         float64
+HEATP           float64
+HTLS50          float64
+ELHT1             int64
+NGHT1             int64
+FKHT1             int64
+PRHT1             int64
+STHT1             int64
+HWHT1             int64
+WOHT1             int64
+COHT1             int64
+SOHT1             int64
+OTHT1             int64
+ELHT2             int64
+NGHT2             int64
+FKHT2             int64
+PRHT2             int64
+STHT2             int64
+HWHT2             int64
+WOHT2             int64
+COHT2             int64
+SOHT2             int64
+OTHT2             int64
+PKGHT           float64
+FURNAC          float64
+SLFCON          float64
+BOILER          float64
+HTPMPH          float64
+STHW            float64
+REHEAT          float64
+FIREPLC         float64
+OTHTEQ          float64
+PKGHT_EL        float64
+BOILER_EL       float64
+HTPMPH_EL       float64
+FURNAC_EL       float64
+SLFCON_EL       float64
+FIREPLC_EL      float64
+REHEAT_EL       float64
+OTHTEQ_EL       float64
+PKGHT_NG        float64
+BOILER_NG       float64
+HTPMPH_NG       float64
+FURNAC_NG       float64
+SLFCON_NG       float64
+FIREPLC_NG      float64
+OTHTEQ_NG       float64
+BOILER_FK       float64
+FURNAC_FK       float64
+SLFCON_FK       float64
+OTHTEQ_FK       float64
+PKGHT_PR        float64
+BOILER_PR       float64
+HTPMPH_PR       float64
+FURNAC_PR       float64
+SLFCON_PR       float64
+FIREPLC_PR      float64
+OTHTEQ_PR       float64
+DIST_ST         float64
+AIRHAND_ST      float64
+FANCOIL_ST      float64
+REHEAT_ST       float64
+RADIATR_ST      float64
+RADFLR_ST       float64
+WTLOOP_ST       float64
+OTDIST_ST       float64
+DIST_HW         float64
+AIRHAND_HW      float64
+FANCOIL_HW      float64
+REHEAT_HW       float64
+RADIATR_HW      float64
+RADFLR_HW       float64
+WTLOOP_HW       float64
+OTDIST_HW       float64
+FURNAC_WO       float64
+SLFCON_WO       float64
+FIREPLC_WO      float64
+OTHTEQ_WO       float64
+BOILER_CO       float64
+FURNAC_CO       float64
+OTHTEQ_CO       float64
+SOTHERM_SO      float64
+PKGHT_OT        float64
+BOILER_OT       float64
+FURNAC_OT       float64
+SLFCON_OT       float64
+OTHTEQ_OT       float64
+BLRAIR_HT1      float64
+BLRFNCL_HT1     float64
+BLRDUCT_HT1     float64
+BLRRAD_HT1      float64
+BLRRDFL_HT1     float64
+BLRWTLP_HT1     float64
+BLROTD_HT1      float64
+BLRAIR_EL2      float64
+BLRFNCL_EL2     float64
+BLRDUCT_EL2     float64
+BLRRAD_EL2      float64
+BLRRDFL_EL2     float64
+BLRWTLP_EL2     float64
+BLROTD_EL2      float64
+BLRAIR_NG2      float64
+BLRFNCL_NG2     float64
+BLRDUCT_NG2     float64
+BLRRAD_NG2      float64
+BLRRDFL_NG2     float64
+BLRWTLP_NG2     float64
+BLROTD_NG2      float64
+BLRAIR_FK2      float64
+BLRFNCL_FK2     float64
+BLRDUCT_FK2     float64
+BLRRAD_FK2      float64
+BLRRDFL_FK2     float64
+BLRWTLP_FK2     float64
+BLROTD_FK2      float64
+BLRAIR_PR2      float64
+BLRFNCL_PR2     float64
+BLRDUCT_PR2     float64
+BLRRAD_PR2      float64
+BLRRDFL_PR2     float64
+BLRWTLP_PR2     float64
+BLROTD_PR2      float64
+BLRAIR_CO2      float64
+BLRFNCL_CO2     float64
+BLRDUCT_CO2     float64
+BLRRAD_CO2      float64
+BLRRDFL_CO2     float64
+BLRWTLP_CO2     float64
+BLROTD_CO2      float64
+BLRAIR_OT2      float64
+BLRFNCL_OT2     float64
+BLRDUCT_OT2     float64
+BLRRAD_OT2      float64
+BLRRDFL_OT2     float64
+BLRWTLP_OT2     float64
+BLROTD_OT2      float64
+BLRAIR          float64
+BLRDUCT         float64
+BLRFNCL         float64
+BLROTD          float64
+BLRRAD          float64
+BLRRDFL         float64
+BLRWTLP         float64
+PKGHPH          float64
+HPHPTHP         float64
+HPHAIR          float64
+HPHGRD          float64
+HPHDUAL         float64
+HPHWTR          float64
+HPHVRF          float64
+SPHTPTHP        float64
+FURNP_EL        float64
+PKGHP_EL        float64
+BOILP_EL        float64
+HTPHP_EL        float64
+SLFCNP_EL       float64
+FIREPLP_EL      float64
+REHEATP_EL      float64
+OTHTP_EL        float64
+FURNP_NG        float64
+PKGHP_NG        float64
+BOILP_NG        float64
+HTPHP_NG        float64
+SLFCNP_NG       float64
+FIREPLP_NG      float64
+OTHTP_NG        float64
+FURNP_FK        float64
+BOILP_FK        float64
+SLFCNP_FK       float64
+OTHTP_FK        float64
+FURNP_PR        float64
+PKGHP_PR        float64
+BOILP_PR        float64
+HTPHP_PR        float64
+SLFCNP_PR       float64
+FIREPLP_PR      float64
+OTHTP_PR        float64
+STHWP_ST        float64
+STHWP_HW        float64
+FURNP_WO        float64
+SLFCNP_WO       float64
+FIREPLP_WO      float64
+OTHTP_WO        float64
+FURNP_CO        float64
+BOILP_CO        float64
+OTHTP_CO        float64
+SOTHERMP_SO     float64
+FURNP_OT        float64
+PKGHP_OT        float64
+BOILP_OT        float64
+SLFCNP_OT       float64
+OTHTP_OT        float64
+MAINHT          float64
+NWMNHT          float64
+COOLP           float64
+ELCOOL            int64
+NGCOOL            int64
+FKCOOL            int64
+PRCOOL            int64
+STCOOL            int64
+CWCOOL            int64
+OTCOOL            int64
+RCAC            float64
+PKGCL           float64
+CHILLR          float64
+HTPMPC          float64
+ACWNWL          float64
+EVAPCL          float64
+OTCLEQ          float64
+CHWT            float64
+RCAC_EL         float64
+PKGCL_EL        float64
+CHILLR_EL       float64
+HTPMPC_EL       float64
+ACWNWL_EL       float64
+EVAPCL_EL       float64
+OTCLEQ_EL       float64
+HPCPTHP         float64
+HPCAIR          float64
+HPCGRD          float64
+HPCDUAL         float64
+HPCWTR          float64
+ACVRF           float64
+RMACPTHP        float64
+CHILLR_NG       float64
+OTCLEQ_NG       float64
+CHILLR_FK       float64
+OTCLEQ_FK       float64
+CHILLR_PR       float64
+OTCLEQ_PR       float64
+CHILLR_ST       float64
+OTCLEQ_ST       float64
+OTCLEQ_OT       float64
+DIST_CW         float64
+CWAIR           float64
+CWFNCL          float64
+CWBEAM          float64
+CWWTLP          float64
+CWOTD           float64
+CHLAIR          float64
+CHLFNCL         float64
+CHLBEAM         float64
+CHLWTLP         float64
+CHLOTD          float64
+CHLAIRCL        float64
+CHLWTRCL        float64
+CHLABSRP        float64
+RCACP_EL        float64
+PKGCP_EL        float64
+CHILP_EL        float64
+HTPCP_EL        float64
+ACWNWP_EL       float64
+EVAPP_EL        float64
+OTCLP_EL        float64
+CHILP_NG        float64
+OTCLP_NG        float64
+CHILP_FK        float64
+OTCLP_FK        float64
+CHILP_PR        float64
+OTCLP_PR        float64
+CHILP_ST        float64
+OTCLP_ST        float64
+CHWTP_CW        float64
+OTCLP_OT        float64
+MAINCL          float64
+NWMNCL          float64
+EMCS            float64
+EMCSHT          float64
+EMCSCL          float64
+EMCSLT          float64
+SMRTTHRM        float64
+HWRDHT          float64
+HWRDCL          float64
+VAV             float64
+DOAS            float64
+DCV             float64
+ECN             float64
+MAINT           float64
+ELWATR            int64
+NGWATR            int64
+FKWATR            int64
+PRWATR            int64
+STWATR            int64
+HWWATR            int64
+WOWATR            int64
+COWATR            int64
+SOWATR            int64
+OTWATR            int64
+WTHTEQ          float64
+BOOSTWT         float64
+ELCOOK            int64
+NGCOOK            int64
+FKCOOK            int64
+PRCOOK            int64
+STCOOK            int64
+HWCOOK            int64
+WOCOOK            int64
+COCOOK            int64
+OTCOOK            int64
+ELMANU            int64
+NGMANU            int64
+FKMANU            int64
+PRMANU            int64
+STMANU            int64
+HWMANU            int64
+WOMANU            int64
+COMANU            int64
+OTMANU            int64
+CAPGEN            int64
+PVC             float64
+ENGINE          float64
+FUELCL          float64
+LRGTRB          float64
+MCROTB          float64
+OTGENTECH       float64
+COGEN           float64
+NGGENR            int64
+FKGENR            int64
+PRGENR            int64
+WOGENR            int64
+COGENR            int64
+SOGENR            int64
+OTGENR            int64
+GENUSE          float64
+GENGT1MW        float64
+NGOTH             int64
+FKOTH             int64
+PROTH             int64
+STOTH             int64
+HWOTH             int64
+CWOTH             int64
+WOOTH             int64
+COOTH             int64
+SOOTH             int64
+OTOTH             int64
+PRAMTC          float64
+PRUNIT          float64
+WOAMT           float64
+WOSRC           float64
+WOEXP           float64
+WOEXPC          float64
+ENRGYPLN        float64
+SNACK           float64
+FASTFD          float64
+CAF             float64
+FDPREP          float64
+KITCHN          float64
+BREAKRM         float64
+OTFDRM          float64
+SNACKSF         float64
+FASTFDSF        float64
+CAFSF           float64
+FDPREPSF        float64
+HWTRM           float64
+LAUNDR          float64
+CONFSP          float64
+CONFSPP         float64
+MEDEQP          float64
+XRAYN           float64
+CTSCAN          float64
+MRI             float64
+LINACC          float64
+OUTHOSPPCT      float64
+OUTSURG         float64
+LABEQP          float64
+MCHEQP          float64
+POOL            float64
+HTPOOL          float64
+POOLSRC         float64
+STRLZR          float64
+RFGEQP          float64
+RFGRES          float64
+RFGCOMP         float64
+RFGWI           float64
+RFGOP           float64
+RFGCL           float64
+RFGVEN          float64
+RFGICE          float64
+RFGSTO          float64
+RFGRSN          float64
+RFGCOMPN        float64
+RFGWIN          float64
+RFGOPN          float64
+RFGCLN          float64
+RFGVNN          float64
+RFGICN          float64
+RFGSTP          float64
+WHRECOV         float64
+WHHT2           float64
+WHWT            float64
+WHOT            float64
+PCTERM          float64
+LAPTOP          float64
+TABLET          float64
+SERVER          float64
+PCTERMN         float64
+PCTRMC          float64
+LAPTPN          float64
+LAPTPC          float64
+MLTMON          float64
+MLTMNC          float64
+TABCHRG         float64
+TABLETN         float64
+SRVUNIT         float64
+SERVERN         float64
+SERVERC         float64
+SRVRCLST        float64
+DATACNTR        float64
+DCNTRSFC        float64
+TRNGRM          float64
+STDNRM          float64
+LGOFFDEV        float64
+SMOFFDEV        float64
+WBOARDS         float64
+TVVIDEO         float64
+RGSTR           float64
+LGOFFDEVN       float64
+SMOFFDEVN       float64
+WBOARDSN        float64
+TVVIDEON        float64
+RGSTRN          float64
+ATMN            float64
+LTZHRP          float64
+LZHRPC          float64
+LTOHRP          float64
+LOHRPC          float64
+LTNR24          float64
+LTNHRP          float64
+LNHRPC          float64
+LIT             float64
+FLUOR           float64
+CFLR            float64
+BULB            float64
+HALO            float64
+HID             float64
+LED             float64
+OTLT            float64
+FLUORP          float64
+CFLRP           float64
+BULBP           float64
+HALOP           float64
+HIDP            float64
+LEDP            float64
+OTLTP           float64
+SCHED           float64
+OCSN            float64
+DIM             float64
+DAYHARV         float64
+TRIM            float64
+PLGCTRL         float64
+DRLGHT          float64
+LTEXPC          float64
+PKLT            float64
+PKLTINOUT       float64
+PKLTN           float64
+WINTYP            int64
+TINT            float64
+REFL            float64
+AWN             float64
+SKYLT           float64
+DAYLTP          float64
+HDD65             int64
+CDD65             int64
+MFUSED            int64
+MFBTU           float64
+MFEXP           float64
+ELBTU           float64
+ELCNS           float64
+ELEXP           float64
+NGBTU           float64
+NGCNS           float64
+NGEXP           float64
+FKBTU           float64
+FKCNS           float64
+FKEXP           float64
+DHUSED            int64
+DHHT1             int64
+DHHT2             int64
+DHCOOL            int64
+DHWATR            int64
+DHCOOK            int64
+DHMANU            int64
+DHOTH             int64
+DHBTU           float64
+DHEXP           float64
+MFHTBTU         float64
+MFCLBTU         float64
+MFVNBTU         float64
+MFWTBTU         float64
+MFLTBTU         float64
+MFCKBTU         float64
+MFRFBTU         float64
+MFOFBTU         float64
+MFPCBTU         float64
+MFOTBTU         float64
+ELHTBTU         float64
+ELCLBTU         float64
+ELVNBTU         float64
+ELWTBTU         float64
+ELLTBTU         float64
+ELCKBTU         float64
+ELRFBTU         float64
+ELOFBTU         float64
+ELPCBTU         float64
+ELOTBTU         float64
+NGHTBTU         float64
+NGCLBTU         float64
+NGWTBTU         float64
+NGCKBTU         float64
+NGOTBTU         float64
+FKHTBTU         float64
+FKCLBTU         float64
+FKWTBTU         float64
+FKCKBTU         float64
+FKOTBTU         float64
+DHHTBTU         float64
+DHCLBTU         float64
+DHWTBTU         float64
+DHCKBTU         float64
+DHOTBTU         float64
+FINALWT         float64
+FINALWT1        float64
+FINALWT2        float64
+FINALWT3        float64
+FINALWT4        float64
+FINALWT5        float64
+FINALWT6        float64
+FINALWT7        float64
+FINALWT8        float64
+FINALWT9        float64
+FINALWT10       float64
+FINALWT11       float64
+FINALWT12       float64
+FINALWT13       float64
+FINALWT14       float64
+FINALWT15       float64
+FINALWT16       float64
+FINALWT17       float64
+FINALWT18       float64
+FINALWT19       float64
+FINALWT20       float64
+FINALWT21       float64
+FINALWT22       float64
+FINALWT23       float64
+FINALWT24       float64
+FINALWT25       float64
+FINALWT26       float64
+FINALWT27       float64
+FINALWT28       float64
+FINALWT29       float64
+FINALWT30       float64
+FINALWT31       float64
+FINALWT32       float64
+FINALWT33       float64
+FINALWT34       float64
+FINALWT35       float64
+FINALWT36       float64
+FINALWT37       float64
+FINALWT38       float64
+FINALWT39       float64
+FINALWT40       float64
+FINALWT41       float64
+FINALWT42       float64
+FINALWT43       float64
+FINALWT44       float64
+FINALWT45       float64
+FINALWT46       float64
+FINALWT47       float64
+FINALWT48       float64
+FINALWT49       float64
+FINALWT50       float64
+FINALWT51       float64
+FINALWT52       float64
+FINALWT53       float64
+FINALWT54       float64
+FINALWT55       float64
+FINALWT56       float64
+FINALWT57       float64
+FINALWT58       float64
+FINALWT59       float64
+FINALWT60       float64
+FINALWT61       float64
+FINALWT62       float64
+FINALWT63       float64
+FINALWT64       float64
+FINALWT65       float64
+FINALWT66       float64
+FINALWT67       float64
+FINALWT68       float64
+FINALWT69       float64
+FINALWT70       float64
+FINALWT71       float64
+FINALWT72       float64
+FINALWT73       float64
+FINALWT74       float64
+FINALWT75       float64
+FINALWT76       float64
+FINALWT77       float64
+FINALWT78       float64
+FINALWT79       float64
+FINALWT80       float64
+FINALWT81       float64
+FINALWT82       float64
+FINALWT83       float64
+FINALWT84       float64
+FINALWT85       float64
+FINALWT86       float64
+FINALWT87       float64
+FINALWT88       float64
+FINALWT89       float64
+FINALWT90       float64
+FINALWT91       float64
+FINALWT92       float64
+FINALWT93       float64
+FINALWT94       float64
+FINALWT95       float64
+FINALWT96       float64
+FINALWT97       float64
+FINALWT98       float64
+FINALWT99       float64
+FINALWT100      float64
+FINALWT101      float64
+FINALWT102      float64
+FINALWT103      float64
+FINALWT104      float64
+FINALWT105      float64
+FINALWT106      float64
+FINALWT107      float64
+FINALWT108      float64
+FINALWT109      float64
+FINALWT110      float64
+FINALWT111      float64
+FINALWT112      float64
+FINALWT113      float64
+FINALWT114      float64
+FINALWT115      float64
+FINALWT116      float64
+FINALWT117      float64
+FINALWT118      float64
+FINALWT119      float64
+FINALWT120      float64
+FINALWT121      float64
+FINALWT122      float64
+FINALWT123      float64
+FINALWT124      float64
+FINALWT125      float64
+FINALWT126      float64
+FINALWT127      float64
+FINALWT128      float64
+FINALWT129      float64
+FINALWT130      float64
+FINALWT131      float64
+FINALWT132      float64
+FINALWT133      float64
+FINALWT134      float64
+FINALWT135      float64
+FINALWT136      float64
+FINALWT137      float64
+FINALWT138      float64
+FINALWT139      float64
+FINALWT140      float64
+FINALWT141      float64
+FINALWT142      float64
+FINALWT143      float64
+FINALWT144      float64
+FINALWT145      float64
+FINALWT146      float64
+FINALWT147      float64
+FINALWT148      float64
+FINALWT149      float64
+FINALWT150      float64
+FINALWT151      float64
+ZSQFT             int64
+ZSQFTC            int64
+ZWLCNS            int64
+ZRFCNS            int64
+ZRFCOOL           int64
+ZRFTILT           int64
+ZBLDSHP           int64
+ZGLSSPC           int64
+ZNFLOOR           int64
+ZBASEMNT          int64
+ZFLCEILHT         int64
+ZATTIC            int64
+ZELEVTR           int64
+ZNELVTR           int64
+ZESCLTR           int64
+ZNESLTR           int64
+ZYRCONC           int64
+ZRENOV            int64
+ZRENCOS           int64
+ZRENADD           int64
+ZRENRDC           int64
+ZRENINT           int64
+ZRENRFF           int64
+ZRENWIN           int64
+ZRENHVC           int64
+ZRENLGT           int64
+ZRENPLB           int64
+ZRENELC           int64
+ZRENINS           int64
+ZRENSAF           int64
+ZRENSTR           int64
+ZRENOTH           int64
+ZDRYCL            int64
+ZRWSEAT           int64
+ZPBSEAT           int64
+ZEDSEAT           int64
+ZFDSEAT           int64
+ZHCBED            int64
+ZNRSBED           int64
+ZLODGRM           int64
+ZFACIL            int64
+ZFEDFAC           int64
+ZFACACT           int64
+ZPLANT            int64
+ZFACDST           int64
+ZFACDHW           int64
+ZFACDCW           int64
+ZFACELC           int64
+ZBLDPLT           int64
+ZGOVOWN           int64
+ZGOVTYP           int64
+ZOWNTYPE          int64
+ZNOCC             int64
+ZNOCCAT           int64
+ZOWNOCC           int64
+ZOWNOPR           int64
+ZOWNPPR           int64
+ZNWNPPR           int64
+ZNWNOPR           int64
+ZWHOPPR           int64
+ZMONUSE           int64
+ZOCCUPYP          int64
+ZLODOCCP          int64
+ZOPEN24           int64
+ZOPNMF            int64
+ZOPNWE            int64
+ZWKHRS            int64
+ZWKHRSC           int64
+ZNWKER            int64
+ZNWKERC           int64
+ZHT1              int64
+ZHT2              int64
+ZCOOL             int64
+ZWATR             int64
+ZCOOK             int64
+ZMANU             int64
+ZELUSED           int64
+ZNGUSED           int64
+ZFKUSED           int64
+ZPRUSED           int64
+ZSTUSED           int64
+ZHWUSED           int64
+ZCWUSED           int64
+ZWOUSED           int64
+ZCOUSED           int64
+ZSOUSED           int64
+ZOTUSED           int64
+ZFKTYPE           int64
+ZSOPANEL          int64
+ZHEATP            int64
+ZHTLS50           int64
+ZELHT1            int64
+ZNGHT1            int64
+ZFKHT1            int64
+ZPRHT1            int64
+ZSTHT1            int64
+ZHWHT1            int64
+ZWOHT1            int64
+ZCOHT1            int64
+ZSOHT1            int64
+ZOTHT1            int64
+ZELHT2            int64
+ZNGHT2            int64
+ZFKHT2            int64
+ZPRHT2            int64
+ZSTHT2            int64
+ZHWHT2            int64
+ZWOHT2            int64
+ZCOHT2            int64
+ZSOHT2            int64
+ZOTHT2            int64
+ZPKGHT_EL         int64
+ZBOILER_EL        int64
+ZHTPMPH_EL        int64
+ZFURNAC_EL        int64
+ZSLFCON_EL        int64
+ZFIREPLC_EL       int64
+ZREHEAT_EL        int64
+ZOTHTEQ_EL        int64
+ZPKGHT_NG         int64
+ZBOILER_NG        int64
+ZHTPMPH_NG        int64
+ZFURNAC_NG        int64
+ZSLFCON_NG        int64
+ZFIREPLC_NG       int64
+ZOTHTEQ_NG        int64
+ZBOILER_FK        int64
+ZFURNAC_FK        int64
+ZSLFCON_FK        int64
+ZOTHTEQ_FK        int64
+ZPKGHT_PR         int64
+ZBOILER_PR        int64
+ZHTPMPH_PR        int64
+ZFURNAC_PR        int64
+ZSLFCON_PR        int64
+ZFIREPLC_PR       int64
+ZOTHTEQ_PR        int64
+ZDIST_ST          int64
+ZAIRHAND_ST       int64
+ZFANCOIL_ST       int64
+ZREHEAT_ST        int64
+ZRADIATR_ST       int64
+ZRADFLR_ST        int64
+ZWTLOOP_ST        int64
+ZOTDIST_ST        int64
+ZDIST_HW          int64
+ZAIRHAND_HW       int64
+ZFANCOIL_HW       int64
+ZREHEAT_HW        int64
+ZRADIATR_HW       int64
+ZRADFLR_HW        int64
+ZWTLOOP_HW        int64
+ZOTDIST_HW        int64
+ZFURNAC_WO        int64
+ZSLFCON_WO        int64
+ZFIREPLC_WO       int64
+ZOTHTEQ_WO        int64
+ZBOILER_CO        int64
+ZFURNAC_CO        int64
+ZOTHTEQ_CO        int64
+ZSOTHERM_SO       int64
+ZPKGHT_OT         int64
+ZBOILER_OT        int64
+ZFURNAC_OT        int64
+ZSLFCON_OT        int64
+ZOTHTEQ_OT        int64
+ZBLRAIR           int64
+ZBLRDUCT          int64
+ZBLRFNCL          int64
+ZBLROTD           int64
+ZBLRRAD           int64
+ZBLRRDFL          int64
+ZBLRWTLP          int64
+ZHPHPTHP          int64
+ZHPHAIR           int64
+ZHPHGRD           int64
+ZHPHDUAL          int64
+ZHPHWTR           int64
+ZHPHVRF           int64
+ZFURNP_EL         int64
+ZPKGHP_EL         int64
+ZBOILP_EL         int64
+ZHTPHP_EL         int64
+ZSLFCNP_EL        int64
+ZFIREPLP_EL       int64
+ZREHEATP_EL       int64
+ZOTHTP_EL         int64
+ZFURNP_NG         int64
+ZPKGHP_NG         int64
+ZBOILP_NG         int64
+ZHTPHP_NG         int64
+ZSLFCNP_NG        int64
+ZFIREPLP_NG       int64
+ZOTHTP_NG         int64
+ZFURNP_FK         int64
+ZBOILP_FK         int64
+ZSLFCNP_FK        int64
+ZOTHTP_FK         int64
+ZFURNP_PR         int64
+ZPKGHP_PR         int64
+ZBOILP_PR         int64
+ZHTPHP_PR         int64
+ZSLFCNP_PR        int64
+ZFIREPLP_PR       int64
+ZOTHTP_PR         int64
+ZSTHWP_ST         int64
+ZSTHWP_HW         int64
+ZFURNP_WO         int64
+ZSLFCNP_WO        int64
+ZFIREPLP_WO       int64
+ZOTHTP_WO         int64
+ZFURNP_CO         int64
+ZBOILP_CO         int64
+ZOTHTP_CO         int64
+ZSOTHERMP_SO      int64
+ZFURNP_OT         int64
+ZPKGHP_OT         int64
+ZBOILP_OT         int64
+ZSLFCNP_OT        int64
+ZOTHTP_OT         int64
+ZMAINHT           int64
+ZNWMNHT           int64
+ZCOOLP            int64
+ZELCOOL           int64
+ZNGCOOL           int64
+ZFKCOOL           int64
+ZPRCOOL           int64
+ZSTCOOL           int64
+ZCWCOOL           int64
+ZOTCOOL           int64
+ZRCAC_EL          int64
+ZPKGCL_EL         int64
+ZCHILLR_EL        int64
+ZHTPMPC_EL        int64
+ZACWNWL_EL        int64
+ZEVAPCL_EL        int64
+ZOTCLEQ_EL        int64
+ZHPCPTHP          int64
+ZHPCAIR           int64
+ZHPCGRD           int64
+ZHPCDUAL          int64
+ZHPCWTR           int64
+ZCHILLR_NG        int64
+ZOTCLEQ_NG        int64
+ZCHILLR_FK        int64
+ZOTCLEQ_FK        int64
+ZCHILLR_PR        int64
+ZOTCLEQ_PR        int64
+ZCHILLR_ST        int64
+ZOTCLEQ_ST        int64
+ZOTCLEQ_OT        int64
+ZDIST_CW          int64
+ZCWAIR            int64
+ZCWFNCL           int64
+ZCWBEAM           int64
+ZCWWTLP           int64
+ZCWOTD            int64
+ZCHLAIR           int64
+ZCHLFNCL          int64
+ZCHLBEAM          int64
+ZCHLWTLP          int64
+ZCHLOTD           int64
+ZCHLAIRCL         int64
+ZCHLWTRCL         int64
+ZCHLABSRP         int64
+ZRCACP_EL         int64
+ZPKGCP_EL         int64
+ZCHILP_EL         int64
+ZHTPCP_EL         int64
+ZACWNWP_EL        int64
+ZEVAPP_EL         int64
+ZOTCLP_EL         int64
+ZCHILP_NG         int64
+ZOTCLP_NG         int64
+ZCHILP_FK         int64
+ZOTCLP_FK         int64
+ZCHILP_PR         int64
+ZOTCLP_PR         int64
+ZCHILP_ST         int64
+ZOTCLP_ST         int64
+ZCHWTP_CW         int64
+ZOTCLP_OT         int64
+ZMAINCL           int64
+ZNWMNCL           int64
+ZEMCS             int64
+ZEMCSHT           int64
+ZEMCSCL           int64
+ZEMCSLT           int64
+ZSMRTTHRM         int64
+ZHWRDHT           int64
+ZHWRDCL           int64
+ZVAV              int64
+ZDOAS             int64
+ZDCV              int64
+ZECN              int64
+ZMAINT            int64
+ZELWATR           int64
+ZNGWATR           int64
+ZFKWATR           int64
+ZPRWATR           int64
+ZSTWATR           int64
+ZHWWATR           int64
+ZWOWATR           int64
+ZCOWATR           int64
+ZSOWATR           int64
+ZOTWATR           int64
+ZWTHTEQ           int64
+ZBOOSTWT          int64
+ZELCOOK           int64
+ZNGCOOK           int64
+ZFKCOOK           int64
+ZPRCOOK           int64
+ZSTCOOK           int64
+ZHWCOOK           int64
+ZWOCOOK           int64
+ZCOCOOK           int64
+ZOTCOOK           int64
+ZELMANU           int64
+ZNGMANU           int64
+ZFKMANU           int64
+ZPRMANU           int64
+ZSTMANU           int64
+ZHWMANU           int64
+ZWOMANU           int64
+ZCOMANU           int64
+ZOTMANU           int64
+ZCAPGEN           int64
+ZPVC              int64
+ZENGINE           int64
+ZFUELCL           int64
+ZLRGTRB           int64
+ZMCROTB           int64
+ZOTGENTECH        int64
+ZCOGEN            int64
+ZNGGENR           int64
+ZFKGENR           int64
+ZPRGENR           int64
+ZWOGENR           int64
+ZCOGENR           int64
+ZSOGENR           int64
+ZOTGENR           int64
+ZGENUSE           int64
+ZPRAMTC           int64
+ZPRUNIT           int64
+ZWOAMT            int64
+ZWOSRC            int64
+ZWOEXP            int64
+ZWOEXPC           int64
+ZENRGYPLN         int64
+ZSNACK            int64
+ZFASTFD           int64
+ZCAF              int64
+ZFDPREP           int64
+ZKITCHN           int64
+ZBREAKRM          int64
+ZOTFDRM           int64
+ZSNACKSF          int64
+ZFASTFDSF         int64
+ZCAFSF            int64
+ZFDPREPSF         int64
+ZHWTRM            int64
+ZLAUNDR           int64
+ZCONFSP           int64
+ZCONFSPP          int64
+ZMEDEQP           int64
+ZXRAYN            int64
+ZOUTSURG          int64
+ZLABEQP           int64
+ZMCHEQP           int64
+ZPOOL             int64
+ZHTPOOL           int64
+ZPOOLSRC          int64
+ZSTRLZR           int64
+ZRFGEQP           int64
+ZRFGRES           int64
+ZRFGCOMP          int64
+ZRFGWI            int64
+ZRFGOP            int64
+ZRFGCL            int64
+ZRFGVEN           int64
+ZRFGICE           int64
+ZRFGSTO           int64
+ZRFGRSN           int64
+ZRFGCOMPN         int64
+ZRFGWIN           int64
+ZRFGOPN           int64
+ZRFGCLN           int64
+ZRFGVNN           int64
+ZRFGICN           int64
+ZRFGSTP           int64
+ZWHRECOV          int64
+ZWHHT2            int64
+ZWHWT             int64
+ZWHOT             int64
+ZPCTERM           int64
+ZLAPTOP           int64
+ZTABLET           int64
+ZSERVER           int64
+ZPCTERMN          int64
+ZPCTRMC           int64
+ZLAPTPN           int64
+ZLAPTPC           int64
+ZMLTMON           int64
+ZMLTMNC           int64
+ZTABCHRG          int64
+ZTABLETN          int64
+ZSRVUNIT          int64
+ZSERVERN          int64
+ZSERVERC          int64
+ZSRVRCLST         int64
+ZDATACNTR         int64
+ZTRNGRM           int64
+ZSTDNRM           int64
+ZLGOFFDEV         int64
+ZSMOFFDEV         int64
+ZWBOARDS          int64
+ZTVVIDEO          int64
+ZRGSTR            int64
+ZLGOFFDEVN        int64
+ZSMOFFDEVN        int64
+ZWBOARDSN         int64
+ZTVVIDEON         int64
+ZRGSTRN           int64
+ZATMN             int64
+ZLTZHRP           int64
+ZLZHRPC           int64
+ZLTOHRP           int64
+ZLOHRPC           int64
+ZLTNR24           int64
+ZLTNHRP           int64
+ZLNHRPC           int64
+ZFLUOR            int64
+ZCFLR             int64
+ZBULB             int64
+ZHALO             int64
+ZHID              int64
+ZLED              int64
+ZOTLT             int64
+ZFLUORP           int64
+ZCFLRP            int64
+ZBULBP            int64
+ZHALOP            int64
+ZHIDP             int64
+ZLEDP             int64
+ZOTLTP            int64
+ZSCHED            int64
+ZOCSN             int64
+ZDIM              int64
+ZDAYHARV          int64
+ZTRIM             int64
+ZPLGCTRL          int64
+ZDRLGHT           int64
+ZLTEXPC           int64
+ZPKLT             int64
+ZPKLTINOUT        int64
+ZPKLTN            int64
+ZWINTYP           int64
+ZTINT             int64
+ZREFL             int64
+ZAWN              int64
+ZSKYLT            int64
+ZDAYLTP           int64
+ZCTSCAN           int64
+ZDCNTRSFC         int64
+ZLINACC           int64
+ZMRI              int64
+ZOUTHOSPPCT       int64
+ZMFBTU            int64
+ZMFEXP            int64
+ZELCNS            int64
+ZELEXP            int64
+ZNGCNS            int64
+ZNGEXP            int64
+ZFKCNS            int64
+ZFKEXP            int64
+ZDHBTU            int64
+ZDHEXP            int64
+
+MISSING VALUES
+------------------------------------------------------------
+PUBID              0
+REGION             0
+CENDIV             0
+PBA                0
+PUBCLIM            0
+SQFT               0
+SQFTC              0
+WLCNS              0
+RFCNS              0
+RFCOOL             0
+RFTILT             0
+BLDSHP             0
+GLSSPC             0
+NFLOOR             0
+BASEMNT         2585
+FLCEILHT           0
+ATTIC              0
+ELEVTR          2585
+NELVTR          3508
+ESCLTR          2585
+NESLTR          6218
+YRCONC             0
+RENOV            408
+RENCOS          2843
+RENADD          2843
+RENRDC          2843
+RENINT          2843
+RENRFF          2843
+RENWIN          2843
+RENHVC          2843
+RENLGT          2843
+RENPLB          2843
+RENELC          2843
+RENINS          2843
+RENSAF          2843
+RENSTR          2843
+RENOTH          2843
+DRYCL           6383
+VACANT          6314
+PBAPLUS            0
+RWSEAT          6165
+PBSEAT          5955
+EDSEAT          5500
+FDSEAT          6218
+DRVTHRU         6244
+HCBED           6160
+NRSBED          6322
+LODGRM          6018
+COURT           6401
+FACIL              0
+FEDFAC          3861
+FACACT          3861
+MANIND          6383
+PLANT           3861
+FACDST          5715
+FACDHW          5715
+FACDCW          5715
+FACELC          5715
+BLDPLT          5715
+GOVOWN             0
+GOVTYP          4801
+OWNTYPE            0
+NOCC               0
+NOCCAT             0
+OWNOCC            85
+OWNOPR             0
+OWNPPR           988
+NWNPPR          6347
+NWNOPR          5448
+WHOPPR          5448
+MONUSE             0
+OCCUPYP         4647
+LODOCCP         6108
+OPEN24             0
+OPNMF              0
+OPNWE              0
+WKHRS              0
+WKHRSC             0
+NWKER              0
+NWKERC             0
+HT1                0
+HT2                0
+COOL               0
+WATR               0
+COOK               0
+MANU               0
+EGYUSED            0
+ELUSED             0
+NGUSED             0
+FKUSED             0
+PRUSED             0
+STUSED             0
+HWUSED             0
+CWUSED             0
+WOUSED             0
+COUSED             0
+SOUSED             0
+OTUSED             0
+FKTYPE          4720
+SOPANEL         6153
+SOTHERM         6013
+HEATP            429
+HTLS50          6421
+ELHT1              0
+NGHT1              0
+FKHT1              0
+PRHT1              0
+STHT1              0
+HWHT1              0
+WOHT1              0
+COHT1              0
+SOHT1              0
+OTHT1              0
+ELHT2              0
+NGHT2              0
+FKHT2              0
+PRHT2              0
+STHT2              0
+HWHT2              0
+WOHT2              0
+COHT2              0
+SOHT2              0
+OTHT2              0
+PKGHT            429
+FURNAC           429
+SLFCON           429
+BOILER           429
+HTPMPH           429
+STHW             429
+REHEAT           429
+FIREPLC          429
+OTHTEQ           429
+PKGHT_EL        3384
+BOILER_EL       3384
+HTPMPH_EL       3384
+FURNAC_EL       3384
+SLFCON_EL       3384
+FIREPLC_EL      3384
+REHEAT_EL       3384
+OTHTEQ_EL       3384
+PKGHT_NG        2636
+BOILER_NG       2636
+HTPMPH_NG       2636
+FURNAC_NG       2636
+SLFCON_NG       2636
+FIREPLC_NG      2636
+OTHTEQ_NG       2636
+BOILER_FK       6146
+FURNAC_FK       6146
+SLFCON_FK       6146
+OTHTEQ_FK       6146
+PKGHT_PR        6205
+BOILER_PR       6205
+HTPMPH_PR       6205
+FURNAC_PR       6205
+SLFCON_PR       6205
+FIREPLC_PR      6205
+OTHTEQ_PR       6205
+DIST_ST         5997
+AIRHAND_ST      5997
+FANCOIL_ST      5997
+REHEAT_ST       5997
+RADIATR_ST      5997
+RADFLR_ST       5997
+WTLOOP_ST       5997
+OTDIST_ST       5997
+DIST_HW         6322
+AIRHAND_HW      6322
+FANCOIL_HW      6322
+REHEAT_HW       6322
+RADIATR_HW      6322
+RADFLR_HW       6322
+WTLOOP_HW       6322
+OTDIST_HW       6322
+FURNAC_WO       6405
+SLFCON_WO       6405
+FIREPLC_WO      6405
+OTHTEQ_WO       6405
+BOILER_CO       6434
+FURNAC_CO       6434
+OTHTEQ_CO       6434
+SOTHERM_SO      6223
+PKGHT_OT        6415
+BOILER_OT       6415
+FURNAC_OT       6415
+SLFCON_OT       6415
+OTHTEQ_OT       6415
+BLRAIR_HT1      5367
+BLRFNCL_HT1     5473
+BLRDUCT_HT1     5859
+BLRRAD_HT1      5825
+BLRRDFL_HT1     6305
+BLRWTLP_HT1     6034
+BLROTD_HT1      6362
+BLRAIR_EL2      6408
+BLRFNCL_EL2     6416
+BLRDUCT_EL2     6424
+BLRRAD_EL2      6423
+BLRRDFL_EL2     6433
+BLRWTLP_EL2     6417
+BLROTD_EL2      6428
+BLRAIR_NG2      6362
+BLRFNCL_NG2     6388
+BLRDUCT_NG2     6403
+BLRRAD_NG2      6403
+BLRRDFL_NG2     6432
+BLRWTLP_NG2     6386
+BLROTD_NG2      6425
+BLRAIR_FK2      6369
+BLRFNCL_FK2     6376
+BLRDUCT_FK2     6390
+BLRRAD_FK2      6386
+BLRRDFL_FK2     6418
+BLRWTLP_FK2     6411
+BLROTD_FK2      6433
+BLRAIR_PR2      6434
+BLRFNCL_PR2     6432
+BLRDUCT_PR2     6433
+BLRRAD_PR2      6433
+BLRRDFL_PR2     6434
+BLRWTLP_PR2     6430
+BLROTD_PR2      6435
+BLRAIR_CO2      6436
+BLRFNCL_CO2     6436
+BLRDUCT_CO2     6436
+BLRRAD_CO2      6436
+BLRRDFL_CO2     6436
+BLRWTLP_CO2     6436
+BLROTD_CO2      6436
+BLRAIR_OT2      6435
+BLRFNCL_OT2     6436
+BLRDUCT_OT2     6436
+BLRRAD_OT2      6436
+BLRRDFL_OT2     6436
+BLRWTLP_OT2     6436
+BLROTD_OT2      6436
+BLRAIR          4340
+BLRDUCT         4340
+BLRFNCL         4340
+BLROTD          4340
+BLRRAD          4340
+BLRRDFL         4340
+BLRWTLP         4340
+PKGHPH          5397
+HPHPTHP         5467
+HPHAIR          5572
+HPHGRD          5572
+HPHDUAL         5572
+HPHWTR          5572
+HPHVRF          5572
+SPHTPTHP        5631
+FURNP_EL        6189
+PKGHP_EL        4874
+BOILP_EL        6236
+HTPHP_EL        5467
+SLFCNP_EL       5533
+FIREPLP_EL      6403
+REHEATP_EL      5870
+OTHTP_EL        6402
+FURNP_NG        5756
+PKGHP_NG        4443
+BOILP_NG        4656
+HTPHP_NG        6191
+SLFCNP_NG       6023
+FIREPLP_NG      6331
+OTHTP_NG        6433
+FURNP_FK        6392
+BOILP_FK        6214
+SLFCNP_FK       6406
+OTHTP_FK        6436
+FURNP_PR        6344
+PKGHP_PR        6386
+BOILP_PR        6395
+HTPHP_PR        6421
+SLFCNP_PR       6371
+FIREPLP_PR      6423
+OTHTP_PR        6436
+STHWP_ST        5997
+STHWP_HW        6322
+FURNP_WO        6434
+SLFCNP_WO       6416
+FIREPLP_WO      6430
+OTHTP_WO        6433
+FURNP_CO        6434
+BOILP_CO        6436
+OTHTP_CO        6436
+SOTHERMP_SO     6431
+FURNP_OT        6432
+PKGHP_OT        6436
+BOILP_OT        6432
+SLFCNP_OT       6423
+OTHTP_OT        6434
+MAINHT           429
+NWMNHT          2472
+COOLP            456
+ELCOOL             0
+NGCOOL             0
+FKCOOL             0
+PRCOOL             0
+STCOOL             0
+CWCOOL             0
+OTCOOL             0
+RCAC             456
+PKGCL            456
+CHILLR           456
+HTPMPC           456
+ACWNWL           456
+EVAPCL           456
+OTCLEQ           456
+CHWT             456
+RCAC_EL          735
+PKGCL_EL         735
+CHILLR_EL        735
+HTPMPC_EL        735
+ACWNWL_EL        735
+EVAPCL_EL        735
+OTCLEQ_EL        735
+HPCPTHP         6165
+HPCAIR          5948
+HPCGRD          5948
+HPCDUAL         5948
+HPCWTR          5948
+ACVRF           5161
+RMACPTHP        5562
+CHILLR_NG       6406
+OTCLEQ_NG       6406
+CHILLR_FK       6434
+OTCLEQ_FK       6434
+CHILLR_PR       6434
+OTCLEQ_PR       6434
+CHILLR_ST       6420
+OTCLEQ_ST       6420
+OTCLEQ_OT       6434
+DIST_CW         6046
+CWAIR           6046
+CWFNCL          6046
+CWBEAM          6046
+CWWTLP          6046
+CWOTD           6046
+CHLAIR          4895
+CHLFNCL         4895
+CHLBEAM         4895
+CHLWTLP         4895
+CHLOTD          4895
+CHLAIRCL        4895
+CHLWTRCL        4895
+CHLABSRP        4895
+RCACP_EL        5212
+PKGCP_EL        2749
+CHILP_EL        4927
+HTPCP_EL        5627
+ACWNWP_EL       5470
+EVAPP_EL        6284
+OTCLP_EL        6426
+CHILP_NG        6406
+OTCLP_NG        6436
+CHILP_FK        6434
+OTCLP_FK        6436
+CHILP_PR        6434
+OTCLP_PR        6436
+CHILP_ST        6420
+OTCLP_ST        6436
+CHWTP_CW        6046
+OTCLP_OT        6434
+MAINCL           456
+NWMNCL          3722
+EMCS             243
+EMCSHT          3348
+EMCSCL          3319
+EMCSLT          3293
+SMRTTHRM        3387
+HWRDHT          3851
+HWRDCL          3914
+VAV              397
+DOAS             397
+DCV              397
+ECN              725
+MAINT            243
+ELWATR             0
+NGWATR             0
+FKWATR             0
+PRWATR             0
+STWATR             0
+HWWATR             0
+WOWATR             0
+COWATR             0
+SOWATR             0
+OTWATR             0
+WTHTEQ           467
+BOOSTWT         5933
+ELCOOK             0
+NGCOOK             0
+FKCOOK             0
+PRCOOK             0
+STCOOK             0
+HWCOOK             0
+WOCOOK             0
+COCOOK             0
+OTCOOK             0
+ELMANU             0
+NGMANU             0
+FKMANU             0
+PRMANU             0
+STMANU             0
+HWMANU             0
+WOMANU             0
+COMANU             0
+OTMANU             0
+CAPGEN             0
+PVC             4137
+ENGINE          4137
+FUELCL          4137
+LRGTRB          4137
+MCROTB          4137
+OTGENTECH       4137
+COGEN           4299
+NGGENR             0
+FKGENR             0
+PRGENR             0
+WOGENR             0
+COGENR             0
+SOGENR             0
+OTGENR             0
+GENUSE          4326
+GENGT1MW        4899
+NGOTH              0
+FKOTH              0
+PROTH              0
+STOTH              0
+HWOTH              0
+CWOTH              0
+WOOTH              0
+COOTH              0
+SOOTH              0
+OTOTH              0
+PRAMTC          5818
+PRUNIT          5818
+WOAMT           6389
+WOSRC           6389
+WOEXP           6402
+WOEXPC          6402
+ENRGYPLN         237
+SNACK           3355
+FASTFD          3355
+CAF             3355
+FDPREP          3355
+KITCHN          3355
+BREAKRM         3355
+OTFDRM          3355
+SNACKSF         5616
+FASTFDSF        5708
+CAFSF           5280
+FDPREPSF        5120
+HWTRM            467
+LAUNDR          5628
+CONFSP          6132
+CONFSPP         6205
+MEDEQP          5442
+XRAYN           5742
+CTSCAN          5742
+MRI             5742
+LINACC          5742
+OUTHOSPPCT      6160
+OUTSURG         6219
+LABEQP          2232
+MCHEQP          3799
+POOL            4577
+HTPOOL          6184
+POOLSRC         6190
+STRLZR          1911
+RFGEQP            78
+RFGRES          1020
+RFGCOMP         1020
+RFGWI           1020
+RFGOP           1020
+RFGCL           1020
+RFGVEN          1020
+RFGICE          1020
+RFGSTO          1020
+RFGRSN          2559
+RFGCOMPN        4054
+RFGWIN          4066
+RFGOPN          5332
+RFGCLN          4482
+RFGVNN          3343
+RFGICN          3775
+RFGSTP          6204
+WHRECOV         5739
+WHHT2           6399
+WHWT            6399
+WHOT            6399
+PCTERM           122
+LAPTOP           122
+TABLET           122
+SERVER           122
+PCTERMN          896
+PCTRMC           896
+LAPTPN          1678
+LAPTPC          1678
+MLTMON           644
+MLTMNC          3099
+TABCHRG         2806
+TABLETN         2961
+SRVUNIT         2803
+SERVERN         2803
+SERVERC         2803
+SRVRCLST         643
+DATACNTR         643
+DCNTRSFC        5539
+TRNGRM           643
+STDNRM           643
+LGOFFDEV         122
+SMOFFDEV         122
+WBOARDS          122
+TVVIDEO          122
+RGSTR            122
+LGOFFDEVN       2622
+SMOFFDEVN       1363
+WBOARDSN        5135
+TVVIDEON        1960
+RGSTRN          3798
+ATMN            6397
+LTZHRP          6344
+LZHRPC          6344
+LTOHRP           170
+LOHRPC           170
+LTNR24          4961
+LTNHRP           336
+LNHRPC           336
+LIT                3
+FLUOR            110
+CFLR             110
+BULB             110
+HALO             110
+HID              110
+LED              110
+OTLT             110
+FLUORP          1555
+CFLRP           3919
+BULBP           4970
+HALOP           5368
+HIDP            5608
+LEDP            2149
+OTLTP           6429
+SCHED            110
+OCSN             110
+DIM              110
+DAYHARV          110
+TRIM             110
+PLGCTRL          110
+DRLGHT           110
+LTEXPC            78
+PKLT              78
+PKLTINOUT       2194
+PKLTN           2194
+WINTYP             0
+TINT             276
+REFL             276
+AWN              276
+SKYLT            276
+DAYLTP           276
+HDD65              0
+CDD65              0
+MFUSED             0
+MFBTU             79
+MFEXP             79
+ELBTU             79
+ELCNS             79
+ELEXP             79
+NGBTU           1889
+NGCNS           1889
+NGEXP           1889
+FKBTU           4720
+FKCNS           4720
+FKEXP           4720
+DHUSED             0
+DHHT1              0
+DHHT2              0
+DHCOOL             0
+DHWATR             0
+DHCOOK             0
+DHMANU             0
+DHOTH              0
+DHBTU           5877
+DHEXP           5877
+MFHTBTU           79
+MFCLBTU           79
+MFVNBTU           79
+MFWTBTU           79
+MFLTBTU           79
+MFCKBTU           79
+MFRFBTU           79
+MFOFBTU           79
+MFPCBTU           79
+MFOTBTU           79
+ELHTBTU           79
+ELCLBTU           79
+ELVNBTU           79
+ELWTBTU           79
+ELLTBTU           79
+ELCKBTU           79
+ELRFBTU           79
+ELOFBTU           79
+ELPCBTU           79
+ELOTBTU           79
+NGHTBTU         1889
+NGCLBTU         1889
+NGWTBTU         1889
+NGCKBTU         1889
+NGOTBTU         1889
+FKHTBTU         4720
+FKCLBTU         4720
+FKWTBTU         4720
+FKCKBTU         4720
+FKOTBTU         4720
+DHHTBTU         5877
+DHCLBTU         5877
+DHWTBTU         5877
+DHCKBTU         5877
+DHOTBTU         5877
+FINALWT            0
+FINALWT1           0
+FINALWT2           0
+FINALWT3           0
+FINALWT4           0
+FINALWT5           0
+FINALWT6           0
+FINALWT7           0
+FINALWT8           0
+FINALWT9           0
+FINALWT10          0
+FINALWT11          0
+FINALWT12          0
+FINALWT13          0
+FINALWT14          0
+FINALWT15          0
+FINALWT16          0
+FINALWT17          0
+FINALWT18          0
+FINALWT19          0
+FINALWT20          0
+FINALWT21          0
+FINALWT22          0
+FINALWT23          0
+FINALWT24          0
+FINALWT25          0
+FINALWT26          0
+FINALWT27          0
+FINALWT28          0
+FINALWT29          0
+FINALWT30          0
+FINALWT31          0
+FINALWT32          0
+FINALWT33          0
+FINALWT34          0
+FINALWT35          0
+FINALWT36          0
+FINALWT37          0
+FINALWT38          0
+FINALWT39          0
+FINALWT40          0
+FINALWT41          0
+FINALWT42          0
+FINALWT43          0
+FINALWT44          0
+FINALWT45          0
+FINALWT46          0
+FINALWT47          0
+FINALWT48          0
+FINALWT49          0
+FINALWT50          0
+FINALWT51          0
+FINALWT52          0
+FINALWT53          0
+FINALWT54          0
+FINALWT55          0
+FINALWT56          0
+FINALWT57          0
+FINALWT58          0
+FINALWT59          0
+FINALWT60          0
+FINALWT61          0
+FINALWT62          0
+FINALWT63          0
+FINALWT64          0
+FINALWT65          0
+FINALWT66          0
+FINALWT67          0
+FINALWT68          0
+FINALWT69          0
+FINALWT70          0
+FINALWT71          0
+FINALWT72          0
+FINALWT73          0
+FINALWT74          0
+FINALWT75          0
+FINALWT76          0
+FINALWT77          0
+FINALWT78          0
+FINALWT79          0
+FINALWT80          0
+FINALWT81          0
+FINALWT82          0
+FINALWT83          0
+FINALWT84          0
+FINALWT85          0
+FINALWT86          0
+FINALWT87          0
+FINALWT88          0
+FINALWT89          0
+FINALWT90          0
+FINALWT91          0
+FINALWT92          0
+FINALWT93          0
+FINALWT94          0
+FINALWT95          0
+FINALWT96          0
+FINALWT97          0
+FINALWT98          0
+FINALWT99          0
+FINALWT100         0
+FINALWT101         0
+FINALWT102         0
+FINALWT103         0
+FINALWT104         0
+FINALWT105         0
+FINALWT106         0
+FINALWT107         0
+FINALWT108         0
+FINALWT109         0
+FINALWT110         0
+FINALWT111         0
+FINALWT112         0
+FINALWT113         0
+FINALWT114         0
+FINALWT115         0
+FINALWT116         0
+FINALWT117         0
+FINALWT118         0
+FINALWT119         0
+FINALWT120         0
+FINALWT121         0
+FINALWT122         0
+FINALWT123         0
+FINALWT124         0
+FINALWT125         0
+FINALWT126         0
+FINALWT127         0
+FINALWT128         0
+FINALWT129         0
+FINALWT130         0
+FINALWT131         0
+FINALWT132         0
+FINALWT133         0
+FINALWT134         0
+FINALWT135         0
+FINALWT136         0
+FINALWT137         0
+FINALWT138         0
+FINALWT139         0
+FINALWT140         0
+FINALWT141         0
+FINALWT142         0
+FINALWT143         0
+FINALWT144         0
+FINALWT145         0
+FINALWT146         0
+FINALWT147         0
+FINALWT148         0
+FINALWT149         0
+FINALWT150         0
+FINALWT151         0
+ZSQFT              0
+ZSQFTC             0
+ZWLCNS             0
+ZRFCNS             0
+ZRFCOOL            0
+ZRFTILT            0
+ZBLDSHP            0
+ZGLSSPC            0
+ZNFLOOR            0
+ZBASEMNT           0
+ZFLCEILHT          0
+ZATTIC             0
+ZELEVTR            0
+ZNELVTR            0
+ZESCLTR            0
+ZNESLTR            0
+ZYRCONC            0
+ZRENOV             0
+ZRENCOS            0
+ZRENADD            0
+ZRENRDC            0
+ZRENINT            0
+ZRENRFF            0
+ZRENWIN            0
+ZRENHVC            0
+ZRENLGT            0
+ZRENPLB            0
+ZRENELC            0
+ZRENINS            0
+ZRENSAF            0
+ZRENSTR            0
+ZRENOTH            0
+ZDRYCL             0
+ZRWSEAT            0
+ZPBSEAT            0
+ZEDSEAT            0
+ZFDSEAT            0
+ZHCBED             0
+ZNRSBED            0
+ZLODGRM            0
+ZFACIL             0
+ZFEDFAC            0
+ZFACACT            0
+ZPLANT             0
+ZFACDST            0
+ZFACDHW            0
+ZFACDCW            0
+ZFACELC            0
+ZBLDPLT            0
+ZGOVOWN            0
+ZGOVTYP            0
+ZOWNTYPE           0
+ZNOCC              0
+ZNOCCAT            0
+ZOWNOCC            0
+ZOWNOPR            0
+ZOWNPPR            0
+ZNWNPPR            0
+ZNWNOPR            0
+ZWHOPPR            0
+ZMONUSE            0
+ZOCCUPYP           0
+ZLODOCCP           0
+ZOPEN24            0
+ZOPNMF             0
+ZOPNWE             0
+ZWKHRS             0
+ZWKHRSC            0
+ZNWKER             0
+ZNWKERC            0
+ZHT1               0
+ZHT2               0
+ZCOOL              0
+ZWATR              0
+ZCOOK              0
+ZMANU              0
+ZELUSED            0
+ZNGUSED            0
+ZFKUSED            0
+ZPRUSED            0
+ZSTUSED            0
+ZHWUSED            0
+ZCWUSED            0
+ZWOUSED            0
+ZCOUSED            0
+ZSOUSED            0
+ZOTUSED            0
+ZFKTYPE            0
+ZSOPANEL           0
+ZHEATP             0
+ZHTLS50            0
+ZELHT1             0
+ZNGHT1             0
+ZFKHT1             0
+ZPRHT1             0
+ZSTHT1             0
+ZHWHT1             0
+ZWOHT1             0
+ZCOHT1             0
+ZSOHT1             0
+ZOTHT1             0
+ZELHT2             0
+ZNGHT2             0
+ZFKHT2             0
+ZPRHT2             0
+ZSTHT2             0
+ZHWHT2             0
+ZWOHT2             0
+ZCOHT2             0
+ZSOHT2             0
+ZOTHT2             0
+ZPKGHT_EL          0
+ZBOILER_EL         0
+ZHTPMPH_EL         0
+ZFURNAC_EL         0
+ZSLFCON_EL         0
+ZFIREPLC_EL        0
+ZREHEAT_EL         0
+ZOTHTEQ_EL         0
+ZPKGHT_NG          0
+ZBOILER_NG         0
+ZHTPMPH_NG         0
+ZFURNAC_NG         0
+ZSLFCON_NG         0
+ZFIREPLC_NG        0
+ZOTHTEQ_NG         0
+ZBOILER_FK         0
+ZFURNAC_FK         0
+ZSLFCON_FK         0
+ZOTHTEQ_FK         0
+ZPKGHT_PR          0
+ZBOILER_PR         0
+ZHTPMPH_PR         0
+ZFURNAC_PR         0
+ZSLFCON_PR         0
+ZFIREPLC_PR        0
+ZOTHTEQ_PR         0
+ZDIST_ST           0
+ZAIRHAND_ST        0
+ZFANCOIL_ST        0
+ZREHEAT_ST         0
+ZRADIATR_ST        0
+ZRADFLR_ST         0
+ZWTLOOP_ST         0
+ZOTDIST_ST         0
+ZDIST_HW           0
+ZAIRHAND_HW        0
+ZFANCOIL_HW        0
+ZREHEAT_HW         0
+ZRADIATR_HW        0
+ZRADFLR_HW         0
+ZWTLOOP_HW         0
+ZOTDIST_HW         0
+ZFURNAC_WO         0
+ZSLFCON_WO         0
+ZFIREPLC_WO        0
+ZOTHTEQ_WO         0
+ZBOILER_CO         0
+ZFURNAC_CO         0
+ZOTHTEQ_CO         0
+ZSOTHERM_SO        0
+ZPKGHT_OT          0
+ZBOILER_OT         0
+ZFURNAC_OT         0
+ZSLFCON_OT         0
+ZOTHTEQ_OT         0
+ZBLRAIR            0
+ZBLRDUCT           0
+ZBLRFNCL           0
+ZBLROTD            0
+ZBLRRAD            0
+ZBLRRDFL           0
+ZBLRWTLP           0
+ZHPHPTHP           0
+ZHPHAIR            0
+ZHPHGRD            0
+ZHPHDUAL           0
+ZHPHWTR            0
+ZHPHVRF            0
+ZFURNP_EL          0
+ZPKGHP_EL          0
+ZBOILP_EL          0
+ZHTPHP_EL          0
+ZSLFCNP_EL         0
+ZFIREPLP_EL        0
+ZREHEATP_EL        0
+ZOTHTP_EL          0
+ZFURNP_NG          0
+ZPKGHP_NG          0
+ZBOILP_NG          0
+ZHTPHP_NG          0
+ZSLFCNP_NG         0
+ZFIREPLP_NG        0
+ZOTHTP_NG          0
+ZFURNP_FK          0
+ZBOILP_FK          0
+ZSLFCNP_FK         0
+ZOTHTP_FK          0
+ZFURNP_PR          0
+ZPKGHP_PR          0
+ZBOILP_PR          0
+ZHTPHP_PR          0
+ZSLFCNP_PR         0
+ZFIREPLP_PR        0
+ZOTHTP_PR          0
+ZSTHWP_ST          0
+ZSTHWP_HW          0
+ZFURNP_WO          0
+ZSLFCNP_WO         0
+ZFIREPLP_WO        0
+ZOTHTP_WO          0
+ZFURNP_CO          0
+ZBOILP_CO          0
+ZOTHTP_CO          0
+ZSOTHERMP_SO       0
+ZFURNP_OT          0
+ZPKGHP_OT          0
+ZBOILP_OT          0
+ZSLFCNP_OT         0
+ZOTHTP_OT          0
+ZMAINHT            0
+ZNWMNHT            0
+ZCOOLP             0
+ZELCOOL            0
+ZNGCOOL            0
+ZFKCOOL            0
+ZPRCOOL            0
+ZSTCOOL            0
+ZCWCOOL            0
+ZOTCOOL            0
+ZRCAC_EL           0
+ZPKGCL_EL          0
+ZCHILLR_EL         0
+ZHTPMPC_EL         0
+ZACWNWL_EL         0
+ZEVAPCL_EL         0
+ZOTCLEQ_EL         0
+ZHPCPTHP           0
+ZHPCAIR            0
+ZHPCGRD            0
+ZHPCDUAL           0
+ZHPCWTR            0
+ZCHILLR_NG         0
+ZOTCLEQ_NG         0
+ZCHILLR_FK         0
+ZOTCLEQ_FK         0
+ZCHILLR_PR         0
+ZOTCLEQ_PR         0
+ZCHILLR_ST         0
+ZOTCLEQ_ST         0
+ZOTCLEQ_OT         0
+ZDIST_CW           0
+ZCWAIR             0
+ZCWFNCL            0
+ZCWBEAM            0
+ZCWWTLP            0
+ZCWOTD             0
+ZCHLAIR            0
+ZCHLFNCL           0
+ZCHLBEAM           0
+ZCHLWTLP           0
+ZCHLOTD            0
+ZCHLAIRCL          0
+ZCHLWTRCL          0
+ZCHLABSRP          0
+ZRCACP_EL          0
+ZPKGCP_EL          0
+ZCHILP_EL          0
+ZHTPCP_EL          0
+ZACWNWP_EL         0
+ZEVAPP_EL          0
+ZOTCLP_EL          0
+ZCHILP_NG          0
+ZOTCLP_NG          0
+ZCHILP_FK          0
+ZOTCLP_FK          0
+ZCHILP_PR          0
+ZOTCLP_PR          0
+ZCHILP_ST          0
+ZOTCLP_ST          0
+ZCHWTP_CW          0
+ZOTCLP_OT          0
+ZMAINCL            0
+ZNWMNCL            0
+ZEMCS              0
+ZEMCSHT            0
+ZEMCSCL            0
+ZEMCSLT            0
+ZSMRTTHRM          0
+ZHWRDHT            0
+ZHWRDCL            0
+ZVAV               0
+ZDOAS              0
+ZDCV               0
+ZECN               0
+ZMAINT             0
+ZELWATR            0
+ZNGWATR            0
+ZFKWATR            0
+ZPRWATR            0
+ZSTWATR            0
+ZHWWATR            0
+ZWOWATR            0
+ZCOWATR            0
+ZSOWATR            0
+ZOTWATR            0
+ZWTHTEQ            0
+ZBOOSTWT           0
+ZELCOOK            0
+ZNGCOOK            0
+ZFKCOOK            0
+ZPRCOOK            0
+ZSTCOOK            0
+ZHWCOOK            0
+ZWOCOOK            0
+ZCOCOOK            0
+ZOTCOOK            0
+ZELMANU            0
+ZNGMANU            0
+ZFKMANU            0
+ZPRMANU            0
+ZSTMANU            0
+ZHWMANU            0
+ZWOMANU            0
+ZCOMANU            0
+ZOTMANU            0
+ZCAPGEN            0
+ZPVC               0
+ZENGINE            0
+ZFUELCL            0
+ZLRGTRB            0
+ZMCROTB            0
+ZOTGENTECH         0
+ZCOGEN             0
+ZNGGENR            0
+ZFKGENR            0
+ZPRGENR            0
+ZWOGENR            0
+ZCOGENR            0
+ZSOGENR            0
+ZOTGENR            0
+ZGENUSE            0
+ZPRAMTC            0
+ZPRUNIT            0
+ZWOAMT             0
+ZWOSRC             0
+ZWOEXP             0
+ZWOEXPC            0
+ZENRGYPLN          0
+ZSNACK             0
+ZFASTFD            0
+ZCAF               0
+ZFDPREP            0
+ZKITCHN            0
+ZBREAKRM           0
+ZOTFDRM            0
+ZSNACKSF           0
+ZFASTFDSF          0
+ZCAFSF             0
+ZFDPREPSF          0
+ZHWTRM             0
+ZLAUNDR            0
+ZCONFSP            0
+ZCONFSPP           0
+ZMEDEQP            0
+ZXRAYN             0
+ZOUTSURG           0
+ZLABEQP            0
+ZMCHEQP            0
+ZPOOL              0
+ZHTPOOL            0
+ZPOOLSRC           0
+ZSTRLZR            0
+ZRFGEQP            0
+ZRFGRES            0
+ZRFGCOMP           0
+ZRFGWI             0
+ZRFGOP             0
+ZRFGCL             0
+ZRFGVEN            0
+ZRFGICE            0
+ZRFGSTO            0
+ZRFGRSN            0
+ZRFGCOMPN          0
+ZRFGWIN            0
+ZRFGOPN            0
+ZRFGCLN            0
+ZRFGVNN            0
+ZRFGICN            0
+ZRFGSTP            0
+ZWHRECOV           0
+ZWHHT2             0
+ZWHWT              0
+ZWHOT              0
+ZPCTERM            0
+ZLAPTOP            0
+ZTABLET            0
+ZSERVER            0
+ZPCTERMN           0
+ZPCTRMC            0
+ZLAPTPN            0
+ZLAPTPC            0
+ZMLTMON            0
+ZMLTMNC            0
+ZTABCHRG           0
+ZTABLETN           0
+ZSRVUNIT           0
+ZSERVERN           0
+ZSERVERC           0
+ZSRVRCLST          0
+ZDATACNTR          0
+ZTRNGRM            0
+ZSTDNRM            0
+ZLGOFFDEV          0
+ZSMOFFDEV          0
+ZWBOARDS           0
+ZTVVIDEO           0
+ZRGSTR             0
+ZLGOFFDEVN         0
+ZSMOFFDEVN         0
+ZWBOARDSN          0
+ZTVVIDEON          0
+ZRGSTRN            0
+ZATMN              0
+ZLTZHRP            0
+ZLZHRPC            0
+ZLTOHRP            0
+ZLOHRPC            0
+ZLTNR24            0
+ZLTNHRP            0
+ZLNHRPC            0
+ZFLUOR             0
+ZCFLR              0
+ZBULB              0
+ZHALO              0
+ZHID               0
+ZLED               0
+ZOTLT              0
+ZFLUORP            0
+ZCFLRP             0
+ZBULBP             0
+ZHALOP             0
+ZHIDP              0
+ZLEDP              0
+ZOTLTP             0
+ZSCHED             0
+ZOCSN              0
+ZDIM               0
+ZDAYHARV           0
+ZTRIM              0
+ZPLGCTRL           0
+ZDRLGHT            0
+ZLTEXPC            0
+ZPKLT              0
+ZPKLTINOUT         0
+ZPKLTN             0
+ZWINTYP            0
+ZTINT              0
+ZREFL              0
+ZAWN               0
+ZSKYLT             0
+ZDAYLTP            0
+ZCTSCAN            0
+ZDCNTRSFC          0
+ZLINACC            0
+ZMRI               0
+ZOUTHOSPPCT        0
+ZMFBTU             0
+ZMFEXP             0
+ZELCNS             0
+ZELEXP             0
+ZNGCNS             0
+ZNGEXP             0
+ZFKCNS             0
+ZFKEXP             0
+ZDHBTU             0
+ZDHEXP             0
+
+FIRST FIVE ROWS
+------------------------------------------------------------
+   PUBID  REGION  CENDIV  PBA  PUBCLIM    SQFT  SQFTC  WLCNS  RFCNS  RFCOOL  RFTILT  BLDSHP  GLSSPC  NFLOOR  BASEMNT  FLCEILHT  ATTIC  ELEVTR  NELVTR  ESCLTR  NESLTR  YRCONC  RENOV  RENCOS  RENADD  RENRDC  RENINT  RENRFF  RENWIN  RENHVC  RENLGT  RENPLB  RENELC  RENINS  RENSAF  RENSTR  RENOTH  DRYCL  VACANT  PBAPLUS  RWSEAT  PBSEAT  EDSEAT  FDSEAT  DRVTHRU  HCBED  NRSBED  LODGRM  COURT  FACIL  FEDFAC  FACACT  MANIND  PLANT  FACDST  FACDHW  FACDCW  FACELC  BLDPLT  GOVOWN  GOVTYP  OWNTYPE  NOCC  NOCCAT  OWNOCC  OWNOPR  OWNPPR  NWNPPR  NWNOPR  WHOPPR  MONUSE  OCCUPYP  LODOCCP  OPEN24  OPNMF  OPNWE  WKHRS  WKHRSC  NWKER  NWKERC  HT1  HT2  COOL  WATR  COOK  MANU  EGYUSED  ELUSED  NGUSED  FKUSED  PRUSED  STUSED  HWUSED  CWUSED  WOUSED  COUSED  SOUSED  OTUSED  FKTYPE  SOPANEL  SOTHERM  HEATP  HTLS50  ELHT1  NGHT1  FKHT1  PRHT1  STHT1  HWHT1  WOHT1  COHT1  SOHT1  OTHT1  ELHT2  NGHT2  FKHT2  PRHT2  STHT2  HWHT2  WOHT2  COHT2  SOHT2  OTHT2  PKGHT  FURNAC  SLFCON  BOILER  HTPMPH  STHW  REHEAT  FIREPLC  OTHTEQ  PKGHT_EL  BOILER_EL  HTPMPH_EL  FURNAC_EL  SLFCON_EL  FIREPLC_EL  REHEAT_EL  OTHTEQ_EL  PKGHT_NG  BOILER_NG  HTPMPH_NG  FURNAC_NG  SLFCON_NG  FIREPLC_NG  OTHTEQ_NG  BOILER_FK  FURNAC_FK  SLFCON_FK  OTHTEQ_FK  PKGHT_PR  BOILER_PR  HTPMPH_PR  FURNAC_PR  SLFCON_PR  FIREPLC_PR  OTHTEQ_PR  DIST_ST  AIRHAND_ST  FANCOIL_ST  REHEAT_ST  RADIATR_ST  RADFLR_ST  WTLOOP_ST  OTDIST_ST  DIST_HW  AIRHAND_HW  FANCOIL_HW  REHEAT_HW  RADIATR_HW  RADFLR_HW  WTLOOP_HW  OTDIST_HW  FURNAC_WO  SLFCON_WO  FIREPLC_WO  OTHTEQ_WO  BOILER_CO  FURNAC_CO  OTHTEQ_CO  SOTHERM_SO  PKGHT_OT  BOILER_OT  FURNAC_OT  SLFCON_OT  OTHTEQ_OT  BLRAIR_HT1  BLRFNCL_HT1  BLRDUCT_HT1  BLRRAD_HT1  BLRRDFL_HT1  BLRWTLP_HT1  BLROTD_HT1  BLRAIR_EL2  BLRFNCL_EL2  BLRDUCT_EL2  BLRRAD_EL2  BLRRDFL_EL2  BLRWTLP_EL2  BLROTD_EL2  BLRAIR_NG2  BLRFNCL_NG2  BLRDUCT_NG2  BLRRAD_NG2  BLRRDFL_NG2  BLRWTLP_NG2  BLROTD_NG2  BLRAIR_FK2  BLRFNCL_FK2  BLRDUCT_FK2  BLRRAD_FK2  BLRRDFL_FK2  BLRWTLP_FK2  BLROTD_FK2  BLRAIR_PR2  BLRFNCL_PR2  BLRDUCT_PR2  BLRRAD_PR2  BLRRDFL_PR2  BLRWTLP_PR2  BLROTD_PR2  BLRAIR_CO2  BLRFNCL_CO2  BLRDUCT_CO2  BLRRAD_CO2  BLRRDFL_CO2  BLRWTLP_CO2  BLROTD_CO2  BLRAIR_OT2  BLRFNCL_OT2  BLRDUCT_OT2  BLRRAD_OT2  BLRRDFL_OT2  BLRWTLP_OT2  BLROTD_OT2  BLRAIR  BLRDUCT  BLRFNCL  BLROTD  BLRRAD  BLRRDFL  BLRWTLP  PKGHPH  HPHPTHP  HPHAIR  HPHGRD  HPHDUAL  HPHWTR  HPHVRF  SPHTPTHP  FURNP_EL  PKGHP_EL  BOILP_EL  HTPHP_EL  SLFCNP_EL  FIREPLP_EL  REHEATP_EL  OTHTP_EL  FURNP_NG  PKGHP_NG  BOILP_NG  HTPHP_NG  SLFCNP_NG  FIREPLP_NG  OTHTP_NG  FURNP_FK  BOILP_FK  SLFCNP_FK  OTHTP_FK  FURNP_PR  PKGHP_PR  BOILP_PR  HTPHP_PR  SLFCNP_PR  FIREPLP_PR  OTHTP_PR  STHWP_ST  STHWP_HW  FURNP_WO  SLFCNP_WO  FIREPLP_WO  OTHTP_WO  FURNP_CO  BOILP_CO  OTHTP_CO  SOTHERMP_SO  FURNP_OT  PKGHP_OT  BOILP_OT  SLFCNP_OT  OTHTP_OT  MAINHT  NWMNHT  COOLP  ELCOOL  NGCOOL  FKCOOL  PRCOOL  STCOOL  CWCOOL  OTCOOL  RCAC  PKGCL  CHILLR  HTPMPC  ACWNWL  EVAPCL  OTCLEQ  CHWT  RCAC_EL  PKGCL_EL  CHILLR_EL  HTPMPC_EL  ACWNWL_EL  EVAPCL_EL  OTCLEQ_EL  HPCPTHP  HPCAIR  HPCGRD  HPCDUAL  HPCWTR  ACVRF  RMACPTHP  CHILLR_NG  OTCLEQ_NG  CHILLR_FK  OTCLEQ_FK  CHILLR_PR  OTCLEQ_PR  CHILLR_ST  OTCLEQ_ST  OTCLEQ_OT  DIST_CW  CWAIR  CWFNCL  CWBEAM  CWWTLP  CWOTD  CHLAIR  CHLFNCL  CHLBEAM  CHLWTLP  CHLOTD  CHLAIRCL  CHLWTRCL  CHLABSRP  RCACP_EL  PKGCP_EL  CHILP_EL  HTPCP_EL  ACWNWP_EL  EVAPP_EL  OTCLP_EL  CHILP_NG  OTCLP_NG  CHILP_FK  OTCLP_FK  CHILP_PR  OTCLP_PR  CHILP_ST  OTCLP_ST  CHWTP_CW  OTCLP_OT  MAINCL  NWMNCL  EMCS  EMCSHT  EMCSCL  EMCSLT  SMRTTHRM  HWRDHT  HWRDCL  VAV  DOAS  DCV  ECN  MAINT  ELWATR  NGWATR  FKWATR  PRWATR  STWATR  HWWATR  WOWATR  COWATR  SOWATR  OTWATR  WTHTEQ  BOOSTWT  ELCOOK  NGCOOK  FKCOOK  PRCOOK  STCOOK  HWCOOK  WOCOOK  COCOOK  OTCOOK  ELMANU  NGMANU  FKMANU  PRMANU  STMANU  HWMANU  WOMANU  COMANU  OTMANU  CAPGEN  PVC  ENGINE  FUELCL  LRGTRB  MCROTB  OTGENTECH  COGEN  NGGENR  FKGENR  PRGENR  WOGENR  COGENR  SOGENR  OTGENR  GENUSE  GENGT1MW  NGOTH  FKOTH  PROTH  STOTH  HWOTH  CWOTH  WOOTH  COOTH  SOOTH  OTOTH  PRAMTC  PRUNIT  WOAMT  WOSRC  WOEXP  WOEXPC  ENRGYPLN  SNACK  FASTFD  CAF  FDPREP  KITCHN  BREAKRM  OTFDRM  SNACKSF  FASTFDSF  CAFSF  FDPREPSF  HWTRM  LAUNDR  CONFSP  CONFSPP  MEDEQP  XRAYN  CTSCAN  MRI  LINACC  OUTHOSPPCT  OUTSURG  LABEQP  MCHEQP  POOL  HTPOOL  POOLSRC  STRLZR  RFGEQP  RFGRES  RFGCOMP  RFGWI  RFGOP  RFGCL  RFGVEN  RFGICE  RFGSTO  RFGRSN  RFGCOMPN  RFGWIN  RFGOPN  RFGCLN  RFGVNN  RFGICN  RFGSTP  WHRECOV  WHHT2  WHWT  WHOT  PCTERM  LAPTOP  TABLET  SERVER  PCTERMN  PCTRMC  LAPTPN  LAPTPC  MLTMON  MLTMNC  TABCHRG  TABLETN  SRVUNIT  SERVERN  SERVERC  SRVRCLST  DATACNTR  DCNTRSFC  TRNGRM  STDNRM  LGOFFDEV  SMOFFDEV  WBOARDS  TVVIDEO  RGSTR  LGOFFDEVN  SMOFFDEVN  WBOARDSN  TVVIDEON  RGSTRN  ATMN  LTZHRP  LZHRPC  LTOHRP  LOHRPC  LTNR24  LTNHRP  LNHRPC  LIT  FLUOR  CFLR  BULB  HALO  HID  LED  OTLT  FLUORP  CFLRP  BULBP  HALOP  HIDP   LEDP  OTLTP  SCHED  OCSN  DIM  DAYHARV  TRIM  PLGCTRL  DRLGHT  LTEXPC  PKLT  PKLTINOUT  PKLTN  WINTYP  TINT  REFL  AWN  SKYLT  DAYLTP  HDD65  CDD65  MFUSED       MFBTU      MFEXP       ELBTU      ELCNS     ELEXP      NGBTU    NGCNS    NGEXP    FKBTU  FKCNS  FKEXP  DHUSED  DHHT1  DHHT2  DHCOOL  DHWATR  DHCOOK  DHMANU  DHOTH       DHBTU     DHEXP     MFHTBTU    MFCLBTU    MFVNBTU   MFWTBTU    MFLTBTU  MFCKBTU   MFRFBTU   MFOFBTU   MFPCBTU    MFOTBTU  ELHTBTU    ELCLBTU    ELVNBTU  ELWTBTU    ELLTBTU  ELCKBTU   ELRFBTU   ELOFBTU   ELPCBTU    ELOTBTU    NGHTBTU  NGCLBTU  NGWTBTU  NGCKBTU  NGOTBTU  FKHTBTU  FKCLBTU  FKWTBTU  FKCKBTU  FKOTBTU     DHHTBTU  DHCLBTU   DHWTBTU  DHCKBTU  DHOTBTU  FINALWT  FINALWT1  FINALWT2  FINALWT3  FINALWT4  FINALWT5  FINALWT6  FINALWT7  FINALWT8  FINALWT9  FINALWT10  FINALWT11  FINALWT12  FINALWT13  FINALWT14  FINALWT15  FINALWT16  FINALWT17  FINALWT18  FINALWT19  FINALWT20  FINALWT21  FINALWT22  FINALWT23  FINALWT24  FINALWT25  FINALWT26  FINALWT27  FINALWT28  FINALWT29  FINALWT30  FINALWT31  FINALWT32  FINALWT33  FINALWT34  FINALWT35  FINALWT36  FINALWT37  FINALWT38  FINALWT39  FINALWT40  FINALWT41  FINALWT42  FINALWT43  FINALWT44  FINALWT45  FINALWT46  FINALWT47  FINALWT48  FINALWT49  FINALWT50  FINALWT51  FINALWT52  FINALWT53  FINALWT54  FINALWT55  FINALWT56  FINALWT57  FINALWT58  FINALWT59  FINALWT60  FINALWT61  FINALWT62  FINALWT63  FINALWT64  FINALWT65  FINALWT66  FINALWT67  FINALWT68  FINALWT69  FINALWT70  FINALWT71  FINALWT72  FINALWT73  FINALWT74  FINALWT75  FINALWT76  FINALWT77  FINALWT78  FINALWT79  FINALWT80  FINALWT81  FINALWT82  FINALWT83  FINALWT84  FINALWT85  FINALWT86  FINALWT87  FINALWT88  FINALWT89  FINALWT90  FINALWT91  FINALWT92  FINALWT93  FINALWT94  FINALWT95  FINALWT96  FINALWT97  FINALWT98  FINALWT99  FINALWT100  FINALWT101  FINALWT102  FINALWT103  FINALWT104  FINALWT105  FINALWT106  FINALWT107  FINALWT108  FINALWT109  FINALWT110  FINALWT111  FINALWT112  FINALWT113  FINALWT114  FINALWT115  FINALWT116  FINALWT117  FINALWT118  FINALWT119  FINALWT120  FINALWT121  FINALWT122  FINALWT123  FINALWT124  FINALWT125  FINALWT126  FINALWT127  FINALWT128  FINALWT129  FINALWT130  FINALWT131  FINALWT132  FINALWT133  FINALWT134  FINALWT135  FINALWT136  FINALWT137  FINALWT138  FINALWT139  FINALWT140  FINALWT141  FINALWT142  FINALWT143  FINALWT144  FINALWT145  FINALWT146  FINALWT147  FINALWT148  FINALWT149  FINALWT150  FINALWT151  ZSQFT  ZSQFTC  ZWLCNS  ZRFCNS  ZRFCOOL  ZRFTILT  ZBLDSHP  ZGLSSPC  ZNFLOOR  ZBASEMNT  ZFLCEILHT  ZATTIC  ZELEVTR  ZNELVTR  ZESCLTR  ZNESLTR  ZYRCONC  ZRENOV  ZRENCOS  ZRENADD  ZRENRDC  ZRENINT  ZRENRFF  ZRENWIN  ZRENHVC  ZRENLGT  ZRENPLB  ZRENELC  ZRENINS  ZRENSAF  ZRENSTR  ZRENOTH  ZDRYCL  ZRWSEAT  ZPBSEAT  ZEDSEAT  ZFDSEAT  ZHCBED  ZNRSBED  ZLODGRM  ZFACIL  ZFEDFAC  ZFACACT  ZPLANT  ZFACDST  ZFACDHW  ZFACDCW  ZFACELC  ZBLDPLT  ZGOVOWN  ZGOVTYP  ZOWNTYPE  ZNOCC  ZNOCCAT  ZOWNOCC  ZOWNOPR  ZOWNPPR  ZNWNPPR  ZNWNOPR  ZWHOPPR  ZMONUSE  ZOCCUPYP  ZLODOCCP  ZOPEN24  ZOPNMF  ZOPNWE  ZWKHRS  ZWKHRSC  ZNWKER  ZNWKERC  ZHT1  ZHT2  ZCOOL  ZWATR  ZCOOK  ZMANU  ZELUSED  ZNGUSED  ZFKUSED  ZPRUSED  ZSTUSED  ZHWUSED  ZCWUSED  ZWOUSED  ZCOUSED  ZSOUSED  ZOTUSED  ZFKTYPE  ZSOPANEL  ZHEATP  ZHTLS50  ZELHT1  ZNGHT1  ZFKHT1  ZPRHT1  ZSTHT1  ZHWHT1  ZWOHT1  ZCOHT1  ZSOHT1  ZOTHT1  ZELHT2  ZNGHT2  ZFKHT2  ZPRHT2  ZSTHT2  ZHWHT2  ZWOHT2  ZCOHT2  ZSOHT2  ZOTHT2  ZPKGHT_EL  ZBOILER_EL  ZHTPMPH_EL  ZFURNAC_EL  ZSLFCON_EL  ZFIREPLC_EL  ZREHEAT_EL  ZOTHTEQ_EL  ZPKGHT_NG  ZBOILER_NG  ZHTPMPH_NG  ZFURNAC_NG  ZSLFCON_NG  ZFIREPLC_NG  ZOTHTEQ_NG  ZBOILER_FK  ZFURNAC_FK  ZSLFCON_FK  ZOTHTEQ_FK  ZPKGHT_PR  ZBOILER_PR  ZHTPMPH_PR  ZFURNAC_PR  ZSLFCON_PR  ZFIREPLC_PR  ZOTHTEQ_PR  ZDIST_ST  ZAIRHAND_ST  ZFANCOIL_ST  ZREHEAT_ST  ZRADIATR_ST  ZRADFLR_ST  ZWTLOOP_ST  ZOTDIST_ST  ZDIST_HW  ZAIRHAND_HW  ZFANCOIL_HW  ZREHEAT_HW  ZRADIATR_HW  ZRADFLR_HW  ZWTLOOP_HW  ZOTDIST_HW  ZFURNAC_WO  ZSLFCON_WO  ZFIREPLC_WO  ZOTHTEQ_WO  ZBOILER_CO  ZFURNAC_CO  ZOTHTEQ_CO  ZSOTHERM_SO  ZPKGHT_OT  ZBOILER_OT  ZFURNAC_OT  ZSLFCON_OT  ZOTHTEQ_OT  ZBLRAIR  ZBLRDUCT  ZBLRFNCL  ZBLROTD  ZBLRRAD  ZBLRRDFL  ZBLRWTLP  ZHPHPTHP  ZHPHAIR  ZHPHGRD  ZHPHDUAL  ZHPHWTR  ZHPHVRF  ZFURNP_EL  ZPKGHP_EL  ZBOILP_EL  ZHTPHP_EL  ZSLFCNP_EL  ZFIREPLP_EL  ZREHEATP_EL  ZOTHTP_EL  ZFURNP_NG  ZPKGHP_NG  ZBOILP_NG  ZHTPHP_NG  ZSLFCNP_NG  ZFIREPLP_NG  ZOTHTP_NG  ZFURNP_FK  ZBOILP_FK  ZSLFCNP_FK  ZOTHTP_FK  ZFURNP_PR  ZPKGHP_PR  ZBOILP_PR  ZHTPHP_PR  ZSLFCNP_PR  ZFIREPLP_PR  ZOTHTP_PR  ZSTHWP_ST  ZSTHWP_HW  ZFURNP_WO  ZSLFCNP_WO  ZFIREPLP_WO  ZOTHTP_WO  ZFURNP_CO  ZBOILP_CO  ZOTHTP_CO  ZSOTHERMP_SO  ZFURNP_OT  ZPKGHP_OT  ZBOILP_OT  ZSLFCNP_OT  ZOTHTP_OT  ZMAINHT  ZNWMNHT  ZCOOLP  ZELCOOL  ZNGCOOL  ZFKCOOL  ZPRCOOL  ZSTCOOL  ZCWCOOL  ZOTCOOL  ZRCAC_EL  ZPKGCL_EL  ZCHILLR_EL  ZHTPMPC_EL  ZACWNWL_EL  ZEVAPCL_EL  ZOTCLEQ_EL  ZHPCPTHP  ZHPCAIR  ZHPCGRD  ZHPCDUAL  ZHPCWTR  ZCHILLR_NG  ZOTCLEQ_NG  ZCHILLR_FK  ZOTCLEQ_FK  ZCHILLR_PR  ZOTCLEQ_PR  ZCHILLR_ST  ZOTCLEQ_ST  ZOTCLEQ_OT  ZDIST_CW  ZCWAIR  ZCWFNCL  ZCWBEAM  ZCWWTLP  ZCWOTD  ZCHLAIR  ZCHLFNCL  ZCHLBEAM  ZCHLWTLP  ZCHLOTD  ZCHLAIRCL  ZCHLWTRCL  ZCHLABSRP  ZRCACP_EL  ZPKGCP_EL  ZCHILP_EL  ZHTPCP_EL  ZACWNWP_EL  ZEVAPP_EL  ZOTCLP_EL  ZCHILP_NG  ZOTCLP_NG  ZCHILP_FK  ZOTCLP_FK  ZCHILP_PR  ZOTCLP_PR  ZCHILP_ST  ZOTCLP_ST  ZCHWTP_CW  ZOTCLP_OT  ZMAINCL  ZNWMNCL  ZEMCS  ZEMCSHT  ZEMCSCL  ZEMCSLT  ZSMRTTHRM  ZHWRDHT  ZHWRDCL  ZVAV  ZDOAS  ZDCV  ZECN  ZMAINT  ZELWATR  ZNGWATR  ZFKWATR  ZPRWATR  ZSTWATR  ZHWWATR  ZWOWATR  ZCOWATR  ZSOWATR  ZOTWATR  ZWTHTEQ  ZBOOSTWT  ZELCOOK  ZNGCOOK  ZFKCOOK  ZPRCOOK  ZSTCOOK  ZHWCOOK  ZWOCOOK  ZCOCOOK  ZOTCOOK  ZELMANU  ZNGMANU  ZFKMANU  ZPRMANU  ZSTMANU  ZHWMANU  ZWOMANU  ZCOMANU  ZOTMANU  ZCAPGEN  ZPVC  ZENGINE  ZFUELCL  ZLRGTRB  ZMCROTB  ZOTGENTECH  ZCOGEN  ZNGGENR  ZFKGENR  ZPRGENR  ZWOGENR  ZCOGENR  ZSOGENR  ZOTGENR  ZGENUSE  ZPRAMTC  ZPRUNIT  ZWOAMT  ZWOSRC  ZWOEXP  ZWOEXPC  ZENRGYPLN  ZSNACK  ZFASTFD  ZCAF  ZFDPREP  ZKITCHN  ZBREAKRM  ZOTFDRM  ZSNACKSF  ZFASTFDSF  ZCAFSF  ZFDPREPSF  ZHWTRM  ZLAUNDR  ZCONFSP  ZCONFSPP  ZMEDEQP  ZXRAYN  ZOUTSURG  ZLABEQP  ZMCHEQP  ZPOOL  ZHTPOOL  ZPOOLSRC  ZSTRLZR  ZRFGEQP  ZRFGRES  ZRFGCOMP  ZRFGWI  ZRFGOP  ZRFGCL  ZRFGVEN  ZRFGICE  ZRFGSTO  ZRFGRSN  ZRFGCOMPN  ZRFGWIN  ZRFGOPN  ZRFGCLN  ZRFGVNN  ZRFGICN  ZRFGSTP  ZWHRECOV  ZWHHT2  ZWHWT  ZWHOT  ZPCTERM  ZLAPTOP  ZTABLET  ZSERVER  ZPCTERMN  ZPCTRMC  ZLAPTPN  ZLAPTPC  ZMLTMON  ZMLTMNC  ZTABCHRG  ZTABLETN  ZSRVUNIT  ZSERVERN  ZSERVERC  ZSRVRCLST  ZDATACNTR  ZTRNGRM  ZSTDNRM  ZLGOFFDEV  ZSMOFFDEV  ZWBOARDS  ZTVVIDEO  ZRGSTR  ZLGOFFDEVN  ZSMOFFDEVN  ZWBOARDSN  ZTVVIDEON  ZRGSTRN  ZATMN  ZLTZHRP  ZLZHRPC  ZLTOHRP  ZLOHRPC  ZLTNR24  ZLTNHRP  ZLNHRPC  ZFLUOR  ZCFLR  ZBULB  ZHALO  ZHID  ZLED  ZOTLT  ZFLUORP  ZCFLRP  ZBULBP  ZHALOP  ZHIDP  ZLEDP  ZOTLTP  ZSCHED  ZOCSN  ZDIM  ZDAYHARV  ZTRIM  ZPLGCTRL  ZDRLGHT  ZLTEXPC  ZPKLT  ZPKLTINOUT  ZPKLTN  ZWINTYP  ZTINT  ZREFL  ZAWN  ZSKYLT  ZDAYLTP  ZCTSCAN  ZDCNTRSFC  ZLINACC  ZMRI  ZOUTHOSPPCT  ZMFBTU  ZMFEXP  ZELCNS  ZELEXP  ZNGCNS  ZNGEXP  ZFKCNS  ZFKEXP  ZDHBTU  ZDHEXP
+0      1       3       5    2        3  210000      8      1      4       2       1       6       3     994      1.0        12      2     1.0     8.0     2.0     NaN       2    1.0     1.0     2.0     2.0     1.0     2.0     2.0     1.0     1.0     1.0     1.0     2.0     1.0     2.0     2.0    NaN     NaN        4     NaN     NaN     NaN     NaN      NaN    NaN     NaN     NaN    NaN      2     NaN     NaN     NaN    NaN     NaN     NaN     NaN     NaN     NaN       1     1.0        8     1       2     2.0       1     1.0     NaN     NaN     NaN      12    100.0      NaN       2      1      2     70       5    350       8    1    2     1     1     2     2        1       1       2       1       2       1       2       2       2       2       2       2     2.0      NaN      NaN  100.0     NaN      2      2      2      2      1      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2    2.0     2.0     2.0     2.0     2.0   1.0     2.0      2.0     2.0       NaN        NaN        NaN        NaN        NaN         NaN        NaN        NaN       NaN        NaN        NaN        NaN        NaN         NaN        NaN        NaN        NaN        NaN        NaN       NaN        NaN        NaN        NaN        NaN         NaN        NaN      1.0         1.0         2.0        2.0         1.0        2.0        2.0        2.0      NaN         NaN         NaN        NaN         NaN        NaN        NaN        NaN        NaN        NaN         NaN        NaN        NaN        NaN        NaN         NaN       NaN        NaN        NaN        NaN        NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN     NaN      NaN      NaN     NaN     NaN      NaN      NaN     NaN      NaN     NaN     NaN      NaN     NaN     NaN       NaN       NaN       NaN       NaN       NaN        NaN         NaN         NaN       NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN        NaN       NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN     100.0       NaN       NaN        NaN         NaN       NaN       NaN       NaN       NaN          NaN       NaN       NaN       NaN        NaN       NaN    27.0     NaN  100.0       1       2       2       2       2       2       2   2.0    2.0     1.0     2.0     2.0     2.0     2.0   2.0      2.0       2.0        1.0        2.0        2.0        2.0        2.0      NaN     NaN     NaN      NaN     NaN    NaN       NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN      NaN    NaN     NaN     NaN     NaN    NaN     1.0      2.0      2.0      2.0     2.0       2.0       1.0       2.0       NaN       NaN     100.0       NaN        NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN     3.0     2.0   1.0     1.0     1.0     1.0       NaN     NaN     NaN  1.0   2.0  2.0  1.0    1.0       2       2       2       2       1       2       2       2       2       2     1.0      NaN       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       1  2.0     1.0     2.0     2.0     2.0        2.0    2.0       2       1       2       2       2       2       2     1.0       1.0      2      2      2      2      2      2      2      2      2      2     NaN     NaN    NaN    NaN    NaN     NaN       2.0    NaN     NaN  NaN     NaN     NaN      NaN     NaN      NaN       NaN    NaN       NaN    2.0     NaN     NaN      NaN     NaN    NaN     NaN  NaN     NaN         NaN      NaN     2.0     NaN   NaN     NaN      NaN     2.0     1.0     1.0      2.0    2.0    2.0    2.0     1.0     1.0     2.0    30.0       NaN     NaN     NaN     NaN     3.0     1.0     NaN      NaN    NaN   NaN   NaN     1.0     1.0     2.0     1.0    250.0     7.0    50.0     5.0     1.0     2.0      NaN      NaN      1.0    100.0      3.0       2.0       1.0       4.0     2.0     2.0       1.0       2.0      1.0      1.0    2.0       70.0        NaN       4.0     120.0     NaN   NaN     NaN     NaN    90.0     4.0     NaN    10.0     1.0  1.0    1.0   2.0   1.0   2.0  2.0  1.0   2.0    40.0    NaN    1.0    NaN   NaN   60.0    NaN    1.0   1.0  1.0      1.0   1.0      2.0     2.0     2.0   1.0        2.0   30.0       2   2.0   2.0  2.0    1.0     0.0   4463   1759       1  29727152.0  1072600.0  18708970.0  5483285.0  775800.0        NaN      NaN      NaN  49435.0  360.0  746.0       1      1      2       2       1       2       2      2  10968747.0  296054.0  10592748.0  1823745.0  8436752.0  375999.0  1623736.0      0.0  305105.0  676685.0  995161.0  4897221.0      0.0  1823745.0  8436752.0      0.0  1623736.0      0.0  305105.0  676685.0  995161.0  4847786.0        NaN      NaN      NaN      NaN      NaN      0.0      0.0      0.0      0.0  49435.0  10592748.0      0.0  375999.0      0.0      0.0     2.17      2.17      2.17      2.17      2.17      2.17      2.17      2.17      2.17      2.17       2.17       2.18       2.20       2.17       2.17       2.17       2.18       2.16       2.19       2.17       2.18       2.19       2.19       3.29       2.17       2.14       2.17       2.17       2.19       2.19       2.16       2.17       2.17       2.17       2.16       2.17       2.17       2.17       2.17       2.16       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.17       2.16       2.17       2.17       2.17       2.15       2.19       2.13       2.17       2.17       2.17       2.14       3.27        2.15        2.21        2.17        2.17        2.16        2.15        2.18        2.17        2.17        2.18        2.17        2.18        2.17        2.17        2.17        2.17        2.18        2.16        2.17        2.17        2.16        2.18        2.17        2.19        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.19        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17        2.17      1       0       0       0        0        0        0        0        0         0          0       0        0        0        0        9        0       0        0        0        0        0        0        0        0        0        0        0        0        0        0        0       9        9        9        9        9       9        9        9       0        9        9       9        9        9        9        9        9        0        0         0      0        0        0        0        0        9        9        9        0         0         9        0       0       0       0        0       1        0     0     0      0      0      0      0        0        0        0        0        0        0        0        0        0        0        0        0         9       0        9       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0          9           9           9           9           9            9           9           9          9           9           9           9           9            9           9           9           9           9           9          9           9           9           9           9            9           9         0            0            0           0            0           0           0           0         9            9            9           9            9           9           9           9           9           9            9           9           9           9           9            9          9           9           9           9           9        9         9         9        9        9         9         9         9        9        9         9        9        9          9          9          9          9           9            9            9          9          9          9          9          9           9            9          9          9          9           9          9          9          9          9          9           9            9          9          0          9          9           9            9          9          9          9          9             9          9          9          9           9          9        0        9       0        0        0        0        0        0        0        0         0          0           0           0           0           0           0         9        9        9         9        9           9           9           9           9           9           9           9           9           9         9       9        9        9        9       9        0         0         0         0        0          0          0          0          9          9          0          9           9          9          9          9          9          9          9          9          9          9          9          9          9        0        0      0        0        0        0          9        9        9     0      0     0     0       0        0        0        0        0        0        0        0        0        0        0        0         9        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0     0        0        0        0        0           0       0        0        0        0        0        0        0        0        0        9        9       9       9       9        9          0       9        9     9        9        9         9        9         9          9       9          9       0        9        9         9        9       9         9        0        9      9        9         9        0        0        0         0       0       0       0        0        0        0        0          9        9        9        9        0        0        9         9       9      9      9        0        0        0        0         1        0        1        0        0        0         9         9         0         1         0          0          0        0        0          0          0         0         0       0           0           9          0          0        9      9        9        9        1        0        9        1        0       0      0      0      0     0     0      0        0       9       0       9      9      0       9       0      0     0         0      0         0        0        0      0           0       0        0      0      0     0       0        0        9          0        9     9            9       0       0       0       0       9       9       1       1       0       0
+1      2       4       9    2        4   28000      5      1      6       1       1      11       3       5      1.0         8      2     1.0     1.0     2.0     NaN       6    1.0     1.0     2.0     2.0     1.0     2.0     2.0     1.0     1.0     1.0     2.0     2.0     1.0     2.0     2.0    NaN     NaN        6     NaN     NaN     NaN     NaN      NaN    NaN     NaN     NaN    NaN      1     2.0     4.0     NaN    2.0     NaN     NaN     NaN     NaN     NaN       2     NaN        2     2       3     2.0       1     1.0     NaN     NaN     NaN      12    100.0      NaN       2      1      2     45       3     12       4    1    1     1     1     2     2        1       1       1       2       2       2       2       2       2       2       1       2     NaN      1.0      2.0   80.0     NaN      2      1      2      2      2      2      2      2      2      2      1      2      2      2      2      2      2      2      2      2    2.0     2.0     2.0     2.0     1.0   2.0     2.0      2.0     2.0       2.0        2.0        1.0        2.0        2.0         2.0        2.0        2.0       2.0        2.0        1.0        2.0        2.0         2.0        2.0        NaN        NaN        NaN        NaN       NaN        NaN        NaN        NaN        NaN         NaN        NaN      NaN         NaN         NaN        NaN         NaN        NaN        NaN        NaN      NaN         NaN         NaN        NaN         NaN        NaN        NaN        NaN        NaN        NaN         NaN        NaN        NaN        NaN        NaN         NaN       NaN        NaN        NaN        NaN        NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN     NaN      NaN      NaN     NaN     NaN      NaN      NaN     NaN      1.0     NaN     NaN      NaN     NaN     NaN       NaN       NaN       NaN       NaN       5.0        NaN         NaN         NaN       NaN       NaN       NaN       NaN     100.0        NaN         NaN       NaN       NaN       NaN        NaN       NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN       NaN          NaN       NaN       NaN       NaN        NaN       NaN    12.0     1.0  100.0       1       2       2       2       2       2       2   2.0    2.0     2.0     1.0     2.0     2.0     2.0   2.0      2.0       2.0        2.0        1.0        2.0        2.0        2.0      NaN     NaN     NaN      NaN     NaN    NaN       NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN      NaN    NaN     NaN     NaN     NaN    NaN     NaN      NaN      NaN      NaN     NaN       NaN       NaN       NaN       NaN       NaN       NaN     100.0        NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN     4.0     NaN   1.0     1.0     1.0     1.0       NaN     NaN     NaN  2.0   2.0  2.0  2.0    1.0       2       1       2       2       2       2       2       2       2       2     1.0      NaN       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       1  1.0     2.0     2.0     2.0     2.0        2.0    NaN       2       2       2       2       2       1       2     NaN       NaN      2      2      2      2      2      2      2      2      2      2     NaN     NaN    NaN    NaN    NaN     NaN       2.0    NaN     NaN  NaN     NaN     NaN      NaN     NaN      NaN       NaN    NaN       NaN    2.0     NaN     NaN      NaN     2.0    NaN     NaN  NaN     NaN         NaN      NaN     2.0     NaN   NaN     NaN      NaN     2.0     1.0     1.0      2.0    2.0    2.0    1.0     2.0     2.0     2.0     8.0       NaN     NaN     NaN     8.0     NaN     NaN     NaN      NaN    NaN   NaN   NaN     1.0     1.0     1.0     1.0     20.0     4.0     5.0     2.0     1.0     3.0      1.0    100.0      1.0      1.0      1.0       1.0       2.0       NaN     2.0     2.0       1.0       1.0      2.0      1.0    2.0        2.0       10.0       NaN      40.0     NaN   NaN     NaN     NaN   100.0     4.0     NaN    10.0     1.0  1.0    1.0   2.0   2.0   2.0  2.0  1.0   2.0    20.0    NaN    NaN    NaN   NaN   80.0    NaN    1.0   1.0  2.0      2.0   2.0      2.0     2.0     1.0   1.0        2.0   40.0       1   1.0   1.0  2.0    1.0    15.0   2424    189       1   1730655.0    82030.0   1528667.0   448027.0   77933.0   201988.0   1946.0   4097.0      NaN    NaN    NaN       2      2      2       2       2       2       2      2         NaN       NaN    199383.0    43482.0   566658.0    5281.0   167247.0      0.0  226868.0   93334.0   55708.0   372694.0   2676.0    43482.0   566658.0      0.0   167247.0      0.0  226868.0   93334.0   55708.0   372694.0   196707.0      0.0   5281.0      0.0      0.0      NaN      NaN      NaN      NaN      NaN         NaN      NaN       NaN      NaN      NaN   312.77    312.76    312.77    312.77    312.79    312.76    312.76    312.77    312.73    312.74     312.82     313.80     312.85     312.70     313.12     313.26     312.78     312.76     312.76     312.77     312.78     312.73     312.78     312.73     312.81     312.89     307.02     313.17     312.76     312.77     312.75     312.78     312.77     312.79     312.77     312.76     312.79     312.78     312.78     311.67     305.47     301.50     312.80     317.08     310.51     301.09     312.75     312.78     312.75     317.92     310.71       0.00     312.77     312.77     312.76     312.91     312.76     312.74     312.76     312.76     307.81     312.75     311.83     306.23     312.77     312.74     312.78     312.92     312.73     312.78     312.60     312.79     313.82     312.77     312.77     312.77     312.77     312.77     312.78     312.77     312.80     312.78     312.77     312.76     312.75     312.80     312.75     314.54     312.47     312.57     312.66     311.70     312.51     312.76     312.78     312.76     312.76     312.89     312.75     312.80      312.75      312.41      320.59      311.65      312.69      312.79      312.77      312.77      312.77      312.76      312.76      312.78      312.77      312.78      312.76      312.28      328.95      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      312.77      1       0       0       0        0        0        0        0        0         0          0       0        0        0        0        9        0       0        0        0        0        0        0        0        0        0        0        0        0        0        0        0       9        9        9        9        9       9        9        9       0        0        0       0        9        9        9        9        9        0        9         0      0        0        0        0        0        9        9        9        0         0         9        0       0       0       0        0       1        1     0     0      0      0      0      0        0        0        0        0        0        0        0        0        0        0        0        9         0       0        9       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0          0           0           0           0           0            0           0           0          0           0           0           0           0            0           0           9           9           9           9          9           9           9           9           9            9           9         9            9            9           9            9           9           9           9         9            9            9           9            9           9           9           9           9           9            9           9           9           9           9            9          9           9           9           9           9        9         9         9        9        9         9         9         1        9        9         9        9        9          9          9          9          1           9            9            9          9          9          9          9          1           9            9          9          9          9           9          9          9          9          9          9           9            9          9          9          9          9           9            9          9          9          9          9             9          9          9          9           9          9        0        0       0        0        0        0        0        0        0        0         0          0           0           0           0           0           0         9        9        9         9        9           9           9           9           9           9           9           9           9           9         9       9        9        9        9       9        9         9         9         9        9          9          9          9          9          9          9          0           9          9          9          9          9          9          9          9          9          9          9          9          9        0        9      0        0        0        0          9        9        9     0      0     0     1       0        0        0        0        0        0        0        0        0        0        0        0         9        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0     0        0        0        0        0           0       9        0        0        0        0        0        0        0        9        9        9       9       9       9        9          0       9        9     9        9        9         9        9         9          9       9          9       0        9        9         9        0       9         9        0        9      9        9         9        1        0        0         0       0       0       0        0        0        0        0          9        9        9        0        9        9        9         9       9      9      9        0        0        0        0         1        1        1        1        0        0         0         0         1         1         1          0          0        0        0          0          0         0         0       0           0           0          9          0        9      9        9        9        0        0        9        0        0       0      0      0      0     0     0      0        0       9       9       9      9      0       9       0      0     0         0      0         0        0        0      0           0       0        0      0      0     0       0        0        9          9        9     9            9       0       0       0       0       0       0       9       9       9       9
+2      3       3       5    8        4    2100      2      1      4       2       3       2       3       1      NaN         9      1     NaN     NaN     NaN     NaN       6    1.0     2.0     2.0     2.0     2.0     2.0     2.0     1.0     2.0     2.0     2.0     2.0     2.0     2.0     2.0    NaN     NaN       18     NaN     NaN     NaN     NaN      NaN    NaN     NaN     NaN    NaN      2     NaN     NaN     NaN    NaN     NaN     NaN     NaN     NaN     NaN       2     NaN        3     1       2     2.0       1     1.0     NaN     NaN     NaN      12    100.0      NaN       2      1      2     48       3      6       3    1    2     1     1     2     2        1       1       2       2       2       2       2       2       2       2       2       2     NaN      NaN      NaN  100.0     NaN      1      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2    1.0     2.0     2.0     2.0     2.0   2.0     2.0      2.0     2.0       1.0        2.0        2.0        2.0        2.0         2.0        2.0        2.0       NaN        NaN        NaN        NaN        NaN         NaN        NaN        NaN        NaN        NaN        NaN       NaN        NaN        NaN        NaN        NaN         NaN        NaN      NaN         NaN         NaN        NaN         NaN        NaN        NaN        NaN      NaN         NaN         NaN        NaN         NaN        NaN        NaN        NaN        NaN        NaN         NaN        NaN        NaN        NaN        NaN         NaN       NaN        NaN        NaN        NaN        NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN     NaN      NaN      NaN     NaN     NaN      NaN      NaN     1.0      NaN     1.0     2.0      2.0     2.0     1.0       NaN       NaN     100.0       NaN       NaN        NaN         NaN         NaN       NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN        NaN       NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN       NaN          NaN       NaN       NaN       NaN        NaN       NaN     2.0     1.0  100.0       1       2       2       2       2       2       2   2.0    1.0     2.0     2.0     2.0     2.0     2.0   2.0      2.0       1.0        2.0        2.0        2.0        2.0        2.0      NaN     NaN     NaN      NaN     NaN    NaN       NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN      NaN    NaN     NaN     NaN     NaN    NaN     NaN      NaN      NaN      NaN     NaN       NaN       NaN       NaN       NaN     100.0       NaN       NaN        NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN     2.0     NaN   2.0     NaN     NaN     NaN       2.0     2.0     2.0  2.0   2.0  1.0  1.0    2.0       1       2       2       2       2       2       2       2       2       2     1.0      NaN       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2  NaN     NaN     NaN     NaN     NaN        NaN    NaN       2       2       2       2       2       2       2     NaN       NaN      2      2      2      2      2      2      2      2      2      2     NaN     NaN    NaN    NaN    NaN     NaN       2.0    NaN     NaN  NaN     NaN     NaN      NaN     NaN      NaN       NaN    NaN       NaN    2.0     NaN     NaN      NaN     1.0    5.0     2.0  2.0     2.0         NaN      1.0     1.0     NaN   NaN     NaN      NaN     1.0     1.0     2.0      1.0    2.0    2.0    2.0     2.0     2.0     2.0     NaN       3.0     NaN     NaN     NaN     NaN     NaN     NaN      NaN    NaN   NaN   NaN     1.0     1.0     1.0     1.0      2.0     1.0     5.0     2.0     2.0     NaN      1.0      2.0      1.0      1.0      1.0       2.0       2.0       NaN     2.0     2.0       2.0       1.0      2.0      1.0    1.0        NaN        3.0       NaN       2.0     2.0   NaN     NaN     NaN   100.0     4.0     NaN     0.0     5.0  1.0    1.0   1.0   2.0   2.0  2.0  1.0   2.0    75.0   20.0    NaN    NaN   NaN    5.0    NaN    2.0   2.0  2.0      2.0   2.0      2.0     2.0     4.0   1.0        2.0   10.0       2   2.0   2.0  1.0    2.0    40.0   3218   2403       1     52387.0     3472.0     52387.0    15354.0    3472.0        NaN      NaN      NaN      NaN    NaN    NaN       2      2      2       2       2       2       2      2         NaN       NaN     11021.0     2161.0     2199.0     799.0    17750.0      0.0    2429.0    2848.0    3651.0     9529.0  11021.0     2161.0     2199.0    799.0    17750.0      0.0    2429.0    2848.0    3651.0     9529.0        NaN      NaN      NaN      NaN      NaN      NaN      NaN      NaN      NaN      NaN         NaN      NaN       NaN      NaN      NaN  1218.03   1218.42   1215.66   1213.58   1209.81   1217.06   1215.97   1219.33   1217.15   1219.75    1219.73    1220.76    1218.62    1217.62    1213.71    1217.06    1220.80    1226.78    1223.54    1214.45    1216.09    1219.87    1218.23    1218.64    1822.88    1223.72    1211.10    1216.23    1220.23    1219.31    1223.38    1215.78    1216.31    1223.33    1224.33    1220.69    1218.01    1211.54    1218.46    1211.42    1217.99    1218.64    1217.53    1218.76    1218.89    1219.62    1217.32    1219.96    1216.80    1219.98    1218.39    1217.60    1219.12    1218.04    1220.01    1215.71    1218.41    1214.45    1215.96    1217.40    1214.67    1216.35    1217.05    1217.71    1217.81    1215.66    1216.94    1220.52    1218.68    1217.32    1216.95    1220.09    1222.19    1216.14    1218.03    1218.03    1218.03    1219.48    1222.96    1220.50    1223.06    1216.99    1218.58    1217.93    1218.11    1219.21    1218.95    1214.33    1218.03    1217.50    1218.93    1218.81    1212.52    1212.63    1210.04    1219.39    1218.03    1218.36    1217.87    1218.23     1828.08     1220.70     1228.14     1219.74     1215.71     1217.70     1224.79     1224.18     1224.17     1214.84     1217.65     1212.81     1218.03     1217.82     1219.83     1221.87     1222.26     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03     1218.03      1       0       0       0        0        0        0        0        0         9          0       0        9        9        9        9        0       0        0        0        0        0        0        0        0        0        0        0        0        0        0        0       9        9        9        9        9       9        9        9       0        9        9       9        9        9        9        9        9        0        9         0      0        0        0        0        0        9        9        9        0         0         9        0       0       0       0        0       0        0     0     0      0      0      0      0        0        0        0        0        0        0        0        0        0        0        0        9         9       0        9       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0          0           0           0           0           0            0           0           0          9           9           9           9           9            9           9           9           9           9           9          9           9           9           9           9            9           9         9            9            9           9            9           9           9           9         9            9            9           9            9           9           9           9           9           9            9           9           9           9           9            9          9           9           9           9           9        9         9         9        9        9         9         9         9        0        0         0        0        0          9          0          9          9           9            9            9          9          9          9          9          9           9            9          9          9          9           9          9          9          9          9          9           9            9          9          9          9          9           9            9          9          9          9          9             9          9          9          9           9          9        0        0       0        0        0        0        0        0        0        0         0          0           0           0           0           0           0         9        9        9         9        9           9           9           9           9           9           9           9           9           9         9       9        9        9        9       9        9         9         9         9        9          9          9          9          9          0          9          9           9          9          9          9          9          9          9          9          9          9          9          9          9        0        9      0        9        9        9          0        0        0     0      0     0     0       0        0        0        0        0        0        0        0        0        0        0        0         9        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0     9        9        9        9        9           9       9        0        0        0        0        0        0        0        9        9        9       9       9       9        9          0       9        9     9        9        9         9        9         9          9       9          9       0        9        9         9        0       0         0        0        9      9        9         9        0        0        0         0       0       0       0        0        0        0        9          0        9        9        9        9        9        9         9       9      9      9        0        0        0        0         0        0        0        0        0        9         0         0         0         0         0          0          0        0        0          0          0         0         0       0           9           0          9          0        0      9        9        9        0        0        9        0        0       0      0      0      0     0     0      0        0       0       9       9      9      0       9       0      0     0         0      0         0        0        0      0           0       0        0      0      0     0       0        0        0          9        0     0            9       0       0       0       0       9       9       9       9       9       9
+3      4       3       7    5        5  240000      8      2      6       1       1       2       2       1      NaN        25      2     NaN     NaN     NaN     NaN       9    NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN    NaN     NaN        9     NaN     NaN     NaN     NaN      NaN    NaN     NaN     NaN    NaN      2     NaN     NaN     NaN    NaN     NaN     NaN     NaN     NaN     NaN       2     NaN        1     2       3     2.0       1     1.0     NaN     NaN     NaN      12      NaN      NaN       2      1      2     55       4     34       5    1    1     1     1     2     2        1       1       1       2       1       2       2       2       2       2       2       2     NaN      NaN      NaN    5.0     NaN      2      1      2      2      2      2      2      2      2      2      1      2      2      2      2      2      2      2      2      2    1.0     2.0     1.0     1.0     2.0   2.0     2.0      2.0     2.0       2.0        2.0        2.0        2.0        1.0         2.0        2.0        2.0       1.0        1.0        2.0        2.0        2.0         2.0        2.0        NaN        NaN        NaN        NaN       NaN        NaN        NaN        NaN        NaN         NaN        NaN      NaN         NaN         NaN        NaN         NaN        NaN        NaN        NaN      NaN         NaN         NaN        NaN         NaN        NaN        NaN        NaN        NaN        NaN         NaN        NaN        NaN        NaN        NaN         NaN       NaN        NaN        NaN        NaN        NaN         1.0          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN     1.0      2.0      2.0     2.0     2.0      2.0      2.0     NaN      NaN     NaN     NaN      NaN     NaN     NaN       2.0       NaN       NaN       NaN       NaN        5.0         NaN         NaN       NaN       NaN      10.0      90.0       NaN        NaN         NaN       NaN       NaN       NaN        NaN       NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN       NaN          NaN       NaN       NaN       NaN        NaN       NaN    11.0     NaN   45.0       1       2       2       2       2       2       2   1.0    1.0     2.0     2.0     2.0     2.0     2.0   2.0      1.0       1.0        2.0        2.0        2.0        2.0        2.0      NaN     NaN     NaN      NaN     NaN    5.0       NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN      NaN    NaN     NaN     NaN     NaN    NaN     NaN      NaN      NaN      NaN     NaN       NaN       NaN       NaN      15.0      85.0       NaN       NaN        NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN     2.0     NaN   2.0     NaN     NaN     NaN       2.0     1.0     1.0  1.0   2.0  2.0  2.0    1.0       2       1       2       2       2       2       2       2       2       2     2.0      NaN       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       1  2.0     1.0     2.0     2.0     2.0        2.0    2.0       1       2       2       2       2       2       2     1.0       NaN      2      2      1      2      2      2      2      2      2      2     1.0     1.0    NaN    NaN    NaN     NaN       2.0    NaN     NaN  NaN     NaN     NaN      NaN     NaN      NaN       NaN    NaN       NaN    2.0     NaN     NaN      NaN     NaN    NaN     NaN  NaN     NaN         NaN      NaN     NaN     2.0   NaN     NaN      NaN     NaN     1.0     1.0      2.0    2.0    2.0    2.0     2.0     2.0     2.0     5.0       NaN     NaN     NaN     NaN     NaN     NaN     NaN      NaN    NaN   NaN   NaN     1.0     1.0     2.0     1.0     15.0     3.0    10.0     3.0     1.0     3.0      NaN      NaN      1.0      1.0      1.0       2.0       2.0       NaN     2.0     2.0       2.0       1.0      2.0      1.0    2.0        NaN        9.0       NaN       1.0     NaN   NaN     NaN     NaN    95.0     4.0     NaN    10.0     1.0  1.0    2.0   2.0   2.0   2.0  2.0  1.0   2.0     NaN    NaN    NaN    NaN   NaN  100.0    NaN    2.0   1.0  2.0      2.0   2.0      2.0     2.0     2.0   1.0        2.0  450.0       2   1.0   2.0  2.0    2.0     5.0   1045   3041       1   3185775.0    51059.0   1974255.0   578621.0   41197.0  1211520.0  11672.0   9862.0      NaN    NaN    NaN       2      2      2       2       2       2       2      2         NaN       NaN   1135594.0   270861.0   174744.0   20734.0  1151578.0      0.0   11998.0    3953.0   24723.0   391590.0  14998.0   270861.0   174744.0      0.0  1151578.0      0.0   11998.0    3953.0   24723.0   321400.0  1120596.0      0.0  20734.0      0.0  70190.0      NaN      NaN      NaN      NaN      NaN         NaN      NaN       NaN      NaN      NaN    69.60     69.39     69.59     69.59     69.24     69.38     70.19     70.01     69.79     70.35      69.95      69.59      69.60      69.60      69.61      69.59      69.60      69.62      69.57      69.59      69.59      69.61      69.60      69.50      69.59      69.72      69.60      69.59      69.88      69.93      69.13      69.20      69.46       0.00      69.41      69.64      70.24      69.47      70.86      64.01      69.59      69.60      69.60      69.59      69.60      69.60      69.60      69.90      68.36      69.14      69.60      69.60      69.60      69.60      69.60      69.60      69.60      69.29      69.59      69.14      69.59      69.08      69.60      68.34      69.60      69.36      69.59      69.60      69.60      69.60      69.10      69.60      69.60      70.05      69.60      69.60      69.60      69.80      69.60      69.89      68.07      69.35      70.19      70.29      69.16      69.27      69.26      69.60      69.59      69.59      69.59      69.60      69.60      69.59      69.67      69.59      69.60      69.58      69.59      69.66       69.60       69.74       69.59       69.60       69.68       69.49       70.44       70.13       69.48      104.11       69.68       69.50       69.60       69.84       68.54       68.26       69.59       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60       69.60      0       0       0       0        0        0        0        0        0         9          0       0        9        9        9        9        0       9        9        9        9        9        9        9        9        9        9        9        9        9        9        9       9        9        9        9        9       9        9        9       0        9        9       9        9        9        9        9        9        0        9         0      0        0        0        0        0        9        9        9        0         9         9        0       0       0       0        0       0        0     0     0      0      0      0      0        0        0        0        0        0        0        0        0        0        0        0        9         9       0        9       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0          0           0           0           0           0            0           0           0          0           0           0           0           0            0           0           9           9           9           9          9           9           9           9           9            9           9         9            9            9           9            9           9           9           9         9            9            9           9            9           9           9           9           9           9            9           9           9           9           9            9          9           9           9           9           9        0         0         0        0        0         0         0         9        9        9         9        9        9          9          9          9          9           0            9            9          9          9          0          0          9           9            9          9          9          9           9          9          9          9          9          9           9            9          9          9          9          9           9            9          9          9          9          9             9          9          9          9           9          9        0        9       0        0        0        0        0        0        0        0         0          0           0           0           0           0           0         9        9        9         9        9           9           9           9           9           9           9           9           9           9         9       9        9        9        9       9        9         9         9         9        9          9          9          9          0          0          9          9           9          9          9          9          9          9          9          9          9          9          9          9          9        0        9      0        9        9        9          0        0        0     0      0     0     0       0        0        0        0        0        0        0        0        0        0        0        0         9        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0     1        1        1        1        1           1       1        1        1        1        1        1        1        1        1        0        0       9       9       9        9          0       9        9     9        9        9         9        9         9          9       9          9       0        9        9         9        9       9         9        9        0      9        9         9        9        0        0         0       0       0       0        0        0        0        0          9        9        9        9        9        9        9         9       9      9      9        0        0        0        0         0        0        0        0        0        0         9         9         0         1         0          0          0        0        0          0          0         0         0       0           9           0          9          0        9      9        9        9        0        0        9        0        0       0      0      0      0     0     0      0        9       9       9       9      9      0       9       0      0     0         0      0         0        0        0      0           0       0        0      0      0     0       0        0        9          9        9     9            9       0       0       0       0       1       1       9       9       9       9
+4      5       1       2    5        3  295000      8      3      6       2       1       1       1       1      NaN        30      2     NaN     NaN     NaN     NaN       4    2.0     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN     NaN    NaN     NaN        9     NaN     NaN     NaN     NaN      NaN    NaN     NaN     NaN    NaN      2     NaN     NaN     NaN    NaN     NaN     NaN     NaN     NaN     NaN       2     NaN        1     2       3     2.0       1     1.0     NaN     NaN     NaN      12      NaN      NaN       2      1      1     80       5     10       4    1    2     2     1     2     2        1       1       1       2       2       2       2       2       2       2       2       2     NaN      NaN      NaN  100.0     NaN      2      1      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2      2    1.0     2.0     2.0     2.0     2.0   2.0     2.0      2.0     2.0       NaN        NaN        NaN        NaN        NaN         NaN        NaN        NaN       1.0        2.0        2.0        2.0        2.0         2.0        2.0        NaN        NaN        NaN        NaN       NaN        NaN        NaN        NaN        NaN         NaN        NaN      NaN         NaN         NaN        NaN         NaN        NaN        NaN        NaN      NaN         NaN         NaN        NaN         NaN        NaN        NaN        NaN        NaN        NaN         NaN        NaN        NaN        NaN        NaN         NaN       NaN        NaN        NaN        NaN        NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN         NaN          NaN          NaN         NaN          NaN          NaN         NaN     NaN      NaN      NaN     NaN     NaN      NaN      NaN     NaN      NaN     NaN     NaN      NaN     NaN     NaN       NaN       NaN       NaN       NaN       NaN        NaN         NaN         NaN       NaN       NaN     100.0       NaN       NaN        NaN         NaN       NaN       NaN       NaN        NaN       NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN       NaN        NaN         NaN       NaN       NaN       NaN       NaN          NaN       NaN       NaN       NaN        NaN       NaN    10.0     2.0    NaN       2       2       2       2       2       2       2   NaN    NaN     NaN     NaN     NaN     NaN     NaN   NaN      NaN       NaN        NaN        NaN        NaN        NaN        NaN      NaN     NaN     NaN      NaN     NaN    NaN       NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN        NaN      NaN    NaN     NaN     NaN     NaN    NaN     NaN      NaN      NaN      NaN     NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN        NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN       NaN     NaN     NaN   2.0     NaN     NaN     NaN       2.0     2.0     NaN  2.0   2.0  2.0  NaN    1.0       1       2       2       2       2       2       2       2       2       2     1.0      NaN       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2       2  NaN     NaN     NaN     NaN     NaN        NaN    NaN       2       2       2       2       2       2       2     NaN       NaN      2      2      2      2      2      2      2      2      2      2     NaN     NaN    NaN    NaN    NaN     NaN       2.0    NaN     NaN  NaN     NaN     NaN      NaN     NaN      NaN       NaN    NaN       NaN    2.0     NaN     NaN      NaN     NaN    NaN     NaN  NaN     NaN         NaN      NaN     NaN     2.0   NaN     NaN      NaN     NaN     1.0     1.0      2.0    2.0    2.0    2.0     1.0     2.0     2.0     2.0       NaN     NaN     NaN     NaN     2.0     NaN     NaN      NaN    NaN   NaN   NaN     1.0     2.0     2.0     2.0     10.0     3.0     NaN     NaN     1.0     NaN      NaN      NaN      NaN      NaN      NaN       2.0       2.0       NaN     2.0     2.0       2.0       1.0      2.0      2.0    2.0        NaN       12.0       NaN       NaN     NaN   NaN     NaN     NaN   100.0     4.0     NaN    60.0     3.0  1.0    1.0   2.0   2.0   2.0  2.0  2.0   2.0   100.0    NaN    NaN    NaN   NaN    NaN    NaN    2.0   2.0  2.0      2.0   2.0      2.0     2.0     4.0   1.0        2.0   40.0       2   1.0   2.0  2.0    1.0     0.0   5076   1316       1   4677009.0    68985.0   1290564.0   378243.0   33688.0  3386445.0  32625.0  35297.0      NaN    NaN    NaN       2      2      2       2       2       2       2      2         NaN       NaN   3386445.0        0.0    40185.0    1125.0   683259.0      0.0    3224.0     854.0    2890.0   559027.0      0.0        0.0    40185.0   1125.0   683259.0      0.0    3224.0     854.0    2890.0   559027.0  3386445.0      0.0      0.0      0.0      0.0      NaN      NaN      NaN      NaN      NaN         NaN      NaN       NaN      NaN      NaN   199.58    198.99    199.58    199.55    198.55    199.05    201.28    200.79    300.40    201.73     200.58     199.58     199.59     199.59     199.57     199.59     199.59     199.14     199.62     199.55     199.58     199.19     199.60     199.57     199.61     199.15     199.56     199.60     200.42     200.39     198.22     198.56     199.21     200.27     198.23     199.60     201.51     199.24     203.20     183.53     199.59     199.58     199.58     199.57     199.58     199.57     199.58     200.45     196.23     198.28     199.58     199.59     199.58     199.57     199.58     199.59     199.58     198.75     199.58     198.24     199.57     198.12     199.58     195.98     199.57     198.94     199.58     199.60     199.58     199.59     198.18     199.58     199.57     200.89     199.58     199.58     199.58     200.17     199.58     200.42     195.19     199.04     201.28     201.51       0.00     198.60     198.59     199.59     199.57     199.58     199.58     199.58     199.58     199.81     199.55     199.58     199.59     199.70     199.59     199.59      199.56      199.86      199.62      199.59      199.81      199.20      201.90      201.02      199.17      198.99      200.23      199.57      199.58      200.28      196.55      195.78      199.60      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      199.58      0       0       0       0        0        0        0        0        0         9          0       0        9        9        9        9        0       0        9        9        9        9        9        9        9        9        9        9        9        9        9        9       9        9        9        9        9       9        9        9       0        9        9       9        9        9        9        9        9        0        9         0      0        0        0        0        0        9        9        9        0         9         9        0       0       1       1        0       1        0     0     0      0      0      0      0        0        0        0        0        0        0        0        0        0        0        0        9         9       0        9       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0       0          9           9           9           9           9            9           9           9          0           0           0           0           0            0           0           9           9           9           9          9           9           9           9           9            9           9         9            9            9           9            9           9           9           9         9            9            9           9            9           9           9           9           9           9            9           9           9           9           9            9          9           9           9           9           9        9         9         9        9        9         9         9         9        9        9         9        9        9          9          9          9          9           9            9            9          9          9          0          9          9           9            9          9          9          9           9          9          9          9          9          9           9            9          9          9          9          9           9            9          9          9          9          9             9          9          9          9           9          9        0        0       9        0        0        0        0        0        0        0         9          9           9           9           9           9           9         9        9        9         9        9           9           9           9           9           9           9           9           9           9         9       9        9        9        9       9        9         9         9         9        9          9          9          9          9          9          9          9           9          9          9          9          9          9          9          9          9          9          9          9          9        9        9      0        9        9        9          0        0        9     0      0     0     9       0        0        0        0        0        0        0        0        0        0        0        0         9        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0     9        9        9        9        9           9       9        0        0        0        0        0        0        0        9        9        9       9       9       9        9          0       9        9     9        9        9         9        9         9          9       9          9       0        9        9         9        9       9         9        9        0      9        9         9        9        0        0         0       0       0       0        0        0        0        0          9        9        9        9        0        9        9         9       9      9      9        0        0        0        0         1        0        9        9        1        9         9         9         9         9         9          0          0        0        0          0          0         0         0       0           9           0          9          9        9      9        9        9        0        0        9        1        0       0      0      0      0     0     0      0        0       9       9       9      9      9       9       0      0     0         0      0         0        0        0      0           0       0        0      0      0     0       0        0        9          9        9     9            9       0       0       0       0       0       0       9       9       9       9

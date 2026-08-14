@@ -1,0 +1,47 @@
+Dataset: test_energy
+============================================================
+File: test_energy_data.csv
+
+Rows: 100
+Columns: 7
+Memory: 0.01 MB
+Duplicate Rows: 0
+
+COLUMN NAMES
+------------------------------------------------------------
+Building Type
+Square Footage
+Number of Occupants
+Appliances Used
+Average Temperature
+Day of Week
+Energy Consumption
+
+DATA TYPES
+------------------------------------------------------------
+Building Type              str
+Square Footage           int64
+Number of Occupants      int64
+Appliances Used          int64
+Average Temperature    float64
+Day of Week                str
+Energy Consumption     float64
+
+MISSING VALUES
+------------------------------------------------------------
+Building Type          0
+Square Footage         0
+Number of Occupants    0
+Appliances Used        0
+Average Temperature    0
+Day of Week            0
+Energy Consumption     0
+
+FIRST FIVE ROWS
+------------------------------------------------------------
+  Building Type  Square Footage  Number of Occupants  Appliances Used  Average Temperature Day of Week  Energy Consumption
+0   Residential           24563                   15                4                28.52     Weekday             2865.57
+1    Commercial           27583                   56               23                23.07     Weekend             4283.80
+2    Commercial           45313                    4               44                33.56     Weekday             5067.83
+3   Residential           41625                   84               17                27.39     Weekend             4624.30
+4   Residential           36720                   58               47                17.08     Weekday             4820.59
