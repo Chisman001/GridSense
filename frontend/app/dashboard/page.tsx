@@ -12,7 +12,7 @@ import {
 import { GesReadout } from "@/components/ges-readout";
 import { ShellIcon } from "@/components/shell/shell-icon";
 import { primaryButtonClasses, secondaryButtonClasses } from "@/components/ui/button-styles";
-import { calculateGesV1FromRecord } from "@/lib/ges-v1";
+import { calculateGES } from "@/lib/ges-v1";
 
 type DashboardEnergyRecord = {
   id: string;
@@ -597,7 +597,7 @@ export default function DashboardPage() {
       return null;
     }
 
-    return calculateGesV1FromRecord({
+    return calculateGES({
       totalEnergyCost: latestEnergyRecord.totalEnergyCost,
       monthlyRevenue: latestEnergyRecord.monthlyRevenue,
       generatorHours: latestEnergyRecord.generatorHours,

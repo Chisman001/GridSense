@@ -47,7 +47,7 @@ export async function proxyMlRequest(
       {
         success: false,
         error:
-          "The forecast service is unavailable. Start the GridSense ML API on port 8000 and try again.",
+          "The forecast service is unavailable. Confirm ML_API_URL is set and the GridSense ML API is running.",
         code: "FORECAST_SERVICE_UNAVAILABLE",
       },
       { status: 503 }

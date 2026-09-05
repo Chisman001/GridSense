@@ -39,7 +39,7 @@ class PredictionRequest(BaseModel):
     operating_hours: float = Field(..., ge=0)
 
     # Business / workforce features
-    employee_count: int = Field(..., ge=0)
+    employee_count: int | None = Field(default=None, ge=0)
     employees: int = Field(..., ge=0)
     occupancy_rate: float = Field(..., ge=0, le=100)
 
@@ -61,8 +61,8 @@ class PredictionRequest(BaseModel):
     # Derived efficiency / ratio features
     energy_cost_per_employee: float = Field(..., ge=0)
     cost_per_kwh: float = Field(..., ge=0)
-    average_monthly_energy_cost: float = Field(..., ge=0)
-    energy_efficiency_score: float
+    average_monthly_energy_cost: float | None = Field(default=None, ge=0)
+    energy_efficiency_score: float | None = None
     generator_dependency: float = Field(..., ge=0)
     revenue_energy_ratio: float = Field(..., ge=0)
 

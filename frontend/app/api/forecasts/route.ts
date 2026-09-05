@@ -8,43 +8,14 @@ import {
   predictions,
   insights,
 } from "@/lib/db/schema";
-import { isEnergyRecordPeriodConflict } from "@/lib/energy-records";
+import {
+  isEnergyRecordPeriodConflict,
+  persistableEnergyRecord,
+  validateEnergyRecord,
+  type RawEnergyRecord,
+} from "@/lib/energy-records";
 
 import { and, eq } from "drizzle-orm";
-
-type ForecastForm = {
-  year: number;
-  month: number;
-  quarter: number;
-  energy_source: string;
-  electricity_bill: number;
-  diesel_cost: number;
-  petrol_cost: number;
-  total_energy_cost: number;
-  energy_consumption_kwh: number;
-  fuel_consumption_liters: number;
-  generator_hours: number;
-  grid_hours: number;
-  outage_hours: number;
-  operating_hours: number;
-  employee_count: number;
-  employees: number;
-  occupancy_rate: number;
-  floor_area_sqm: number;
-  solar_capacity_kw: number;
-  renewable_energy_percentage: number;
-  maintenance_cost: number;
-  monthly_revenue: number;
-  energy_cost_per_employee: number;
-  cost_per_kwh: number;
-  average_monthly_energy_cost: number;
-  energy_efficiency_score: number;
-  generator_dependency: number;
-  revenue_energy_ratio: number;
-  outage_severity: number;
-  weather_avg_temp: number;
-  estimated_carbon_intensity: number;
-};
 
 type PredictionPayload = {
   predicted_next_month_energy_cost: number;
@@ -73,110 +44,6 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value);
-}
-
-function isForecastForm(value: unknown): value is ForecastForm {
-  if (!isRecord(value) || typeof value.energy_source !== "string") {
-    return false;
-  }
-
-  const numericFields = [
-    "year",
-    "month",
-    "quarter",
-    "electricity_bill",
-    "diesel_cost",
-    "petrol_cost",
-    "total_energy_cost",
-    "energy_consumption_kwh",
-    "fuel_consumption_liters",
-    "generator_hours",
-    "grid_hours",
-    "outage_hours",
-    "operating_hours",
-    "employee_count",
-    "employees",
-    "occupancy_rate",
-    "floor_area_sqm",
-    "solar_capacity_kw",
-    "renewable_energy_percentage",
-    "maintenance_cost",
-    "monthly_revenue",
-    "energy_cost_per_employee",
-    "cost_per_kwh",
-    "average_monthly_energy_cost",
-    "energy_efficiency_score",
-    "generator_dependency",
-    "revenue_energy_ratio",
-    "outage_severity",
-    "weather_avg_temp",
-    "estimated_carbon_intensity",
-  ] as const;
-
-  if (!numericFields.every((field) => isFiniteNumber(value[field]))) {
-    return false;
-  }
-
-  const nonNegativeFields = [
-    "electricity_bill",
-    "diesel_cost",
-    "petrol_cost",
-    "total_energy_cost",
-    "energy_consumption_kwh",
-    "fuel_consumption_liters",
-    "generator_hours",
-    "grid_hours",
-    "outage_hours",
-    "operating_hours",
-    "employee_count",
-    "employees",
-    "occupancy_rate",
-    "floor_area_sqm",
-    "solar_capacity_kw",
-    "renewable_energy_percentage",
-    "maintenance_cost",
-    "monthly_revenue",
-    "energy_cost_per_employee",
-    "cost_per_kwh",
-    "average_monthly_energy_cost",
-    "generator_dependency",
-    "revenue_energy_ratio",
-    "outage_severity",
-    "estimated_carbon_intensity",
-  ] as const;
-
-  const year = value.year as number;
-  const month = value.month as number;
-  const quarter = value.quarter as number;
-  const employeeCount = value.employee_count as number;
-  const employees = value.employees as number;
-  const occupancyRate = value.occupancy_rate as number;
-  const renewableEnergyPercentage =
-    value.renewable_energy_percentage as number;
-
-  return (
-    value.energy_source.trim().length > 0 &&
-    nonNegativeFields.every(
-      (field) => (value[field] as number) >= 0
-    ) &&
-    Number.isInteger(year) &&
-    year >= 2000 &&
-    year <= 2100 &&
-    Number.isInteger(month) &&
-    month >= 1 &&
-    month <= 12 &&
-    Number.isInteger(quarter) &&
-    quarter >= 1 &&
-    quarter <= 4 &&
-    Number.isInteger(employeeCount) &&
-    employeeCount >= 0 &&
-    Number.isInteger(employees) &&
-    employees >= 0 &&
-    occupancyRate >= 0 &&
-    occupancyRate <= 100 &&
-    renewableEnergyPercentage >= 0 &&
-    renewableEnergyPercentage <= 100
-  );
 }
 
 function isPredictionPayload(
@@ -301,13 +168,16 @@ export async function POST(request: Request) {
 
     const { form, prediction, aiInsights } = body;
 
-    if (!isForecastForm(form)) {
+    const formValidation = validateEnergyRecord(form);
+    if (!formValidation.success) {
       return errorResponse(
         400,
         "INVALID_FORECAST_FORM",
         "Forecast form data is invalid"
       );
     }
+
+    const rawForm: RawEnergyRecord = formValidation.data;
 
     if (!isPredictionPayload(prediction)) {
       return errorResponse(
@@ -352,8 +222,8 @@ export async function POST(request: Request) {
       .where(
         and(
           eq(energyRecords.businessId, business.id),
-          eq(energyRecords.year, form.year),
-          eq(energyRecords.month, form.month)
+          eq(energyRecords.year, rawForm.year),
+          eq(energyRecords.month, rawForm.month)
         )
       )
       .limit(1);
@@ -376,73 +246,17 @@ export async function POST(request: Request) {
         return forecastAlreadyExistsResponse();
       }
     } else {
+      const persisted = await persistableEnergyRecord(
+        rawForm,
+        business.id
+      );
+
       const [insertedRecord] = await db
         .insert(energyRecords)
         .values({
           id: crypto.randomUUID(),
           businessId: business.id,
-
-          year: form.year,
-          month: form.month,
-          quarter: form.quarter,
-
-          energySource: form.energy_source,
-
-          electricityBill: form.electricity_bill,
-          dieselCost: form.diesel_cost,
-          petrolCost: form.petrol_cost,
-          totalEnergyCost: form.total_energy_cost,
-
-          energyConsumptionKwh:
-            form.energy_consumption_kwh,
-
-          fuelConsumptionLiters:
-            form.fuel_consumption_liters,
-
-          generatorHours: form.generator_hours,
-          gridHours: form.grid_hours,
-          outageHours: form.outage_hours,
-          operatingHours: form.operating_hours,
-
-          employeeCount: form.employee_count,
-          employees: form.employees,
-
-          occupancyRate: form.occupancy_rate,
-          floorAreaSqm: form.floor_area_sqm,
-
-          solarCapacityKw: form.solar_capacity_kw,
-
-          renewableEnergyPercentage:
-            form.renewable_energy_percentage,
-
-          maintenanceCost: form.maintenance_cost,
-          monthlyRevenue: form.monthly_revenue,
-
-          energyCostPerEmployee:
-            form.energy_cost_per_employee,
-
-          costPerKwh: form.cost_per_kwh,
-
-          averageMonthlyEnergyCost:
-            form.average_monthly_energy_cost,
-
-          energyEfficiencyScore:
-            form.energy_efficiency_score,
-
-          generatorDependency:
-            form.generator_dependency,
-
-          revenueEnergyRatio:
-            form.revenue_energy_ratio,
-
-          outageSeverity:
-            form.outage_severity,
-
-          weatherAvgTemp:
-            form.weather_avg_temp,
-
-          estimatedCarbonIntensity:
-            form.estimated_carbon_intensity,
+          ...persisted,
         })
         .returning();
 

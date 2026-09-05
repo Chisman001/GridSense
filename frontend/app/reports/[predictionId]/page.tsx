@@ -10,7 +10,7 @@ import {
   type ReactNode,
 } from "react";
 
-import { calculateGesV1FromRecord } from "@/lib/ges-v1";
+import { calculateGES } from "@/lib/ges-v1";
 import { formatGesScoreWithRating } from "@/lib/ges-display";
 
 type ReportBusiness = {
@@ -178,7 +178,7 @@ function formatGesScore(energyRecord: ReportEnergyRecord | null | undefined) {
     return "Unavailable";
   }
 
-  const ges = calculateGesV1FromRecord({
+  const ges = calculateGES({
     totalEnergyCost: energyRecord.totalEnergyCost,
     monthlyRevenue: energyRecord.monthlyRevenue,
     generatorHours: energyRecord.generatorHours,

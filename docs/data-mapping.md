@@ -229,7 +229,21 @@ The following features are calculated during preprocessing.
 | outage_severity | outage_hours / operating_hours |
 | revenue_energy_ratio | monthly_revenue / total_energy_cost |
 | estimated_carbon_intensity | fuel_consumption / energy_consumption_kwh |
-| energy_efficiency_score | Composite score (0–100) |
+| energy_efficiency_score | Computed GES cache (0–100). Not a user or CSV input. |
+
+---
+
+# 6b. Application CSV Import
+
+Energy Records CSV import uses three header categories.
+
+| Category | Examples | Behavior |
+|----------|----------|----------|
+| Supported RAW | year, month, electricity_bill, diesel_cost, petrol_cost, employees | Required. Values are imported. |
+| Known legacy / derived | total_energy_cost, cost_per_kwh, generator_dependency, energy_efficiency_score, employee_count | Accepted. Values are ignored and recalculated. |
+| Unknown | foo, customer_comment | Import succeeds. Columns are ignored with a warning. |
+
+`total_energy_cost` is always `electricity_bill + diesel_cost + petrol_cost`. If an old CSV supplies a different total, GridSense stores the recomputed sum and warns that the column was recalculated.
 
 ---
 

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "test:ges": "npx --yes tsx lib/ges-v1.test.ts",
+    "test:energy-records": "npx --yes tsx lib/energy-record-pipeline.test.ts",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"

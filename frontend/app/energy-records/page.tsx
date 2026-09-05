@@ -22,39 +22,15 @@ import {
   downloadSampleEnergyRecordsCsv,
   expectedUploadFields,
 } from "@/lib/energy-records-sample";
-import { calculateGesV1FromRecord } from "@/lib/ges-v1";
+import { calculateGES } from "@/lib/ges-v1";
+import {
+  deriveEnergyMetrics,
+  totalEnergyCostFromBills,
+  type ImportWarning,
+} from "@/lib/energy-record-pipeline";
+import { rawObservationFields, type RawObservationField } from "@/lib/energy-record-fields";
 
-type WritableField =
-  | "year"
-  | "month"
-  | "quarter"
-  | "energySource"
-  | "electricityBill"
-  | "dieselCost"
-  | "petrolCost"
-  | "totalEnergyCost"
-  | "energyConsumptionKwh"
-  | "fuelConsumptionLiters"
-  | "generatorHours"
-  | "gridHours"
-  | "outageHours"
-  | "operatingHours"
-  | "employeeCount"
-  | "employees"
-  | "occupancyRate"
-  | "floorAreaSqm"
-  | "solarCapacityKw"
-  | "renewableEnergyPercentage"
-  | "maintenanceCost"
-  | "monthlyRevenue"
-  | "energyCostPerEmployee"
-  | "costPerKwh"
-  | "averageMonthlyEnergyCost"
-  | "generatorDependency"
-  | "revenueEnergyRatio"
-  | "outageSeverity"
-  | "weatherAvgTemp"
-  | "estimatedCarbonIntensity";
+type WritableField = RawObservationField;
 
 type EnergyRecord = {
   id: string;
@@ -73,8 +49,8 @@ type EnergyRecord = {
   gridHours: number;
   outageHours: number;
   operatingHours: number;
-  employeeCount: number;
   employees: number;
+  employeeCount: number;
   occupancyRate: number;
   floorAreaSqm: number;
   solarCapacityKw: number;
@@ -139,7 +115,6 @@ const FIELD_GROUPS: FieldGroup[] = [
     fields: [
       { name: "year", label: "Year", min: 2000, max: 2100 },
       { name: "month", label: "Month", min: 1, max: 12 },
-      { name: "quarter", label: "Quarter", min: 1, max: 4 },
       {
         name: "energySource",
         label: "Energy source",
@@ -150,12 +125,11 @@ const FIELD_GROUPS: FieldGroup[] = [
   },
   {
     title: "Costs and consumption",
-    description: "Enter energy spending and measured consumption.",
+    description: "Enter the bills and measured consumption GridSense uses to calculate totals.",
     fields: [
       { name: "electricityBill", label: "Electricity bill (₦)", min: 0, step: 0.01 },
       { name: "dieselCost", label: "Diesel cost (₦)", min: 0, step: 0.01 },
       { name: "petrolCost", label: "Petrol cost (₦)", min: 0, step: 0.01 },
-      { name: "totalEnergyCost", label: "Total energy cost (₦)", min: 0, step: 0.01 },
       {
         name: "energyConsumptionKwh",
         label: "Energy consumption (kWh)",
@@ -168,13 +142,6 @@ const FIELD_GROUPS: FieldGroup[] = [
         min: 0,
         step: 0.01,
       },
-      {
-        name: "averageMonthlyEnergyCost",
-        label: "Average monthly energy cost (₦)",
-        min: 0,
-        step: 0.01,
-      },
-      { name: "costPerKwh", label: "Cost per kWh (₦)", min: 0, step: 0.01 },
     ],
   },
   {
@@ -185,32 +152,17 @@ const FIELD_GROUPS: FieldGroup[] = [
       { name: "gridHours", label: "Grid hours", min: 0, step: 0.01 },
       { name: "outageHours", label: "Outage hours", min: 0, step: 0.01 },
       { name: "operatingHours", label: "Operating Hours per Day", min: 0, step: 0.01 },
-      {
-        name: "generatorDependency",
-        label: "Generator dependency",
-        min: 0,
-        step: 0.01,
-      },
-      { name: "outageSeverity", label: "Outage severity", min: 0, step: 0.01 },
     ],
   },
   {
     title: "Business activity",
     description: "Add the operating scale and financial context.",
     fields: [
-      { name: "employeeCount", label: "Employee count", min: 0 },
       { name: "employees", label: "Employees", min: 0 },
       { name: "occupancyRate", label: "Occupancy rate (%)", min: 0, max: 100, step: 0.01 },
       { name: "floorAreaSqm", label: "Floor area (m²)", min: 0, step: 0.01 },
       { name: "maintenanceCost", label: "Maintenance cost (₦)", min: 0, step: 0.01 },
       { name: "monthlyRevenue", label: "Monthly revenue (₦)", min: 0, step: 0.01 },
-      {
-        name: "energyCostPerEmployee",
-        label: "Energy cost per employee (₦)",
-        min: 0,
-        step: 0.01,
-      },
-      { name: "revenueEnergyRatio", label: "Revenue / energy ratio", min: 0, step: 0.01 },
     ],
   },
   {
@@ -226,12 +178,6 @@ const FIELD_GROUPS: FieldGroup[] = [
         step: 0.01,
       },
       { name: "weatherAvgTemp", label: "Average temperature (°C)", step: 0.01 },
-      {
-        name: "estimatedCarbonIntensity",
-        label: "Estimated carbon intensity",
-        min: 0,
-        step: 0.01,
-      },
     ],
   },
 ];
@@ -244,7 +190,6 @@ function emptyForm(): FormValues {
   ) as FormValues;
   values.year = String(CURRENT_YEAR);
   values.month = String(new Date().getMonth() + 1);
-  values.quarter = String(Math.ceil((new Date().getMonth() + 1) / 3));
   return values;
 }
 
@@ -263,16 +208,26 @@ function toRequestBody(values: FormValues): Record<string, string | number> {
   );
 }
 
+function rawFromForm(values: FormValues) {
+  return Object.fromEntries(
+    rawObservationFields.map((field) => [
+      field,
+      field === "energySource"
+        ? values[field].trim()
+        : Number(values[field]),
+    ])
+  ) as Parameters<typeof deriveEnergyMetrics>[0];
+}
+
 function gesFromForm(values: FormValues) {
-  return calculateGesV1FromRecord({
-    totalEnergyCost: Number(values.totalEnergyCost),
-    monthlyRevenue: Number(values.monthlyRevenue),
-    generatorHours: Number(values.generatorHours),
-    gridHours: Number(values.gridHours),
-    outageHours: Number(values.outageHours),
-    operatingHours: Number(values.operatingHours),
-    year: Number(values.year),
-    month: Number(values.month),
+  const raw = rawFromForm(values);
+  return calculateGES({
+    ...raw,
+    totalEnergyCost: totalEnergyCostFromBills(
+      raw.electricityBill,
+      raw.dieselCost,
+      raw.petrolCost
+    ),
   });
 }
 
@@ -323,10 +278,24 @@ function isEnergyRecord(value: unknown): value is EnergyRecord {
     return false;
   }
 
+  const persistedNumericFields = [
+    ...rawObservationFields.filter((field) => field !== "energySource"),
+    "quarter",
+    "totalEnergyCost",
+    "employeeCount",
+    "energyCostPerEmployee",
+    "costPerKwh",
+    "averageMonthlyEnergyCost",
+    "energyEfficiencyScore",
+    "generatorDependency",
+    "revenueEnergyRatio",
+    "outageSeverity",
+    "estimatedCarbonIntensity",
+  ] as const;
+
   return (
-    ALL_FIELDS.every(({ name, type }) =>
-      type === "text" ? typeof value[name] === "string" : typeof value[name] === "number"
-    ) && typeof value.energyEfficiencyScore === "number"
+    typeof value.energySource === "string" &&
+    persistedNumericFields.every((field) => typeof value[field] === "number")
   );
 }
 
@@ -564,8 +533,11 @@ export default function EnergyRecordsPage() {
   const [sourceFilter, setSourceFilter] = useState("");
   const [importing, setImporting] = useState(false);
   const [importErrors, setImportErrors] = useState<ImportError[]>([]);
+  const [importWarnings, setImportWarnings] = useState<ImportWarning[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formGes = dialog?.type === "form" ? gesFromForm(form) : null;
+  const formDerived =
+    dialog?.type === "form" ? deriveEnergyMetrics(rawFromForm(form)) : null;
 
   const loadRecords = useCallback(async (signal?: AbortSignal) => {
     setLoading(true);
@@ -700,6 +672,7 @@ export default function EnergyRecordsPage() {
 
     setImporting(true);
     setImportErrors([]);
+    setImportWarnings([]);
     setNotice("");
     setImportForecastTarget(null);
     setActionError("");
@@ -732,6 +705,18 @@ export default function EnergyRecordsPage() {
       }
       const importedRecords = parseImportedRecords(payload);
       const latestImported = pickLatestImportedRecord(importedRecords);
+      if (isObject(payload) && Array.isArray(payload.warnings)) {
+        setImportWarnings(
+          payload.warnings.filter(
+            (item): item is ImportWarning =>
+              isObject(item) &&
+              (item.type === "legacy_ignored" ||
+                item.type === "total_recalculated" ||
+                item.type === "unknown_ignored") &&
+              typeof item.message === "string"
+          )
+        );
+      }
 
       if (latestImported) {
         setImportForecastTarget({
@@ -818,8 +803,8 @@ export default function EnergyRecordsPage() {
             Expected fields
           </h2>
           <p className="mt-1 text-sm leading-6 text-slate-600 dark:text-slate-400">
-            Give GridSense monthly operating data. These are the fields the
-            forecast, GridSense Energy Score, and analytics actually use.
+            Give GridSense monthly operating facts. Totals, ratios, and the
+            GridSense Energy Score (GES) are calculated automatically.
           </p>
           <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {expectedUploadFields.map((field) => (
@@ -859,11 +844,13 @@ export default function EnergyRecordsPage() {
               CSV format
             </summary>
             <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">
-              Upload raw monthly energy data. GridSense calculates ratio
-              columns and the GridSense Energy Score from those inputs. Use
-              Download sample CSV rather than building a file from scratch. If
-              a year and month already exist, delete those records first or
-              change the period in the file.
+              Upload raw monthly energy data only. Do not include
+              total_energy_cost or other calculated columns. If an older file
+              still has those columns, GridSense ignores them and recalculates
+              from electricity, diesel, and petrol costs. Unrecognized columns
+              are also ignored. Use Download sample CSV rather than building a
+              file from scratch. If a year and month already exist, delete
+              those records first or change the period in the file.
             </p>
           </details>
         </section>
@@ -943,6 +930,16 @@ export default function EnergyRecordsPage() {
             </Notice>
           )}
           {actionError && !dialog && <Notice tone="error">{actionError}</Notice>}
+          {importWarnings.length > 0 && (
+            <Notice tone="success">
+              <p className="font-semibold">CSV imported with notes:</p>
+              <ul className="mt-2 space-y-1">
+                {importWarnings.map((warning, index) => (
+                  <li key={`${warning.type}-${index}`}>{warning.message}</li>
+                ))}
+              </ul>
+            </Notice>
+          )}
           {importErrors.length > 0 && (
             <Notice tone="error">
               <p className="font-semibold">Some CSV rows need attention:</p>
@@ -1163,7 +1160,9 @@ export default function EnergyRecordsPage() {
                 <h2 id="record-dialog-title" className="text-lg font-semibold text-slate-950 sm:text-xl dark:text-white">
                   {dialog.record ? "Edit energy record" : "Add energy record"}
                 </h2>
-                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Complete all fields to keep forecast inputs consistent.</p>
+                <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  Enter the facts your business already knows. GridSense calculates totals, ratios, and GES.
+                </p>
               </div>
               <button
                 type="button"
@@ -1213,8 +1212,30 @@ export default function EnergyRecordsPage() {
                     Calculated by GridSense
                   </h3>
                   <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-400">
-                    GridSense Energy Score is computed from your entered values. It cannot be edited directly.
+                    These values update as you type. They cannot be edited directly.
                   </p>
+                  {formDerived && (
+                    <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      <div>
+                        <dt className="text-xs text-slate-500 dark:text-slate-400">Total energy cost</dt>
+                        <dd className="mt-1 text-sm font-semibold text-slate-950 dark:text-white">
+                          {formatCurrency(formDerived.totalEnergyCost)}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="text-xs text-slate-500 dark:text-slate-400">Cost per kWh</dt>
+                        <dd className="mt-1 text-sm font-medium text-slate-800 dark:text-slate-200">
+                          {formatCurrency(formDerived.costPerKwh)}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="text-xs text-slate-500 dark:text-slate-400">Generator dependency</dt>
+                        <dd className="mt-1 text-sm font-medium text-slate-800 dark:text-slate-200">
+                          {(formDerived.generatorDependency * 100).toFixed(1)}%
+                        </dd>
+                      </div>
+                    </dl>
+                  )}
                   <div className="mt-4">
                     {formGes && <GesReadout result={formGes} showHelper={false} />}
                   </div>

@@ -7,10 +7,9 @@ import { energyRecords, predictions } from "@/lib/db/schema";
 import {
   errorResponse,
   isEnergyRecordPeriodConflict,
+  persistableEnergyRecord,
   resolveBusiness,
   validateEnergyRecord,
-  withDerivedEnergyRecordFields,
-  withPersistedEnergyEfficiencyScore,
 } from "@/lib/energy-records";
 
 function parseIntegerFilter(
@@ -197,18 +196,17 @@ export async function POST(request: Request) {
       );
     }
 
+    const persisted = await persistableEnergyRecord(
+      validation.data,
+      business.id
+    );
+
     const [record] = await db
       .insert(energyRecords)
       .values({
         id: crypto.randomUUID(),
         businessId: business.id,
-        ...withPersistedEnergyEfficiencyScore(
-          withDerivedEnergyRecordFields(
-            validation.data,
-            validation.data.averageMonthlyEnergyCost ??
-              validation.data.totalEnergyCost
-          )
-        ),
+        ...persisted,
       })
       .returning();
 

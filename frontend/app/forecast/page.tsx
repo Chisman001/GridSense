@@ -20,10 +20,10 @@ import {
   toEditableNumberString,
 } from "@/lib/format-number";
 import {
-  calculateGesV1,
+  calculateGES,
   GES_V1_MAX_OPERATING_HOURS_PER_DAY,
 } from "@/lib/ges-v1";
-import { LEGACY_ENERGY_EFFICIENCY_SCORE } from "@/lib/ml-compat";
+import { deriveEnergyMetrics } from "@/lib/energy-record-pipeline";
 
 // Typical SME day. Not derived from the old monthly-shaped demo default of 600.
 const DEFAULT_OPERATING_HOURS_PER_DAY = 12;
@@ -32,7 +32,6 @@ function createInitialForecastForm() {
   const now = new Date();
   const year = now.getFullYear();
   const month = now.getMonth() + 1;
-  const quarter = Math.ceil(month / 3);
 
   return {
     business_type: "",
@@ -42,13 +41,11 @@ function createInitialForecastForm() {
 
     year,
     month,
-    quarter,
 
     electricity_bill: 0,
     diesel_cost: 0,
     petrol_cost: 0,
 
-    total_energy_cost: 0,
     energy_consumption_kwh: 0,
     fuel_consumption_liters: 0,
 
@@ -57,7 +54,6 @@ function createInitialForecastForm() {
     outage_hours: 0,
     operating_hours_per_day: DEFAULT_OPERATING_HOURS_PER_DAY,
 
-    employee_count: 0,
     employees: 0,
     occupancy_rate: 0,
 
@@ -68,15 +64,7 @@ function createInitialForecastForm() {
     maintenance_cost: 0,
     monthly_revenue: 0,
 
-    energy_cost_per_employee: 0,
-    cost_per_kwh: 0,
-    average_monthly_energy_cost: 0,
-
-    generator_dependency: 0,
-    revenue_energy_ratio: 0,
-    outage_severity: 0,
     weather_avg_temp: 0,
-    estimated_carbon_intensity: 0,
   };
 }
 
@@ -124,12 +112,10 @@ function prefillFromEnergyRecord(record: EnergyRecordPrefill) {
   return {
     year: record.year,
     month: record.month,
-    quarter: record.quarter,
     energy_source: record.energySource,
     electricity_bill: record.electricityBill,
     diesel_cost: record.dieselCost,
     petrol_cost: record.petrolCost,
-    total_energy_cost: record.totalEnergyCost,
     energy_consumption_kwh: record.energyConsumptionKwh,
     fuel_consumption_liters: record.fuelConsumptionLiters,
     generator_hours: record.generatorHours,
@@ -139,7 +125,6 @@ function prefillFromEnergyRecord(record: EnergyRecordPrefill) {
       record.operatingHours > 0 && record.operatingHours <= 24
         ? record.operatingHours
         : DEFAULT_OPERATING_HOURS_PER_DAY,
-    employee_count: record.employeeCount,
     employees: record.employees,
     occupancy_rate: record.occupancyRate,
     floor_area_sqm: record.floorAreaSqm,
@@ -147,14 +132,32 @@ function prefillFromEnergyRecord(record: EnergyRecordPrefill) {
     renewable_energy_percentage: record.renewableEnergyPercentage,
     maintenance_cost: record.maintenanceCost,
     monthly_revenue: record.monthlyRevenue,
-    energy_cost_per_employee: record.energyCostPerEmployee,
-    cost_per_kwh: record.costPerKwh,
-    average_monthly_energy_cost: record.averageMonthlyEnergyCost,
-    generator_dependency: record.generatorDependency,
-    revenue_energy_ratio: record.revenueEnergyRatio,
-    outage_severity: record.outageSeverity,
     weather_avg_temp: record.weatherAvgTemp,
-    estimated_carbon_intensity: record.estimatedCarbonIntensity,
+  };
+}
+
+function rawForecastPayload(form: ReturnType<typeof createInitialForecastForm>) {
+  return {
+    year: form.year,
+    month: form.month,
+    energySource: form.energy_source,
+    electricityBill: form.electricity_bill,
+    dieselCost: form.diesel_cost,
+    petrolCost: form.petrol_cost,
+    energyConsumptionKwh: form.energy_consumption_kwh,
+    fuelConsumptionLiters: form.fuel_consumption_liters,
+    generatorHours: form.generator_hours,
+    gridHours: form.grid_hours,
+    outageHours: form.outage_hours,
+    operatingHours: form.operating_hours_per_day,
+    employees: form.employees,
+    occupancyRate: form.occupancy_rate,
+    floorAreaSqm: form.floor_area_sqm,
+    solarCapacityKw: form.solar_capacity_kw,
+    renewableEnergyPercentage: form.renewable_energy_percentage,
+    maintenanceCost: form.maintenance_cost,
+    monthlyRevenue: form.monthly_revenue,
+    weatherAvgTemp: form.weather_avg_temp,
   };
 }
 
@@ -361,6 +364,11 @@ function ForecastPageContent() {
   const [prefillError, setPrefillError] = useState("");
   const [forecastBlocked, setForecastBlocked] = useState(false);
 
+  const derivedMetrics = useMemo(
+    () => deriveEnergyMetrics(rawForecastPayload(form)),
+    [form]
+  );
+
   const ges = useMemo(() => {
     if (form.operating_hours_per_day > GES_V1_MAX_OPERATING_HOURS_PER_DAY) {
       return {
@@ -369,18 +377,18 @@ function ForecastPageContent() {
       };
     }
 
-    return calculateGesV1({
-      totalEnergyCost: form.total_energy_cost,
+    return calculateGES({
+      totalEnergyCost: derivedMetrics.totalEnergyCost,
       monthlyRevenue: form.monthly_revenue,
       generatorHours: form.generator_hours,
       gridHours: form.grid_hours,
       outageHours: form.outage_hours,
-      operatingHoursPerDay: form.operating_hours_per_day,
+      operatingHours: form.operating_hours_per_day,
       year: form.year,
       month: form.month,
     });
   }, [
-    form.total_energy_cost,
+    derivedMetrics.totalEnergyCost,
     form.monthly_revenue,
     form.generator_hours,
     form.grid_hours,
@@ -657,16 +665,10 @@ function ForecastPageContent() {
     setInsights(null);
     setSavedPredictionId(null);
 
-    const forecastPayload = {
-      ...form,
-      business_type: business.businessType,
-      industry: business.industry,
-      state: business.state,
-      operating_hours: form.operating_hours_per_day,
-      energy_efficiency_score: LEGACY_ENERGY_EFFICIENCY_SCORE,
-    };
+    const forecastPayload = rawForecastPayload(form);
 
     let predictionCompleted = false;
+    let persistedPredictionId: string | null = null;
 
     try {
       const response = await fetch("/api/predict", {
@@ -728,6 +730,7 @@ function ForecastPageContent() {
       }
 
       const predictionId = getSavedPredictionId(savePayload);
+      persistedPredictionId = predictionId;
       setSavedPredictionId(predictionId);
       setSaveLoading(false);
 
@@ -740,7 +743,9 @@ function ForecastPageContent() {
         err instanceof Error ? err.message : "Something went wrong."
       );
 
-      if (predictionCompleted) {
+      if (persistedPredictionId) {
+        setInsightsError(message);
+      } else if (predictionCompleted) {
         setSaveError(message);
       } else {
         setPredictionError(message);
@@ -806,8 +811,9 @@ function ForecastPageContent() {
           </h1>
 
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
-            Enter your latest energy and operational information to forecast
-            next-month energy costs and calculate your GridSense Energy Score.
+            Enter your latest energy and operational facts. GridSense
+            calculates totals, ratios, and the GridSense Energy Score, then
+            forecasts next-month energy cost.
           </p>
         </section>
 
@@ -960,7 +966,7 @@ function ForecastPageContent() {
                 </p>
               </div>
 
-              <div className="mt-6 grid gap-5 md:grid-cols-3">
+              <div className="mt-6 grid gap-5 md:grid-cols-2">
                 <NumberField
                   label="Year"
                   value={form.year}
@@ -978,17 +984,6 @@ function ForecastPageContent() {
                   max={12}
                   onChange={(value) =>
                     updateField("month", value)
-                  }
-                />
-
-                <NumberField
-                  label="Quarter"
-                  value={form.quarter}
-                  formatted
-                  min={1}
-                  max={4}
-                  onChange={(value) =>
-                    updateField("quarter", value)
                   }
                 />
               </div>
@@ -1039,15 +1034,6 @@ function ForecastPageContent() {
                 />
 
                 <NumberField
-                  label="Total Energy Cost (₦)"
-                  value={form.total_energy_cost}
-                  formatted
-                  onChange={(value) =>
-                    updateField("total_energy_cost", value)
-                  }
-                />
-
-                <NumberField
                   label="Energy Consumption (kWh)"
                   value={form.energy_consumption_kwh}
                   formatted
@@ -1070,29 +1056,18 @@ function ForecastPageContent() {
                     )
                   }
                 />
-
-                <NumberField
-                  label="Average Monthly Energy Cost (₦)"
-                  value={form.average_monthly_energy_cost}
-                  formatted
-                  onChange={(value) =>
-                    updateField(
-                      "average_monthly_energy_cost",
-                      value
-                    )
-                  }
-                />
-
-                <NumberField
-                  label="Cost per kWh (₦)"
-                  value={form.cost_per_kwh}
-                  formatted
-                  decimals={2}
-                  onChange={(value) =>
-                    updateField("cost_per_kwh", value)
-                  }
-                />
               </div>
+              <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
+                Total energy cost:{" "}
+                <span className="font-semibold text-slate-950 dark:text-white">
+                  {new Intl.NumberFormat("en-NG", {
+                    style: "currency",
+                    currency: "NGN",
+                    maximumFractionDigits: 0,
+                  }).format(derivedMetrics.totalEnergyCost)}
+                </span>
+                {" "}(electricity + diesel + petrol)
+              </p>
             </section>
 
             {/* Operations & Reliability */}
@@ -1150,26 +1125,6 @@ function ForecastPageContent() {
                     updateField("operating_hours_per_day", value)
                   }
                 />
-
-                <NumberField
-                  label="Generator Dependency"
-                  value={form.generator_dependency}
-                  formatted
-                  decimals={2}
-                  onChange={(value) =>
-                    updateField("generator_dependency", value)
-                  }
-                />
-
-                <NumberField
-                  label="Outage Severity"
-                  value={form.outage_severity}
-                  formatted
-                  decimals={2}
-                  onChange={(value) =>
-                    updateField("outage_severity", value)
-                  }
-                />
               </div>
             </section>
 
@@ -1209,15 +1164,6 @@ function ForecastPageContent() {
                 />
 
                 <NumberField
-                  label="Employee Count"
-                  value={form.employee_count}
-                  formatted
-                  onChange={(value) =>
-                    updateField("employee_count", value)
-                  }
-                />
-
-                <NumberField
                   label="Employees"
                   value={form.employees}
                   formatted
@@ -1243,25 +1189,6 @@ function ForecastPageContent() {
                     updateField("floor_area_sqm", value)
                   }
                 />
-
-                <NumberField
-                  label="Energy Cost per Employee (₦)"
-                  value={form.energy_cost_per_employee}
-                  formatted
-                  onChange={(value) =>
-                    updateField("energy_cost_per_employee", value)
-                  }
-                />
-
-                <NumberField
-                  label="Revenue / Energy Ratio"
-                  value={form.revenue_energy_ratio}
-                  formatted
-                  decimals={2}
-                  onChange={(value) =>
-                    updateField("revenue_energy_ratio", value)
-                  }
-                />
               </div>
             </section>
 
@@ -1277,7 +1204,7 @@ function ForecastPageContent() {
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
-                  Add renewable energy and environmental information. GridSense Energy Score is calculated automatically.
+                  Add renewable energy and environmental information. GridSense Energy Score (GES) updates as you type.
                 </p>
               </div>
 
@@ -1311,19 +1238,6 @@ function ForecastPageContent() {
                   decimals={1}
                   onChange={(value) =>
                     updateField("weather_avg_temp", value)
-                  }
-                />
-
-                <NumberField
-                  label="Carbon Intensity"
-                  value={form.estimated_carbon_intensity}
-                  formatted
-                  decimals={2}
-                  onChange={(value) =>
-                    updateField(
-                      "estimated_carbon_intensity",
-                      value
-                    )
                   }
                 />
               </div>

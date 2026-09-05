@@ -176,6 +176,17 @@ class TestGridSenseAPI(unittest.TestCase):
             data,
         )
 
+    def test_prediction_allows_optional_legacy_fields(self):
+        payload = dict(self.payload)
+        del payload["energy_efficiency_score"]
+        del payload["average_monthly_energy_cost"]
+        del payload["employee_count"]
+
+        response = self.client.post("/predict", json=payload)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("predicted_next_month_energy_cost", response.json())
+
     def test_prediction_is_deterministic(self):
         response_1 = self.client.post(
             "/predict",

@@ -5,18 +5,20 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { energyRecords } from "@/lib/db/schema";
 import {
+  buildImportWarnings,
+  buildPersistedEnergyRecord,
+  classifyCsvHeaders,
   csvHeaders,
   csvRowToPayload,
-  EnergyRecordPayload,
+  detectTotalCostMismatch,
   errorResponse,
   isEnergyRecordPeriodConflict,
-  optionalCsvHeaders,
+  nextAverageMonthlyEnergyCost,
   parseCsv,
-  requiredCsvHeaders,
+  readOptionalCsvNumber,
   resolveBusiness,
   validateEnergyRecord,
-  withDerivedEnergyRecordFields,
-  withPersistedEnergyEfficiencyScore,
+  type RawEnergyRecord,
 } from "@/lib/energy-records";
 
 type ImportError = {
@@ -96,42 +98,22 @@ export async function POST(request: Request) {
       index === 0 ? header.replace(/^\uFEFF/, "").trim() : header.trim()
     );
     const errors: ImportError[] = [];
-    const seenHeaders = new Set<string>();
+    const classification = classifyCsvHeaders(headers);
 
-    for (const header of headers) {
-      if (seenHeaders.has(header)) {
-        errors.push({
-          row: headerRow.row,
-          reason: "Duplicate CSV header",
-          field: header,
-        });
-      }
-      seenHeaders.add(header);
+    for (const header of classification.duplicateHeaders) {
+      errors.push({
+        row: headerRow.row,
+        reason: "Duplicate CSV header",
+        field: header,
+      });
     }
 
-    for (const requiredHeader of requiredCsvHeaders) {
-      if (!seenHeaders.has(requiredHeader)) {
-        errors.push({
-          row: headerRow.row,
-          reason: "Required CSV header is missing",
-          field: requiredHeader,
-        });
-      }
-    }
-
-    const allowedHeaders = new Set([
-      ...requiredCsvHeaders,
-      ...optionalCsvHeaders,
-    ]);
-
-    for (const header of headers) {
-      if (!allowedHeaders.has(header)) {
-        errors.push({
-          row: headerRow.row,
-          reason: "Unexpected CSV header",
-          field: header,
-        });
-      }
+    for (const requiredHeader of classification.missingRequired) {
+      errors.push({
+        row: headerRow.row,
+        reason: "Required CSV header is missing",
+        field: requiredHeader,
+      });
     }
 
     if (errors.length > 0) {
@@ -147,6 +129,7 @@ export async function POST(request: Request) {
       .select({
         year: energyRecords.year,
         month: energyRecords.month,
+        totalEnergyCost: energyRecords.totalEnergyCost,
       })
       .from(energyRecords)
       .where(eq(energyRecords.businessId, business.id));
@@ -157,8 +140,9 @@ export async function POST(request: Request) {
     const filePeriods = new Set<string>();
     const validRecords: Array<{
       row: number;
-      data: EnergyRecordPayload;
+      data: RawEnergyRecord;
     }> = [];
+    const recalculatedRows: number[] = [];
 
     for (const csvRow of dataRows) {
       if (csvRow.values.every((value) => value.trim().length === 0)) {
@@ -207,6 +191,23 @@ export async function POST(request: Request) {
         });
       }
 
+      const legacyTotal = readOptionalCsvNumber(
+        headers,
+        csvRow.values,
+        "total_energy_cost"
+      );
+
+      if (
+        detectTotalCostMismatch(
+          validation.data.electricityBill,
+          validation.data.dieselCost,
+          validation.data.petrolCost,
+          legacyTotal
+        )
+      ) {
+        recalculatedRows.push(csvRow.row);
+      }
+
       validRecords.push({ row: csvRow.row, data: validation.data });
     }
 
@@ -229,18 +230,21 @@ export async function POST(request: Request) {
         left.data.month -
         (right.data.year * 12 + right.data.month)
     );
-    const derivedByRow = new Map<number, EnergyRecordPayload>();
-    let runningTotal = 0;
+    const derivedByRow = new Map<number, ReturnType<typeof buildPersistedEnergyRecord>["record"]>();
+    const existingTotals = existingRecords.map((record) => record.totalEnergyCost);
+    const runningTotals = [...existingTotals];
 
-    chronological.forEach((record, index) => {
-      runningTotal += record.data.totalEnergyCost;
-      derivedByRow.set(
-        record.row,
-        withDerivedEnergyRecordFields(
-          record.data,
-          runningTotal / (index + 1)
-        )
-      );
+    chronological.forEach((record) => {
+      const { record: persisted } = buildPersistedEnergyRecord(record.data, {
+        averageMonthlyEnergyCost: nextAverageMonthlyEnergyCost(
+          runningTotals,
+          record.data.electricityBill +
+            record.data.dieselCost +
+            record.data.petrolCost
+        ),
+      });
+      runningTotals.push(persisted.totalEnergyCost);
+      derivedByRow.set(record.row, persisted);
     });
 
     const insertedRecords = await db
@@ -256,7 +260,7 @@ export async function POST(request: Request) {
           return {
             id: crypto.randomUUID(),
             businessId: business.id,
-            ...withPersistedEnergyEfficiencyScore(derived),
+            ...derived,
           };
         })
       )
@@ -267,6 +271,7 @@ export async function POST(request: Request) {
         success: true,
         count: insertedRecords.length,
         records: insertedRecords,
+        warnings: buildImportWarnings(classification, [...new Set(recalculatedRows)]),
       },
       { status: 201 }
     );

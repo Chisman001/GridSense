@@ -21,7 +21,7 @@ import {
 } from "recharts";
 
 import {
-  calculateGesV1FromRecord,
+  calculateGES,
   gesUnavailableMessage,
   type GesV1Available,
   type GesV1Result,
@@ -192,7 +192,7 @@ function parseForecasts(payload: unknown): Forecast[] {
 }
 
 function recordGes(record: EnergyRecord): GesV1Result {
-  return calculateGesV1FromRecord({
+  return calculateGES({
     totalEnergyCost: record.totalEnergyCost,
     monthlyRevenue: record.monthlyRevenue,
     generatorHours: record.generatorHours,

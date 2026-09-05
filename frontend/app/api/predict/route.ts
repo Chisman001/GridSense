@@ -1,43 +1,19 @@
 import { auth } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
 
-import { LEGACY_ENERGY_EFFICIENCY_SCORE } from "@/lib/ml-compat";
+import {
+  buildMlPredictionPayload,
+  errorResponse,
+  persistableEnergyRecord,
+  resolveBusiness,
+  validateEnergyRecord,
+} from "@/lib/energy-records";
 import { proxyMlRequest } from "@/lib/ml-api";
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null;
-}
-
-function withModelCompatFields(body: unknown): unknown {
-  if (!isRecord(body)) {
-    return body;
-  }
-
-  if (
-    typeof body.energy_efficiency_score === "number" &&
-    Number.isFinite(body.energy_efficiency_score)
-  ) {
-    return body;
-  }
-
-  return {
-    ...body,
-    energy_efficiency_score: LEGACY_ENERGY_EFFICIENCY_SCORE,
-  };
-}
 
 export async function POST(request: Request) {
   const { userId } = await auth();
 
   if (!userId) {
-    return NextResponse.json(
-      {
-        success: false,
-        error: "Unauthorized",
-        code: "UNAUTHORIZED",
-      },
-      { status: 401 }
-    );
+    return errorResponse(401, "UNAUTHORIZED", "Unauthorized");
   }
 
   let body: unknown;
@@ -45,15 +21,39 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json(
-      {
-        success: false,
-        error: "Request body must be valid JSON",
-        code: "INVALID_JSON",
-      },
-      { status: 400 }
+    return errorResponse(400, "INVALID_JSON", "Request body must be valid JSON");
+  }
+
+  const business = await resolveBusiness(userId);
+
+  if (!business) {
+    return errorResponse(
+      404,
+      "BUSINESS_NOT_FOUND",
+      "Business profile not found"
     );
   }
 
-  return proxyMlRequest("/predict", withModelCompatFields(body));
+  const validation = validateEnergyRecord(body);
+
+  if (!validation.success) {
+    return errorResponse(
+      400,
+      "INVALID_ENERGY_RECORD",
+      "Forecast input data is invalid",
+      validation.issues
+    );
+  }
+
+  const persisted = await persistableEnergyRecord(
+    validation.data,
+    business.id
+  );
+
+  return proxyMlRequest(
+    "/predict",
+    buildMlPredictionPayload(validation.data, business, {
+      averageMonthlyEnergyCost: persisted.averageMonthlyEnergyCost,
+    })
+  );
 }

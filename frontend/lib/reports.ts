@@ -9,7 +9,7 @@ import {
   insights,
   predictions,
 } from "@/lib/db/schema";
-import { calculateGesV1FromRecord } from "@/lib/ges-v1";
+import { calculateGES } from "@/lib/ges-v1";
 
 export type ReportBusiness = {
   id: string;
@@ -319,7 +319,7 @@ export function formatGesScore(
     return "Unavailable";
   }
 
-  const ges = calculateGesV1FromRecord({
+  const ges = calculateGES({
     totalEnergyCost: energyRecord.totalEnergyCost,
     monthlyRevenue: energyRecord.monthlyRevenue,
     generatorHours: energyRecord.generatorHours,

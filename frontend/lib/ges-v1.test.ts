@@ -5,6 +5,7 @@ import {
   GES_V1_D_MIN,
   GES_V1_S_MAX,
   GES_V1_S_MIN,
+  calculateGES,
   calculateGesV1,
   calculateGesV1FromRecord,
   daysInCalendarMonth,
@@ -355,6 +356,20 @@ run("monthly-shaped operating hours 600 do not compute GES", () => {
   if (!result.available) {
     assert.equal(result.reason, "operating_hours_invalid");
   }
+});
+
+run("calculateGES is an alias of calculateGesV1FromRecord", () => {
+  const input = {
+    totalEnergyCost: 300_000,
+    monthlyRevenue: 1_000_000,
+    generatorHours: 40,
+    gridHours: 360,
+    outageHours: 40,
+    operatingHours: 12,
+    year: 2024,
+    month: 1,
+  };
+  assert.deepEqual(calculateGES(input), calculateGesV1FromRecord(input));
 });
 
 console.log("All GES v1 tests passed.");

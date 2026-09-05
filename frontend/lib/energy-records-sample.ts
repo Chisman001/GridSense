@@ -4,7 +4,7 @@ import {
   writableFields,
   type WritableField,
 } from "@/lib/energy-record-fields";
-import { LEGACY_ENERGY_EFFICIENCY_SCORE } from "@/lib/ml-compat";
+import { deriveEnergyMetrics, type RawEnergyRecord } from "@/lib/energy-record-pipeline";
 
 export const SAMPLE_CSV_FILENAME = "gridsense-sample-energy-records.csv";
 
@@ -15,19 +15,19 @@ export const expectedUploadFields = [
     columns: "year, month",
   },
   {
-    label: "Energy Cost",
-    unit: "₦",
-    columns: "total_energy_cost",
-  },
-  {
     label: "Grid Cost",
     unit: "₦",
     columns: "electricity_bill",
   },
   {
-    label: "Generator Cost",
+    label: "Diesel Cost",
     unit: "₦",
     columns: "diesel_cost",
+  },
+  {
+    label: "Petrol Cost",
+    unit: "₦",
+    columns: "petrol_cost",
   },
   {
     label: "Energy Consumption",
@@ -51,30 +51,7 @@ export const expectedUploadFields = [
   },
 ] as const;
 
-type SampleRawRow = {
-  year: number;
-  month: number;
-  energySource: string;
-  electricityBill: number;
-  dieselCost: number;
-  petrolCost: number;
-  energyConsumptionKwh: number;
-  fuelConsumptionLiters: number;
-  generatorHours: number;
-  gridHours: number;
-  outageHours: number;
-  operatingHours: number;
-  employees: number;
-  occupancyRate: number;
-  floorAreaSqm: number;
-  solarCapacityKw: number;
-  renewableEnergyPercentage: number;
-  maintenanceCost: number;
-  monthlyRevenue: number;
-  weatherAvgTemp: number;
-};
-
-const SAMPLE_RAW_ROWS: SampleRawRow[] = [
+const SAMPLE_RAW_ROWS: RawEnergyRecord[] = [
   {
     year: 2025,
     month: 1,
@@ -165,23 +142,6 @@ const SAMPLE_RAW_ROWS: SampleRawRow[] = [
   },
 ];
 
-function roundTo(value: number, digits: number): number {
-  const factor = 10 ** digits;
-  return Math.round(value * factor) / factor;
-}
-
-function safeDivide(numerator: number, denominator: number): number {
-  if (denominator === 0) {
-    return 0;
-  }
-
-  return numerator / denominator;
-}
-
-function daysInMonth(year: number, month: number): number {
-  return new Date(year, month, 0).getDate();
-}
-
 function csvValue(value: string | number): string {
   const text = String(value);
 
@@ -192,100 +152,42 @@ function csvValue(value: string | number): string {
   return text;
 }
 
-function buildSampleRecord(
-  raw: SampleRawRow,
-  averageMonthlyEnergyCost: number
-): Record<WritableField, string | number> {
-  const totalEnergyCost = raw.electricityBill + raw.dieselCost + raw.petrolCost;
-
-  return {
-    year: raw.year,
-    month: raw.month,
-    quarter: Math.floor((raw.month - 1) / 3) + 1,
-    energySource: raw.energySource,
-    electricityBill: raw.electricityBill,
-    dieselCost: raw.dieselCost,
-    petrolCost: raw.petrolCost,
-    totalEnergyCost,
-    energyConsumptionKwh: raw.energyConsumptionKwh,
-    fuelConsumptionLiters: raw.fuelConsumptionLiters,
-    generatorHours: raw.generatorHours,
-    gridHours: raw.gridHours,
-    outageHours: raw.outageHours,
-    operatingHours: raw.operatingHours,
-    employeeCount: raw.employees,
-    employees: raw.employees,
-    occupancyRate: raw.occupancyRate,
-    floorAreaSqm: raw.floorAreaSqm,
-    solarCapacityKw: raw.solarCapacityKw,
-    renewableEnergyPercentage: raw.renewableEnergyPercentage,
-    maintenanceCost: raw.maintenanceCost,
-    monthlyRevenue: raw.monthlyRevenue,
-    energyCostPerEmployee: roundTo(
-      safeDivide(totalEnergyCost, raw.employees),
-      4
-    ),
-    costPerKwh: roundTo(
-      safeDivide(totalEnergyCost, raw.energyConsumptionKwh),
-      4
-    ),
-    averageMonthlyEnergyCost: roundTo(averageMonthlyEnergyCost, 2),
-    energyEfficiencyScore: LEGACY_ENERGY_EFFICIENCY_SCORE,
-    generatorDependency: roundTo(
-      safeDivide(raw.generatorHours, raw.generatorHours + raw.gridHours),
-      6
-    ),
-    revenueEnergyRatio: roundTo(
-      safeDivide(raw.monthlyRevenue, totalEnergyCost),
-      6
-    ),
-    outageSeverity: roundTo(
-      safeDivide(
-        raw.outageHours,
-        raw.operatingHours * daysInMonth(raw.year, raw.month)
-      ),
-      6
-    ),
-    weatherAvgTemp: raw.weatherAvgTemp,
-    estimatedCarbonIntensity: roundTo(
-      safeDivide(raw.fuelConsumptionLiters, raw.energyConsumptionKwh),
-      6
-    ),
-  };
-}
-
-function buildSampleRecords(): Array<Record<WritableField, string | number>> {
-  let runningTotal = 0;
-
-  return SAMPLE_RAW_ROWS.map((raw, index) => {
-    const totalEnergyCost = raw.electricityBill + raw.dieselCost + raw.petrolCost;
-    runningTotal += totalEnergyCost;
-    return buildSampleRecord(raw, runningTotal / (index + 1));
-  });
-}
-
 export function buildSampleEnergyRecordsCsv(): string {
-  const records = buildSampleRecords();
   const lines = [
     requiredCsvHeaders.join(","),
-    ...records.map((record) =>
+    ...SAMPLE_RAW_ROWS.map((raw) =>
       requiredCsvHeaders
         .map((header) => {
           const field = writableFields.find(
             (name) => csvHeaders[name] === header
-          );
+          ) as WritableField | undefined;
 
-          if (!field) {
+          if (!field || !(field in raw)) {
             throw new Error(`Sample CSV is missing header mapping: ${header}`);
           }
 
-          return csvValue(record[field]);
+          return csvValue(raw[field as keyof RawEnergyRecord]);
         })
         .join(",")
     ),
   ];
 
   return `${lines.join("\n")}\n`;
+}
+
+export function buildSampleDerivedRecords() {
+  let runningTotal = 0;
+
+  return SAMPLE_RAW_ROWS.map((raw, index) => {
+    const derived = deriveEnergyMetrics(raw);
+    runningTotal += derived.totalEnergyCost;
+    return {
+      ...raw,
+      ...deriveEnergyMetrics(raw, {
+        averageMonthlyEnergyCost: runningTotal / (index + 1),
+      }),
+    };
+  });
 }
 
 export function downloadSampleEnergyRecordsCsv(): void {

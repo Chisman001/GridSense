@@ -226,3 +226,6 @@ export function calculateGesV1FromRecord(record: GesRecordInput): GesV1Result {
     month: record.month,
   });
 }
+
+/** Single application-facing GES entry point. */
+export const calculateGES = calculateGesV1FromRecord;

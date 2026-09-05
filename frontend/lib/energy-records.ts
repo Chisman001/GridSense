@@ -12,10 +12,15 @@ import {
   writableFields,
   type WritableField,
 } from "@/lib/energy-record-fields";
-import { daysInCalendarMonth } from "@/lib/ges-v1";
-import { LEGACY_ENERGY_EFFICIENCY_SCORE } from "@/lib/ml-compat";
+import {
+  buildPersistedEnergyRecord,
+  nextAverageMonthlyEnergyCost,
+  totalEnergyCostFromBills,
+  validateRawEnergyRecord,
+  type PersistedEnergyRecord,
+  type RawEnergyRecord,
+} from "@/lib/energy-record-pipeline";
 
-export { LEGACY_ENERGY_EFFICIENCY_SCORE };
 export {
   csvHeaders,
   derivedWritableFields,
@@ -26,27 +31,27 @@ export {
   type WritableField,
 };
 
-export type EnergyRecordPayload = Omit<
-  Pick<typeof energyRecords.$inferInsert, WritableField>,
-  "energyEfficiencyScore"
-> & {
-  energyEfficiencyScore?: number;
-};
+export {
+  buildImportWarnings,
+  buildMlPredictionPayload,
+  buildPersistedEnergyRecord,
+  calculateGES,
+  classifyCsvHeaders,
+  csvRowToPayload,
+  totalEnergyCostFromBills,
+  deriveEnergyMetrics,
+  detectTotalCostMismatch,
+  nextAverageMonthlyEnergyCost,
+  readOptionalCsvNumber,
+  validateRawEnergyRecord,
+  type BusinessProfileFeatures,
+  type ImportWarning,
+  type PersistedEnergyRecord,
+  type RawEnergyRecord,
+  type ValidationIssue,
+} from "@/lib/energy-record-pipeline";
 
-export function withPersistedEnergyEfficiencyScore(
-  data: EnergyRecordPayload,
-  fallback = LEGACY_ENERGY_EFFICIENCY_SCORE
-): EnergyRecordPayload & { energyEfficiencyScore: number } {
-  return {
-    ...data,
-    energyEfficiencyScore: data.energyEfficiencyScore ?? fallback,
-  };
-}
-
-export type ValidationIssue = {
-  field: WritableField;
-  reason: string;
-};
+export type EnergyRecordPayload = PersistedEnergyRecord;
 
 export const energyRecordPeriodUniqueConstraint =
   "energy_records_business_year_month_unique";
@@ -55,7 +60,7 @@ export function isEnergyRecordPeriodConflict(error: unknown): boolean {
   const seen = new Set<unknown>();
   let current = error;
 
-  while (isRecord(current) && !seen.has(current)) {
+  while (isPlainRecord(current) && !seen.has(current)) {
     seen.add(current);
 
     if (
@@ -71,217 +76,79 @@ export function isEnergyRecordPeriodConflict(error: unknown): boolean {
   return false;
 }
 
-const integerFields = new Set<WritableField>([
-  "year",
-  "month",
-  "quarter",
-  "employeeCount",
-  "employees",
-]);
-
-const signedFields = new Set<WritableField>([
-  "weatherAvgTemp",
-  "energyEfficiencyScore",
-]);
-
-const derivedFieldSet = new Set<WritableField>(derivedWritableFields);
-
-function roundTo(value: number, digits: number): number {
-  const factor = 10 ** digits;
-  return Math.round(value * factor) / factor;
-}
-
-function safeDivide(numerator: number, denominator: number): number {
-  if (denominator === 0) {
-    return 0;
-  }
-
-  return numerator / denominator;
-}
-
-/**
- * Fill ratio columns from raw inputs. GES ignores these stored values
- * and recomputes from the same raw fields.
- */
-export function withDerivedEnergyRecordFields(
-  data: EnergyRecordPayload,
-  averageMonthlyEnergyCost: number
-): EnergyRecordPayload {
-  const employees = data.employees;
-
-  return {
-    ...data,
-    energyCostPerEmployee: roundTo(
-      safeDivide(data.totalEnergyCost, employees),
-      4
-    ),
-    costPerKwh: roundTo(
-      safeDivide(data.totalEnergyCost, data.energyConsumptionKwh),
-      4
-    ),
-    averageMonthlyEnergyCost: roundTo(averageMonthlyEnergyCost, 2),
-    generatorDependency: roundTo(
-      safeDivide(
-        data.generatorHours,
-        data.generatorHours + data.gridHours
-      ),
-      6
-    ),
-    revenueEnergyRatio: roundTo(
-      safeDivide(data.monthlyRevenue, data.totalEnergyCost),
-      6
-    ),
-    outageSeverity: roundTo(
-      safeDivide(
-        data.outageHours,
-        data.operatingHours *
-          (daysInCalendarMonth(data.year, data.month) ?? 0)
-      ),
-      6
-    ),
-  };
-}
-
-export function isRecord(
+function isPlainRecord(
   value: unknown
 ): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-export function validateEnergyRecord(
-  value: unknown
-):
-  | { success: true; data: EnergyRecordPayload }
-  | { success: false; issues: ValidationIssue[] } {
-  if (!isRecord(value)) {
-    return {
-      success: false,
-      issues: [{ field: "year", reason: "Record must be an object" }],
-    };
-  }
+export const validateEnergyRecord = validateRawEnergyRecord;
 
-  const issues: ValidationIssue[] = [];
+export function withDerivedEnergyRecordFields(
+  data: RawEnergyRecord,
+  averageMonthlyEnergyCost: number
+): PersistedEnergyRecord {
+  return buildPersistedEnergyRecord(data, { averageMonthlyEnergyCost }).record;
+}
 
-  for (const field of writableFields) {
-    const fieldValue = value[field];
-
-    if (derivedFieldSet.has(field) && fieldValue === undefined) {
-      continue;
-    }
-
-    if (field === "energySource") {
-      if (typeof fieldValue !== "string" || fieldValue.trim().length === 0) {
-        issues.push({
-          field,
-          reason: "Must be a non-empty string",
-        });
-      }
-      continue;
-    }
-
-    if (typeof fieldValue !== "number" || !Number.isFinite(fieldValue)) {
-      issues.push({ field, reason: "Must be a finite number" });
-      continue;
-    }
-
-    if (integerFields.has(field) && !Number.isInteger(fieldValue)) {
-      issues.push({ field, reason: "Must be an integer" });
-      continue;
-    }
-
-    if (!signedFields.has(field) && fieldValue < 0) {
-      issues.push({ field, reason: "Must be nonnegative" });
-    }
-  }
-
-  const year = value.year;
-  const month = value.month;
-  const quarter = value.quarter;
-  const occupancyRate = value.occupancyRate;
-  const renewablePercentage = value.renewableEnergyPercentage;
-
-  if (
-    typeof year === "number" &&
-    Number.isInteger(year) &&
-    (year < 2000 || year > 2100)
-  ) {
-    issues.push({ field: "year", reason: "Must be between 2000 and 2100" });
-  }
-
-  if (
-    typeof month === "number" &&
-    Number.isInteger(month) &&
-    (month < 1 || month > 12)
-  ) {
-    issues.push({ field: "month", reason: "Must be between 1 and 12" });
-  }
-
-  if (
-    typeof quarter === "number" &&
-    Number.isInteger(quarter) &&
-    (quarter < 1 || quarter > 4)
-  ) {
-    issues.push({ field: "quarter", reason: "Must be between 1 and 4" });
-  }
-
-  if (
-    typeof occupancyRate === "number" &&
-    Number.isFinite(occupancyRate) &&
-    (occupancyRate < 0 || occupancyRate > 100)
-  ) {
-    issues.push({
-      field: "occupancyRate",
-      reason: "Must be between 0 and 100",
-    });
-  }
-
-  if (
-    typeof renewablePercentage === "number" &&
-    Number.isFinite(renewablePercentage) &&
-    (renewablePercentage < 0 || renewablePercentage > 100)
-  ) {
-    issues.push({
-      field: "renewableEnergyPercentage",
-      reason: "Must be between 0 and 100",
-    });
-  }
-
-  if (issues.length > 0) {
-    return { success: false, issues };
-  }
-
-  const data = Object.fromEntries(
-    writableFields
-      .filter((field) => {
-        if (!derivedFieldSet.has(field)) {
-          return true;
-        }
-
-        const fieldValue = value[field];
-        return typeof fieldValue === "number" && Number.isFinite(fieldValue);
-      })
-      .map((field) => [
-        field,
-        field === "energySource"
-          ? (value[field] as string).trim()
-          : value[field],
-      ])
-  ) as EnergyRecordPayload;
-
-  return {
-    success: true,
-    data,
-  };
+export function withComputedGesCache(
+  data: RawEnergyRecord,
+  averageMonthlyEnergyCost: number
+): PersistedEnergyRecord {
+  return buildPersistedEnergyRecord(data, { averageMonthlyEnergyCost }).record;
 }
 
 export async function resolveBusiness(userId: string) {
   const [business] = await db
-    .select({ id: businesses.id })
+    .select({
+      id: businesses.id,
+      businessName: businesses.businessName,
+      businessType: businesses.businessType,
+      industry: businesses.industry,
+      state: businesses.state,
+    })
     .from(businesses)
     .where(eq(businesses.clerkUserId, userId))
     .limit(1);
 
   return business ?? null;
+}
+
+export async function loadEnergyCostTotals(
+  businessId: string,
+  excludeRecordId?: string
+) {
+  const records = await db
+    .select({
+      id: energyRecords.id,
+      totalEnergyCost: energyRecords.totalEnergyCost,
+    })
+    .from(energyRecords)
+    .where(eq(energyRecords.businessId, businessId));
+
+  return records
+    .filter((record) => record.id !== excludeRecordId)
+    .map((record) => record.totalEnergyCost);
+}
+
+export async function persistableEnergyRecord(
+  raw: RawEnergyRecord,
+  businessId: string,
+  excludeRecordId?: string
+): Promise<PersistedEnergyRecord> {
+  const existingTotals = await loadEnergyCostTotals(businessId, excludeRecordId);
+  const { record } = buildPersistedEnergyRecord(raw, {
+    averageMonthlyEnergyCost: nextAverageMonthlyEnergyCost(
+      existingTotals,
+      totalEnergyCostFromBills(
+        raw.electricityBill,
+        raw.dieselCost,
+        raw.petrolCost
+      )
+    ),
+  });
+
+  return record;
 }
 
 export function errorResponse(
@@ -396,27 +263,4 @@ export function parseCsv(text: string):
   }
 
   return { success: true, rows };
-}
-
-export function csvRowToPayload(
-  headers: string[],
-  values: string[]
-): Record<string, unknown> {
-  const byHeader = new Map(
-    headers.map((header, index) => [header, values[index] ?? ""])
-  );
-
-  return Object.fromEntries(
-    rawWritableFields.map((field) => {
-      const rawValue = byHeader.get(csvHeaders[field]) ?? "";
-      return [
-        field,
-        field === "energySource"
-          ? rawValue.trim()
-          : rawValue.trim().length === 0
-            ? Number.NaN
-            : Number(rawValue),
-      ];
-    })
-  );
 }

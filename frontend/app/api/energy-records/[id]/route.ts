@@ -7,10 +7,9 @@ import { energyRecords, predictions } from "@/lib/db/schema";
 import {
   errorResponse,
   isEnergyRecordPeriodConflict,
+  persistableEnergyRecord,
   resolveBusiness,
   validateEnergyRecord,
-  withDerivedEnergyRecordFields,
-  withPersistedEnergyEfficiencyScore,
 } from "@/lib/energy-records";
 
 type RouteContext = {
@@ -127,18 +126,15 @@ export async function PATCH(request: Request, context: RouteContext) {
       );
     }
 
+    const persisted = await persistableEnergyRecord(
+      validation.data,
+      business.id,
+      id
+    );
+
     const [record] = await db
       .update(energyRecords)
-      .set(
-        withPersistedEnergyEfficiencyScore(
-          withDerivedEnergyRecordFields(
-            validation.data,
-            validation.data.averageMonthlyEnergyCost ??
-              validation.data.totalEnergyCost
-          ),
-          ownedRecord.energyEfficiencyScore
-        )
-      )
+      .set(persisted)
       .where(
         and(
           eq(energyRecords.id, id),

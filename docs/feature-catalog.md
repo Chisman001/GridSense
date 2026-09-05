@@ -351,13 +351,29 @@ Medium
 
 ---
 
+## Classification
+
+GridSense treats energy-record fields as either RAW observations or DERIVED metrics.
+
+RAW fields are entered by the business (or uploaded in CSV).
+
+DERIVED fields are always calculated by GridSense. They are never user-editable.
+
+---
+
 ## total_energy_cost
+
+Classification
+
+DERIVED
 
 Formula
 
-electricity_cost +
+electricity_bill +
 diesel_cost +
 petrol_cost
+
+The user never enters this value. Forms show it as a live total. Old CSVs may still include the column; GridSense ignores the supplied value and recomputes the sum.
 
 Used By
 
@@ -444,9 +460,13 @@ Importance
 
 ## energy_efficiency_score
 
+Classification
+
+DERIVED cache
+
 Type
 
-Composite Score
+Composite Score (GridSense Energy Score)
 
 Range
 
@@ -458,7 +478,7 @@ Importance
 
 Description
 
-Represents the overall energy performance of the business.
+The database column `energy_efficiency_score` stores a computed GridSense Energy Score (GES) cache. It is not a user-entered value and is not a LightGBM feature. The UI always labels this as GridSense Energy Score (GES). The score is recalculated from raw fields through `calculateGES()`. There is no default of 75.
 
 ---
 
