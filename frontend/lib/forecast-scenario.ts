@@ -216,18 +216,12 @@ export function buildScenarioExplanation(input: {
   scenarioCost: number;
 }): string {
   const reduction = clampReductionPercent(input.reductionPercent);
-  const direction =
-    input.scenarioCost < input.baselineCost
-      ? "falls"
-      : input.scenarioCost > input.baselineCost
-        ? "rises"
-        : "stays at";
-  const scenarioPhrase =
+  const costPhrase =
     input.scenarioCost === input.baselineCost
-      ? formatForecastCurrency(input.baselineCost)
-      : `${formatForecastCurrency(input.baselineCost)} to ${formatForecastCurrency(input.scenarioCost)}`;
+      ? `remains at ${formatForecastCurrency(input.baselineCost)}`
+      : `moves from ${formatForecastCurrency(input.baselineCost)} to ${formatForecastCurrency(input.scenarioCost)}`;
 
-  return `Scenario estimate: Reducing generator hours by ${formatForecastPercent(reduction, 0)} also reduces diesel and fuel consumption by ${formatForecastPercent(reduction, 0)}. The model's estimated next-month energy cost ${direction} from ${scenarioPhrase}.`;
+  return `Scenario estimate: Reducing generator hours by ${formatForecastPercent(reduction, 0)} also reduces diesel and fuel consumption by ${formatForecastPercent(reduction, 0)}. The estimated next-month energy cost ${costPhrase}.`;
 }
 
 export function parseForecastPrediction(payload: unknown): ForecastPrediction {

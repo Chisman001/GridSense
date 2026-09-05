@@ -1,0 +1,230 @@
+{
+  "audit": "F",
+  "title": "What-If robustness across validation/test population",
+  "generated_at": "2026-09-05T09:58:10.447067",
+  "model": "lightgbm",
+  "population_size": 750,
+  "reduction_levels_percent": [
+    0,
+    10,
+    20,
+    30,
+    40
+  ],
+  "max_reduction_percent": 40,
+  "overall": {
+    "row_count": 750,
+    "direction_sensible_rate_pct": 82.9,
+    "monotonic_non_increasing_rate_pct": 32.0,
+    "flat_response_rate_pct": 4.3,
+    "median_delta_at_max_reduction_naira": -125092.33,
+    "median_delta_at_max_reduction_pct": -4.2416,
+    "mean_delta_at_max_reduction_naira": -204185.11
+  },
+  "by_generator_dependency_bucket": [
+    {
+      "bucket": "0-5%",
+      "generator_dependency_range": [
+        0.0,
+        0.05
+      ],
+      "row_count": 193,
+      "direction_sensible_rate_pct": 85.5,
+      "monotonic_non_increasing_rate_pct": 55.4,
+      "flat_response_rate_pct": 14.0,
+      "median_delta_at_max_reduction_naira": -39061.86,
+      "median_delta_at_max_reduction_pct": -2.4753,
+      "mean_delta_at_max_reduction_naira": -85410.32
+    },
+    {
+      "bucket": "5-10%",
+      "generator_dependency_range": [
+        0.05,
+        0.1
+      ],
+      "row_count": 320,
+      "direction_sensible_rate_pct": 86.6,
+      "monotonic_non_increasing_rate_pct": 29.4,
+      "flat_response_rate_pct": 1.6,
+      "median_delta_at_max_reduction_naira": -151781.77,
+      "median_delta_at_max_reduction_pct": -4.8675,
+      "mean_delta_at_max_reduction_naira": -248429.87
+    },
+    {
+      "bucket": "10-20%",
+      "generator_dependency_range": [
+        0.1,
+        0.2
+      ],
+      "row_count": 234,
+      "direction_sensible_rate_pct": 76.1,
+      "monotonic_non_increasing_rate_pct": 16.7,
+      "flat_response_rate_pct": 0.0,
+      "median_delta_at_max_reduction_naira": -237358.07,
+      "median_delta_at_max_reduction_pct": -4.2828,
+      "mean_delta_at_max_reduction_naira": -243225.45
+    },
+    {
+      "bucket": "20-40%",
+      "generator_dependency_range": [
+        0.2,
+        0.4
+      ],
+      "row_count": 3,
+      "direction_sensible_rate_pct": 66.7,
+      "monotonic_non_increasing_rate_pct": 0.0,
+      "flat_response_rate_pct": 0.0,
+      "median_delta_at_max_reduction_naira": -243146.29,
+      "median_delta_at_max_reduction_pct": -1.4483,
+      "mean_delta_at_max_reduction_naira": -80776.18
+    },
+    {
+      "bucket": "40%+",
+      "generator_dependency_range": [
+        0.4,
+        1.0
+      ],
+      "row_count": 0
+    }
+  ],
+  "by_business_type": [
+    {
+      "business_type": "Bakery",
+      "row_count": 105,
+      "direction_sensible_rate_pct": 82.9,
+      "monotonic_non_increasing_rate_pct": 44.8,
+      "flat_response_rate_pct": 17.1,
+      "median_delta_at_max_reduction_naira": -35064.12,
+      "median_delta_at_max_reduction_pct": -4.8482,
+      "mean_delta_at_max_reduction_naira": -43254.0
+    },
+    {
+      "business_type": "Cold Room",
+      "row_count": 130,
+      "direction_sensible_rate_pct": 96.9,
+      "monotonic_non_increasing_rate_pct": 31.5,
+      "flat_response_rate_pct": 0.0,
+      "median_delta_at_max_reduction_naira": -229009.98,
+      "median_delta_at_max_reduction_pct": -7.0876,
+      "mean_delta_at_max_reduction_naira": -235301.14
+    },
+    {
+      "business_type": "Factory",
+      "row_count": 150,
+      "direction_sensible_rate_pct": 71.3,
+      "monotonic_non_increasing_rate_pct": 14.7,
+      "flat_response_rate_pct": 0.0,
+      "median_delta_at_max_reduction_naira": -249200.21,
+      "median_delta_at_max_reduction_pct": -2.3861,
+      "mean_delta_at_max_reduction_naira": -363114.29
+    },
+    {
+      "business_type": "Hospital",
+      "row_count": 145,
+      "direction_sensible_rate_pct": 82.8,
+      "monotonic_non_increasing_rate_pct": 18.6,
+      "flat_response_rate_pct": 0.0,
+      "median_delta_at_max_reduction_naira": -309627.06,
+      "median_delta_at_max_reduction_pct": -4.1196,
+      "mean_delta_at_max_reduction_naira": -309365.86
+    },
+    {
+      "business_type": "Hotel",
+      "row_count": 120,
+      "direction_sensible_rate_pct": 90.0,
+      "monotonic_non_increasing_rate_pct": 46.7,
+      "flat_response_rate_pct": 3.3,
+      "median_delta_at_max_reduction_naira": -70359.95,
+      "median_delta_at_max_reduction_pct": -4.8895,
+      "mean_delta_at_max_reduction_naira": -107782.71
+    },
+    {
+      "business_type": "School",
+      "row_count": 100,
+      "direction_sensible_rate_pct": 74.0,
+      "monotonic_non_increasing_rate_pct": 47.0,
+      "flat_response_rate_pct": 10.0,
+      "median_delta_at_max_reduction_naira": -20944.44,
+      "median_delta_at_max_reduction_pct": -1.3809,
+      "mean_delta_at_max_reduction_naira": -57488.99
+    }
+  ],
+  "empirical_threshold_analysis": [
+    {
+      "minimum_generator_dependency": 0.05,
+      "minimum_generator_dependency_pct": 5.0,
+      "row_count": 557,
+      "direction_sensible_rate_pct": 82.0,
+      "monotonic_non_increasing_rate_pct": 23.9,
+      "flat_response_rate_pct": 0.9,
+      "median_delta_at_max_reduction_naira": -167203.62,
+      "median_delta_at_max_reduction_pct": -4.6195,
+      "mean_delta_at_max_reduction_naira": -245340.47
+    },
+    {
+      "minimum_generator_dependency": 0.1,
+      "minimum_generator_dependency_pct": 10.0,
+      "row_count": 237,
+      "direction_sensible_rate_pct": 75.9,
+      "monotonic_non_increasing_rate_pct": 16.5,
+      "flat_response_rate_pct": 0.0,
+      "median_delta_at_max_reduction_naira": -238859.77,
+      "median_delta_at_max_reduction_pct": -4.2675,
+      "mean_delta_at_max_reduction_naira": -241169.13
+    },
+    {
+      "minimum_generator_dependency": 0.15,
+      "minimum_generator_dependency_pct": 15.0,
+      "row_count": 55,
+      "direction_sensible_rate_pct": 54.5,
+      "monotonic_non_increasing_rate_pct": 5.5,
+      "flat_response_rate_pct": 0.0,
+      "median_delta_at_max_reduction_naira": -61977.69,
+      "median_delta_at_max_reduction_pct": -1.0127,
+      "mean_delta_at_max_reduction_naira": -112541.94
+    },
+    {
+      "minimum_generator_dependency": 0.2,
+      "minimum_generator_dependency_pct": 20.0,
+      "row_count": 3,
+      "direction_sensible_rate_pct": 66.7,
+      "monotonic_non_increasing_rate_pct": 0.0,
+      "flat_response_rate_pct": 0.0,
+      "median_delta_at_max_reduction_naira": -243146.29,
+      "median_delta_at_max_reduction_pct": -1.4483,
+      "mean_delta_at_max_reduction_naira": -80776.18
+    },
+    {
+      "minimum_generator_dependency": 0.25,
+      "minimum_generator_dependency_pct": 25.0,
+      "row_count": 0
+    },
+    {
+      "minimum_generator_dependency": 0.3,
+      "minimum_generator_dependency_pct": 30.0,
+      "row_count": 0
+    },
+    {
+      "minimum_generator_dependency": 0.4,
+      "minimum_generator_dependency_pct": 40.0,
+      "row_count": 0
+    }
+  ],
+  "recommended_minimum_generator_dependency": {
+    "minimum_generator_dependency": 0.05,
+    "minimum_generator_dependency_pct": 5.0,
+    "direction_sensible_rate_pct": 82.0,
+    "monotonic_non_increasing_rate_pct": 23.9,
+    "row_count": 557,
+    "note": "Lowest tested threshold where at least 70% of records show non-increasing predicted cost at max generator reduction."
+  },
+  "analysis": {
+    "interpretation_notes": [
+      "Direction sensible = predicted cost at 40% reduction is not higher than baseline.",
+      "Flat response = all five scenario predictions are within \u20a61 of each other.",
+      "Use dependency buckets and empirical thresholds to set product guardrails with evidence."
+    ],
+    "population_direction_sensible_rate_pct": 82.9,
+    "population_flat_response_rate_pct": 4.3
+  }
+}

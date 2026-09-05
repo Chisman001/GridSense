@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-09-05T09:58:10.473113",
+  "audits_run": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H"
+  ],
+  "key_findings": [
+    "21 frontend business types have no training examples.",
+    "8 frontend industries have no training examples.",
+    "All app-only business type scenarios produced the same prediction \u2014 likely ignored by the model.",
+    "Changing only business_type/industry with fixed energy inputs did not change predictions at all.",
+    "Highest mean absolute error cluster: Factory (MAE ~\u20a61,739,007).",
+    "19 of top 20 worst errors are Factory businesses.",
+    "What-If sample sweep: 2/3 profiles show lower predicted cost at max generator reduction.",
+    "What-If sample sweep: 1/3 profiles have monotonic non-increasing predictions.",
+    "Population What-If: 82.9% direction-sensible at max reduction across 750 records.",
+    "Population What-If: 4.3% of records show flat predictions across all reduction levels.",
+    "Evidence-based generator dependency floor for reliable What-If direction: 5.0% (82.0% direction-sensible, n=557).",
+    "Dominant model driver: maintenance_cost; business identity features = 0.0% importance.",
+    "The model is primarily driven by current-month energy spend and usage signals. Industry and business_type labels contribute very little relative to energy inputs.",
+    "Leakage/temporal sanity verdict: PASS.",
+    "Highest target correlation on eval split: total_energy_cost (r=0.9535).",
+    "Lowest R\u00b2 by business_type: School (0.6416); highest: Hotel (0.8773)."
+  ],
+  "coverage": {
+    "app_business_types_covered_pct": 22.2,
+    "app_industries_covered_pct": 42.9,
+    "app_only_business_type_count": 21,
+    "app_only_industry_count": 8
+  },
+  "sensitivity": {
+    "prediction_min": 11441977.28,
+    "prediction_max": 11441977.28,
+    "prediction_spread_naira": 0.0,
+    "prediction_spread_pct_of_min": 0.0,
+    "trained_type_spread_naira": 0.0,
+    "app_only_all_equal": true,
+    "app_only_unique_prediction_count": 1,
+    "factory_vs_hospital_delta_naira": 0.0,
+    "factory_vs_retail_store_delta_naira": 0.0,
+    "interpretation_notes": [
+      "If app_only scenarios share one prediction, unknown categories are likely ignored by one-hot encoding.",
+      "If trained scenarios differ, business_type/industry affect predictions within training coverage.",
+      "Decoupled pairs simulate user-selected mismatches not present in synthetic training data."
+    ]
+  },
+  "overall_accuracy": {
+    "row_count": 750,
+    "mae": 698973.23,
+    "rmse": 1141857.42,
+    "r2": 0.9436,
+    "mean_actual": 5054016.18,
+    "mean_predicted": 5027038.46
+  },
+  "worst_errors": {
+    "row_count": 750,
+    "mean_abs_residual": 698973.23,
+    "median_abs_residual": 351912.54,
+    "max_abs_residual": 6838520.87,
+    "over_prediction_rate_pct": 50.9
+  },
+  "whatif_sample_sensitivity": {
+    "profiles_tested": 3,
+    "profiles_with_sensible_direction": 2,
+    "profiles_with_monotonic_non_increasing_predictions": 1,
+    "interpretation_notes": [
+      "Sensible direction means max-reduction scenario predicts lower cost than baseline.",
+      "Monotonic non-increasing means each step down in generator use does not raise the forecast.",
+      "What-If does not model grid replacement or operational constraints \u2014 treat as scenario estimates."
+    ]
+  },
+  "whatif_population_robustness": {
+    "interpretation_notes": [
+      "Direction sensible = predicted cost at 40% reduction is not higher than baseline.",
+      "Flat response = all five scenario predictions are within \u20a61 of each other.",
+      "Use dependency buckets and empirical thresholds to set product guardrails with evidence."
+    ],
+    "population_direction_sensible_rate_pct": 82.9,
+    "population_flat_response_rate_pct": 4.3
+  },
+  "whatif_recommended_minimum_generator_dependency": {
+    "minimum_generator_dependency": 0.05,
+    "minimum_generator_dependency_pct": 5.0,
+    "direction_sensible_rate_pct": 82.0,
+    "monotonic_non_increasing_rate_pct": 23.9,
+    "row_count": 557,
+    "note": "Lowest tested threshold where at least 70% of records show non-increasing predicted cost at max generator reduction."
+  },
+  "feature_importance": {
+    "dominant_feature": "maintenance_cost",
+    "business_identity_importance_pct": 0.0,
+    "current_energy_cost_importance_pct": 28.32,
+    "product_interpretation": "The model is primarily driven by current-month energy spend and usage signals. Industry and business_type labels contribute very little relative to energy inputs.",
+    "interpretation_notes": [
+      "Importances are aggregated across one-hot encoded categorical columns.",
+      "High total_energy_cost importance indicates autoregressive cost forecasting, not industry optimization."
+    ]
+  },
+  "leakage_sanity": {
+    "leakage_verdict": "PASS",
+    "product_interpretation": "Features represent current-month observations and static business attributes forecasting next month's total energy cost. High R\u00b2 is primarily driven by autoregressive cost persistence, not same-month leakage.",
+    "interpretation_notes": [
+      "Medium-risk features derive from current-month total_energy_cost but remain temporally valid inputs.",
+      "Verify product copy describes next-month forecasting from current observed data.",
+      "GES and other post-hoc scores are excluded from the model contract."
+    ]
+  }
+}

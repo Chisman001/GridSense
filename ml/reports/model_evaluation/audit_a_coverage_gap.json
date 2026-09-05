@@ -1,0 +1,189 @@
+{
+  "audit": "A",
+  "title": "Training coverage vs frontend options",
+  "generated_at": "2026-09-05T09:58:06.376647",
+  "training": {
+    "business_types": [
+      "Bakery",
+      "Cold Room",
+      "Factory",
+      "Hospital",
+      "Hotel",
+      "School"
+    ],
+    "industries": [
+      "Cold Storage",
+      "Education",
+      "Food Production",
+      "Healthcare",
+      "Hospitality",
+      "Manufacturing"
+    ],
+    "business_type_industry_pairs": [
+      {
+        "business_type": "Bakery",
+        "industry": "Food Production"
+      },
+      {
+        "business_type": "Cold Room",
+        "industry": "Cold Storage"
+      },
+      {
+        "business_type": "Factory",
+        "industry": "Manufacturing"
+      },
+      {
+        "business_type": "Hospital",
+        "industry": "Healthcare"
+      },
+      {
+        "business_type": "Hotel",
+        "industry": "Hospitality"
+      },
+      {
+        "business_type": "School",
+        "industry": "Education"
+      }
+    ],
+    "business_type_counts": [
+      {
+        "business_type": "Bakery",
+        "business_count": 21
+      },
+      {
+        "business_type": "Cold Room",
+        "business_count": 26
+      },
+      {
+        "business_type": "Factory",
+        "business_count": 30
+      },
+      {
+        "business_type": "Hospital",
+        "business_count": 29
+      },
+      {
+        "business_type": "Hotel",
+        "business_count": 24
+      },
+      {
+        "business_type": "School",
+        "business_count": 20
+      }
+    ],
+    "rule_engine_business_type_to_industry": {
+      "Hotel": "Hospitality",
+      "Bakery": "Food Production",
+      "Hospital": "Healthcare",
+      "School": "Education",
+      "Cold Room": "Cold Storage",
+      "Factory": "Manufacturing"
+    }
+  },
+  "frontend": {
+    "business_types": [
+      "Bakery",
+      "Hotel",
+      "Restaurant",
+      "Retail Store",
+      "Supermarket",
+      "Hospital",
+      "School",
+      "Factory",
+      "Office",
+      "Pharmacy",
+      "Farm",
+      "Laundry",
+      "Cold Room",
+      "Warehouse",
+      "Salon",
+      "Clinic",
+      "Gym",
+      "Printing Press",
+      "Fuel Station",
+      "Event Center",
+      "Mini Mart",
+      "Bar / Lounge",
+      "Poultry Farm",
+      "Water Factory",
+      "Bank Branch",
+      "Telecom Shop",
+      "Cyber Cafe"
+    ],
+    "industries": [
+      "Hospitality",
+      "Food Production",
+      "Healthcare",
+      "Education",
+      "Cold Storage",
+      "Manufacturing",
+      "Retail",
+      "Agriculture",
+      "Logistics",
+      "Professional Services",
+      "Financial Services",
+      "Telecommunications",
+      "Energy",
+      "Construction"
+    ]
+  },
+  "gaps": {
+    "business_types_in_app_not_in_training": [
+      "Bank Branch",
+      "Bar / Lounge",
+      "Clinic",
+      "Cyber Cafe",
+      "Event Center",
+      "Farm",
+      "Fuel Station",
+      "Gym",
+      "Laundry",
+      "Mini Mart",
+      "Office",
+      "Pharmacy",
+      "Poultry Farm",
+      "Printing Press",
+      "Restaurant",
+      "Retail Store",
+      "Salon",
+      "Supermarket",
+      "Telecom Shop",
+      "Warehouse",
+      "Water Factory"
+    ],
+    "business_types_in_training_not_in_app": [],
+    "industries_in_app_not_in_training": [
+      "Agriculture",
+      "Construction",
+      "Energy",
+      "Financial Services",
+      "Logistics",
+      "Professional Services",
+      "Retail",
+      "Telecommunications"
+    ],
+    "industries_in_training_not_in_app": [],
+    "business_types_shared": [
+      "Bakery",
+      "Cold Room",
+      "Factory",
+      "Hospital",
+      "Hotel",
+      "School"
+    ],
+    "industries_shared": [
+      "Cold Storage",
+      "Education",
+      "Food Production",
+      "Healthcare",
+      "Hospitality",
+      "Manufacturing"
+    ]
+  },
+  "coverage_summary": {
+    "app_business_types_covered_pct": 22.2,
+    "app_industries_covered_pct": 42.9,
+    "app_only_business_type_count": 21,
+    "app_only_industry_count": 8
+  }
+}

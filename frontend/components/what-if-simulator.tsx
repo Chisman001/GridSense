@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { GesReadout } from "@/components/ges-readout";
+import { MlGuardrailNotice } from "@/components/ml-guardrail-notice";
 import {
   deriveEnergyMetrics,
   type RawEnergyRecord,
@@ -20,10 +21,16 @@ import {
   type ScenarioAdjustment,
   GENERATOR_SCENARIO_MAX_REDUCTION_PERCENT,
 } from "@/lib/forecast-scenario";
+import {
+  WHATIF_SCENARIO_DISCLAIMER,
+  hasLimitedModelCoverage,
+  isScenarioResponseFlat,
+} from "@/lib/ml-guardrails";
 
 type WhatIfSimulatorProps = {
   baselineRaw: RawEnergyRecord;
   baselineResult: ForecastPrediction;
+  businessType?: string;
   disabled?: boolean;
   disabledReason?: string;
 };
@@ -35,6 +42,7 @@ type ScenarioInsights = {
 export function WhatIfSimulator({
   baselineRaw,
   baselineResult,
+  businessType,
   disabled = false,
   disabledReason,
 }: WhatIfSimulatorProps) {
@@ -217,14 +225,14 @@ export function WhatIfSimulator({
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-300">
-            What-if scenario
+            Explore a scenario
           </p>
           <h2 className="mt-2 text-lg font-semibold text-slate-950 dark:text-white">
-            Reduce generator usage
+            Generator use reduction
           </h2>
           <p className="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
-            Explore how lower generator hours could change the next-month
-            estimate. Diesel and fuel use are scaled with generator hours.
+            What might your next-month energy cost look like if generator use
+            were reduced? Diesel and fuel use are scaled with generator hours.
             Grid hours remain unchanged.
           </p>
         </div>
@@ -232,6 +240,11 @@ export function WhatIfSimulator({
           Scenario estimate
         </span>
       </div>
+
+      {typeof businessType === "string" &&
+        hasLimitedModelCoverage(businessType) && (
+          <MlGuardrailNotice variant="coverage" className="mt-5" />
+        )}
 
       {disabled ? (
         <p className="mt-5 rounded-lg border border-amber-200 bg-amber-50 px-3.5 py-3 text-sm leading-6 text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-200">
@@ -338,25 +351,24 @@ export function WhatIfSimulator({
                   </div>
                 </div>
 
-                <dl className="mt-4 grid gap-3 sm:grid-cols-2">
-                  <div>
-                    <dt className="text-xs text-slate-500 dark:text-slate-400">
-                      Scenario-estimated reduction in next-month cost
-                    </dt>
-                    <dd className="mt-1 text-base font-semibold text-slate-950 dark:text-white">
-                      {formatDeltaCurrency(monthlyDelta)} / month
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs text-slate-500 dark:text-slate-400">
-                      Simple annualization (12 × monthly)
-                    </dt>
-                    <dd className="mt-1 text-base font-semibold text-slate-950 dark:text-white">
-                      {formatDeltaCurrency(yearlyDelta)} / year
-                    </dd>
-                  </div>
-                </dl>
+                <div className="mt-4">
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Scenario estimate
+                  </p>
+                  <p className="mt-1 text-xl font-semibold text-slate-950 dark:text-white">
+                    {formatDeltaCurrency(monthlyDelta)} / month
+                  </p>
+                  <p className="mt-2 text-xs leading-5 text-slate-500 dark:text-slate-400">
+                    Illustrative annual figure (12 × monthly):{" "}
+                    {formatDeltaCurrency(yearlyDelta)} / year
+                  </p>
+                </div>
               </div>
+
+              {isScenarioResponseFlat(
+                baselineResult.predicted_next_month_energy_cost,
+                activeScenarioResult.predicted_next_month_energy_cost
+              ) && <MlGuardrailNotice variant="flat-scenario" />}
 
               <div className="grid gap-4 lg:grid-cols-2">
                 <div>
@@ -417,9 +429,7 @@ export function WhatIfSimulator({
           )}
 
           <p className="mt-5 rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3 text-xs leading-5 text-slate-600 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-400">
-            This scenario adjusts current-month inputs and re-runs the same
-            forecast model. The result is a scenario estimate, not a guaranteed
-            saving.
+            {WHATIF_SCENARIO_DISCLAIMER}
           </p>
         </>
       )}
@@ -461,7 +471,7 @@ function formatHours(value: number): string {
 function formatDeltaCurrency(delta: number): string {
   const formatted = formatForecastCurrency(Math.abs(delta));
   if (delta < 0) {
-    return formatted;
+    return `−${formatted}`;
   }
   if (delta > 0) {
     return `+${formatted}`;

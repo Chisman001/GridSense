@@ -1,0 +1,477 @@
+{
+  "audit": "H",
+  "title": "Leakage and feature temporal sanity",
+  "generated_at": "2026-09-05T09:58:06.895966",
+  "target_column": "next_month_energy_cost",
+  "target_construction_check": {
+    "target_definition": "next_month_energy_cost = next month's total_energy_cost within business",
+    "comparable_rows": 3450,
+    "exact_match_rows": 3450,
+    "exact_match_rate_pct": 100.0,
+    "final_row_null_targets": 150,
+    "expected_final_null_targets": 150,
+    "target_shift_verified": true
+  },
+  "excluded_from_model_features": [
+    "created_at",
+    "business_id",
+    "city",
+    "business_name",
+    "next_month_energy_cost",
+    "record_id"
+  ],
+  "target_explicitly_excluded_from_inputs": true,
+  "feature_temporal_catalog": [
+    {
+      "feature": "month",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Calendar month of the input energy record."
+    },
+    {
+      "feature": "year",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Calendar year of the input energy record."
+    },
+    {
+      "feature": "quarter",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "month"
+      ],
+      "leakage_risk": "low",
+      "notes": "Derived from current month."
+    },
+    {
+      "feature": "electricity_bill",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Current-month electricity spend; target is next month."
+    },
+    {
+      "feature": "diesel_cost",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Current-month diesel spend."
+    },
+    {
+      "feature": "petrol_cost",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Current-month petrol spend."
+    },
+    {
+      "feature": "total_energy_cost",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "electricity_bill",
+        "diesel_cost",
+        "petrol_cost"
+      ],
+      "leakage_risk": "medium",
+      "notes": "Sum of current-month bills. Strong predictor of next month because target is next month's total_energy_cost, but this is intentional autoregressive forecasting rather than same-month leakage."
+    },
+    {
+      "feature": "generator_hours",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Observed generator usage for the input month."
+    },
+    {
+      "feature": "grid_hours",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Observed grid usage for the input month."
+    },
+    {
+      "feature": "outage_hours",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Observed outage hours for the input month."
+    },
+    {
+      "feature": "energy_consumption_kwh",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Current-month consumption."
+    },
+    {
+      "feature": "fuel_consumption_liters",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Current-month fuel consumption."
+    },
+    {
+      "feature": "maintenance_cost",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Current-month maintenance spend."
+    },
+    {
+      "feature": "cost_per_kwh",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "total_energy_cost",
+        "energy_consumption_kwh"
+      ],
+      "leakage_risk": "medium",
+      "notes": "Derived from current-month cost and consumption."
+    },
+    {
+      "feature": "energy_cost_per_employee",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "total_energy_cost",
+        "employees"
+      ],
+      "leakage_risk": "medium",
+      "notes": "Derived from current-month total cost."
+    },
+    {
+      "feature": "generator_dependency",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "generator_hours",
+        "grid_hours"
+      ],
+      "leakage_risk": "low",
+      "notes": "Ratio using current-month hours."
+    },
+    {
+      "feature": "revenue_energy_ratio",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "monthly_revenue",
+        "total_energy_cost"
+      ],
+      "leakage_risk": "medium",
+      "notes": "Uses current-month energy cost in denominator."
+    },
+    {
+      "feature": "outage_severity",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "outage_hours",
+        "operating_hours",
+        "month",
+        "year"
+      ],
+      "leakage_risk": "low",
+      "notes": "Normalized current-month outage exposure."
+    },
+    {
+      "feature": "estimated_carbon_intensity",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "fuel_consumption_liters",
+        "energy_consumption_kwh"
+      ],
+      "leakage_risk": "low",
+      "notes": "Current-month fuel intensity ratio."
+    },
+    {
+      "feature": "business_type",
+      "temporal_basis": "business_static",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Static business profile field."
+    },
+    {
+      "feature": "industry",
+      "temporal_basis": "business_static",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Static business profile field."
+    },
+    {
+      "feature": "state",
+      "temporal_basis": "business_static",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Static business location."
+    },
+    {
+      "feature": "energy_source",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Declared source mix for the input month."
+    },
+    {
+      "feature": "employees",
+      "temporal_basis": "business_static",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Slow-changing business attribute."
+    },
+    {
+      "feature": "operating_hours",
+      "temporal_basis": "business_static",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Business operating profile."
+    },
+    {
+      "feature": "floor_area_sqm",
+      "temporal_basis": "business_static",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Business physical profile."
+    },
+    {
+      "feature": "solar_capacity_kw",
+      "temporal_basis": "business_static",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Installed capacity, not future generation."
+    },
+    {
+      "feature": "monthly_revenue",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Revenue aligned to the input month."
+    },
+    {
+      "feature": "occupancy_rate",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Operational rate for the input month."
+    },
+    {
+      "feature": "weather_avg_temp",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [],
+      "leakage_risk": "low",
+      "notes": "Observed weather for the input month."
+    }
+  ],
+  "eval_split_correlations_with_target": [
+    {
+      "feature": "total_energy_cost",
+      "pearson_correlation_with_target": 0.9535
+    },
+    {
+      "feature": "electricity_bill",
+      "pearson_correlation_with_target": 0.9456
+    },
+    {
+      "feature": "energy_consumption_kwh",
+      "pearson_correlation_with_target": 0.9379
+    },
+    {
+      "feature": "maintenance_cost",
+      "pearson_correlation_with_target": 0.9284
+    },
+    {
+      "feature": "floor_area_sqm",
+      "pearson_correlation_with_target": 0.8831
+    },
+    {
+      "feature": "diesel_cost",
+      "pearson_correlation_with_target": 0.6846
+    },
+    {
+      "feature": "fuel_consumption_liters",
+      "pearson_correlation_with_target": 0.6741
+    },
+    {
+      "feature": "monthly_revenue",
+      "pearson_correlation_with_target": 0.6713
+    },
+    {
+      "feature": "employees",
+      "pearson_correlation_with_target": 0.6226
+    },
+    {
+      "feature": "generator_dependency",
+      "pearson_correlation_with_target": 0.5329
+    },
+    {
+      "feature": "generator_hours",
+      "pearson_correlation_with_target": 0.5048
+    },
+    {
+      "feature": "outage_hours",
+      "pearson_correlation_with_target": 0.3671
+    },
+    {
+      "feature": "revenue_energy_ratio",
+      "pearson_correlation_with_target": -0.2612
+    },
+    {
+      "feature": "petrol_cost",
+      "pearson_correlation_with_target": 0.2466
+    },
+    {
+      "feature": "outage_severity",
+      "pearson_correlation_with_target": 0.2419
+    },
+    {
+      "feature": "solar_capacity_kw",
+      "pearson_correlation_with_target": 0.1864
+    },
+    {
+      "feature": "operating_hours",
+      "pearson_correlation_with_target": 0.1823
+    },
+    {
+      "feature": "estimated_carbon_intensity",
+      "pearson_correlation_with_target": -0.1791
+    },
+    {
+      "feature": "occupancy_rate",
+      "pearson_correlation_with_target": 0.176
+    },
+    {
+      "feature": "grid_hours",
+      "pearson_correlation_with_target": 0.1376
+    },
+    {
+      "feature": "energy_cost_per_employee",
+      "pearson_correlation_with_target": 0.0996
+    },
+    {
+      "feature": "cost_per_kwh",
+      "pearson_correlation_with_target": 0.0983
+    },
+    {
+      "feature": "weather_avg_temp",
+      "pearson_correlation_with_target": 0.0179
+    },
+    {
+      "feature": "quarter",
+      "pearson_correlation_with_target": 0.0034
+    },
+    {
+      "feature": "month",
+      "pearson_correlation_with_target": -0.0029
+    }
+  ],
+  "high_correlation_features": [
+    {
+      "feature": "total_energy_cost",
+      "pearson_correlation_with_target": 0.9535
+    },
+    {
+      "feature": "electricity_bill",
+      "pearson_correlation_with_target": 0.9456
+    },
+    {
+      "feature": "energy_consumption_kwh",
+      "pearson_correlation_with_target": 0.9379
+    },
+    {
+      "feature": "maintenance_cost",
+      "pearson_correlation_with_target": 0.9284
+    },
+    {
+      "feature": "floor_area_sqm",
+      "pearson_correlation_with_target": 0.8831
+    }
+  ],
+  "medium_leakage_risk_features": [
+    {
+      "feature": "total_energy_cost",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "electricity_bill",
+        "diesel_cost",
+        "petrol_cost"
+      ],
+      "leakage_risk": "medium",
+      "notes": "Sum of current-month bills. Strong predictor of next month because target is next month's total_energy_cost, but this is intentional autoregressive forecasting rather than same-month leakage."
+    },
+    {
+      "feature": "cost_per_kwh",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "total_energy_cost",
+        "energy_consumption_kwh"
+      ],
+      "leakage_risk": "medium",
+      "notes": "Derived from current-month cost and consumption."
+    },
+    {
+      "feature": "energy_cost_per_employee",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "total_energy_cost",
+        "employees"
+      ],
+      "leakage_risk": "medium",
+      "notes": "Derived from current-month total cost."
+    },
+    {
+      "feature": "revenue_energy_ratio",
+      "temporal_basis": "current_month",
+      "available_at_forecast_time": true,
+      "derived_from": [
+        "monthly_revenue",
+        "total_energy_cost"
+      ],
+      "leakage_risk": "medium",
+      "notes": "Uses current-month energy cost in denominator."
+    }
+  ],
+  "same_month_cost_vs_next_month_target": {
+    "feature": "total_energy_cost_same_month_vs_target",
+    "pearson_correlation_with_target": 0.9535,
+    "interpretation": "High correlation is expected because the target is next month's total energy cost and businesses have persistent monthly spend patterns."
+  },
+  "analysis": {
+    "leakage_verdict": "PASS",
+    "product_interpretation": "Features represent current-month observations and static business attributes forecasting next month's total energy cost. High R\u00b2 is primarily driven by autoregressive cost persistence, not same-month leakage.",
+    "interpretation_notes": [
+      "Medium-risk features derive from current-month total_energy_cost but remain temporally valid inputs.",
+      "Verify product copy describes next-month forecasting from current observed data.",
+      "GES and other post-hoc scores are excluded from the model contract."
+    ]
+  }
+}

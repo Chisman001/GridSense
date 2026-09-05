@@ -1,0 +1,148 @@
+{
+  "audit": "C",
+  "title": "Accuracy by business type and industry",
+  "generated_at": "2026-09-05T09:58:06.463793",
+  "model": "lightgbm",
+  "splits_included": [
+    "validation",
+    "test"
+  ],
+  "overall": {
+    "row_count": 750,
+    "mae": 698973.23,
+    "rmse": 1141857.42,
+    "r2": 0.9436,
+    "mean_actual": 5054016.18,
+    "mean_predicted": 5027038.46
+  },
+  "by_split": {
+    "test": {
+      "row_count": 300,
+      "mae": 655001.27,
+      "rmse": 1043583.7,
+      "r2": 0.9532,
+      "mean_actual": 5073978.24,
+      "mean_predicted": 4999641.64
+    },
+    "validation": {
+      "row_count": 450,
+      "mae": 728287.87,
+      "rmse": 1202921.16,
+      "r2": 0.9371,
+      "mean_actual": 5040708.13,
+      "mean_predicted": 5045303.0
+    }
+  },
+  "by_business_type": [
+    {
+      "business_type": "Bakery",
+      "row_count": 105,
+      "mae": 157652.08,
+      "rmse": 195678.4,
+      "r2": 0.797,
+      "mean_actual": 941574.84,
+      "mean_predicted": 919627.35
+    },
+    {
+      "business_type": "Cold Room",
+      "row_count": 130,
+      "mae": 349407.16,
+      "rmse": 460505.87,
+      "r2": 0.8604,
+      "mean_actual": 3198339.19,
+      "mean_predicted": 3170735.84
+    },
+    {
+      "business_type": "Factory",
+      "row_count": 150,
+      "mae": 1739007.46,
+      "rmse": 2204194.21,
+      "r2": 0.7823,
+      "mean_actual": 11586151.79,
+      "mean_predicted": 11253971.3
+    },
+    {
+      "business_type": "Hospital",
+      "row_count": 145,
+      "mae": 876907.5,
+      "rmse": 1103576.85,
+      "r2": 0.8718,
+      "mean_actual": 7926551.73,
+      "mean_predicted": 8036905.74
+    },
+    {
+      "business_type": "Hotel",
+      "row_count": 120,
+      "mae": 258838.84,
+      "rmse": 326149.65,
+      "r2": 0.8773,
+      "mean_actual": 2044937.55,
+      "mean_predicted": 2047714.22
+    },
+    {
+      "business_type": "School",
+      "row_count": 100,
+      "mae": 431901.53,
+      "rmse": 530671.95,
+      "r2": 0.6416,
+      "mean_actual": 1431974.02,
+      "mean_predicted": 1623495.78
+    }
+  ],
+  "by_industry": [
+    {
+      "industry": "Cold Storage",
+      "row_count": 130,
+      "mae": 349407.16,
+      "rmse": 460505.87,
+      "r2": 0.8604,
+      "mean_actual": 3198339.19,
+      "mean_predicted": 3170735.84
+    },
+    {
+      "industry": "Education",
+      "row_count": 100,
+      "mae": 431901.53,
+      "rmse": 530671.95,
+      "r2": 0.6416,
+      "mean_actual": 1431974.02,
+      "mean_predicted": 1623495.78
+    },
+    {
+      "industry": "Food Production",
+      "row_count": 105,
+      "mae": 157652.08,
+      "rmse": 195678.4,
+      "r2": 0.797,
+      "mean_actual": 941574.84,
+      "mean_predicted": 919627.35
+    },
+    {
+      "industry": "Healthcare",
+      "row_count": 145,
+      "mae": 876907.5,
+      "rmse": 1103576.85,
+      "r2": 0.8718,
+      "mean_actual": 7926551.73,
+      "mean_predicted": 8036905.74
+    },
+    {
+      "industry": "Hospitality",
+      "row_count": 120,
+      "mae": 258838.84,
+      "rmse": 326149.65,
+      "r2": 0.8773,
+      "mean_actual": 2044937.55,
+      "mean_predicted": 2047714.22
+    },
+    {
+      "industry": "Manufacturing",
+      "row_count": 150,
+      "mae": 1739007.46,
+      "rmse": 2204194.21,
+      "r2": 0.7823,
+      "mean_actual": 11586151.79,
+      "mean_predicted": 11253971.3
+    }
+  ]
+}

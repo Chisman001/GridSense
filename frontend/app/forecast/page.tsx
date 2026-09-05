@@ -796,7 +796,8 @@ function ForecastPageContent() {
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
             Enter your latest energy and operational facts. GridSense
             calculates totals, ratios, and the GridSense Energy Score, then
-            forecasts next-month energy cost.
+            estimates next-month energy cost from your current bills, usage,
+            and operating data.
           </p>
         </section>
 
@@ -1271,10 +1272,10 @@ function ForecastPageContent() {
             {!baselineResult && !predictionLoading && (
               <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
                 <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-blue-600 dark:text-blue-400">
-                  Next month forecast
+                  Next-month energy cost estimate
                 </p>
                 <p className="mt-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
-                  Generate a forecast to see next-month cost, the main
+                  Generate an estimate to see next-month cost, the main
                   conditions behind it, and unlock the what-if scenario.
                 </p>
               </div>
@@ -1283,14 +1284,18 @@ function ForecastPageContent() {
             {predictionLoading && !baselineResult && (
               <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
                 <p className="text-sm text-slate-500 dark:text-slate-400">
-                  Running GridSense LightGBM model...
+                  Generating estimate...
                 </p>
               </div>
             )}
 
             {baselineResult && (
               <>
-                <ForecastResultCard result={baselineResult} />
+                <ForecastResultCard
+                  result={baselineResult}
+                  businessType={business?.businessType}
+                  showMeaningBlock
+                />
                 <ForecastDrivers drivers={baselineDrivers} />
 
                 {saveLoading && (
@@ -1404,6 +1409,7 @@ function ForecastPageContent() {
               key={forecastSessionId}
               baselineRaw={baselineRawPayload}
               baselineResult={baselineResult}
+              businessType={business?.businessType}
               disabled={inputsChanged}
               disabledReason="Inputs changed — regenerate forecast to update the scenario baseline."
             />

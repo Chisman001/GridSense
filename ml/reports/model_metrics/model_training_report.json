@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-09T17:24:59.502401",
+  "generated_at": "2026-09-05T09:41:13.829644",
   "dataset_path": "C:\\Proj\\GridSense\\ml\\datasets\\final\\energy_records.csv",
   "target": "next_month_energy_cost",
   "features": [
@@ -35,12 +35,12 @@
     "estimated_carbon_intensity"
   ],
   "excluded": [
-    "record_id",
-    "city",
-    "business_id",
     "created_at",
+    "business_id",
+    "city",
     "business_name",
-    "next_month_energy_cost"
+    "next_month_energy_cost",
+    "record_id"
   ],
   "numeric": [
     "month",
@@ -87,19 +87,19 @@
   "models": {
     "linear_regression": {
       "status": "trained",
-      "duration_seconds": 0.17262554168701172
+      "duration_seconds": 0.19978642463684082
     },
     "random_forest": {
       "status": "trained",
-      "duration_seconds": 3.888974189758301
+      "duration_seconds": 2.812347888946533
     },
     "xgboost": {
       "status": "trained",
-      "duration_seconds": 1.814918041229248
+      "duration_seconds": 0.9269061088562012
     },
     "lightgbm": {
       "status": "trained",
-      "duration_seconds": 5.591661214828491
+      "duration_seconds": 4.016210079193115
     }
   },
   "artifacts": {

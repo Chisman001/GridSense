@@ -1,0 +1,360 @@
+{
+  "audit": "G",
+  "title": "LightGBM feature importance",
+  "generated_at": "2026-09-05T09:58:10.466937",
+  "model": "lightgbm",
+  "ranked_features": [
+    {
+      "feature": "maintenance_cost",
+      "importance": 268.0,
+      "importance_pct": 9.04
+    },
+    {
+      "feature": "floor_area_sqm",
+      "importance": 267.0,
+      "importance_pct": 9.01
+    },
+    {
+      "feature": "total_energy_cost",
+      "importance": 215.0,
+      "importance_pct": 7.26
+    },
+    {
+      "feature": "energy_consumption_kwh",
+      "importance": 200.0,
+      "importance_pct": 6.75
+    },
+    {
+      "feature": "weather_avg_temp",
+      "importance": 184.0,
+      "importance_pct": 6.21
+    },
+    {
+      "feature": "electricity_bill",
+      "importance": 167.0,
+      "importance_pct": 5.64
+    },
+    {
+      "feature": "energy_cost_per_employee",
+      "importance": 142.0,
+      "importance_pct": 4.79
+    },
+    {
+      "feature": "occupancy_rate",
+      "importance": 138.0,
+      "importance_pct": 4.66
+    },
+    {
+      "feature": "outage_hours",
+      "importance": 125.0,
+      "importance_pct": 4.22
+    },
+    {
+      "feature": "grid_hours",
+      "importance": 122.0,
+      "importance_pct": 4.12
+    },
+    {
+      "feature": "cost_per_kwh",
+      "importance": 116.0,
+      "importance_pct": 3.91
+    },
+    {
+      "feature": "outage_severity",
+      "importance": 109.0,
+      "importance_pct": 3.68
+    },
+    {
+      "feature": "generator_hours",
+      "importance": 108.0,
+      "importance_pct": 3.64
+    },
+    {
+      "feature": "generator_dependency",
+      "importance": 107.0,
+      "importance_pct": 3.61
+    },
+    {
+      "feature": "revenue_energy_ratio",
+      "importance": 101.0,
+      "importance_pct": 3.41
+    },
+    {
+      "feature": "diesel_cost",
+      "importance": 96.0,
+      "importance_pct": 3.24
+    },
+    {
+      "feature": "estimated_carbon_intensity",
+      "importance": 95.0,
+      "importance_pct": 3.21
+    },
+    {
+      "feature": "petrol_cost",
+      "importance": 93.0,
+      "importance_pct": 3.14
+    },
+    {
+      "feature": "month",
+      "importance": 83.0,
+      "importance_pct": 2.8
+    },
+    {
+      "feature": "employees",
+      "importance": 62.0,
+      "importance_pct": 2.09
+    },
+    {
+      "feature": "solar_capacity_kw",
+      "importance": 55.0,
+      "importance_pct": 1.86
+    },
+    {
+      "feature": "monthly_revenue",
+      "importance": 51.0,
+      "importance_pct": 1.72
+    },
+    {
+      "feature": "operating_hours",
+      "importance": 26.0,
+      "importance_pct": 0.88
+    },
+    {
+      "feature": "fuel_consumption_liters",
+      "importance": 21.0,
+      "importance_pct": 0.71
+    },
+    {
+      "feature": "year",
+      "importance": 12.0,
+      "importance_pct": 0.4
+    }
+  ],
+  "top_features": [
+    {
+      "feature": "maintenance_cost",
+      "importance": 268.0,
+      "importance_pct": 9.04
+    },
+    {
+      "feature": "floor_area_sqm",
+      "importance": 267.0,
+      "importance_pct": 9.01
+    },
+    {
+      "feature": "total_energy_cost",
+      "importance": 215.0,
+      "importance_pct": 7.26
+    }
+  ],
+  "importance_groups_pct": {
+    "current_energy_costs": 28.32,
+    "usage_and_operational": 26.73,
+    "business_identity": 0.0,
+    "derived_ratios": 15.32,
+    "time_fields": 3.2,
+    "business_scale": 17.48,
+    "environment_and_renewables": 8.07
+  },
+  "transformed_feature_count": 47,
+  "analysis": {
+    "dominant_feature": "maintenance_cost",
+    "business_identity_importance_pct": 0.0,
+    "current_energy_cost_importance_pct": 28.32,
+    "product_interpretation": "The model is primarily driven by current-month energy spend and usage signals. Industry and business_type labels contribute very little relative to energy inputs.",
+    "interpretation_notes": [
+      "Importances are aggregated across one-hot encoded categorical columns.",
+      "High total_energy_cost importance indicates autoregressive cost forecasting, not industry optimization."
+    ]
+  },
+  "transformed_feature_details": [
+    {
+      "transformed_feature": "num__month",
+      "importance": 83.0
+    },
+    {
+      "transformed_feature": "num__year",
+      "importance": 12.0
+    },
+    {
+      "transformed_feature": "num__electricity_bill",
+      "importance": 167.0
+    },
+    {
+      "transformed_feature": "num__diesel_cost",
+      "importance": 96.0
+    },
+    {
+      "transformed_feature": "num__petrol_cost",
+      "importance": 93.0
+    },
+    {
+      "transformed_feature": "num__generator_hours",
+      "importance": 108.0
+    },
+    {
+      "transformed_feature": "num__grid_hours",
+      "importance": 122.0
+    },
+    {
+      "transformed_feature": "num__outage_hours",
+      "importance": 125.0
+    },
+    {
+      "transformed_feature": "num__energy_consumption_kwh",
+      "importance": 200.0
+    },
+    {
+      "transformed_feature": "num__fuel_consumption_liters",
+      "importance": 21.0
+    },
+    {
+      "transformed_feature": "num__maintenance_cost",
+      "importance": 268.0
+    },
+    {
+      "transformed_feature": "num__weather_avg_temp",
+      "importance": 184.0
+    },
+    {
+      "transformed_feature": "num__occupancy_rate",
+      "importance": 138.0
+    },
+    {
+      "transformed_feature": "num__total_energy_cost",
+      "importance": 215.0
+    },
+    {
+      "transformed_feature": "num__employees",
+      "importance": 62.0
+    },
+    {
+      "transformed_feature": "num__operating_hours",
+      "importance": 26.0
+    },
+    {
+      "transformed_feature": "num__floor_area_sqm",
+      "importance": 267.0
+    },
+    {
+      "transformed_feature": "num__solar_capacity_kw",
+      "importance": 55.0
+    },
+    {
+      "transformed_feature": "num__monthly_revenue",
+      "importance": 51.0
+    },
+    {
+      "transformed_feature": "num__quarter",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "num__cost_per_kwh",
+      "importance": 116.0
+    },
+    {
+      "transformed_feature": "num__energy_cost_per_employee",
+      "importance": 142.0
+    },
+    {
+      "transformed_feature": "num__generator_dependency",
+      "importance": 107.0
+    },
+    {
+      "transformed_feature": "num__revenue_energy_ratio",
+      "importance": 101.0
+    },
+    {
+      "transformed_feature": "num__outage_severity",
+      "importance": 109.0
+    },
+    {
+      "transformed_feature": "num__estimated_carbon_intensity",
+      "importance": 95.0
+    },
+    {
+      "transformed_feature": "cat__business_type_Bakery",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__business_type_Cold Room",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__business_type_Factory",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__business_type_Hospital",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__business_type_Hotel",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__business_type_School",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__industry_Cold Storage",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__industry_Education",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__industry_Food Production",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__industry_Healthcare",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__industry_Hospitality",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__industry_Manufacturing",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__state_Abuja",
+      "importance": 5.0
+    },
+    {
+      "transformed_feature": "cat__state_Kano",
+      "importance": 1.0
+    },
+    {
+      "transformed_feature": "cat__state_Lagos",
+      "importance": 2.0
+    },
+    {
+      "transformed_feature": "cat__state_Oyo",
+      "importance": 1.0
+    },
+    {
+      "transformed_feature": "cat__state_Rivers",
+      "importance": 0.0
+    },
+    {
+      "transformed_feature": "cat__energy_source_Generator",
+      "importance": 24.0
+    },
+    {
+      "transformed_feature": "cat__energy_source_Grid",
+      "importance": 2.0
+    },
+    {
+      "transformed_feature": "cat__energy_source_Hybrid",
+      "importance": 2.0
+    },
+    {
+      "transformed_feature": "cat__energy_source_Solar",
+      "importance": 0.0
+    }
+  ]
+}

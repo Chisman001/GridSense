@@ -1,0 +1,154 @@
+{
+  "audit": "B",
+  "title": "Industry and business_type sensitivity",
+  "generated_at": "2026-09-05T09:58:07.559810",
+  "model": "lightgbm",
+  "method": "Fixed median Factory energy profile; only business_type and industry vary per scenario. All other model features held constant.",
+  "baseline_profile_summary": {
+    "year": 2024.0,
+    "month": 6.0,
+    "electricity_bill": 9283457.75,
+    "diesel_cost": 1731648.4,
+    "petrol_cost": 52580.415,
+    "generator_hours": 53.02,
+    "grid_hours": 419.52,
+    "outage_hours": 72.87,
+    "total_energy_cost": 11205884.975,
+    "employees": 146.5,
+    "monthly_revenue": 41231616.46,
+    "business_type": "Factory",
+    "industry": "Manufacturing",
+    "state": "Lagos",
+    "energy_source": "Hybrid"
+  },
+  "scenarios": [
+    {
+      "label": "trained:Bakery",
+      "business_type": "Bakery",
+      "industry": "Food Production",
+      "category": "trained_locked_pair",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "trained:Cold Room",
+      "business_type": "Cold Room",
+      "industry": "Cold Storage",
+      "category": "trained_locked_pair",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "trained:Factory",
+      "business_type": "Factory",
+      "industry": "Manufacturing",
+      "category": "trained_locked_pair",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "trained:Hospital",
+      "business_type": "Hospital",
+      "industry": "Healthcare",
+      "category": "trained_locked_pair",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "trained:Hotel",
+      "business_type": "Hotel",
+      "industry": "Hospitality",
+      "category": "trained_locked_pair",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "trained:School",
+      "business_type": "School",
+      "industry": "Education",
+      "category": "trained_locked_pair",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "app_only:Retail Store",
+      "business_type": "Retail Store",
+      "industry": "Retail",
+      "category": "app_only_unseen",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "app_only:Restaurant",
+      "business_type": "Restaurant",
+      "industry": "Food Production",
+      "category": "app_only_unseen",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "app_only:Office",
+      "business_type": "Office",
+      "industry": "Professional Services",
+      "category": "app_only_unseen",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "app_only:Supermarket",
+      "business_type": "Supermarket",
+      "industry": "Retail",
+      "category": "app_only_unseen",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "app_only:Pharmacy",
+      "business_type": "Pharmacy",
+      "industry": "Healthcare",
+      "category": "app_only_unseen",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "app_only:Clinic",
+      "business_type": "Clinic",
+      "industry": "Healthcare",
+      "category": "app_only_unseen",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "decoupled:Factory+Retail",
+      "business_type": "Factory",
+      "industry": "Retail",
+      "category": "decoupled_user_mismatch",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "decoupled:Hospital+Manufacturing",
+      "business_type": "Hospital",
+      "industry": "Manufacturing",
+      "category": "decoupled_user_mismatch",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "decoupled:Hotel+Healthcare",
+      "business_type": "Hotel",
+      "industry": "Healthcare",
+      "category": "decoupled_user_mismatch",
+      "predicted_next_month_energy_cost": 11441977.28
+    },
+    {
+      "label": "decoupled:Bakery+Hospitality",
+      "business_type": "Bakery",
+      "industry": "Hospitality",
+      "category": "decoupled_user_mismatch",
+      "predicted_next_month_energy_cost": 11441977.28
+    }
+  ],
+  "analysis": {
+    "prediction_min": 11441977.28,
+    "prediction_max": 11441977.28,
+    "prediction_spread_naira": 0.0,
+    "prediction_spread_pct_of_min": 0.0,
+    "trained_type_spread_naira": 0.0,
+    "app_only_all_equal": true,
+    "app_only_unique_prediction_count": 1,
+    "factory_vs_hospital_delta_naira": 0.0,
+    "factory_vs_retail_store_delta_naira": 0.0,
+    "interpretation_notes": [
+      "If app_only scenarios share one prediction, unknown categories are likely ignored by one-hot encoding.",
+      "If trained scenarios differ, business_type/industry affect predictions within training coverage.",
+      "Decoupled pairs simulate user-selected mismatches not present in synthetic training data."
+    ]
+  }
+}

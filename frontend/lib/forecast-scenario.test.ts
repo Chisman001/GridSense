@@ -111,5 +111,5 @@ run("scenario explanation includes the reduction and both costs", () => {
   assert.match(explanation, /20%/);
   assert.match(explanation, /₦520,000/);
   assert.match(explanation, /₦455,000/);
-  assert.match(explanation, /falls/);
+  assert.match(explanation, /moves from/);
 });

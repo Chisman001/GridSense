@@ -10,8 +10,10 @@ import {
   type ReactNode,
 } from "react";
 
+import { MlGuardrailNotice } from "@/components/ml-guardrail-notice";
 import { calculateGES } from "@/lib/ges-v1";
 import { formatGesScoreWithRating } from "@/lib/ges-display";
+import { hasLimitedModelCoverage } from "@/lib/ml-guardrails";
 
 type ReportBusiness = {
   id: string;
@@ -300,11 +302,13 @@ function KpiCard({
   label,
   value,
   hint,
+  description,
   toneClass = "text-slate-950 dark:text-white",
 }: {
   label: string;
   value: string;
   hint?: string;
+  description?: string;
   toneClass?: string;
 }) {
   return (
@@ -316,6 +320,11 @@ function KpiCard({
         {value}
       </p>
       {hint && <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">{hint}</p>}
+      {description && (
+        <p className="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">
+          {description}
+        </p>
+      )}
     </article>
   );
 }
@@ -689,9 +698,10 @@ export default function ReportDetailPage() {
               hint={recordedLabel(actualPeriod, "cost")}
             />
             <KpiCard
-              label="Forecasted cost"
+              label="Estimated next-month cost"
               value={formatCurrency(prediction.predictedNextMonthEnergyCost)}
               hint={forecastLabel(forecastPeriod)}
+              description="Based on saved bills, usage, and operating data."
             />
             <KpiCard
               label="Forecast change"
@@ -705,6 +715,9 @@ export default function ReportDetailPage() {
               hint={recordedLabel(actualPeriod, "score")}
             />
           </div>
+          {hasLimitedModelCoverage(business.businessType) && (
+            <MlGuardrailNotice variant="coverage" />
+          )}
         </section>
 
         <div className="grid gap-6 lg:grid-cols-2">
@@ -829,7 +842,7 @@ export default function ReportDetailPage() {
                 value={formatCurrency(energyRecord?.totalEnergyCost)}
               />
               <MetricRow
-                label="Forecast cost"
+                label="Estimated next-month cost"
                 detail={forecastLabel(forecastPeriod)}
                 value={formatCurrency(
                   prediction.predictedNextMonthEnergyCost
@@ -860,6 +873,10 @@ export default function ReportDetailPage() {
                 })}
               />
             </dl>
+            <p className="mt-4 rounded-lg border border-slate-200 bg-slate-50 px-3.5 py-3 text-xs leading-5 text-slate-600 dark:border-slate-700 dark:bg-slate-800/70 dark:text-slate-400">
+              This saved figure is an estimate based on the recorded bills,
+              usage, and operating data. It is not a guaranteed outcome.
+            </p>
           </SectionCard>
         </div>
 

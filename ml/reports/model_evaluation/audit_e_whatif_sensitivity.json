@@ -1,0 +1,272 @@
+{
+  "audit": "E",
+  "title": "What-If generator reduction sensitivity",
+  "generated_at": "2026-09-05T09:58:08.196670",
+  "model": "lightgbm",
+  "method": "Matches frontend What-If: scale generator_hours, diesel_cost, and fuel_consumption_liters; recalculate derived ML features; predict.",
+  "reduction_levels_percent": [
+    0,
+    10,
+    20,
+    30,
+    40
+  ],
+  "profiles": [
+    {
+      "profile_id": "factory_high_generator",
+      "label": "Factory \u2014 high generator dependency",
+      "source_record_id": "REC-000020",
+      "baseline_summary": {
+        "year": 2025,
+        "month": 8,
+        "business_type": "Factory",
+        "industry": "Manufacturing",
+        "total_energy_cost": 15654486.57,
+        "generator_hours": 95.56,
+        "diesel_cost": 3935309.72,
+        "generator_dependency": 0.2412,
+        "monthly_revenue": 61846742.13
+      },
+      "baseline_prediction": 16788706.85,
+      "max_reduction_percent": 40,
+      "sweep": [
+        {
+          "reduction_percent": 0,
+          "generator_hours": 95.56,
+          "diesel_cost": 3935309.72,
+          "fuel_consumption_liters": 3186.49,
+          "total_energy_cost": 15654486.57,
+          "generator_dependency": 0.2412,
+          "predicted_next_month_energy_cost": 16788706.85,
+          "delta_from_baseline_naira": 0.0,
+          "delta_from_baseline_pct": 0.0
+        },
+        {
+          "reduction_percent": 10,
+          "generator_hours": 86.004,
+          "diesel_cost": 3541778.75,
+          "fuel_consumption_liters": 2867.841,
+          "total_energy_cost": 15260955.6,
+          "generator_dependency": 0.2225,
+          "predicted_next_month_energy_cost": 16751381.43,
+          "delta_from_baseline_naira": -37325.42,
+          "delta_from_baseline_pct": -0.22
+        },
+        {
+          "reduction_percent": 20,
+          "generator_hours": 76.448,
+          "diesel_cost": 3148247.78,
+          "fuel_consumption_liters": 2549.192,
+          "total_energy_cost": 14867424.63,
+          "generator_dependency": 0.2028,
+          "predicted_next_month_energy_cost": 16487015.87,
+          "delta_from_baseline_naira": -301690.98,
+          "delta_from_baseline_pct": -1.8
+        },
+        {
+          "reduction_percent": 30,
+          "generator_hours": 66.892,
+          "diesel_cost": 2754716.8,
+          "fuel_consumption_liters": 2230.543,
+          "total_energy_cost": 14473893.65,
+          "generator_dependency": 0.182,
+          "predicted_next_month_energy_cost": 16626918.92,
+          "delta_from_baseline_naira": -161787.92,
+          "delta_from_baseline_pct": -0.96
+        },
+        {
+          "reduction_percent": 40,
+          "generator_hours": 57.336,
+          "diesel_cost": 2361185.83,
+          "fuel_consumption_liters": 1911.894,
+          "total_energy_cost": 14080362.68,
+          "generator_dependency": 0.1602,
+          "predicted_next_month_energy_cost": 16545560.56,
+          "delta_from_baseline_naira": -243146.29,
+          "delta_from_baseline_pct": -1.45
+        }
+      ],
+      "analysis": {
+        "prediction_at_max_reduction": 16545560.56,
+        "total_delta_at_max_reduction_naira": -243146.29,
+        "total_delta_at_max_reduction_pct": -1.45,
+        "monotonic_non_increasing": false,
+        "direction_sensible": true
+      }
+    },
+    {
+      "profile_id": "hotel_moderate_generator",
+      "label": "Hotel \u2014 moderate generator dependency",
+      "source_record_id": "REC-000167",
+      "baseline_summary": {
+        "year": 2025,
+        "month": 11,
+        "business_type": "Hotel",
+        "industry": "Hospitality",
+        "total_energy_cost": 1982939.19,
+        "generator_hours": 22.42,
+        "diesel_cost": 245554.84,
+        "generator_dependency": 0.0415,
+        "monthly_revenue": 7169604.05
+      },
+      "baseline_prediction": 1983459.49,
+      "max_reduction_percent": 40,
+      "sweep": [
+        {
+          "reduction_percent": 0,
+          "generator_hours": 22.42,
+          "diesel_cost": 245554.84,
+          "fuel_consumption_liters": 236.11,
+          "total_energy_cost": 1982939.19,
+          "generator_dependency": 0.0415,
+          "predicted_next_month_energy_cost": 1983459.49,
+          "delta_from_baseline_naira": 0.0,
+          "delta_from_baseline_pct": 0.0
+        },
+        {
+          "reduction_percent": 10,
+          "generator_hours": 20.178,
+          "diesel_cost": 220999.36,
+          "fuel_consumption_liters": 212.499,
+          "total_energy_cost": 1958383.71,
+          "generator_dependency": 0.0375,
+          "predicted_next_month_energy_cost": 1983459.49,
+          "delta_from_baseline_naira": 0.0,
+          "delta_from_baseline_pct": 0.0
+        },
+        {
+          "reduction_percent": 20,
+          "generator_hours": 17.936,
+          "diesel_cost": 196443.87,
+          "fuel_consumption_liters": 188.888,
+          "total_energy_cost": 1933828.22,
+          "generator_dependency": 0.0335,
+          "predicted_next_month_energy_cost": 1983459.49,
+          "delta_from_baseline_naira": 0.0,
+          "delta_from_baseline_pct": 0.0
+        },
+        {
+          "reduction_percent": 30,
+          "generator_hours": 15.694,
+          "diesel_cost": 171888.39,
+          "fuel_consumption_liters": 165.277,
+          "total_energy_cost": 1909272.74,
+          "generator_dependency": 0.0294,
+          "predicted_next_month_energy_cost": 1987356.63,
+          "delta_from_baseline_naira": 3897.14,
+          "delta_from_baseline_pct": 0.2
+        },
+        {
+          "reduction_percent": 40,
+          "generator_hours": 13.452,
+          "diesel_cost": 147332.9,
+          "fuel_consumption_liters": 141.666,
+          "total_energy_cost": 1884717.25,
+          "generator_dependency": 0.0253,
+          "predicted_next_month_energy_cost": 2004648.7,
+          "delta_from_baseline_naira": 21189.21,
+          "delta_from_baseline_pct": 1.07
+        }
+      ],
+      "analysis": {
+        "prediction_at_max_reduction": 2004648.7,
+        "total_delta_at_max_reduction_naira": 21189.21,
+        "total_delta_at_max_reduction_pct": 1.07,
+        "monotonic_non_increasing": false,
+        "direction_sensible": false
+      }
+    },
+    {
+      "profile_id": "school_low_generator",
+      "label": "School \u2014 low generator dependency",
+      "source_record_id": "REC-001267",
+      "baseline_summary": {
+        "year": 2025,
+        "month": 7,
+        "business_type": "School",
+        "industry": "Education",
+        "total_energy_cost": 1639042.3,
+        "generator_hours": 4.14,
+        "diesel_cost": 34482.0,
+        "generator_dependency": 0.0138,
+        "monthly_revenue": 10882856.31
+      },
+      "baseline_prediction": 1784413.85,
+      "max_reduction_percent": 40,
+      "sweep": [
+        {
+          "reduction_percent": 0,
+          "generator_hours": 4.14,
+          "diesel_cost": 34482.0,
+          "fuel_consumption_liters": 37.89,
+          "total_energy_cost": 1639042.3,
+          "generator_dependency": 0.0138,
+          "predicted_next_month_energy_cost": 1784413.85,
+          "delta_from_baseline_naira": 0.0,
+          "delta_from_baseline_pct": 0.0
+        },
+        {
+          "reduction_percent": 10,
+          "generator_hours": 3.726,
+          "diesel_cost": 31033.8,
+          "fuel_consumption_liters": 34.101,
+          "total_energy_cost": 1635594.1,
+          "generator_dependency": 0.0124,
+          "predicted_next_month_energy_cost": 1784413.85,
+          "delta_from_baseline_naira": 0.0,
+          "delta_from_baseline_pct": 0.0
+        },
+        {
+          "reduction_percent": 20,
+          "generator_hours": 3.312,
+          "diesel_cost": 27585.6,
+          "fuel_consumption_liters": 30.312,
+          "total_energy_cost": 1632145.9,
+          "generator_dependency": 0.0111,
+          "predicted_next_month_energy_cost": 1784413.85,
+          "delta_from_baseline_naira": 0.0,
+          "delta_from_baseline_pct": 0.0
+        },
+        {
+          "reduction_percent": 30,
+          "generator_hours": 2.898,
+          "diesel_cost": 24137.4,
+          "fuel_consumption_liters": 26.523,
+          "total_energy_cost": 1628697.7,
+          "generator_dependency": 0.0097,
+          "predicted_next_month_energy_cost": 1784413.85,
+          "delta_from_baseline_naira": 0.0,
+          "delta_from_baseline_pct": 0.0
+        },
+        {
+          "reduction_percent": 40,
+          "generator_hours": 2.484,
+          "diesel_cost": 20689.2,
+          "fuel_consumption_liters": 22.734,
+          "total_energy_cost": 1625249.5,
+          "generator_dependency": 0.0083,
+          "predicted_next_month_energy_cost": 1784413.85,
+          "delta_from_baseline_naira": 0.0,
+          "delta_from_baseline_pct": 0.0
+        }
+      ],
+      "analysis": {
+        "prediction_at_max_reduction": 1784413.85,
+        "total_delta_at_max_reduction_naira": 0.0,
+        "total_delta_at_max_reduction_pct": 0.0,
+        "monotonic_non_increasing": true,
+        "direction_sensible": true
+      }
+    }
+  ],
+  "analysis": {
+    "profiles_tested": 3,
+    "profiles_with_sensible_direction": 2,
+    "profiles_with_monotonic_non_increasing_predictions": 1,
+    "interpretation_notes": [
+      "Sensible direction means max-reduction scenario predicts lower cost than baseline.",
+      "Monotonic non-increasing means each step down in generator use does not raise the forecast.",
+      "What-If does not model grid replacement or operational constraints \u2014 treat as scenario estimates."
+    ]
+  }
+}
