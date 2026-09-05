@@ -4,7 +4,10 @@ import Link from "next/link";
 import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-import { GesReadout } from "@/components/ges-readout";
+import { ForecastCalculatedPanel } from "@/components/forecast-calculated-panel";
+import { ForecastDrivers } from "@/components/forecast-drivers";
+import { ForecastResultCard } from "@/components/forecast-result-card";
+import { WhatIfSimulator } from "@/components/what-if-simulator";
 import {
   BUSINESS_STATES,
   BUSINESS_TYPES,
@@ -24,6 +27,12 @@ import {
   GES_V1_MAX_OPERATING_HOURS_PER_DAY,
 } from "@/lib/ges-v1";
 import { deriveEnergyMetrics } from "@/lib/energy-record-pipeline";
+import {
+  buildForecastDrivers,
+  parseForecastPrediction,
+  rawEnergyRecordsEqual,
+  type ForecastPrediction,
+} from "@/lib/forecast-scenario";
 
 // Typical SME day. Not derived from the old monthly-shaped demo default of 600.
 const DEFAULT_OPERATING_HOURS_PER_DAY = 12;
@@ -180,25 +189,6 @@ function toFriendlyPredictionError(message: string): string {
   return message;
 }
 
-type PredictionAnalytics = {
-  current_energy_cost?: number;
-  predicted_energy_cost?: number;
-  predicted_change?: number;
-  predicted_change_percent?: number;
-  predicted_cost_per_employee?: number;
-  predicted_cost_per_kwh?: number;
-  generator_dependency_percent?: number;
-  outage_hours?: number;
-  predicted_energy_cost_as_percent_of_revenue?: number;
-};
-
-type PredictionResult = {
-  predicted_next_month_energy_cost: number;
-  model: string;
-  features_used: number;
-  analytics?: PredictionAnalytics | null;
-};
-
 type AIInsights = {
   summary: string;
   key_insights: string[];
@@ -249,28 +239,6 @@ function getErrorMessage(
   }
 
   return fallback;
-}
-
-function parsePredictionResult(payload: unknown): PredictionResult {
-  if (
-    !isRecord(payload) ||
-    typeof payload.predicted_next_month_energy_cost !== "number" ||
-    typeof payload.model !== "string" ||
-    typeof payload.features_used !== "number" ||
-    (payload.analytics !== null &&
-      payload.analytics !== undefined &&
-      !isRecord(payload.analytics))
-  ) {
-    throw new Error("Prediction API returned an invalid response.");
-  }
-
-  return {
-    predicted_next_month_energy_cost:
-      payload.predicted_next_month_energy_cost,
-    model: payload.model,
-    features_used: payload.features_used,
-    analytics: payload.analytics as PredictionAnalytics | null | undefined,
-  };
 }
 
 function parseInsights(payload: unknown): AIInsights {
@@ -398,11 +366,43 @@ function ForecastPageContent() {
     form.month,
   ]);
 
-  const [result, setResult] = useState<PredictionResult | null>(null);
+  const [baselineResult, setBaselineResult] =
+    useState<ForecastPrediction | null>(null);
+  const [baselineRawPayload, setBaselineRawPayload] = useState<
+    ReturnType<typeof rawForecastPayload> | null
+  >(null);
+  const [forecastSessionId, setForecastSessionId] = useState(0);
   const [predictionLoading, setPredictionLoading] = useState(false);
   const [predictionError, setPredictionError] = useState("");
   const [saveLoading, setSaveLoading] = useState(false);
   const [saveError, setSaveError] = useState("");
+
+  const currentRawPayload = useMemo(() => rawForecastPayload(form), [form]);
+  const inputsChanged =
+    baselineRawPayload !== null &&
+    !rawEnergyRecordsEqual(currentRawPayload, baselineRawPayload);
+
+  const baselineDrivers = useMemo(() => {
+    if (!baselineRawPayload) {
+      return [];
+    }
+
+    const derived = deriveEnergyMetrics(baselineRawPayload);
+    return buildForecastDrivers(
+      baselineRawPayload,
+      derived,
+      calculateGES({
+        totalEnergyCost: derived.totalEnergyCost,
+        monthlyRevenue: baselineRawPayload.monthlyRevenue,
+        generatorHours: baselineRawPayload.generatorHours,
+        gridHours: baselineRawPayload.gridHours,
+        outageHours: baselineRawPayload.outageHours,
+        operatingHours: baselineRawPayload.operatingHours,
+        year: baselineRawPayload.year,
+        month: baselineRawPayload.month,
+      })
+    );
+  }, [baselineRawPayload]);
 
   function updateField(
     field: string,
@@ -556,7 +556,7 @@ function ForecastPageContent() {
   }, [applyBusinessProfile, recordId]);
 
   async function generateAndPersistInsights(
-    prediction: PredictionResult,
+    prediction: ForecastPrediction,
     predictionId: string
   ) {
     setInsightsLoading(true);
@@ -633,27 +633,28 @@ function ForecastPageContent() {
     }
   }
 
-  async function handleSubmit(
-    event: React.FormEvent<HTMLFormElement>
-  ) {
-    event.preventDefault();
-
+  function validateForecastInputs(): string | null {
     if (forecastBlocked) {
-      setPredictionError(
-        "A forecast already exists for this period. Open Reports to view it."
-      );
-      return;
+      return "A forecast already exists for this period. Open Reports to view it.";
     }
 
     if (!business) {
-      setPredictionError(
-        "Complete your business profile before generating a forecast."
-      );
-      return;
+      return "Complete your business profile before generating a forecast.";
     }
 
     if (!form.energy_source.trim()) {
-      setPredictionError("Select an energy source for this forecast.");
+      return "Select an energy source for this forecast.";
+    }
+
+    return null;
+  }
+
+  async function handleGenerate(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const validationError = validateForecastInputs();
+    if (validationError) {
+      setPredictionError(validationError);
       return;
     }
 
@@ -661,14 +662,12 @@ function ForecastPageContent() {
     setPredictionError("");
     setSaveError("");
     setInsightsError("");
-    setResult(null);
     setInsights(null);
     setSavedPredictionId(null);
+    setBaselineResult(null);
+    setBaselineRawPayload(null);
 
     const forecastPayload = rawForecastPayload(form);
-
-    let predictionCompleted = false;
-    let persistedPredictionId: string | null = null;
 
     try {
       const response = await fetch("/api/predict", {
@@ -696,13 +695,42 @@ function ForecastPageContent() {
         );
       }
 
-      const prediction = parsePredictionResult(predictionPayload);
-      predictionCompleted = true;
-      setResult(prediction);
+      const prediction = parseForecastPrediction(predictionPayload);
+      setBaselineResult(prediction);
+      setBaselineRawPayload(forecastPayload);
+      setForecastSessionId((current) => current + 1);
+    } catch (err) {
+      setPredictionError(
+        toFriendlyPredictionError(
+          err instanceof Error ? err.message : "Something went wrong."
+        )
+      );
+    } finally {
       setPredictionLoading(false);
+    }
+  }
 
-      setSaveLoading(true);
+  async function handleSave() {
+    const validationError = validateForecastInputs();
+    if (validationError) {
+      setSaveError(validationError);
+      return;
+    }
 
+    if (!baselineResult || !baselineRawPayload) {
+      setSaveError("Generate a forecast before saving.");
+      return;
+    }
+
+    if (savedPredictionId) {
+      return;
+    }
+
+    setSaveLoading(true);
+    setSaveError("");
+    setInsightsError("");
+
+    try {
       const saveResponse = await fetch("/api/forecasts", {
         method: "POST",
         headers: {
@@ -710,84 +738,39 @@ function ForecastPageContent() {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          form: forecastPayload,
-          prediction,
+          form: baselineRawPayload,
+          prediction: baselineResult,
         }),
       });
 
-      const savePayload = await readJsonResponse(
-        saveResponse,
-        "Save API"
-      );
+      const savePayload = await readJsonResponse(saveResponse, "Save API");
 
       if (!saveResponse.ok) {
         throw new Error(
-          getErrorMessage(
-            savePayload,
-            "Failed to save forecast."
-          )
+          getErrorMessage(savePayload, "Failed to save forecast.")
         );
       }
 
       const predictionId = getSavedPredictionId(savePayload);
-      persistedPredictionId = predictionId;
       setSavedPredictionId(predictionId);
-      setSaveLoading(false);
-
-      await generateAndPersistInsights(
-        prediction,
-        predictionId
-      );
+      await generateAndPersistInsights(baselineResult, predictionId);
     } catch (err) {
-      const message = toFriendlyPredictionError(
-        err instanceof Error ? err.message : "Something went wrong."
+      setSaveError(
+        toFriendlyPredictionError(
+          err instanceof Error ? err.message : "Failed to save forecast."
+        )
       );
-
-      if (persistedPredictionId) {
-        setInsightsError(message);
-      } else if (predictionCompleted) {
-        setSaveError(message);
-      } else {
-        setPredictionError(message);
-      }
     } finally {
-      setPredictionLoading(false);
       setSaveLoading(false);
     }
   }
 
   async function retryInsights() {
-    if (!result || !savedPredictionId) {
+    if (!baselineResult || !savedPredictionId) {
       return;
     }
 
-    await generateAndPersistInsights(
-      result,
-      savedPredictionId
-    );
-  }
-
-  function formatCurrency(value: number) {
-    return new Intl.NumberFormat("en-NG", {
-      style: "currency",
-      currency: "NGN",
-      maximumFractionDigits: 0,
-    }).format(value);
-  }
-
-  function formatOptionalCurrency(value: number | undefined) {
-    return typeof value === "number"
-      ? formatCurrency(value)
-      : "Unavailable";
-  }
-
-  function formatOptionalNumber(
-    value: number | undefined,
-    suffix = ""
-  ) {
-    return typeof value === "number"
-      ? `${value.toFixed(2)}${suffix}`
-      : "Unavailable";
+    await generateAndPersistInsights(baselineResult, savedPredictionId);
   }
 
   return (
@@ -888,10 +871,11 @@ function ForecastPageContent() {
         )}
 
         {profileStatus === "ready" && business && !forecastBlocked && (
+        <>
         <div className="grid gap-6 lg:grid-cols-3">
           {/* Form */}
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleGenerate}
             className="space-y-5 lg:col-span-2"
           >
             {/* Business Profile */}
@@ -1057,17 +1041,6 @@ function ForecastPageContent() {
                   }
                 />
               </div>
-              <p className="mt-4 text-sm text-slate-600 dark:text-slate-400">
-                Total energy cost:{" "}
-                <span className="font-semibold text-slate-950 dark:text-white">
-                  {new Intl.NumberFormat("en-NG", {
-                    style: "currency",
-                    currency: "NGN",
-                    maximumFractionDigits: 0,
-                  }).format(derivedMetrics.totalEnergyCost)}
-                </span>
-                {" "}(electricity + diesel + petrol)
-              </p>
             </section>
 
             {/* Operations & Reliability */}
@@ -1204,7 +1177,7 @@ function ForecastPageContent() {
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
-                  Add renewable energy and environmental information. GridSense Energy Score (GES) updates as you type.
+                  Add renewable energy and environmental information.
                 </p>
               </div>
 
@@ -1241,30 +1214,51 @@ function ForecastPageContent() {
                   }
                 />
               </div>
-
-              <div className="mt-5 md:col-span-2">
-                <GesReadout result={ges} />
-              </div>
             </section>
 
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={
-                predictionLoading ||
-                saveLoading ||
-                insightsLoading
-              }
-              className="w-full rounded-xl bg-gray-900 px-6 py-4 text-sm font-semibold text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-emerald-400 dark:text-slate-950 dark:hover:bg-emerald-300"
-            >
-              {predictionLoading
-                ? "Generating Forecast..."
-                : saveLoading
+            <ForecastCalculatedPanel
+              electricityBill={form.electricity_bill}
+              dieselCost={form.diesel_cost}
+              petrolCost={form.petrol_cost}
+              derivedMetrics={derivedMetrics}
+              ges={ges}
+            />
+
+            {inputsChanged && (
+              <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-200">
+                Inputs changed — regenerate forecast to update the baseline.
+              </p>
+            )}
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              <button
+                type="submit"
+                disabled={predictionLoading || saveLoading}
+                className="w-full rounded-xl bg-gray-900 px-6 py-4 text-sm font-semibold text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-emerald-400 dark:text-slate-950 dark:hover:bg-emerald-300"
+              >
+                {predictionLoading ? "Generating Forecast..." : "Generate Forecast"}
+              </button>
+              <button
+                type="button"
+                onClick={() => void handleSave()}
+                disabled={
+                  !baselineResult ||
+                  Boolean(savedPredictionId) ||
+                  predictionLoading ||
+                  saveLoading ||
+                  insightsLoading
+                }
+                className="w-full rounded-xl border border-slate-300 bg-white px-6 py-4 text-sm font-semibold text-slate-900 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800"
+              >
+                {saveLoading
                   ? "Saving Forecast..."
                   : insightsLoading
-                    ? "Generating AI Insights..."
-                    : "Generate Energy Forecast"}
-            </button>
+                    ? "Saving AI Insights..."
+                    : savedPredictionId
+                      ? "Forecast Saved"
+                      : "Save Forecast"}
+              </button>
+            </div>
 
             {predictionError && (
               <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
@@ -1273,147 +1267,63 @@ function ForecastPageContent() {
             )}
           </form>
 
-          {/* Result */}
-          <aside className="lg:sticky lg:top-6 lg:self-start">
-            <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
-              <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
-                FORECAST RESULT
-              </p>
+          <aside className="space-y-5 lg:sticky lg:top-6 lg:self-start">
+            {!baselineResult && !predictionLoading && (
+              <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+                <p className="text-[0.68rem] font-bold uppercase tracking-[0.14em] text-blue-600 dark:text-blue-400">
+                  Next month forecast
+                </p>
+                <p className="mt-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                  Generate a forecast to see next-month cost, the main
+                  conditions behind it, and unlock the what-if scenario.
+                </p>
+              </div>
+            )}
 
-              <h2 className="mt-1 text-xl font-bold text-gray-900 dark:text-white">
-                Next-Month Energy Cost
-              </h2>
+            {predictionLoading && !baselineResult && (
+              <div className="rounded-xl border border-gray-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Running GridSense LightGBM model...
+                </p>
+              </div>
+            )}
 
-              {!result && !predictionLoading && (
-                <div className="mt-6 rounded-lg bg-gray-50 p-6 text-center dark:bg-slate-800/50">
-                  <p className="text-sm text-gray-500 dark:text-slate-400">
-                    Your forecast will appear here after you
-                    submit the form.
-                  </p>
-                </div>
-              )}
+            {baselineResult && (
+              <>
+                <ForecastResultCard result={baselineResult} />
+                <ForecastDrivers drivers={baselineDrivers} />
 
-              {predictionLoading && !result && (
-                <div className="mt-6 rounded-lg bg-gray-50 p-8 text-center dark:bg-slate-800/50">
-                  <p className="text-sm text-gray-500 dark:text-slate-400">
-                    Running GridSense LightGBM model...
-                  </p>
-                </div>
-              )}
-
-              {result && (
-                <div className="mt-6 space-y-5">
-                  <div className="rounded-xl bg-gray-900 p-5 text-white dark:border dark:border-slate-700 dark:bg-slate-950">
-                    <p className="text-sm text-gray-300 dark:text-slate-400">
-                      Predicted Cost
-                    </p>
-
-                    <p className="mt-2 text-3xl font-bold">
-                      {formatCurrency(
-                        result.predicted_next_month_energy_cost
-                      )}
-                    </p>
-
-                    <p className="mt-2 text-sm text-gray-300 dark:text-slate-400">
-                      Powered by {result.model}
-                    </p>
+                {saveLoading && (
+                  <div className="rounded-lg bg-slate-50 p-4 text-sm text-slate-500 dark:bg-slate-800/50 dark:text-slate-400">
+                    Saving forecast...
                   </div>
+                )}
 
-                  <GesReadout result={ges} />
+                {savedPredictionId && !saveError && (
+                  <div className="rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-900/60 dark:bg-green-950/40 dark:text-green-300">
+                    Forecast saved successfully.
+                  </div>
+                )}
 
-                  <Metric
-                    label="Expected Change"
-                    value={formatOptionalNumber(
-                      result.analytics
-                        ?.predicted_change_percent,
-                      "%"
-                    )}
-                    description={
-                      typeof result.analytics?.predicted_change ===
-                      "number"
-                        ? result.analytics.predicted_change >= 0
-                          ? "Increase from current cost"
-                          : "Decrease from current cost"
-                        : undefined
-                    }
-                  />
+                {saveError && (
+                  <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
+                    {saveError}
+                  </div>
+                )}
 
-                  <Metric
-                    label="Cost per Employee"
-                    value={formatOptionalCurrency(
-                      result.analytics
-                        ?.predicted_cost_per_employee
-                    )}
-                  />
-
-                  <Metric
-                    label="Cost per kWh"
-                    value={formatOptionalCurrency(
-                      result.analytics
-                        ?.predicted_cost_per_kwh
-                    )}
-                  />
-
-                  <Metric
-                    label="Energy / Revenue"
-                    value={formatOptionalNumber(
-                      result.analytics
-                        ?.predicted_energy_cost_as_percent_of_revenue,
-                      "%"
-                    )}
-                  />
-
-                  <Metric
-                    label="Generator Dependency"
-                    value={formatOptionalNumber(
-                      result.analytics
-                        ?.generator_dependency_percent,
-                      "%"
-                    )}
-                  />
-
-                  <Metric
-                    label="Outage Hours"
-                    value={formatOptionalNumber(
-                      result.analytics?.outage_hours,
-                      " hrs"
-                    )}
-                  />
-
-                  {saveLoading && (
-                    <div className="rounded-lg bg-gray-50 p-4 text-sm text-gray-500 dark:bg-slate-800/50 dark:text-slate-400">
-                      Saving forecast...
-                    </div>
-                  )}
-
-                  {savedPredictionId && !saveError && (
-                    <div className="rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-700 dark:border-green-900/60 dark:bg-green-950/40 dark:text-green-300">
-                      Forecast saved successfully.
-                    </div>
-                  )}
-
-                  {saveError && (
-                    <div className="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700 dark:border-red-900/60 dark:bg-red-950/40 dark:text-red-300">
-                      {saveError}
-                    </div>
-                  )}
-
-                  {/* AI Insights */}
-                  <div className="mt-6 border-t border-gray-200 pt-6 dark:border-slate-800">
+                {(savedPredictionId || insightsLoading || insightsError || insights) && (
+                  <div className="rounded-xl border border-gray-200 bg-white p-5 sm:p-6 dark:border-slate-800 dark:bg-slate-900">
                     <p className="text-sm font-semibold text-blue-600 dark:text-blue-400">
                       AI INSIGHTS
                     </p>
-
                     <h3 className="mt-1 text-lg font-semibold text-gray-900 dark:text-white">
                       What this means
                     </h3>
 
                     {insightsLoading && (
-                      <div className="mt-5 rounded-lg bg-gray-50 p-4 dark:bg-slate-800/50">
-                        <p className="text-sm text-gray-500 dark:text-slate-400">
-                          Gemini is analyzing your forecast...
-                        </p>
-                      </div>
+                      <p className="mt-5 text-sm text-gray-500 dark:text-slate-400">
+                        Gemini is analyzing your forecast...
+                      </p>
                     )}
 
                     {insightsError && (
@@ -1421,11 +1331,10 @@ function ForecastPageContent() {
                         <p className="text-sm text-yellow-800 dark:text-yellow-200">
                           {insightsError}
                         </p>
-
                         {savedPredictionId && (
                           <button
                             type="button"
-                            onClick={retryInsights}
+                            onClick={() => void retryInsights()}
                             disabled={insightsLoading}
                             className="mt-3 text-sm font-semibold text-yellow-900 underline disabled:cursor-not-allowed disabled:opacity-60 dark:text-yellow-300"
                           >
@@ -1437,51 +1346,36 @@ function ForecastPageContent() {
 
                     {insights && (
                       <div className="mt-5 space-y-5">
-
-                        {/* Summary */}
-                        <div>
-                          <p className="text-sm leading-6 text-gray-700 dark:text-slate-300">
-                            {insights.summary}
-                          </p>
-                        </div>
-
-                        {/* Risk */}
+                        <p className="text-sm leading-6 text-gray-700 dark:text-slate-300">
+                          {insights.summary}
+                        </p>
                         <div>
                           <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-slate-400">
                             Risk Level
                           </p>
-
                           <span className="mt-2 inline-flex rounded-full bg-yellow-50 px-3 py-1 text-sm font-medium text-yellow-700 dark:bg-yellow-950/40 dark:text-yellow-300">
                             {insights.risk_level}
                           </span>
                         </div>
-
-                        {/* Key Insights */}
                         <div>
                           <p className="font-medium text-gray-900 dark:text-white">
                             Key Insights
                           </p>
-
                           <ul className="mt-2 space-y-2">
-                            {insights.key_insights.map(
-                              (insight, index) => (
-                                <li
-                                  key={index}
-                                  className="text-sm leading-6 text-gray-600 dark:text-slate-400"
-                                >
-                                  • {insight}
-                                </li>
-                              )
-                            )}
+                            {insights.key_insights.map((insight, index) => (
+                              <li
+                                key={index}
+                                className="text-sm leading-6 text-gray-600 dark:text-slate-400"
+                              >
+                                • {insight}
+                              </li>
+                            ))}
                           </ul>
                         </div>
-
-                        {/* Recommendations */}
                         <div>
                           <p className="font-medium text-gray-900 dark:text-white">
                             Recommendations
                           </p>
-
                           <ul className="mt-2 space-y-2">
                             {insights.recommendations.map(
                               (recommendation, index) => (
@@ -1495,22 +1389,27 @@ function ForecastPageContent() {
                             )}
                           </ul>
                         </div>
-
                       </div>
                     )}
                   </div>
-
-                  <button
-                    onClick={() => router.push("/dashboard")}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3 text-sm font-semibold text-gray-900 hover:bg-gray-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
-                  >
-                    Back to Dashboard
-                  </button>
-                </div>
-              )}
-            </div>
+                )}
+              </>
+            )}
           </aside>
         </div>
+
+        {baselineResult && baselineRawPayload && (
+          <div className="mt-6">
+            <WhatIfSimulator
+              key={forecastSessionId}
+              baselineRaw={baselineRawPayload}
+              baselineResult={baselineResult}
+              disabled={inputsChanged}
+              disabledReason="Inputs changed — regenerate forecast to update the scenario baseline."
+            />
+          </div>
+        )}
+        </>
         )}
       </div>
     </main>
@@ -1647,30 +1546,5 @@ function NumberField({
         className={inputClassName}
       />
     </label>
-  );
-}
-
-function Metric({
-  label,
-  value,
-  description,
-}: {
-  label: string;
-  value: string;
-  description?: string;
-}) {
-  return (
-    <div className="border-b border-gray-100 pb-4 last:border-0 dark:border-slate-800">
-      <p className="text-sm text-gray-500 dark:text-slate-400">{label}</p>
-      <p className="mt-1 text-xl font-semibold text-gray-900 dark:text-white">
-        {value}
-      </p>
-
-      {description && (
-        <p className="mt-1 text-xs text-gray-500 dark:text-slate-400">
-          {description}
-        </p>
-      )}
-    </div>
   );
 }
