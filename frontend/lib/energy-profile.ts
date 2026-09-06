@@ -122,6 +122,34 @@ const BALANCED_READING = {
   body: "Recorded costs, generator use, and outages sit within GridSense watch thresholds. Review the profile, then use Forecast if you want a next-month estimate.",
 };
 
+export function recordPeriodIndex(record: { year: number; month: number }): number {
+  return record.year * 12 + record.month;
+}
+
+export function sortRecordsChronologically<T extends { year: number; month: number }>(
+  records: T[]
+): T[] {
+  return [...records].sort(
+    (left, right) => recordPeriodIndex(left) - recordPeriodIndex(right)
+  );
+}
+
+export function getPreviousRecordForProfile<
+  T extends { year: number; month: number },
+>(selected: T, allRecords: T[]): T | undefined {
+  const chronological = sortRecordsChronologically(allRecords);
+  const selectedIndex = chronological.findIndex(
+    (record) =>
+      record.year === selected.year && record.month === selected.month
+  );
+
+  if (selectedIndex <= 0) {
+    return undefined;
+  }
+
+  return chronological[selectedIndex - 1];
+}
+
 export function isEnergyProfileSource(
   value: unknown
 ): value is EnergyProfileSource {

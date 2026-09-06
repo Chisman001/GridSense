@@ -10,6 +10,7 @@ import {
 } from "react";
 
 import { EnergyNextSteps } from "@/components/energy-next-steps";
+import { EnergyOverviewPeriodNav } from "@/components/energy-overview-period-nav";
 import { EnergyProfileCard } from "@/components/energy-profile-card";
 import { EnergyReading } from "@/components/energy-reading";
 import { MlGuardrailNotice } from "@/components/ml-guardrail-notice";
@@ -17,7 +18,9 @@ import { ShellIcon } from "@/components/shell/shell-icon";
 import { primaryButtonClasses, secondaryButtonClasses } from "@/components/ui/button-styles";
 import {
   buildEnergyProfile,
+  getPreviousRecordForProfile,
   isEnergyProfileSource,
+  sortRecordsChronologically,
   type EnergyProfileSource,
 } from "@/lib/energy-profile";
 import { isRecord } from "@/lib/energy-record-pipeline";
@@ -160,8 +163,7 @@ type DashboardLoadResult =
   | {
       status: "ready";
       data: ForecastHistoryResponse;
-      latestEnergyRecord: DashboardEnergyRecord | null;
-      previousEnergyRecord: DashboardEnergyRecord | null;
+      energyRecords: DashboardEnergyRecord[];
     };
 
 async function fetchDashboardData(
@@ -195,16 +197,13 @@ async function fetchDashboardData(
     throw new Error(getErrorMessage(forecastPayload));
   }
 
-  let latestEnergyRecord: DashboardEnergyRecord | null = null;
-  let previousEnergyRecord: DashboardEnergyRecord | null = null;
+  let energyRecords: DashboardEnergyRecord[] = [];
 
   if (recordsResponse.ok) {
     const recordsText = await recordsResponse.text();
     try {
       const recordsPayload = JSON.parse(recordsText);
-      const parsed = parseEnergyRecords(recordsPayload);
-      latestEnergyRecord = parsed.records[0] ?? null;
-      previousEnergyRecord = parsed.records[1] ?? null;
+      energyRecords = parseEnergyRecords(recordsPayload).records;
     } catch {
       // Energy records are optional for dashboard overview.
     }
@@ -213,8 +212,7 @@ async function fetchDashboardData(
   return {
     status: "ready",
     data: parseForecastHistory(forecastPayload),
-    latestEnergyRecord,
-    previousEnergyRecord,
+    energyRecords,
   };
 }
 
@@ -306,18 +304,19 @@ function Icon({
 export default function DashboardPage() {
   const router = useRouter();
   const [data, setData] = useState<ForecastHistoryResponse | null>(null);
-  const [latestEnergyRecord, setLatestEnergyRecord] =
-    useState<DashboardEnergyRecord | null>(null);
-  const [previousEnergyRecord, setPreviousEnergyRecord] =
-    useState<DashboardEnergyRecord | null>(null);
+  const [energyRecords, setEnergyRecords] = useState<DashboardEnergyRecord[]>(
+    []
+  );
+  const [selectedRecordIndex, setSelectedRecordIndex] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [needsBusinessProfile, setNeedsBusinessProfile] = useState(false);
 
   function applyReadyResult(result: Extract<DashboardLoadResult, { status: "ready" }>) {
+    const chronological = sortRecordsChronologically(result.energyRecords);
     setData(result.data);
-    setLatestEnergyRecord(result.latestEnergyRecord);
-    setPreviousEnergyRecord(result.previousEnergyRecord);
+    setEnergyRecords(chronological);
+    setSelectedRecordIndex(Math.max(chronological.length - 1, 0));
   }
 
   useEffect(() => {
@@ -382,13 +381,18 @@ export default function DashboardPage() {
     }
   }
 
+  const selectedRecord = energyRecords[selectedRecordIndex] ?? null;
+  const newestRecord = energyRecords[energyRecords.length - 1] ?? null;
+  const previousRecord = selectedRecord
+    ? getPreviousRecordForProfile(selectedRecord, energyRecords)
+    : undefined;
   const energyProfile = useMemo(() => {
-    if (!latestEnergyRecord) {
+    if (!selectedRecord) {
       return null;
     }
 
-    return buildEnergyProfile(latestEnergyRecord, previousEnergyRecord);
-  }, [latestEnergyRecord, previousEnergyRecord]);
+    return buildEnergyProfile(selectedRecord, previousRecord);
+  }, [previousRecord, selectedRecord]);
 
   const latestForecast = data?.latestForecast ?? null;
   const savedInsights = latestForecast?.insights ?? null;
@@ -399,6 +403,13 @@ export default function DashboardPage() {
     Boolean(latestForecast) &&
     typeof businessType === "string" &&
     hasLimitedModelCoverage(businessType);
+  const forecastSourcePeriod = latestForecast?.energyRecord ?? null;
+  const overviewPeriodDiffersFromForecast = Boolean(
+    selectedRecord &&
+      forecastSourcePeriod &&
+      (selectedRecord.year !== forecastSourcePeriod.year ||
+        selectedRecord.month !== forecastSourcePeriod.month)
+  );
 
   return (
     <main className="bg-slate-50 text-slate-950 dark:bg-transparent dark:text-slate-100">
@@ -435,13 +446,10 @@ export default function DashboardPage() {
                   <p className="mt-0.5 truncate text-sm font-semibold text-slate-800 dark:text-slate-100">
                     {data.business.businessName}
                   </p>
-                  {latestEnergyRecord && (
+                  {newestRecord && (
                     <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-                      Latest period:{" "}
-                      {formatPeriod(
-                        latestEnergyRecord.year,
-                        latestEnergyRecord.month
-                      )}
+                      Newest record:{" "}
+                      {formatPeriod(newestRecord.year, newestRecord.month)}
                     </p>
                   )}
                 </div>
@@ -563,11 +571,18 @@ export default function DashboardPage() {
             </section>
           )}
 
-          {!loading && !error && !needsBusinessProfile && energyProfile && (
+          {!loading && !error && !needsBusinessProfile && energyProfile && selectedRecord && (
             <div className="space-y-6">
-              <EnergyProfileCard profile={energyProfile} />
-              <EnergyReading profile={energyProfile} />
-              <EnergyNextSteps generatorHours={energyProfile.generatorHours} />
+              <section aria-label="Energy intelligence overview" className="space-y-6">
+                <EnergyOverviewPeriodNav
+                  records={energyRecords}
+                  selectedIndex={selectedRecordIndex}
+                  onSelectIndex={setSelectedRecordIndex}
+                />
+                <EnergyProfileCard profile={energyProfile} />
+                <EnergyReading profile={energyProfile} />
+                <EnergyNextSteps generatorHours={energyProfile.generatorHours} />
+              </section>
 
               <section
                 aria-label="Next-month energy cost estimate"
@@ -609,12 +624,28 @@ export default function DashboardPage() {
                               {formatForecastCurrency(Math.abs(expectedCostChange))}{" "}
                               expected{" "}
                               {expectedCostChange >= 0 ? "increase" : "reduction"}
-                              {latestForecast.energyRecord
+                              {forecastSourcePeriod
                                 ? ` after ${formatPeriod(
-                                    latestForecast.energyRecord.year,
-                                    latestForecast.energyRecord.month
+                                    forecastSourcePeriod.year,
+                                    forecastSourcePeriod.month
                                   )}`
                                 : ""}
+                            </p>
+                          )}
+                        {overviewPeriodDiffersFromForecast &&
+                          forecastSourcePeriod && (
+                            <p className="mt-3 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                              Latest saved estimate is from{" "}
+                              {formatPeriod(
+                                forecastSourcePeriod.year,
+                                forecastSourcePeriod.month
+                              )}
+                              . Overview shows{" "}
+                              {formatPeriod(
+                                selectedRecord.year,
+                                selectedRecord.month
+                              )}
+                              .
                             </p>
                           )}
                       </div>
@@ -662,6 +693,24 @@ export default function DashboardPage() {
                       </div>
                     </div>
                   </div>
+
+                  {overviewPeriodDiffersFromForecast && forecastSourcePeriod && (
+                    <p className="mt-4 text-sm leading-6 text-slate-500 dark:text-slate-400">
+                      Showing analysis from the latest saved forecast (
+                      {formatPeriod(
+                        forecastSourcePeriod.year,
+                        forecastSourcePeriod.month
+                      )}
+                      ).{" "}
+                      <Link
+                        href="/ai-insights"
+                        className="font-semibold text-blue-700 underline-offset-2 hover:underline dark:text-blue-300"
+                      >
+                        Open AI Insights
+                      </Link>{" "}
+                      to browse other periods.
+                    </p>
+                  )}
 
                   {savedInsights ? (
                     <div className="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,0.8fr)]">

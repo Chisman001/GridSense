@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 
 import {
   buildEnergyProfile,
+  getPreviousRecordForProfile,
+  sortRecordsChronologically,
   type EnergyProfileSource,
 } from "./energy-profile";
 
@@ -136,4 +138,27 @@ run("identical energy numbers produce the same profile regardless of label", () 
   assert.deepEqual(factory.intensity, retail.intensity);
   assert.deepEqual(factory.flags, retail.flags);
   assert.deepEqual(factory.reading, retail.reading);
+});
+
+run("sortRecordsChronologically orders by year and month", () => {
+  const ordered = sortRecordsChronologically([
+    source({ year: 2026, month: 8 }),
+    source({ year: 2025, month: 9 }),
+    source({ year: 2026, month: 1 }),
+  ]);
+
+  assert.deepEqual(
+    ordered.map((record) => `${record.year}-${record.month}`),
+    ["2025-9", "2026-1", "2026-8"]
+  );
+});
+
+run("getPreviousRecordForProfile returns the stored month before the selection", () => {
+  const older = source({ year: 2026, month: 6 });
+  const previous = source({ year: 2026, month: 7 });
+  const selected = source({ year: 2026, month: 8 });
+  const all = [selected, older, previous];
+
+  assert.deepEqual(getPreviousRecordForProfile(selected, all), previous);
+  assert.equal(getPreviousRecordForProfile(older, all), undefined);
 });
