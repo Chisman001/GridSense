@@ -388,6 +388,7 @@ export async function GET() {
       .select({
         id: businesses.id,
         businessName: businesses.businessName,
+        businessType: businesses.businessType,
       })
       .from(businesses)
       .where(eq(businesses.clerkUserId, userId))
