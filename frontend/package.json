@@ -12,6 +12,7 @@
     "test:forecast-scenario": "npx --yes tsx lib/forecast-scenario.test.ts",
     "test:ml-guardrails": "npx --yes tsx lib/ml-guardrails.test.ts",
     "test:energy-profile": "npx --yes tsx lib/energy-profile.test.ts",
+    "test:aba-demo": "npx --yes tsx lib/aba-demo-fixture.test.ts",
     "db:generate": "drizzle-kit generate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio"

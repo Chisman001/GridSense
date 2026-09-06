@@ -824,7 +824,7 @@ export default function AiInsightsPage() {
             }
           />
           <MetricCard
-            label="Forecasted cost"
+            label="Estimated next-month cost"
             value={formatCurrency(
               selectedForecast.predictedNextMonthEnergyCost
             )}

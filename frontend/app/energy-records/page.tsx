@@ -18,7 +18,9 @@ import {
   secondaryButtonClasses,
 } from "@/components/ui/button-styles";
 import { PageHeader } from "@/components/ui/page-header";
+import { ABA_DEMO_PROFILE } from "@/lib/aba-demo-fixture";
 import {
+  buildAbaDemoCsvFile,
   downloadSampleEnergyRecordsCsv,
   expectedUploadFields,
 } from "@/lib/energy-records-sample";
@@ -665,11 +667,7 @@ export default function EnergyRecordsPage() {
     }
   }
 
-  async function importCsv(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    event.target.value = "";
-    if (!file) return;
-
+  async function uploadCsvFile(file: File, source: "upload" | "aba-demo") {
     setImporting(true);
     setImportErrors([]);
     setImportWarnings([]);
@@ -686,22 +684,40 @@ export default function EnergyRecordsPage() {
         body: data,
       });
       const payload = await readPayload(response);
+      const errors =
+        isObject(payload) &&
+        isObject(payload.details) &&
+        Array.isArray(payload.details.errors)
+          ? payload.details.errors.filter(
+              (item): item is ImportError =>
+                isObject(item) &&
+                typeof item.row === "number" &&
+                typeof item.reason === "string" &&
+                (item.field === undefined || typeof item.field === "string")
+            )
+          : [];
+
       if (!response.ok) {
-        if (
-          isObject(payload) &&
-          isObject(payload.details) &&
-          Array.isArray(payload.details.errors)
-        ) {
-          const errors = payload.details.errors.filter(
-            (item): item is ImportError =>
-              isObject(item) &&
-              typeof item.row === "number" &&
-              typeof item.reason === "string" &&
-              (item.field === undefined || typeof item.field === "string")
+        const alreadyLoaded =
+          response.status === 409 ||
+          (isObject(payload) &&
+            payload.code === "DUPLICATE_ENERGY_RECORD_PERIOD") ||
+          errors.some((error) =>
+            error.reason.includes("already exists for this year and month")
           );
+
+        if (alreadyLoaded && source === "aba-demo") {
+          throw new Error(
+            "These Aba sample months are already on this account. Open the dashboard to continue the demo."
+          );
+        }
+
+        if (errors.length > 0) {
           setImportErrors(errors);
         }
-        throw new Error(statusMessage(response.status, payload, "The CSV file could not be imported."));
+        throw new Error(
+          statusMessage(response.status, payload, "The CSV file could not be imported.")
+        );
       }
       const importedRecords = parseImportedRecords(payload);
       const latestImported = pickLatestImportedRecord(importedRecords);
@@ -726,12 +742,17 @@ export default function EnergyRecordsPage() {
           count: importedRecords.length,
         });
         setNotice(
-          `${importedRecords.length} record${
-            importedRecords.length === 1 ? "" : "s"
-          } uploaded. Generate a forecast from ${formatPeriod(
-            latestImported.year,
-            latestImported.month
-          )} to see predictions, AI insights, and reports.`
+          source === "aba-demo"
+            ? `${importedRecords.length} Aba sample months loaded for ${ABA_DEMO_PROFILE.businessName}. Generate a next-month estimate from ${formatPeriod(
+                latestImported.year,
+                latestImported.month
+              )}.`
+            : `${importedRecords.length} record${
+                importedRecords.length === 1 ? "" : "s"
+              } uploaded. Generate a forecast from ${formatPeriod(
+                latestImported.year,
+                latestImported.month
+              )} to see predictions, AI insights, and reports.`
         );
       } else {
         setNotice("CSV import completed successfully.");
@@ -750,6 +771,17 @@ export default function EnergyRecordsPage() {
     }
   }
 
+  async function importCsv(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    await uploadCsvFile(file, "upload");
+  }
+
+  async function loadAbaDemoRecords() {
+    await uploadCsvFile(buildAbaDemoCsvFile(), "aba-demo");
+  }
+
   const hasFilters = Boolean(yearFilter || monthFilter || sourceFilter);
 
   return (
@@ -766,7 +798,7 @@ export default function EnergyRecordsPage() {
         <PageHeader
           eyebrow="Energy data"
           title="Energy Records"
-          description="Upload your energy records to start analyzing your business."
+          description="Add monthly records, or load the Aba Packaging & Plastics sample so the dashboard matches the landing preview."
           actions={
             <>
               <button
@@ -784,7 +816,16 @@ export default function EnergyRecordsPage() {
                 className={`${secondaryButtonClasses} w-full sm:w-auto`}
               >
                 <Icon name="download" />
-                Download sample CSV
+                Download Aba sample CSV
+              </button>
+              <button
+                type="button"
+                onClick={() => void loadAbaDemoRecords()}
+                disabled={importing}
+                className={`${secondaryButtonClasses} w-full sm:w-auto`}
+              >
+                <Icon name="database" />
+                {importing ? "Loading..." : "Load Aba sample"}
               </button>
               <button
                 type="button"
@@ -848,7 +889,7 @@ export default function EnergyRecordsPage() {
               total_energy_cost or other calculated columns. If an older file
               still has those columns, GridSense ignores them and recalculates
               from electricity, diesel, and petrol costs. Unrecognized columns
-              are also ignored. Use Download sample CSV rather than building a
+              are also ignored. Use Download Aba sample CSV rather than building a
               file from scratch. If a year and month already exist, delete
               those records first or change the period in the file.
             </p>
@@ -980,7 +1021,7 @@ export default function EnergyRecordsPage() {
               <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500 dark:text-slate-400">
                 {hasFilters
                   ? "No records match these filters. Clear them or add a new record."
-                  : "Upload a CSV file or add your first monthly energy record."}
+                  : "Upload a CSV, load the Aba sample, or add your first monthly energy record."}
               </p>
               <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
                 <button
@@ -996,7 +1037,16 @@ export default function EnergyRecordsPage() {
                   onClick={downloadSampleEnergyRecordsCsv}
                   className={`${secondaryButtonClasses} w-full sm:w-auto`}
                 >
-                  <Icon name="download" /> Download sample CSV
+                  <Icon name="download" /> Download Aba sample CSV
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void loadAbaDemoRecords()}
+                  disabled={importing}
+                  className={`${secondaryButtonClasses} w-full sm:w-auto`}
+                >
+                  <Icon name="database" />
+                  {importing ? "Loading..." : "Load Aba sample"}
                 </button>
                 <button
                   type="button"

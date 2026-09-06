@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { inputClasses, primaryButtonClasses } from "@/components/ui/button-styles";
+import { inputClasses, primaryButtonClasses, secondaryButtonClasses } from "@/components/ui/button-styles";
+import { ABA_DEMO_PROFILE } from "@/lib/aba-demo-fixture";
 import {
   BUSINESS_STATES,
   BUSINESS_TYPES,
@@ -144,6 +145,24 @@ export function OnboardingForm() {
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
               This information personalizes forecasts, analytics, and reports.
             </p>
+            <button
+              type="button"
+              onClick={() =>
+                setForm({
+                  businessName: ABA_DEMO_PROFILE.businessName,
+                  businessType: ABA_DEMO_PROFILE.businessType,
+                  industry: ABA_DEMO_PROFILE.industry,
+                  state: ABA_DEMO_PROFILE.state,
+                })
+              }
+              className={`mt-4 ${secondaryButtonClasses}`}
+            >
+              Use Aba demo profile
+            </button>
+            <p className="mt-2 text-xs leading-5 text-slate-500 dark:text-slate-400">
+              Fills {ABA_DEMO_PROFILE.businessName} · {ABA_DEMO_PROFILE.businessType} ·{" "}
+              {ABA_DEMO_PROFILE.state}. You still submit the form.
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -162,7 +181,7 @@ export function OnboardingForm() {
                 required
                 value={form.businessName}
                 onChange={handleChange}
-                placeholder="Your registered business name"
+                placeholder={ABA_DEMO_PROFILE.businessName}
                 className={inputClasses}
               />
             </div>

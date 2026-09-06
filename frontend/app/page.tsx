@@ -3,6 +3,12 @@ import Link from "next/link";
 import { FaqAccordion } from "@/components/landing/faq-accordion";
 import { ShellIcon } from "@/components/shell/shell-icon";
 import type { ShellIconName } from "@/components/shell/navigation";
+import { getAbaDemoLandingSnapshot } from "@/lib/aba-demo-fixture";
+import {
+  formatForecastCurrency,
+  formatForecastPercent,
+} from "@/lib/forecast-scenario";
+import { formatGesScoreValue } from "@/lib/ges-display";
 
 const features: {
   number: string;
@@ -18,7 +24,7 @@ const features: {
     title: "Energy Cost Intelligence",
     description:
       "Track monthly energy spending and understand cost patterns across grid, fuel, and total spend.",
-    indicator: { label: "Monthly cost", value: "₦2.48m", tone: "slate" },
+    indicator: { label: "This month", value: "Recorded bills", tone: "slate" },
     className: "sm:col-span-2 lg:col-span-7",
   },
   {
@@ -26,35 +32,35 @@ const features: {
     icon: "activity",
     title: "GridSense Energy Score",
     description:
-      "Understand overall energy performance through a single standardized score calculated from your operating data.",
-    indicator: { label: "GES score", value: "78.4 / 100", tone: "emerald" },
+      "See a 0–100 score calculated from recorded cost burden, generator use, and outage hours.",
+    indicator: { label: "Score", value: "From your records", tone: "emerald" },
     className: "lg:col-span-5",
   },
   {
     number: "03",
     icon: "analytics",
-    title: "AI-Powered Forecasting",
+    title: "Next-month cost estimate",
     description:
-      "Forecast upcoming energy costs using GridSense's prediction model trained on your energy profile.",
-    indicator: { label: "Next month", value: "₦2.31m", tone: "blue" },
+      "Estimate next-month energy cost from your current bills, usage, and operating data.",
+    indicator: { label: "Output", value: "An estimate", tone: "blue" },
     className: "lg:col-span-4",
   },
   {
     number: "04",
     icon: "reports",
-    title: "Operational Insights",
+    title: "Operational profile",
     description:
-      "Understand generator dependency, outage exposure, renewable contribution, and other operational indicators.",
-    indicator: { label: "Generator use", value: "34%", tone: "slate" },
+      "See generator versus grid hours, outage exposure, and the recorded bill mix for the month.",
+    indicator: { label: "Signal", value: "Generator share", tone: "slate" },
     className: "lg:col-span-4",
   },
   {
     number: "05",
     icon: "insights",
-    title: "AI Recommendations",
+    title: "AI explanation",
     description:
-      "Turn forecasts and operational signals into practical actions you can review and act on.",
-    indicator: { label: "Priority", value: "Optimize backup power", tone: "emerald" },
+      "Gemini explains the saved forecast and scenario in plain language. It does not replace the numbers.",
+    indicator: { label: "Role", value: "Explanation", tone: "emerald" },
     className: "lg:col-span-4",
   },
 ];
@@ -63,23 +69,23 @@ const steps = [
   {
     number: "01",
     icon: "reports" as const,
-    title: "Add your energy data",
+    title: "Add your energy records",
     description:
-      "Upload CSV records or enter monthly operating data for your business.",
+      "Upload a CSV or enter monthly bills, hours, and operating data for your business.",
   },
   {
     number: "02",
     icon: "analytics" as const,
-    title: "Generate your forecast",
+    title: "See this month’s profile",
     description:
-      "GridSense analyzes your profile and produces a next-month cost outlook with performance signals.",
+      "GridSense calculates totals, the Energy Score, and a rule-based reading from the recorded month.",
   },
   {
     number: "03",
     icon: "insights" as const,
-    title: "Act on the insights",
+    title: "Estimate next month, then explore a scenario",
     description:
-      "Review forecasts, operational indicators, and AI recommendations to inform your decisions.",
+      "Generate a next-month cost estimate, then try a generator-use scenario if you run a generator.",
   },
 ];
 
@@ -94,13 +100,13 @@ const useCases = [
     label: "Forecasting",
     question: "What should we expect next month?",
     answer:
-      "Run a forecast from your energy profile to see predicted next-month cost, expected change, and supporting operational context.",
+      "Generate a next-month energy cost estimate from your current bills, usage, and operating data. It is an estimate, not a guaranteed outcome.",
   },
   {
-    label: "Operations",
-    question: "Where are avoidable energy costs coming from?",
+    label: "Scenarios",
+    question: "What if generator usage drops?",
     answer:
-      "Review generator dependency, outage exposure, renewable contribution, and AI recommendations to identify practical improvement areas.",
+      "Open What-If on Forecast to explore a lower generator-use scenario. The result is directional and does not guarantee savings.",
   },
 ];
 
@@ -111,7 +117,7 @@ const faqGroups = [
       {
         question: "What is GridSense?",
         answer:
-          "GridSense is an energy intelligence platform that helps businesses organize energy records, forecast upcoming energy costs, understand operational indicators, and receive AI-powered recommendations.",
+          "GridSense is an energy intelligence platform that helps businesses organize energy records, see a recorded-month profile, estimate next-month energy cost, and explore a generator-use scenario.",
       },
       {
         question: "Who is GridSense for?",
@@ -126,7 +132,7 @@ const faqGroups = [
       {
         question: "Do I need technical knowledge to use GridSense?",
         answer:
-          "No. GridSense is designed around guided data entry, readable forecasts, and clear recommendations for business users.",
+          "No. GridSense is designed around guided data entry, a readable Energy Score, and a next-month estimate for business users.",
       },
     ],
   },
@@ -176,7 +182,7 @@ const faqGroups = [
       {
         question: "What kind of recommendations does GridSense provide?",
         answer:
-          "GridSense uses the saved forecast and energy profile to surface practical AI-generated observations and recommended actions related to costs, efficiency, and operational risk.",
+          "After you save a forecast, Gemini can explain the estimate and a generator-use scenario in plain language. That explanation sits on top of the numbers; it is not a second prediction.",
       },
     ],
   },
@@ -258,59 +264,72 @@ function PipelineStep({ label }: { label: string }) {
   );
 }
 
+function formatPreviewPeriod(year: number, month: number) {
+  return new Intl.DateTimeFormat("en-NG", {
+    month: "short",
+    year: "numeric",
+  }).format(new Date(year, month - 1));
+}
+
 function HeroProductPreview() {
+  const snapshot = getAbaDemoLandingSnapshot();
+  const { profile, business, costSeries } = snapshot;
+  const peakCost = Math.max(...costSeries.map((point) => point.total), 1);
+  const generatorPercent = profile.dependency.generator * 100;
+
   return (
     <div className="relative">
       <div className="overflow-hidden rounded-xl border border-white/10 bg-slate-900/80 shadow-xl shadow-black/20">
-        <div className="flex items-center justify-between border-b border-white/10 px-4 py-3 sm:px-5">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-7 w-7 items-center justify-center rounded-md bg-slate-950 text-emerald-400">
-              <ShellIcon name="bolt" className="h-4 w-4" />
-            </span>
-            <div>
-              <p className="text-xs font-semibold text-white">GridSense</p>
-              <p className="text-[0.62rem] text-slate-400">
-                Illustrative product preview
-              </p>
-            </div>
+        <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3 sm:px-5">
+          <div className="min-w-0">
+            <p className="truncate text-xs font-semibold text-white">
+              {business.businessName}
+            </p>
+            <p className="mt-0.5 truncate text-[0.62rem] text-slate-400">
+              {business.businessType} · {business.state} · Illustrative preview
+            </p>
           </div>
-          <span className="hidden rounded border border-slate-700 bg-slate-800/80 px-2 py-0.5 text-[0.6rem] font-medium uppercase tracking-wider text-slate-400 sm:inline">
+          <span className="hidden shrink-0 rounded border border-slate-700 bg-slate-800/80 px-2 py-0.5 text-[0.6rem] font-medium uppercase tracking-wider text-slate-400 sm:inline">
             Sample data
           </span>
         </div>
 
         <div className="space-y-3 p-3 sm:p-4">
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 gap-2 min-[400px]:grid-cols-3">
             <div className="rounded-lg border border-slate-700/80 bg-slate-950/60 p-3">
               <p className="text-[0.58rem] font-medium uppercase tracking-wider text-slate-500">
-                Energy cost
+                Monthly cost
               </p>
-              <p className="mt-1.5 text-lg font-bold tracking-tight text-white sm:text-xl">
-                ₦2.48m
+              <p className="mt-1.5 break-words text-lg font-bold tracking-tight text-white sm:text-xl">
+                {formatForecastCurrency(profile.cost.total)}
               </p>
-              <p className="mt-0.5 text-[0.58rem] text-slate-500">July</p>
+              <p className="mt-0.5 text-[0.58rem] text-slate-500">
+                {formatPreviewPeriod(profile.period.year, profile.period.month)}
+              </p>
             </div>
             <div className="rounded-lg border border-emerald-900/50 bg-emerald-950/30 p-3">
               <p className="text-[0.58rem] font-medium uppercase tracking-wider text-emerald-600/80">
-                GES score
+                Energy Score
               </p>
               <p className="mt-1.5 text-lg font-bold tracking-tight text-white sm:text-xl">
-                78.4
-                <span className="text-xs font-medium text-slate-500">/100</span>
+                {formatGesScoreValue(profile.ges)}
+                {profile.ges.available && (
+                  <span className="text-xs font-medium text-slate-500">/100</span>
+                )}
               </p>
               <p className="mt-0.5 text-[0.58rem] font-medium text-emerald-400">
-                Good
+                {profile.ges.available ? profile.ges.rating : "Unavailable"}
               </p>
             </div>
-            <div className="rounded-lg border border-blue-900/50 bg-blue-950/30 p-3">
-              <p className="text-[0.58rem] font-medium uppercase tracking-wider text-blue-400/80">
-                Next-month forecast
+            <div className="rounded-lg border border-amber-900/40 bg-amber-950/20 p-3">
+              <p className="text-[0.58rem] font-medium uppercase tracking-wider text-amber-400/80">
+                Generator
               </p>
               <p className="mt-1.5 text-lg font-bold tracking-tight text-white sm:text-xl">
-                ₦2.31m
+                {formatForecastPercent(generatorPercent)}
               </p>
-              <p className="mt-0.5 text-[0.58rem] font-medium text-emerald-400">
-                −6.8%
+              <p className="mt-0.5 text-[0.58rem] text-slate-500">
+                Share of powered hours
               </p>
             </div>
           </div>
@@ -319,7 +338,7 @@ function HeroProductPreview() {
             <div className="rounded-lg border border-slate-700/80 bg-slate-950/40 p-3">
               <div className="flex items-center justify-between">
                 <p className="text-[0.62rem] font-semibold uppercase tracking-wider text-slate-400">
-                  Cost trend
+                  Recorded cost
                 </p>
                 <ShellIcon name="analytics" className="h-4 w-4 text-blue-400" />
               </div>
@@ -327,32 +346,31 @@ function HeroProductPreview() {
                 className="mt-3 flex h-16 items-end gap-1"
                 aria-hidden="true"
               >
-                {[32, 44, 38, 52, 48, 58, 54, 62, 56, 50].map((height, i) => (
+                {costSeries.map((point) => (
                   <div
-                    key={i}
-                    className={`flex-1 rounded-sm ${
-                      i >= 8 ? "bg-emerald-400/90" : "bg-blue-500/70"
-                    }`}
-                    style={{ height: `${height}%` }}
+                    key={`${point.year}-${point.month}`}
+                    className="flex-1 rounded-sm bg-blue-500/70 last:bg-emerald-400/90"
+                    style={{
+                      height: `${Math.max((point.total / peakCost) * 100, 8)}%`,
+                    }}
                   />
                 ))}
               </div>
               <div className="mt-2 flex justify-between text-[0.55rem] text-slate-500">
-                <span>Historical</span>
-                <span>Forecast</span>
+                <span>12 recorded months</span>
+                <span>Latest</span>
               </div>
             </div>
 
             <div className="rounded-lg border border-slate-700/80 bg-slate-950/40 p-3">
               <p className="text-[0.62rem] font-semibold uppercase tracking-wider text-slate-400">
-                Generator dependency
+                Next-month estimate
               </p>
-              <p className="mt-2 text-2xl font-bold text-white">34%</p>
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-slate-800">
-                <div className="h-full w-[34%] rounded-full bg-amber-400/90" />
-              </div>
+              <p className="mt-2 text-sm font-semibold leading-5 text-white">
+                Generate after you import these records
+              </p>
               <p className="mt-2 text-[0.58rem] leading-4 text-slate-500">
-                Operational signal from grid vs. generator hours
+                The live model produces the estimate. This preview does not invent one.
               </p>
             </div>
           </div>
@@ -364,11 +382,11 @@ function HeroProductPreview() {
               </span>
               <div className="min-w-0">
                 <p className="text-[0.62rem] font-semibold uppercase tracking-wider text-emerald-400">
-                  AI recommendation
+                  What’s going on
                 </p>
                 <p className="mt-1 text-xs leading-5 text-slate-300">
-                  Review generator scheduling during peak grid availability to
-                  reduce avoidable fuel costs.
+                  {profile.reading.headline}. Generator power is a large share of
+                  powered hours, often alongside diesel spend.
                 </p>
               </div>
             </div>
@@ -495,17 +513,16 @@ export default function Home() {
             <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
               <div className="max-w-xl">
                 <p className="text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-emerald-400">
-                  Energy intelligence for modern businesses
+                  GridSense
                 </p>
                 <h1 className="mt-5 text-4xl font-bold leading-[1.06] tracking-[-0.03em] sm:text-5xl lg:text-[3.25rem]">
-                  Turn energy data into{" "}
-                  <span className="text-emerald-400">smarter</span> business
-                  decisions.
+                  Energy intelligence for{" "}
+                  <span className="text-emerald-400">businesses</span>.
                 </h1>
                 <p className="mt-5 text-base leading-7 text-slate-400 sm:text-[1.05rem]">
-                  GridSense helps businesses monitor energy costs, forecast what
-                  is coming next, and turn operational data into actionable
-                  insights.
+                  Understand your energy. Estimate next month. Explore a
+                  generator-use scenario. AI explains the numbers — it does not
+                  invent them.
                 </p>
 
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -522,19 +539,19 @@ export default function Home() {
                   className="mt-8 flex flex-wrap items-center gap-2"
                   aria-label="Product workflow"
                 >
-                  <PipelineStep label="Data" />
+                  <PipelineStep label="Records" />
                   <span aria-hidden="true" className="text-slate-600">
                     →
                   </span>
-                  <PipelineStep label="Analysis" />
+                  <PipelineStep label="Profile" />
                   <span aria-hidden="true" className="text-slate-600">
                     →
                   </span>
-                  <PipelineStep label="Forecast" />
+                  <PipelineStep label="Estimate" />
                   <span aria-hidden="true" className="text-slate-600">
                     →
                   </span>
-                  <PipelineStep label="Action" />
+                  <PipelineStep label="Scenario" />
                 </div>
               </div>
 
@@ -556,8 +573,9 @@ export default function Home() {
                 One connected view of your energy.
               </h2>
               <p className="mt-3 text-base leading-7 text-slate-600">
-                From monthly costs to operational performance and next-month
-                forecasts, GridSense brings the signals together.
+                From recorded bills and hours to a next-month estimate and a
+                generator-use scenario, GridSense keeps measurement and
+                prediction in their own lanes.
               </p>
             </div>
 
@@ -606,8 +624,8 @@ export default function Home() {
                 From energy records to better decisions.
               </h2>
               <p className="mt-3 text-base leading-7 text-slate-600">
-                A connected workflow turns your operating data into forecasts,
-                performance signals, and actionable insights.
+                A connected workflow turns recorded months into a profile, a
+                next-month estimate, and an optional generator-use scenario.
               </p>
             </div>
 
@@ -649,7 +667,7 @@ export default function Home() {
               </ol>
 
               <p className="mt-6 text-center text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-slate-400">
-                Energy data → GridSense analysis → Forecast + insights → Action
+                Records → Profile → Next-month estimate → Generator scenario
               </p>
             </div>
           </div>
@@ -714,12 +732,12 @@ export default function Home() {
           <div className="mx-auto max-w-6xl">
             <div className="rounded-xl border border-slate-800 bg-slate-950 px-6 py-10 text-center sm:px-10 sm:py-12">
               <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Start making better energy decisions.
+                See this month, then estimate the next.
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-400">
-                Bring your energy records into GridSense and turn operational
-                data into forecasts, performance signals, and actionable
-                insights.
+                Bring your energy records into GridSense. Understand the
+                recorded month, estimate next-month cost, and explore a
+                generator-use scenario if you run a generator.
               </p>
               <Link
                 href="/start-analysis"
@@ -739,8 +757,8 @@ export default function Home() {
           <div>
             <Brand inverse />
             <p className="mt-4 max-w-xs text-sm leading-6 text-slate-400">
-              Forecast costs, understand performance, and turn energy data into
-              practical business decisions.
+              Understand recorded energy use, estimate next-month cost, and
+              explore a generator-use scenario.
             </p>
           </div>
 

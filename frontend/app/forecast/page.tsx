@@ -555,6 +555,21 @@ function ForecastPageContent() {
     };
   }, [applyBusinessProfile, recordId]);
 
+  useEffect(() => {
+    if (!baselineResult || window.location.hash !== "#what-if") {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById("what-if")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [baselineResult]);
+
   async function generateAndPersistInsights(
     prediction: ForecastPrediction,
     predictionId: string
@@ -790,7 +805,7 @@ function ForecastPageContent() {
           </p>
 
           <h1 className="mt-2 text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl dark:text-white">
-            Generate a New Forecast
+            Next-month energy cost estimate
           </h1>
 
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600 dark:text-slate-400">
@@ -1237,7 +1252,7 @@ function ForecastPageContent() {
                 disabled={predictionLoading || saveLoading}
                 className="w-full rounded-xl bg-gray-900 px-6 py-4 text-sm font-semibold text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-emerald-400 dark:text-slate-950 dark:hover:bg-emerald-300"
               >
-                {predictionLoading ? "Generating Forecast..." : "Generate Forecast"}
+                {predictionLoading ? "Generating estimate..." : "Generate estimate"}
               </button>
               <button
                 type="button"
@@ -1404,7 +1419,7 @@ function ForecastPageContent() {
         </div>
 
         {baselineResult && baselineRawPayload && (
-          <div className="mt-6">
+          <div id="what-if" className="mt-6 scroll-mt-24">
             <WhatIfSimulator
               key={forecastSessionId}
               baselineRaw={baselineRawPayload}
